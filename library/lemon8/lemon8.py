@@ -54,13 +54,13 @@ class Lemon8:
         headers: dict = {
             "link": link,
             "domain": link_split[2],
-            "tag": link_split[:2],
+            "tag": link_split[2:],
             "crawling_time": Datetime.now(),
             "crawling_time_epoch": int(time()),
             'user_detail': user_detail,
             'post_detail': post_detail,
-            "path_data_raw": 'S3://ai-pipeline-statistics/data/data_raw/data_review/lemon8/${app.title}/json/detail.json',
-            "path_data_clean": 'S3://ai-pipeline-statistics/data/data_clean/data_review/lemon8/${app.title}/json/detail.json',
+            "path_data_raw": f'S3://ai-pipeline-statistics/data/data_raw/data_review/lemon8/{user_detail["user_unique_name"]}/{post_detail["item_id"]}/json/detail.json',
+            "path_data_clean": f'S3://ai-pipeline-statistics/data/data_clean/data_review/lemon8/{user_detail["user_unique_name"]}/{post_detail["item_id"]}/json/detail.json',
         };
 
         async with self.__request.get('https://api22-normal-useast1a.lemon8-app.com/api/550/comment_v2/comments',                             
@@ -89,9 +89,16 @@ class Lemon8:
                                     'language': 'en', 
                                 },
                                 ) as response:
-            data = await response.json()
+            detail_comment = await response.json()
 
-            Iostream.write_json(f'data/{headers["user_detail"]["user_unique_name"]}/{headers["post_detail"]["item_id"]}/data_review/{comment_id}.json', data['data'])
+            data: dict = {
+                **headers, 
+                "path_data_raw": f'S3://ai-pipeline-statistics/data/data_raw/data_review/lemon8/{headers["user_detail"]["user_unique_name"]}/{headers["post_detail"]["item_id"]}/json/{comment_id}.json',
+                "path_data_clean": f'S3://ai-pipeline-statistics/data/data_clean/data_review/lemon8/{headers["user_detail"]["user_unique_name"]}/{headers["post_detail"]["item_id"]}/json/{comment_id}.json',
+                "detail_review": detail_comment['data']
+            }
+
+            Iostream.write_json(f'data/{headers["user_detail"]["user_unique_name"]}/{headers["post_detail"]["item_id"]}/data_review/{comment_id}.json', data)
 
     async def get_comments_by__user_id(self, user_id) -> None:
         self.__request: ClientSession = ClientSession(headers={
