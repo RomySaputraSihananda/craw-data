@@ -8,6 +8,8 @@ __pycache__/
 
 *.html
 
+data/
+
 # Distribution / packaging
 .Python
 build/

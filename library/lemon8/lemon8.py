@@ -3,9 +3,11 @@ import requests
 import re
 import asyncio
 
+from time import time
 from aiohttp import ClientSession
 from requests import Response
 from json import dumps, loads
+from helpers import Iostream, Datetime
 
 class Lemon8:
     def __init__(self) -> None:
@@ -45,25 +47,42 @@ class Lemon8:
 
         return loads(re.sub(r'<[^>]*>', '', dumps(response.json(), ensure_ascii=False)))['data']['items']
 
-    async def __get_comments(self, post) -> None:
+    async def __get_comments(self, post_detail: dict, user_detail: dict) -> None:
+        link: str = f'https://www.lemon8-app.com/{user_detail["user_unique_name"]}/{post_detail["item_id"]}'
+        link_split: list = link.split('/')
+
+        headers: dict = {
+            "link": link,
+            "domain": link_split[2],
+            "tag": link_split[:2],
+            "crawling_time": Datetime.now(),
+            "crawling_time_epoch": int(time()),
+            'user_detail': user_detail,
+            'post_detail': post_detail,
+            "path_data_raw": 'S3://ai-pipeline-statistics/data/data_raw/data_review/lemon8/${app.title}/json/detail.json',
+            "path_data_clean": 'S3://ai-pipeline-statistics/data/data_clean/data_review/lemon8/${app.title}/json/detail.json',
+        };
+
         async with self.__request.get('https://api22-normal-useast1a.lemon8-app.com/api/550/comment_v2/comments',                             
                                     params={
-                                        'group_id': post['group_id'], 
-                                        'item_id': post['item_id'], 
-                                        'media_id': post['media_id'], 
+                                        'group_id': post_detail['group_id'], 
+                                        'item_id': post_detail['item_id'], 
+                                        'media_id': post_detail['media_id'], 
                                         'count': '1000', 
                                         'aid': '2657', 
                                     }) as response:
             comments = await response.json()
 
-        return await asyncio.gather(*(self.__get_detail_comment(comment["id"], post) for comment in comments['data']['data']))        
+            Iostream.write_json(f'data/{headers["user_detail"]["user_unique_name"]}/{headers["post_detail"]["item_id"]}/detail.json', headers)
 
-    async def __get_detail_comment(self, comment_id, post):
+        return await asyncio.gather(*(self.__get_detail_comment(comment["id"], headers) for comment in comments['data']['data']))        
+
+    async def __get_detail_comment(self, comment_id, headers: dict) -> None:
         async with self.__request.get('https://api22-normal-useast1a.lemon8-app.com/api/550/comment_v2/detail',
                                 params={
-                                    'group_id': post['group_id'], 
-                                    'item_id': post['item_id'],
-                                    'media_id': post['media_id'], 
+                                    'group_id': headers['post_detail']['group_id'], 
+                                    'item_id': headers['post_detail']['item_id'],
+                                    'media_id': headers['post_detail']['media_id'], 
                                     'comment_id': comment_id, 
                                     'count': '1000', 
                                     'aid': '2657', 
@@ -71,19 +90,17 @@ class Lemon8:
                                 },
                                 ) as response:
             data = await response.json()
-            with open(f'post["media_id"]/{post["group_id"]}.json')
 
+            Iostream.write_json(f'data/{headers["user_detail"]["user_unique_name"]}/{headers["post_detail"]["item_id"]}/data_review/{comment_id}.json', data['data'])
 
     async def get_comments_by__user_id(self, user_id) -> None:
         self.__request: ClientSession = ClientSession(headers={
             'User-Agent': 'com.bd.nproject/55014 (Linux; U; Android 9; en_US; unknown; Build/PI;tt-ok/3.12.13.1)',
         })
 
+        user_detail: dict = self.get_user_profile(user_id)
         posts: dict = self.get_user_posts(user_id)
-        data = await asyncio.gather(*(self.__get_comments(post) for post in posts))
-
-
-        print(dumps(data, indent=4, ensure_ascii=False))
+        await asyncio.gather(*(self.__get_comments(post, user_detail) for post in posts))
 
         await self.__request.close()
 
