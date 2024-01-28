@@ -1,15 +1,12 @@
-from click import command, option
+from click import command, option, argument
 
 class Main:
-    def __init__(self, **kwargs) -> None:
-        print(kwargs)
-
-@command()
-@option('--count', default=1, help='number of greetings')
-@option('--count2', default=1, help='number of greetings')
-def main(**kwargs) -> None:
-    Main(**kwargs)
-
+    @staticmethod
+    @command()
+    @argument('method', default='get_by_user_id', help='method want use')
+    @option('--user_id', default=1, help='user_id')
+    def main(**kwargs) -> None:
+        pass
 
 if(__name__ == "__main__"):
-    main()
+    Main.main()

@@ -9,7 +9,7 @@ from requests import Response
 from json import dumps, loads
 from helpers import Iostream, Datetime
 
-class Lemon8:
+class BaseLemon8:
     def __init__(self) -> None:
         self.__request: ClientSession = None
     
@@ -73,8 +73,9 @@ class Lemon8:
                                     }) as response:
             comments = await response.json()
 
-            Iostream.write_json(f'data/{headers["user_detail"]["user_unique_name"]}/{headers["post_detail"]["item_id"]}/detail.json', headers)
+            Iostream.write_json(headers, f'data/{headers["user_detail"]["user_unique_name"]}/{headers["post_detail"]["item_id"]}/detail.json')
 
+            # Iostream.info_log({"test": post_detail['group_id']}, post_detail['group_id'], 'success', name=__name__)
         return await asyncio.gather(*(self.__get_detail_comment(comment["id"], headers) for comment in comments['data']['data']))        
 
     async def __get_detail_comment(self, comment_id, headers: dict) -> None:
@@ -93,14 +94,15 @@ class Lemon8:
 
             data: dict = {
                 **headers, 
+                "detail_review": detail_comment['data'],
                 "path_data_raw": f'S3://ai-pipeline-statistics/data/data_raw/data_review/lemon8/{headers["user_detail"]["user_unique_name"]}/{headers["post_detail"]["item_id"]}/json/{comment_id}.json',
                 "path_data_clean": f'S3://ai-pipeline-statistics/data/data_clean/data_review/lemon8/{headers["user_detail"]["user_unique_name"]}/{headers["post_detail"]["item_id"]}/json/{comment_id}.json',
-                "detail_review": detail_comment['data']
             }
 
-            Iostream.write_json(f'data/{headers["user_detail"]["user_unique_name"]}/{headers["post_detail"]["item_id"]}/data_review/{comment_id}.json', data)
+            Iostream.write_json(data, f'data/{headers["user_detail"]["user_unique_name"]}/{headers["post_detail"]["item_id"]}/data_review/{comment_id}.json')
+            # Iostream.info_log({"ok":90}, comment_id, 'success')
 
-    async def get_comments_by__user_id(self, user_id) -> None:
+    async def by_user_id(self, user_id) -> None:
         self.__request: ClientSession = ClientSession(headers={
             'User-Agent': 'com.bd.nproject/55014 (Linux; U; Android 9; en_US; unknown; Build/PI;tt-ok/3.12.13.1)',
         })
@@ -111,8 +113,9 @@ class Lemon8:
 
         await self.__request.close()
 
+
 # testing
 if(__name__ == '__main__'):
-    lemon8: Lemon8 = Lemon8()
+    lemon8: BaseLemon8 = BaseLemon8()
 
-    asyncio.run(lemon8.get_comments_by__user_id('7138599741986915329'))
+    asyncio.run(lemon8.by_user_id('7138599741986915329'))

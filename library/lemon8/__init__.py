@@ -1,1 +1,1 @@
-from .lemon8 import Lemon8
+from .lemon8 import BaseLemon8
