@@ -62,7 +62,7 @@ class Lemon8:
         async with self.__request.get('https://api22-normal-useast1a.lemon8-app.com/api/550/comment_v2/detail',
                                 params={
                                     'group_id': post['group_id'], 
-                                    'item_id': post['item_id'], 
+                                    'item_id': post['item_id'],
                                     'media_id': post['media_id'], 
                                     'comment_id': comment_id, 
                                     'count': '1000', 
@@ -71,8 +71,8 @@ class Lemon8:
                                 },
                                 ) as response:
             data = await response.json()
-        
-        return data
+            with open(f'post["media_id"]/{post["group_id"]}.json')
+
 
     async def get_comments_by__user_id(self, user_id) -> None:
         self.__request: ClientSession = ClientSession(headers={
@@ -87,7 +87,7 @@ class Lemon8:
 
         await self.__request.close()
 
-
+# testing
 if(__name__ == '__main__'):
     lemon8: Lemon8 = Lemon8()
 
