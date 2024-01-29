@@ -7,7 +7,9 @@ from services.lemon8 import Lemon8
 @final
 class Main:
     @click.group()
+    @click.option('--s3', default=False, help='Send to S3 ?')
     def main(**kwargs) -> None:
+        """ Main Engine """
         pass
 
     @staticmethod
@@ -16,8 +18,8 @@ class Main:
     @click.option('--user_id', default=None, help='User ID')
     @click.option('--username', default=None, help='Username')
     @click.option('--url', default=None, help='Url')
-    @click.option('--s3', default=False, help='Send to S3 ?')
     def lemon8(**kwargs):
+        """ Lemon8 Engine """
         return Lemon8(**kwargs)
 
 if(__name__ == "__main__"):
