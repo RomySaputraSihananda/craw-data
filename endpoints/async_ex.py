@@ -32,7 +32,7 @@ class Requests:
                                         'group_id': self.__media_id, 
                                         'item_id': self.__media_id, 
                                         'media_id': self.__user_id, 
-                                        'count': '1000', 
+                                        'count': '99999999', 
                                         'aid': '2657', 
                                     }) as response:
             data = await response.json()

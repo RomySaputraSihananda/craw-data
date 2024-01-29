@@ -3,6 +3,7 @@ import os
 from time import perf_counter
 from functools import wraps
 from typing import Callable, Any, final
+from json import loads, dumps
 
 from config.logging import logging
 
@@ -15,7 +16,8 @@ class Decorator:
             start: float = perf_counter()
             logging.info('start crawling')
             func(self, *args, **kwargs)
-            logging.info(f'task completed in {perf_counter() - start} seconds')
+            
+            return logging.info(f'task completed in {perf_counter() - start} seconds')
         
         return wrapper
     

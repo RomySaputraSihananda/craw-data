@@ -1,18 +1,18 @@
-from click import command, option, argument
-
-from services.lemon8 import Lemon8
+import click 
 
 from typing import final
+
+from services.lemon8 import Lemon8
 
 @final
 class Main:
     @staticmethod
-    @command()
-    @argument('engine', default='lemon8')
-    @argument('method', default='by_user_id')
-    @option('--user_id', default='7138599741986915329', help='user_id')
-    @option('--username', default='jktfoodsquad', help='user_id')
-    @option('--s3', default=False, help='send s3 ?')
+    @click.command()
+    @click.argument('engine', metavar='ENGINE', type=click.Choice(['lemon8']))
+    @click.argument('method', metavar='METHOD', type=click.Choice(['by_user_id', 'by_username']))
+    @click.option('--user_id', default=None, help='User ID')
+    @click.option('--username', default=None, help='Username')
+    @click.option('--s3', default=False, is_flag=True, help='Send to S3 ?')
     def main(**kwargs) -> None:
         match(kwargs.get('engine')):
             case 'lemon8':

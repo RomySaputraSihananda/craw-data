@@ -37,7 +37,7 @@ class BaseLemon8:
             'https://api22-normal-useast1a.lemon8-app.com/api/550/stream',
             params={
                 'category': '486', 
-                'count': '1000', 
+                'count': '99999999', 
                 'category_parameter': user_id, 
                 'session_cnt': '1', 
                 'aid': '2657', 
@@ -77,21 +77,22 @@ class BaseLemon8:
                                         'group_id': post_detail['group_id'], 
                                         'item_id': post_detail['item_id'], 
                                         'media_id': post_detail['media_id'], 
-                                        'count': '1000', 
+                                        'count': '99999999', 
                                         'aid': '2657', 
                                     }) as response:
             comments: dict = await response.json()
 
             paths: list = [path.replace('S3://ai-pipeline-statistics/', '') for path in [headers["path_data_raw"], headers["path_data_clean"]]] 
 
-            try:
-                with ThreadPoolExecutor() as executor:
+            with ThreadPoolExecutor() as executor:
+                headers: dict = Iostream.dict_to_deep(headers)
+                try:
                     if(self.__s3):
                         executor.map(lambda path: ConnectionS3.upload(headers, path), paths)
                     else:
                         executor.map(lambda path: Iostream.write_json(headers, path), paths)
-            except Exception as e:
-                raise e
+                except Exception as e:
+                    raise e
 
         comments: list = comments['data']['data']
 
@@ -116,7 +117,7 @@ class BaseLemon8:
             return Iostream.update_log(log, name=__name__)
         
         return await asyncio.gather(*(self.__get_detail_comment(comment["id"], headers, log) for comment in comments))        
-
+    
     async def __get_detail_comment(self, comment_id, headers: dict, log: dict) -> None:
         try:
             async with self.__request.get('https://api22-normal-useast1a.lemon8-app.com/api/550/comment_v2/detail',
@@ -125,30 +126,31 @@ class BaseLemon8:
                                         'item_id': headers['post_detail']['item_id'],
                                         'media_id': headers['post_detail']['media_id'], 
                                         'comment_id': comment_id, 
-                                        'count': '1000', 
+                                        'count': '99999999', 
                                         'aid': '2657', 
                                         'language': 'en', 
-                                    },
-                                    ) as response:
+                                    }) as response:
+                
                 detail_comment = await response.json()
 
                 data: dict = {
                     **headers, 
                     "detail_review": detail_comment['data'],
-                    "path_data_raw": f'S3://ai-pipeline-statistics/data/data_raw/data_review/lemon8/{headers["user_detail"]["user_unique_name"]}/{headers["post_detail"]["item_id"]}/json/{comment_id}.json',
-                    "path_data_clean": f'S3://ai-pipeline-statistics/data/data_clean/data_review/lemon8/{headers["user_detail"]["user_unique_name"]}/{headers["post_detail"]["item_id"]}/json/{comment_id}.json',
+                    "path_data_raw": f'S3://ai-pipeline-statistics/data/data_raw/data_review/lemon8/{headers["user_detail"]["user_unique_name"]}/{headers["post_detail"]["item_id"]}/json/data_review/{comment_id}.json',
+                    "path_data_clean": f'S3://ai-pipeline-statistics/data/data_clean/data_review/lemon8/{headers["user_detail"]["user_unique_name"]}/{headers["post_detail"]["item_id"]}/json/data_review/{comment_id}.json',
                 }
 
                 paths: list = [path.replace('S3://ai-pipeline-statistics/', '') for path in [data["path_data_raw"], data["path_data_clean"]]] 
                 
-                try:
-                    with ThreadPoolExecutor() as executor:
+                with ThreadPoolExecutor() as executor:
+                    data: dict = Iostream.dict_to_deep(data)
+                    try:
                         if(self.__s3):
-                            executor.map(lambda path: ConnectionS3.upload(data, path),paths)
+                            executor.map(lambda path: ConnectionS3.upload(data, path), paths)
                         else:
-                            executor.map(lambda path: Iostream.write_json(data, path),paths)
-                except Exception as e:
-                    raise e
+                            executor.map(lambda path: Iostream.write_json(data, path), paths)
+                    except Exception as e:
+                        raise e
 
                 Iostream.info_log(log, comment_id, 'success', name=__name__)
                 
@@ -156,6 +158,7 @@ class BaseLemon8:
                 Iostream.update_log(log, name=__name__)
         
         except Exception as e:
+            raise e
             Iostream.info_log(log, comment_id, 'failed', error=e, name=__name__)
 
             log['total_failed'] += 1

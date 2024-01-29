@@ -1,20 +1,20 @@
 import os
 import json
 
-from json import dumps
+from json import dumps, loads
 
 from helpers.decorators import Decorator
 
 class Iostream:
     @staticmethod
-    @Decorator.check_path
     @Decorator.logging_path()
+    @Decorator.check_path
     def write_json(data: dict, file_path: str) -> None:
         with open(file_path, 'w') as file:
             file.write(dumps(data, indent=4, ensure_ascii=False))
     
     @staticmethod
-    def update_log(data, file_name="Monitoring_data.json", **kwargs):
+    def update_log(data: dict, file_name="Monitoring_data.json", **kwargs):
         try:
             with open(f'logging/{kwargs.get("name").split(".")[-1] if kwargs.get("name") else "test"}/{file_name}', "r") as file:
                 logs = json.load(file)
@@ -28,7 +28,7 @@ class Iostream:
         Iostream.write_json(updated_logs, f'logging/{kwargs.get("name").split(".")[-1] if kwargs.get("name") else "test"}/{file_name}')
 
     @staticmethod
-    def write_log(data, file_name="Monitoring_data.json", **kwargs):
+    def write_log(data: dict, file_name="Monitoring_data.json", **kwargs):
         try:
             with open(f'logging/{kwargs.get("name").split(".")[-1] if kwargs.get("name") else "test"}/{file_name}', "r") as file:
                 logs = json.load(file)
@@ -58,6 +58,21 @@ class Iostream:
         }
 
         Iostream.write_log(data, file_name, **kwargs)
+    
+    @staticmethod
+    def dict_to_deep(data: dict) -> dict:
+        if isinstance(data, dict):
+            for key, value in data.items():
+                if isinstance(value, dict):
+                    data[key] = Iostream.dict_to_deep(value)
+                elif isinstance(value, list):
+                    data[key] = [Iostream.dict_to_deep(item) for item in value]
+                elif isinstance(value, str):
+                    try:
+                        data[key] = loads(value)
+                    except Exception:
+                        pass
+        return data
 
 from time import sleep
 # testing

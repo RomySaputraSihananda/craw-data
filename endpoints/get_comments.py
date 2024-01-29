@@ -4,15 +4,15 @@ import urllib3
 urllib3.disable_warnings()
 
 
-userId: str = '7138599741986915329'
-mediaId: str = '7147953600210240002'
+userId: str = '7279186948648158214'
+mediaId: str = '7279238426292945413'
 response = requests.get(
     'https://api22-normal-useast1a.lemon8-app.com/api/550/comment_v2/comments',
     params={
         'group_id': mediaId, 
         'item_id': mediaId, 
         'media_id': userId, 
-        'count': '1000', 
+        'count': '99999999', 
         'aid': '2657', 
     },
     headers={

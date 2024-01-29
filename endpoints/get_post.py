@@ -9,7 +9,7 @@ response = requests.get(
     'https://api22-normal-useast1a.lemon8-app.com/api/550/stream',
     params={
         'category': '486', 
-        'count': '1000', 
+        'count': '99999999', 
         'category_parameter': userId, 
         'session_cnt': '1', 
         'aid': '2657', 
