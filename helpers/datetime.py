@@ -1,5 +1,9 @@
 import pytz
+
 from datetime import datetime
+from typing import final
+
+@final
 class Datetime:
     def execute(text: str) -> str:
         try:

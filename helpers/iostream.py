@@ -2,9 +2,11 @@ import os
 import json
 
 from json import dumps, loads
+from typing import final
 
 from helpers.decorators import Decorator
 
+@final 
 class Iostream:
     @staticmethod
     @Decorator.logging_path()
