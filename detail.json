@@ -1,0 +1,431 @@
+{
+    "link": "https://www.lemon8-app.com/jktfoodsquad/7268603232883180034",
+    "domain": "www.lemon8-app.com",
+    "tag": [
+        "www.lemon8-app.com",
+        "jktfoodsquad",
+        "7268603232883180034"
+    ],
+    "crawling_time": "2024-01-29 16:50:42",
+    "crawling_time_epoch": 1706521842,
+    "user_detail": {
+        "user_id": 7138599741986915329,
+        "user_id_str": "7138599741986915329",
+        "media_id": 7138599741986915329,
+        "media_id_str": "7138599741986915329",
+        "name": "JKT Food Squad",
+        "user_unique_name": "jktfoodsquad",
+        "unique_name_modify_time": 0,
+        "description": "Hello! ✨\nWe curate only the best in the industry for you!",
+        "user_auth_info": "",
+        "media_label": "",
+        "media_desc": {},
+        "user_status": 1,
+        "icon_url": "https://p16-va.topbuzzcdn.com/img/user-avatar-alisg/92d1b277b93a852fa3261b2b0654f2bb~1200x0.image",
+        "is_following": 0,
+        "is_followed": 0,
+        "posts_count": 87,
+        "following_count": 41,
+        "followers_count": 4939,
+        "anonymous_followers": 0,
+        "comment_count": 0,
+        "tabs": [
+            {
+                "id": "post",
+                "show_name": "Post",
+                "is_default": true,
+                "visibility": true
+            },
+            {
+                "id": "likes",
+                "show_name": "Likes",
+                "is_default": false,
+                "visibility": false
+            },
+            {
+                "id": "favorites",
+                "show_name": "Favorites",
+                "is_default": false,
+                "visibility": false
+            }
+        ],
+        "share_count": 0,
+        "is_blocked": false,
+        "is_blocked_by_profile": false,
+        "is_blocking_profile": false,
+        "privacy_status": 1,
+        "background_url": "https://p16-sign-va.lemon8cdn.com/tos-maliva-p-0000/7ec74f46890245a1b35c909e219db456~tplv-tej9nj120t-origin.webp?lk3s=2c4c8de6&source=profile_bg&x-expires=1709121600&x-signature=jO2TtZqQ9PxjeK%2BQMXgDvgfXoUU%3D",
+        "is_default_bg": true,
+        "permissions": {},
+        "pendant_info": {
+            "desc": "",
+            "id": 0,
+            "url": ""
+        },
+        "handle_id": "",
+        "recent_visitors": [],
+        "birthday": "",
+        "show_private_guide_alert": false,
+        "gender": 0,
+        "location": "DKI Jakarta",
+        "user_tags": [],
+        "rank": {
+            "count": 0,
+            "icon_url": "",
+            "text": "",
+            "to_view_text": "",
+            "url": ""
+        },
+        "yesterday_read": {
+            "count": 0,
+            "url": ""
+        },
+        "yesterday_post": {
+            "count": 0,
+            "url": ""
+        },
+        "yesterday_interaction": {
+            "count": 0,
+            "url": ""
+        },
+        "auth_request_url": "",
+        "auth_introduction_url": "",
+        "user_is_login": false,
+        "forum_id": 0,
+        "share_url": "https://www.lemon8-app.com/jktfoodsquad",
+        "contact_info": "",
+        "is_contact_friend": false,
+        "log_extra": "{\"contacts_friend\":0}",
+        "is_banned_account": false,
+        "user_liked_count": 3770,
+        "draft_count": 0,
+        "digg_count": 242,
+        "favorite_count": 18,
+        "year_of_birth": 0,
+        "instagram_id": "jktfoodsquad",
+        "instagram_url": "instagram.com/jktfoodsquad/",
+        "twitter_id": "jktfoodsquad",
+        "twitter_url": "twitter.com/jktfoodsquad",
+        "user_link": {
+            "prefix": "lemon8-app.com",
+            "link_name": "jktfoodsquad",
+            "enable_edit": true
+        },
+        "draft_cover_list": [],
+        "setting_ugc_permission_show": false,
+        "setting_ugc_permission_alert": false,
+        "ban_status": 0,
+        "relation_tag": 1,
+        "user_favorite_count": 3709,
+        "has_skin_report": null,
+        "show_campaign_center": null,
+        "tiktok_name": "jktfoodsquad",
+        "tiktok_url": "tiktok.com/@jktfoodsquad",
+        "is_follow_apply": 0
+    },
+    "post_detail": {
+        "anchor_list": [],
+        "app_transcode_rule": {},
+        "article_class": "Video",
+        "article_selected": false,
+        "article_type": 0,
+        "article_url": "https://www.lemon8-app.com/jktfoodsquad/7268603232883180034?",
+        "author": {
+            "author_id": 7138599741986915329,
+            "avatar": {
+                "height": 1,
+                "origin_uri": "user-avatar-alisg/92d1b277b93a852fa3261b2b0654f2bb",
+                "thumb_uri": "thumb/user-avatar-alisg/92d1b277b93a852fa3261b2b0654f2bb",
+                "uri": "https://p16-sign-va.lemon8cdn.com/user-avatar-alisg/92d1b277b93a852fa3261b2b0654f2bb~tplv-tej9nj120t-shrink:120:0:q75.webp?lk3s=66c60501&source=feed_user&x-expires=1709121600&x-signature=Rz9xpiMhnYPHO9GvohaaM4XpHXU%3D",
+                "url_list": [
+                    {
+                        "url": "https://p16-sign-va.lemon8cdn.com/user-avatar-alisg/92d1b277b93a852fa3261b2b0654f2bb~tplv-tej9nj120t-shrink:120:0:q75.webp?lk3s=66c60501&source=feed_user&x-expires=1709121600&x-signature=Rz9xpiMhnYPHO9GvohaaM4XpHXU%3D"
+                    }
+                ],
+                "width": 1
+            },
+            "description": "Hello! ✨\nWe curate only the best in the industry for you!",
+            "link": "sslocal://user_profile?user_id=7138599741986915329",
+            "media_label": "",
+            "name": "JKT Food Squad",
+            "permissions": {
+                "114": true
+            },
+            "privacy_status": 1,
+            "relation": null,
+            "user_auth_info": ""
+        },
+        "babe_long_article": 0,
+        "ban_comment": 0,
+        "behot_time": 1692353931,
+        "bury_count": 0,
+        "category": "{}",
+        "comment_count": 0,
+        "content": "SELAMAT MERAYAKAN HUT RI GES! 🇮🇩Siapa yang masih liburan dan mau merayakan sisi nasionalis dengan makan makanan Indonesia?Menurutku, Roemah Rempah di Plaza Senayan adalah restoran Indonesia terenak karena melambangkan negara kita banget - KAYA AKAN REMPAH! 🔥Serius, kalian pasti tau lah ya, Indonesia tuh kaya akan rempah, bumbunya yang kompleks, medok, dan on point banget. Nah Roemah Rempah ini menurutku yang paling enak diantara semuanya bahkan jauh diatas Remboelan dkk😆Aku waktu itu gak sengaja nemu restoran ini dan sejak saat itu kalo kumpul rame-rame sama keluarga atau temen, terutama buat yang dari luar negeri, aku ajak kesini.Terakhir aku makan kesini itu ber-10 habis sekitar 2 jutaan tapi aku jamin PUAS! Porsinya gede-gede, makanannya ada beragam macam jenis dan ini favoritku:1. Kambing GulingPorsi sharing, super juicy, empuk, smokey dan sambel kecapnya 🔥2. Bebek Goreng Saus JerukSatu kata, MINDBLOWING 🤯 DAH COBA AJA POKOKNYA!3. Asam-Asam IgaSEGER DAN UENAK POL! Sampe sekarang masih gagal move on.Untuk menu lainnya semuanya aku bisa bilang enak tapi 3 tadi paling outstanding dan WAJIB KUDU HARUS cobain 😭😭😭#jktfoodsquad #makananIndonesia #indonesianfood  #hutri77dilemon8 #hiddengem  #restoreview #restaurantrecommendation #restaurantreview Roemah Rempah Plaza Senayan\n",
+        "content_space": "bn",
+        "cover_glass_effect": false,
+        "create_forum_scene": "",
+        "delete": 0,
+        "description": "Makanan Indonesia TERENAK Ada Di Sini! 🔥🇮🇩",
+        "detail_content_fold": false,
+        "detail_load_url_silenced": false,
+        "detail_type": 5,
+        "digg_count": 9,
+        "disable_ugc_edit": false,
+        "display_time": 1692353931,
+        "display_url": "https://www.lemon8-app.com/jktfoodsquad/7268603232883180034?",
+        "dynamic_banner_patterns": {},
+        "enable_video_share_download": false,
+        "enable_watermark": true,
+        "favorite_count": 2,
+        "flow_coupon_entry": null,
+        "group_flags": 0,
+        "group_id": 7268603232883180034,
+        "group_modify_status": {
+            "delete_status": 0,
+            "featured_status": 0,
+            "immersive_trend_link": "",
+            "stick_status": 0,
+            "trend_link": "",
+            "trend_status": 0,
+            "trend_style": 0,
+            "vertical_immersive_show": false
+        },
+        "group_permission_config": {
+            "4": 1,
+            "7": 1
+        },
+        "group_permissions_v2": {
+            "comment_permission": 0
+        },
+        "group_source": 482,
+        "hat": null,
+        "impr_id": "7329455313382902021",
+        "impression_count": 0,
+        "item_id": 7268603232883180034,
+        "language": "id",
+        "large_image": {
+            "height": 960,
+            "origin_uri": "tos-alisg-v-a3e477-sg/o08eA9CYIgtQGWAJZbV7fQ0OkYARCnno3ADgEB",
+            "thumb_uri": "tos-alisg-v-a3e477-sg/o08eA9CYIgtQGWAJZbV7fQ0OkYARCnno3ADgEB~tplv-tej9nj120t-shrink:100:56:q75",
+            "thumb_url_list": [
+                {
+                    "url": "https://p16-sign-va.lemon8cdn.com/tos-alisg-v-a3e477-sg/o08eA9CYIgtQGWAJZbV7fQ0OkYARCnno3ADgEB~tplv-tej9nj120t-shrink:100:56:q75.webp?biz_tag=multi_feed_video&lk3s=66c60501&source=feed_large&x-expires=1709121600&x-signature=PpTEM5y6LXVylv2gdHBryP4NEwg%3D"
+                },
+                {
+                    "url": "https://p19-sign-va.lemon8cdn.com/tos-alisg-v-a3e477-sg/o08eA9CYIgtQGWAJZbV7fQ0OkYARCnno3ADgEB~tplv-tej9nj120t-shrink:100:56:q75.webp?biz_tag=multi_feed_video&lk3s=66c60501&source=feed_large&x-expires=1709121600&x-signature=Sx%2FpB%2Fkspr1gSFfRD1jmvegh%2BKI%3D"
+                }
+            ],
+            "uri": "tos-alisg-v-a3e477-sg/o08eA9CYIgtQGWAJZbV7fQ0OkYARCnno3ADgEB~tplv-tej9nj120t-shrink:640:0:q75",
+            "url": "https://p16-sign-va.lemon8cdn.com/tos-alisg-v-a3e477-sg/o08eA9CYIgtQGWAJZbV7fQ0OkYARCnno3ADgEB~tplv-tej9nj120t-shrink:640:0:q75.webp?biz_tag=multi_feed_video&lk3s=66c60501&source=feed_large&x-expires=1709121600&x-signature=Bbu%2BfGC16SuZXCah9GgpkYhjaDo%3D",
+            "url_list": [
+                {
+                    "url": "https://p16-sign-va.lemon8cdn.com/tos-alisg-v-a3e477-sg/o08eA9CYIgtQGWAJZbV7fQ0OkYARCnno3ADgEB~tplv-tej9nj120t-shrink:640:0:q75.webp?biz_tag=multi_feed_video&lk3s=66c60501&source=feed_large&x-expires=1709121600&x-signature=Bbu%2BfGC16SuZXCah9GgpkYhjaDo%3D"
+                },
+                {
+                    "url": "https://p19-sign-va.lemon8cdn.com/tos-alisg-v-a3e477-sg/o08eA9CYIgtQGWAJZbV7fQ0OkYARCnno3ADgEB~tplv-tej9nj120t-shrink:640:0:q75.webp?biz_tag=multi_feed_video&lk3s=66c60501&source=feed_large&x-expires=1709121600&x-signature=WoPS8w8u32Db9nbhMpgIPc0aWZk%3D"
+                }
+            ],
+            "width": 540
+        },
+        "latest_version": 0,
+        "like_count": 9,
+        "list_style": 93,
+        "log_extra": "{\"Impr ID\":\"7329455313382902021\",\"Article Type (Default)\":0,\"Article Detail Type\":5,\"Article List Source\":\"JKT Food Squad\",\"Article List Style\":3,\"Author ID\":\"7138599741986915329\",\"Article Class\":\"Video\",\"Article Video Duration\":57,\"Article Video Style\":1,\"article_sub_class\":\"normal\",\"i18n_article_class\":\"video\"}",
+        "log_pb": "{}",
+        "media_id": 7138599741986915329,
+        "middle_image": {
+            "height": 360,
+            "origin_uri": "tos-alisg-v-a3e477-sg/o08eA9CYIgtQGWAJZbV7fQ0OkYARCnno3ADgEB",
+            "thumb_uri": "tos-alisg-v-a3e477-sg/o08eA9CYIgtQGWAJZbV7fQ0OkYARCnno3ADgEB~tplv-tej9nj120t-cs:100:56:q75",
+            "thumb_url_list": [
+                {
+                    "url": "https://p16-sign-va.lemon8cdn.com/tos-alisg-v-a3e477-sg/o08eA9CYIgtQGWAJZbV7fQ0OkYARCnno3ADgEB~tplv-tej9nj120t-cs:100:56:q75.webp?lk3s=66c60501&source=feed_middle&x-expires=1709121600&x-signature=fblBNf9SKrVcEXnjIrUAGg5e7as%3D"
+                },
+                {
+                    "url": "https://p19-sign-va.lemon8cdn.com/tos-alisg-v-a3e477-sg/o08eA9CYIgtQGWAJZbV7fQ0OkYARCnno3ADgEB~tplv-tej9nj120t-cs:100:56:q75.webp?lk3s=66c60501&source=feed_middle&x-expires=1709121600&x-signature=NL%2F0FQodQGRvd3Xk%2FNBY7c8kEU4%3D"
+                }
+            ],
+            "uri": "tos-alisg-v-a3e477-sg/o08eA9CYIgtQGWAJZbV7fQ0OkYARCnno3ADgEB~tplv-tej9nj120t-cs:640:360:q75",
+            "url": "https://p16-sign-va.lemon8cdn.com/tos-alisg-v-a3e477-sg/o08eA9CYIgtQGWAJZbV7fQ0OkYARCnno3ADgEB~tplv-tej9nj120t-cs:640:360:q75.webp?lk3s=66c60501&source=feed_middle&x-expires=1709121600&x-signature=KP3X%2FCdK1tMyZhFvRZfPlRPzyZc%3D",
+            "url_list": [
+                {
+                    "url": "https://p16-sign-va.lemon8cdn.com/tos-alisg-v-a3e477-sg/o08eA9CYIgtQGWAJZbV7fQ0OkYARCnno3ADgEB~tplv-tej9nj120t-cs:640:360:q75.webp?lk3s=66c60501&source=feed_middle&x-expires=1709121600&x-signature=KP3X%2FCdK1tMyZhFvRZfPlRPzyZc%3D"
+                },
+                {
+                    "url": "https://p19-sign-va.lemon8cdn.com/tos-alisg-v-a3e477-sg/o08eA9CYIgtQGWAJZbV7fQ0OkYARCnno3ADgEB~tplv-tej9nj120t-cs:640:360:q75.webp?lk3s=66c60501&source=feed_middle&x-expires=1709121600&x-signature=RiUpcTc7gwFWek8JLlDEYbRYQRE%3D"
+                }
+            ],
+            "width": 640
+        },
+        "origin_image": {
+            "height": 960,
+            "origin_uri": "tos-alisg-v-a3e477-sg/o08eA9CYIgtQGWAJZbV7fQ0OkYARCnno3ADgEB",
+            "thumb_uri": "tos-alisg-v-a3e477-sg/o08eA9CYIgtQGWAJZbV7fQ0OkYARCnno3ADgEB~tplv-tej9nj120t-shrink:120:0:q75",
+            "thumb_url_list": [
+                {
+                    "url": "https://p16-sign-va.lemon8cdn.com/tos-alisg-v-a3e477-sg/o08eA9CYIgtQGWAJZbV7fQ0OkYARCnno3ADgEB~tplv-tej9nj120t-shrink:120:0:q75.webp?lk3s=66c60501&source=feed_origin&x-expires=1709121600&x-signature=7j23RXI3vIKMNaCq2SIZsTm4GUw%3D"
+                },
+                {
+                    "url": "https://p19-sign-va.lemon8cdn.com/tos-alisg-v-a3e477-sg/o08eA9CYIgtQGWAJZbV7fQ0OkYARCnno3ADgEB~tplv-tej9nj120t-shrink:120:0:q75.webp?lk3s=66c60501&source=feed_origin&x-expires=1709121600&x-signature=y%2Fs36CYD9v9MuYhU%2FgFL6i1kofI%3D"
+                }
+            ],
+            "uri": "tos-alisg-v-a3e477-sg/o08eA9CYIgtQGWAJZbV7fQ0OkYARCnno3ADgEB~tplv-tej9nj120t-origin",
+            "url": "https://p16-sign-va.lemon8cdn.com/tos-alisg-v-a3e477-sg/o08eA9CYIgtQGWAJZbV7fQ0OkYARCnno3ADgEB~tplv-tej9nj120t-origin.webp?lk3s=66c60501&source=feed_origin&x-expires=1709121600&x-signature=N52SkuJdCWaGEZSsUPGdXoYFgFk%3D",
+            "url_list": [
+                {
+                    "url": "https://p16-sign-va.lemon8cdn.com/tos-alisg-v-a3e477-sg/o08eA9CYIgtQGWAJZbV7fQ0OkYARCnno3ADgEB~tplv-tej9nj120t-origin.webp?lk3s=66c60501&source=feed_origin&x-expires=1709121600&x-signature=N52SkuJdCWaGEZSsUPGdXoYFgFk%3D"
+                },
+                {
+                    "url": "https://p19-sign-va.lemon8cdn.com/tos-alisg-v-a3e477-sg/o08eA9CYIgtQGWAJZbV7fQ0OkYARCnno3ADgEB~tplv-tej9nj120t-origin.webp?lk3s=66c60501&source=feed_origin&x-expires=1709121600&x-signature=HHSf8Eao6C%2FCOg7kLAbrMRZi%2BW0%3D"
+                }
+            ],
+            "width": 540
+        },
+        "pin_status": 0,
+        "preload_web": 2,
+        "publish_time": 1692353931,
+        "read_count": 777,
+        "recommend_count": 1343,
+        "region": "id",
+        "repost_count": 0,
+        "repost_layer": 0,
+        "repost_layers_content": null,
+        "repost_tips_text": null,
+        "seo_article_extra": {},
+        "share_count": 0,
+        "share_download_video": {
+            "author_avatar": "https://sf16-passport-sg.ibytedtos.com/img/user-avatar-alisg/92d1b277b93a852fa3261b2b0654f2bb~0x0.image",
+            "author_name": "JKT Food Squad",
+            "cdn_url": "https://v16-app.lemon8cdn.com/be73b05b0ec1314cd4f0b53f14088d89/65bb69ab/video/tos/alisg/tos-alisg-v-a3e477-sg/ossDI8Qtx920n2naBPges3ZgQbRhkSDBWgLIfE/?a=2657&ch=0&cr=0&dr=0&lr=lemon8&cd=0%7C0%7C1%7C1&cv=1&br=2250&bt=1125&bti=NzNAMi9g&cs=0&ds=6&ft=aeKb_qSkmuKPD12ZJG.R3wUZSULgjeF~O5&mime_type=video_mp4&qs=0&rc=NDU6aGRkOjdoOTszOjNkZUBpM3A1dDc6Zm5ubTQzOGU2NEBeNjQuXjY1X18xMjYuMF5jYSNjbm42cjRnMmNgLS1kYS1zcw%3D%3D&l=20240129095040F27E5451CFFCDF1C731B&btag=e00088000",
+            "codec_type": "h264",
+            "description": "Makanan Indonesia TERENAK Ada Di Sini! 🔥🇮🇩",
+            "duration": 57,
+            "height": 960,
+            "id": "7268603232883180034",
+            "immersive": 1,
+            "landscape_enabled": false,
+            "list_play": false,
+            "play_times": 1,
+            "recommend_codec_type": "h264",
+            "recommend_url": "https://v16-app.lemon8cdn.com/be73b05b0ec1314cd4f0b53f14088d89/65bb69ab/video/tos/alisg/tos-alisg-v-a3e477-sg/ossDI8Qtx920n2naBPges3ZgQbRhkSDBWgLIfE/?a=2657&ch=0&cr=0&dr=0&lr=lemon8&cd=0%7C0%7C1%7C1&cv=1&br=2250&bt=1125&bti=NzNAMi9g&cs=0&ds=6&ft=aeKb_qSkmuKPD12ZJG.R3wUZSULgjeF~O5&mime_type=video_mp4&qs=0&rc=NDU6aGRkOjdoOTszOjNkZUBpM3A1dDc6Zm5ubTQzOGU2NEBeNjQuXjY1X18xMjYuMF5jYSNjbm42cjRnMmNgLS1kYS1zcw%3D%3D&l=20240129095040F27E5451CFFCDF1C731B&btag=e00088000",
+            "site": "native_encrypt",
+            "title": "Makanan Indonesia TERENAK Ada Di Sini! 🔥🇮🇩",
+            "type": "native_encrypt",
+            "url": "https://v16-app.lemon8cdn.com/be73b05b0ec1314cd4f0b53f14088d89/65bb69ab/video/tos/alisg/tos-alisg-v-a3e477-sg/ossDI8Qtx920n2naBPges3ZgQbRhkSDBWgLIfE/?a=2657&ch=0&cr=0&dr=0&lr=lemon8&cd=0%7C0%7C1%7C1&cv=1&br=2250&bt=1125&bti=NzNAMi9g&cs=0&ds=6&ft=aeKb_qSkmuKPD12ZJG.R3wUZSULgjeF~O5&mime_type=video_mp4&qs=0&rc=NDU6aGRkOjdoOTszOjNkZUBpM3A1dDc6Zm5ubTQzOGU2NEBeNjQuXjY1X18xMjYuMF5jYSNjbm42cjRnMmNgLS1kYS1zcw%3D%3D&l=20240129095040F27E5451CFFCDF1C731B&btag=e00088000",
+            "url_list": [
+                {
+                    "bit_rate": 1152569,
+                    "codec_type": "h264",
+                    "file_hash": "1e0d79692fd22d2e32ded0e64bb2b2a8",
+                    "logo_type": "lemon8",
+                    "origin_duration": 57.422,
+                    "preload_size": {},
+                    "size": 8272858,
+                    "text": "540p_normal",
+                    "url_expire": 1706781099,
+                    "urls": [
+                        "https://v16-app.lemon8cdn.com/be73b05b0ec1314cd4f0b53f14088d89/65bb69ab/video/tos/alisg/tos-alisg-v-a3e477-sg/ossDI8Qtx920n2naBPges3ZgQbRhkSDBWgLIfE/?a=2657&ch=0&cr=0&dr=0&lr=lemon8&cd=0%7C0%7C1%7C1&cv=1&br=2250&bt=1125&bti=NzNAMi9g&cs=0&ds=6&ft=aeKb_qSkmuKPD12ZJG.R3wUZSULgjeF~O5&mime_type=video_mp4&qs=0&rc=NDU6aGRkOjdoOTszOjNkZUBpM3A1dDc6Zm5ubTQzOGU2NEBeNjQuXjY1X18xMjYuMF5jYSNjbm42cjRnMmNgLS1kYS1zcw%3D%3D&l=20240129095040F27E5451CFFCDF1C731B&btag=e00088000",
+                        "https://v19-app.lemon8cdn.com/83affb5393559e91455733a80dee8d28/65bb69ab/video/tos/alisg/tos-alisg-v-a3e477-sg/ossDI8Qtx920n2naBPges3ZgQbRhkSDBWgLIfE/?a=2657&ch=0&cr=0&dr=0&lr=lemon8&cd=0%7C0%7C1%7C1&cv=1&br=2250&bt=1125&bti=NzNAMi9g&cs=0&ds=6&ft=aeKb_qSkmuKPD12ZJG.R3wUZSULgjeF~O5&mime_type=video_mp4&qs=0&rc=NDU6aGRkOjdoOTszOjNkZUBpM3A1dDc6Zm5ubTQzOGU2NEBeNjQuXjY1X18xMjYuMF5jYSNjbm42cjRnMmNgLS1kYS1zcw%3D%3D&l=20240129095040F27E5451CFFCDF1C731B&btag=e00088000"
+                    ]
+                }
+            ],
+            "video_immersive_direct": "vertical",
+            "video_over_times": 0,
+            "width": 540
+        },
+        "share_image_url": "",
+        "share_url": "https://www.lemon8-app.com/jktfoodsquad/7268603232883180034?",
+        "short_content": "SELAMAT MERAYAKAN HUT RI GES! 🇮🇩  Siapa yang masih liburan dan mau merayakan sisi nasionalis dengan makan makanan Indonesia?    Menurutku, Roemah Rempah di Plaza Senayan adalah restoran Indonesia terenak karena melambangkan negara kita banget - KAYA AKAN REMPAH! 🔥    Serius, kalian pasti tau lah ya",
+        "show_action_button": true,
+        "show_audio_comment": false,
+        "show_option_button": 1,
+        "silence_load_url": "",
+        "smart_view_type": 6,
+        "source": "JKT Food Squad",
+        "star_comments": null,
+        "stickers": null,
+        "subscribed_goods_cards": [],
+        "super_group": null,
+        "template_type": "",
+        "title": "Makanan Indonesia TERENAK Ada Di Sini! 🔥🇮🇩",
+        "toolbar_type": 0,
+        "url": "https://v16-app.lemon8cdn.com/53cc55c0bf7f4443d11898caccffd3b8/65bb69ab/video/tos/alisg/tos-alisg-v-a3e477-sg/ogGb0eLbEbatCnIsI8fBSn3h54D93klQggBOQW/?a=2657&ch=0&cr=0&dr=0&cd=0%7C0%7C0%7C1&cv=1&br=980&bt=490&bti=NzNAMi9g&cs=2&ds=6&ft=aeKb_qSkmuKPD12kJG.R3wUZSULgjeF~O5&mime_type=video_mp4&qs=0&rc=NmhlPDRlNGc4ZDs7ZzYzNEBpM3A1dDc6Zm5ubTQzOGU2NEAvLzNhLy8uX2IxNS82XjYvYSNjbm42cjRnMmNgLS1kYS1zcw%3D%3D&l=20240129095040F27E5451CFFCDF1C731B&btag=e00088000",
+        "user_bury": 0,
+        "user_digg": 0,
+        "user_dislike": 0,
+        "user_like": 0,
+        "user_repin": 0,
+        "video": {
+            "author_avatar": "https://sf16-passport-sg.ibytedtos.com/img/user-avatar-alisg/92d1b277b93a852fa3261b2b0654f2bb~0x0.image",
+            "author_name": "JKT Food Squad",
+            "cdn_url": "https://v16-app.lemon8cdn.com/53cc55c0bf7f4443d11898caccffd3b8/65bb69ab/video/tos/alisg/tos-alisg-v-a3e477-sg/ogGb0eLbEbatCnIsI8fBSn3h54D93klQggBOQW/?a=2657&ch=0&cr=0&dr=0&cd=0%7C0%7C0%7C1&cv=1&br=980&bt=490&bti=NzNAMi9g&cs=2&ds=6&ft=aeKb_qSkmuKPD12kJG.R3wUZSULgjeF~O5&mime_type=video_mp4&qs=0&rc=NmhlPDRlNGc4ZDs7ZzYzNEBpM3A1dDc6Zm5ubTQzOGU2NEAvLzNhLy8uX2IxNS82XjYvYSNjbm42cjRnMmNgLS1kYS1zcw%3D%3D&l=20240129095040F27E5451CFFCDF1C731B&btag=e00088000",
+            "codec_type": "h264",
+            "description": "Makanan Indonesia TERENAK Ada Di Sini! 🔥🇮🇩",
+            "duration": 57,
+            "first_frame_image": {
+                "height": 1280,
+                "origin_uri": "v0201/9f0096455e5e504cc2aeb7f29371e4b7",
+                "thumb_uri": "v0201/9f0096455e5e504cc2aeb7f29371e4b7~tplv-tej9nj120t-shrink:120:0:q75",
+                "thumb_url_list": [
+                    {
+                        "url": "https://p16-sign-va.lemon8cdn.com/v0201/9f0096455e5e504cc2aeb7f29371e4b7~tplv-tej9nj120t-shrink:120:0:q75.webp?biz_tag=multi_feed_video&lk3s=66c60501&source=detail_list&x-expires=1709121600&x-signature=VYgHEfyeDPP5X4TX0E%2FySkv%2BERo%3D"
+                    },
+                    {
+                        "url": "https://p19-sign-va.lemon8cdn.com/v0201/9f0096455e5e504cc2aeb7f29371e4b7~tplv-tej9nj120t-shrink:120:0:q75.webp?biz_tag=multi_feed_video&lk3s=66c60501&source=detail_list&x-expires=1709121600&x-signature=E8SkvyhNuvrtUaqqX9k9onm1cPs%3D"
+                    }
+                ],
+                "uri": "v0201/9f0096455e5e504cc2aeb7f29371e4b7~tplv-tej9nj120t-shrink:720:1280:q75",
+                "url": "https://p16-sign-va.lemon8cdn.com/v0201/9f0096455e5e504cc2aeb7f29371e4b7~tplv-tej9nj120t-shrink:720:1280:q75.webp?biz_tag=multi_feed_video&lk3s=66c60501&source=detail_list&x-expires=1709121600&x-signature=zAu6n4hC8tGdZ9FTG%2FBSfkXzceA%3D",
+                "url_list": [
+                    {
+                        "url": "https://p16-sign-va.lemon8cdn.com/v0201/9f0096455e5e504cc2aeb7f29371e4b7~tplv-tej9nj120t-shrink:720:1280:q75.webp?biz_tag=multi_feed_video&lk3s=66c60501&source=detail_list&x-expires=1709121600&x-signature=zAu6n4hC8tGdZ9FTG%2FBSfkXzceA%3D"
+                    },
+                    {
+                        "url": "https://p19-sign-va.lemon8cdn.com/v0201/9f0096455e5e504cc2aeb7f29371e4b7~tplv-tej9nj120t-shrink:720:1280:q75.webp?biz_tag=multi_feed_video&lk3s=66c60501&source=detail_list&x-expires=1709121600&x-signature=m%2F99fyEbHDRZBv51jY%2BS0pdFf6Y%3D"
+                    }
+                ],
+                "width": 720
+            },
+            "height": 960,
+            "id": "7268603232883180034",
+            "immersive": 1,
+            "is_custom_cover": 2,
+            "landscape_enabled": false,
+            "list_play": false,
+            "play_times": 1,
+            "recommend_codec_type": "h265_hvc1",
+            "recommend_url": "https://v16-app.lemon8cdn.com/53cc55c0bf7f4443d11898caccffd3b8/65bb69ab/video/tos/alisg/tos-alisg-v-a3e477-sg/ogGb0eLbEbatCnIsI8fBSn3h54D93klQggBOQW/?a=2657&ch=0&cr=0&dr=0&cd=0%7C0%7C0%7C1&cv=1&br=980&bt=490&bti=NzNAMi9g&cs=2&ds=6&ft=aeKb_qSkmuKPD12kJG.R3wUZSULgjeF~O5&mime_type=video_mp4&qs=0&rc=NmhlPDRlNGc4ZDs7ZzYzNEBpM3A1dDc6Zm5ubTQzOGU2NEAvLzNhLy8uX2IxNS82XjYvYSNjbm42cjRnMmNgLS1kYS1zcw%3D%3D&l=20240129095040F27E5451CFFCDF1C731B&btag=e00088000",
+            "site": "native_encrypt",
+            "title": "Makanan Indonesia TERENAK Ada Di Sini! 🔥🇮🇩",
+            "type": "native_encrypt",
+            "url": "https://v16-app.lemon8cdn.com/53cc55c0bf7f4443d11898caccffd3b8/65bb69ab/video/tos/alisg/tos-alisg-v-a3e477-sg/ogGb0eLbEbatCnIsI8fBSn3h54D93klQggBOQW/?a=2657&ch=0&cr=0&dr=0&cd=0%7C0%7C0%7C1&cv=1&br=980&bt=490&bti=NzNAMi9g&cs=2&ds=6&ft=aeKb_qSkmuKPD12kJG.R3wUZSULgjeF~O5&mime_type=video_mp4&qs=0&rc=NmhlPDRlNGc4ZDs7ZzYzNEBpM3A1dDc6Zm5ubTQzOGU2NEAvLzNhLy8uX2IxNS82XjYvYSNjbm42cjRnMmNgLS1kYS1zcw%3D%3D&l=20240129095040F27E5451CFFCDF1C731B&btag=e00088000",
+            "url_list": [
+                {
+                    "bit_rate": 502077,
+                    "codec_type": "h265_hvc1",
+                    "file_hash": "03d4337220dc498abecf910f57a99fa8",
+                    "logo_type": "",
+                    "origin_duration": 57.422,
+                    "preload_size": {},
+                    "size": 3603787,
+                    "text": "540p_normal",
+                    "url_expire": 1706781099,
+                    "urls": [
+                        "https://v16-app.lemon8cdn.com/53cc55c0bf7f4443d11898caccffd3b8/65bb69ab/video/tos/alisg/tos-alisg-v-a3e477-sg/ogGb0eLbEbatCnIsI8fBSn3h54D93klQggBOQW/?a=2657&ch=0&cr=0&dr=0&cd=0%7C0%7C0%7C1&cv=1&br=980&bt=490&bti=NzNAMi9g&cs=2&ds=6&ft=aeKb_qSkmuKPD12kJG.R3wUZSULgjeF~O5&mime_type=video_mp4&qs=0&rc=NmhlPDRlNGc4ZDs7ZzYzNEBpM3A1dDc6Zm5ubTQzOGU2NEAvLzNhLy8uX2IxNS82XjYvYSNjbm42cjRnMmNgLS1kYS1zcw%3D%3D&l=20240129095040F27E5451CFFCDF1C731B&btag=e00088000",
+                        "https://v19-app.lemon8cdn.com/0c63a1fe38f1ccb2d857a152c70935ef/65bb69ab/video/tos/alisg/tos-alisg-v-a3e477-sg/ogGb0eLbEbatCnIsI8fBSn3h54D93klQggBOQW/?a=2657&ch=0&cr=0&dr=0&cd=0%7C0%7C0%7C1&cv=1&br=980&bt=490&bti=NzNAMi9g&cs=2&ds=6&ft=aeKb_qSkmuKPD12kJG.R3wUZSULgjeF~O5&mime_type=video_mp4&qs=0&rc=NmhlPDRlNGc4ZDs7ZzYzNEBpM3A1dDc6Zm5ubTQzOGU2NEAvLzNhLy8uX2IxNS82XjYvYSNjbm42cjRnMmNgLS1kYS1zcw%3D%3D&l=20240129095040F27E5451CFFCDF1C731B&btag=e00088000"
+                    ]
+                }
+            ],
+            "video_immersive_direct": "vertical",
+            "video_model": "{\"status\":10,\"message\":\"success\",\"version\":3,\"video_id\":\"v103dbg50001cjfk5kjc77u49qq2qmf0\",\"enable_ssl\":true,\"video_duration\":57.422,\"media_type\":\"video\",\"url_expire\":1706781099,\"fallback_api\":{\"fallback_api\":\"https://vas-maliva16.byteoversea.com/video/fplay/1/2c9ff031d7e2b243d7baaccbb971220c/v103dbg50001cjfk5kjc77u49qq2qmf0?aid=2657&codec_type=1&definition=3&device_platform=android&force_fids=MTJkMg%3D%3D&imp=false&ssl=true&stream_type=normal&version_code=550&vps=0&vquality=8\"},\"video_list\":[{\"main_url\":\"https://v16-app.lemon8cdn.com/0d0f6b00f8ac53cf78d6acabf2b17a8e/65bb69ab/video/tos/alisg/tos-alisg-v-a3e477-sg/oAB1g48JDtQSvZidBAnERL3RtOkgfBi9Q0DCbe/?a=2657&ch=0&cr=3&dr=3&er=0&cd=0%7C0%7C0%7C1&cv=1&br=1144&bt=572&bti=NzNAMi9g&cs=2&ds=3&ft=aeKb_qSkmuKPD12kJG.R3wUZSULgjeF~O5&mime_type=video_mp4&qs=14&rc=NTU7OTNkZzZkNTZpM2c5ZUBpM3A1dDc6Zm5ubTQzOGU2NEBhLi40MTZjXi0xL18xYjQuYSNjbm42cjRnMmNgLS1kYS1zcw%3D%3D&l=20240129095040F27E5451CFFCDF1C731B&btag=e00088000\",\"backup_url\":\"https://v19-app.lemon8cdn.com/9393d87716fabacf80ad85457f800194/65bb69ab/video/tos/alisg/tos-alisg-v-a3e477-sg/oAB1g48JDtQSvZidBAnERL3RtOkgfBi9Q0DCbe/?a=2657&ch=0&cr=3&dr=3&er=0&cd=0%7C0%7C0%7C1&cv=1&br=1144&bt=572&bti=NzNAMi9g&cs=2&ds=3&ft=aeKb_qSkmuKPD12kJG.R3wUZSULgjeF~O5&mime_type=video_mp4&qs=14&rc=NTU7OTNkZzZkNTZpM2c5ZUBpM3A1dDc6Zm5ubTQzOGU2NEBhLi40MTZjXi0xL18xYjQuYSNjbm42cjRnMmNgLS1kYS1zcw%3D%3D&l=20240129095040F27E5451CFFCDF1C731B&btag=e00088000\",\"video_meta\":{\"definition\":\"720p\",\"quality\":\"adapt_lower\",\"quality_desc\":\"405\",\"vtype\":\"mp4\",\"vwidth\":720,\"vheight\":1280,\"bitrate\":586424,\"codec_type\":\"h265\",\"size\":4209210,\"file_id\":\"1b76ed40bf23420aa3fd9a40761812d2\",\"fps\":30,\"file_hash\":\"b4f558818651a616263191e4f346390b\",\"real_bitrate\":586424,\"audio_channels\":\"2.0\",\"audio_layout\":\"C\"},\"check_info\":{\"check_info\":\"c:0-48860-91b4|d:0-2104604-d8ff,2104605-4209209-92ed\"},\"quality_type\":14}]}",
+            "video_over_times": 0,
+            "width": 540
+        },
+        "video_style": 1,
+        "view_count": 0,
+        "vote_module": null
+    },
+    "path_data_raw": "S3://ai-pipeline-statistics/data/data_raw/data_review/lemon8/jktfoodsquad/7268603232883180034/json/detail.json",
+    "path_data_clean": "S3://ai-pipeline-statistics/data/data_clean/data_review/lemon8/jktfoodsquad/7268603232883180034/json/detail.json"
+}

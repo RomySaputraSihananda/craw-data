@@ -2,13 +2,15 @@ import asyncio
 
 from typing import final
 
+from helpers.decorators import Decorator
 from library.lemon8 import BaseLemon8
-from helpers import counter_time
 
 @final
 class Lemon8(BaseLemon8):
-    @counter_time
+    @Decorator.counter_time
     def __init__(self, **kwargs) -> None:
+        super().__init__(**kwargs)
+
         method: str = kwargs.get('method')
 
         match(method):

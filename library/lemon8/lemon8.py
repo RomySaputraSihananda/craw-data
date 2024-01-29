@@ -7,10 +7,13 @@ from time import time
 from aiohttp import ClientSession
 from requests import Response
 from json import dumps, loads
-from helpers import Iostream, Datetime
+from concurrent.futures import ThreadPoolExecutor
+
+from helpers import Iostream, Datetime, ConnectionS3
 
 class BaseLemon8:
-    def __init__(self) -> None:
+    def __init__(self, **kwargs) -> None:
+        self.__s3: bool = kwargs.get('s3')
         self.__request: ClientSession = None
     
     @staticmethod
@@ -63,6 +66,7 @@ class BaseLemon8:
             "path_data_clean": f'S3://ai-pipeline-statistics/data/data_clean/data_review/lemon8/{user_detail["user_unique_name"]}/{post_detail["item_id"]}/json/detail.json',
         };
 
+
         async with self.__request.get('https://api22-normal-useast1a.lemon8-app.com/api/550/comment_v2/comments',                             
                                     params={
                                         'group_id': post_detail['group_id'], 
@@ -71,36 +75,90 @@ class BaseLemon8:
                                         'count': '1000', 
                                         'aid': '2657', 
                                     }) as response:
-            comments = await response.json()
+            comments: dict = await response.json()
 
-            Iostream.write_json(headers, f'data/{headers["user_detail"]["user_unique_name"]}/{headers["post_detail"]["item_id"]}/detail.json')
+            paths: list = [path.replace('S3://ai-pipeline-statistics/', '') for path in [headers["path_data_raw"], headers["path_data_clean"]]] 
 
-            # Iostream.info_log({"test": post_detail['group_id']}, post_detail['group_id'], 'success', name=__name__)
-        return await asyncio.gather(*(self.__get_detail_comment(comment["id"], headers) for comment in comments['data']['data']))        
+            try:
+                with ThreadPoolExecutor() as executor:
+                    if(self.__s3):
+                        executor.map(lambda path: ConnectionS3.upload(headers, path), paths)
+                    else:
+                        executor.map(lambda path: Iostream.write_json(headers, path), paths)
+            except Exception as e:
+                raise e
 
-    async def __get_detail_comment(self, comment_id, headers: dict) -> None:
-        async with self.__request.get('https://api22-normal-useast1a.lemon8-app.com/api/550/comment_v2/detail',
-                                params={
-                                    'group_id': headers['post_detail']['group_id'], 
-                                    'item_id': headers['post_detail']['item_id'],
-                                    'media_id': headers['post_detail']['media_id'], 
-                                    'comment_id': comment_id, 
-                                    'count': '1000', 
-                                    'aid': '2657', 
-                                    'language': 'en', 
-                                },
-                                ) as response:
-            detail_comment = await response.json()
+        comments: list = comments['data']['data']
 
-            data: dict = {
-                **headers, 
-                "detail_review": detail_comment['data'],
-                "path_data_raw": f'S3://ai-pipeline-statistics/data/data_raw/data_review/lemon8/{headers["user_detail"]["user_unique_name"]}/{headers["post_detail"]["item_id"]}/json/{comment_id}.json',
-                "path_data_clean": f'S3://ai-pipeline-statistics/data/data_clean/data_review/lemon8/{headers["user_detail"]["user_unique_name"]}/{headers["post_detail"]["item_id"]}/json/{comment_id}.json',
-            }
+        log: dict = {
+            "Crawlling_time": Datetime.now(),
+            "id_project": None,
+            "project": "Data Intelligence",
+            "sub_project": "data review",
+            "source_name": headers['domain'],
+            "sub_source_name": user_detail["user_unique_name"],
+            "id_sub_source": str(post_detail["item_id"]),
+            "total_data": len(comments),
+            "total_success": 0,
+            "total_failed": 0,
+            "status": "Process",
+            "assign": "romy",
+        }
+        Iostream.write_log(log, name=__name__)
 
-            Iostream.write_json(data, f'data/{headers["user_detail"]["user_unique_name"]}/{headers["post_detail"]["item_id"]}/data_review/{comment_id}.json')
-            # Iostream.info_log({"ok":90}, comment_id, 'success')
+        if(not bool(len(comments))): 
+            log['status'] = 'Done'
+            return Iostream.update_log(log, name=__name__)
+        
+        return await asyncio.gather(*(self.__get_detail_comment(comment["id"], headers, log) for comment in comments))        
+
+    async def __get_detail_comment(self, comment_id, headers: dict, log: dict) -> None:
+        try:
+            async with self.__request.get('https://api22-normal-useast1a.lemon8-app.com/api/550/comment_v2/detail',
+                                    params={
+                                        'group_id': headers['post_detail']['group_id'], 
+                                        'item_id': headers['post_detail']['item_id'],
+                                        'media_id': headers['post_detail']['media_id'], 
+                                        'comment_id': comment_id, 
+                                        'count': '1000', 
+                                        'aid': '2657', 
+                                        'language': 'en', 
+                                    },
+                                    ) as response:
+                detail_comment = await response.json()
+
+                data: dict = {
+                    **headers, 
+                    "detail_review": detail_comment['data'],
+                    "path_data_raw": f'S3://ai-pipeline-statistics/data/data_raw/data_review/lemon8/{headers["user_detail"]["user_unique_name"]}/{headers["post_detail"]["item_id"]}/json/{comment_id}.json',
+                    "path_data_clean": f'S3://ai-pipeline-statistics/data/data_clean/data_review/lemon8/{headers["user_detail"]["user_unique_name"]}/{headers["post_detail"]["item_id"]}/json/{comment_id}.json',
+                }
+
+                paths: list = [path.replace('S3://ai-pipeline-statistics/', '') for path in [data["path_data_raw"], data["path_data_clean"]]] 
+                
+                try:
+                    with ThreadPoolExecutor() as executor:
+                        if(self.__s3):
+                            executor.map(lambda path: ConnectionS3.upload(data, path),paths)
+                        else:
+                            executor.map(lambda path: Iostream.write_json(data, path),paths)
+                except Exception as e:
+                    raise e
+
+                Iostream.info_log(log, comment_id, 'success', name=__name__)
+                
+                log['total_success'] += 1
+                Iostream.update_log(log, name=__name__)
+        
+        except Exception as e:
+            Iostream.info_log(log, comment_id, 'failed', error=e, name=__name__)
+
+            log['total_failed'] += 1
+            Iostream.update_log(log, name=__name__)
+        
+        log['status'] = 'Done'
+        Iostream.update_log(log, name=__name__)
+
 
     async def by_user_id(self, user_id) -> None:
         self.__request: ClientSession = ClientSession(headers={
