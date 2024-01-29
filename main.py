@@ -11,6 +11,7 @@ class Main:
     @argument('engine', default='lemon8')
     @argument('method', default='by_user_id')
     @option('--user_id', default='7138599741986915329', help='user_id')
+    @option('--username', default='jktfoodsquad', help='user_id')
     @option('--s3', default=False, help='send s3 ?')
     def main(**kwargs) -> None:
         match(kwargs.get('engine')):

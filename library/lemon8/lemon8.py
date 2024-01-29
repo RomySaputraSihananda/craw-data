@@ -17,7 +17,7 @@ class BaseLemon8:
         self.__request: ClientSession = None
     
     @staticmethod
-    def get_user_profile(user_id) -> dict:
+    def get_user_profile(user_id: str) -> dict:
         response: Response = requests.get(
             'https://api22-normal-useast1a.lemon8-app.com/api/550/user/profile/homepage',
             params={
@@ -32,7 +32,7 @@ class BaseLemon8:
         return response.json()['data']
     
     @staticmethod
-    def get_user_posts(user_id) -> dict:
+    def get_user_posts(user_id: str) -> dict:
         response: Response = requests.get(
             'https://api22-normal-useast1a.lemon8-app.com/api/550/stream',
             params={
@@ -49,6 +49,11 @@ class BaseLemon8:
         )
 
         return loads(re.sub(r'<[^>]*>', '', dumps(response.json(), ensure_ascii=False)))['data']['items']
+
+    @staticmethod
+    def get_user_id(username: str) -> str:
+        response: Response = requests.get(f'https://www.lemon8-app.com/{username}', params={'_data': None})
+        return re.findall(r'"userId":"(\d+)"', response.text)[0]
 
     async def __get_comments(self, post_detail: dict, user_detail: dict) -> None:
         link: str = f'https://www.lemon8-app.com/{user_detail["user_unique_name"]}/{post_detail["item_id"]}'
@@ -160,7 +165,7 @@ class BaseLemon8:
         Iostream.update_log(log, name=__name__)
 
 
-    async def by_user_id(self, user_id) -> None:
+    async def by_user_id(self, user_id: str) -> None:
         self.__request: ClientSession = ClientSession(headers={
             'User-Agent': 'com.bd.nproject/55014 (Linux; U; Android 9; en_US; unknown; Build/PI;tt-ok/3.12.13.1)',
         })
@@ -170,6 +175,9 @@ class BaseLemon8:
         await asyncio.gather(*(self.__get_comments(post, user_detail) for post in posts))
 
         await self.__request.close()
+    
+    def by_username(self, username: str) -> None:
+        asyncio.run(self.by_user_id(self.get_user_id(username)))
 
 
 # testing
