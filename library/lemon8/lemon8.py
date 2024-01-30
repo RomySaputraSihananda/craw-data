@@ -48,12 +48,22 @@ class BaseLemon8:
             },
         )
 
-        return loads(re.sub(r'<[^>]*>', '', dumps(response.json(), ensure_ascii=False)))['data']['items']
+        return response.json()['data']['items']
 
     @staticmethod
     def get_user_id(username: str) -> str:
         response: Response = requests.get(f'https://www.lemon8-app.com/{username}', params={'_data': None})
         return re.findall(r'"userId":"(\d+)"', response.text)[0]
+
+    @staticmethod
+    def get_static_url(url: str) -> str:
+        response: Response = requests.get(url)
+        return re.findall(r'"(https://www.lemon8-app.com/.*?/\d+)', response.text)[0]
+
+    @staticmethod
+    def get_url_by_post_id(post_id: str) -> str:
+        response: Response = requests.get(f"https://www.lemon8-app.com/<>/{post_id}")
+        return re.findall(r'<link\s+rel="canonical"\s+href="([^"]+)"', response.text)[0]
 
     async def __get_comments(self, post_detail: dict, user_detail: dict) -> None:
         link: str = f'https://www.lemon8-app.com/{user_detail["user_unique_name"]}/{post_detail["item_id"]}'
@@ -158,7 +168,6 @@ class BaseLemon8:
                 Iostream.update_log(log, name=__name__)
         
         except Exception as e:
-            raise e
             Iostream.info_log(log, comment_id, 'failed', error=e, name=__name__)
 
             log['total_failed'] += 1
@@ -168,21 +177,34 @@ class BaseLemon8:
         Iostream.update_log(log, name=__name__)
 
 
-    async def by_user_id(self, user_id: str) -> None:
+    async def by_user_id(self, user_id: str, **kwargs) -> None:
         self.__request: ClientSession = ClientSession(headers={
             'User-Agent': 'com.bd.nproject/55014 (Linux; U; Android 9; en_US; unknown; Build/PI;tt-ok/3.12.13.1)',
         })
 
         user_detail: dict = self.get_user_profile(user_id)
-        posts: dict = self.get_user_posts(user_id)
+
+        post_id = kwargs.get('post_id')
+
+        posts: list = self.get_user_posts(user_id)
+        
+        if(post_id): posts: list = [post for post in posts if str(post['group_id']) == post_id]
+
         await asyncio.gather(*(self.__get_comments(post, user_detail) for post in posts))
 
         await self.__request.close()
     
-    def by_username(self, username: str) -> None:
-        asyncio.run(self.by_user_id(self.get_user_id(username)))
+    def by_post_id(self, post_id: str) -> None:
+        self.by_url(self.get_url_by_post_id(post_id))
+    
+    def by_username(self, username: str, **kwargs) -> None:
+        asyncio.run(self.by_user_id(self.get_user_id(username), **kwargs))
+    
+    def by_url(self, url: str) -> None:
+        if(not re.match(r'(^https://www.lemon8-app.com/.*?/\d+)', url)): url = self.get_static_url(url)
 
-
+        self.by_username(re.findall(r'https://www.lemon8-app.com/(.+)/', url)[0], post_id='7279238426292945413')
+        
 # testing
 if(__name__ == '__main__'):
     lemon8: BaseLemon8 = BaseLemon8()

@@ -7,7 +7,6 @@ from helpers import logging
 from helpers.decorators import Decorator
 from library.lemon8 import BaseLemon8
 
-
 @final
 class Lemon8(BaseLemon8):
     def __init__(self, **kwargs) -> None:
@@ -24,7 +23,10 @@ class Lemon8(BaseLemon8):
                 self.get_comments_by_username(**kwargs)
             case 'by_url':
                 if(not kwargs.get('url')): raise click.BadParameter("--url is required for method 'by_url'")
-                self.get_comments_by_username(**kwargs)
+                self.get_comments_by_url(**kwargs)
+            case 'by_post_id':
+                if(not kwargs.get('post_id')): raise click.BadParameter("--post_id is required for method 'by_post_id'")
+                self.get_comments_by_post_id(**kwargs)
             case _:
                 logging.error('Wait.............')
 
@@ -38,7 +40,12 @@ class Lemon8(BaseLemon8):
     
     @Decorator.counter_time
     def get_comments_by_url(self, **kwargs) -> None:
-        self.by_url(kwargs.get('username'))
+        self.by_url(kwargs.get('url'))
+    
+    @Decorator.counter_time
+    def get_comments_by_post_id(self, **kwargs) -> None:
+        self.by_post_id(kwargs.get('post_id'))
+
 
 if(__name__ == '__main__'):
     Lemon8(user_id='7138599741986915329', method='by_user_id')

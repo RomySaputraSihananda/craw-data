@@ -1,4 +1,4 @@
-import os
+import re
 import json
 
 from json import dumps, loads
@@ -73,7 +73,7 @@ class Iostream:
                     try:
                         data[key] = loads(value)
                     except Exception:
-                        pass
+                        data[key] = re.sub('<.*?>', '', value)
         return data
 
 from time import sleep
