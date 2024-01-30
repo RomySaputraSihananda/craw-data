@@ -8,6 +8,7 @@ from aiohttp import ClientSession
 from requests import Response
 from json import dumps, loads
 from concurrent.futures import ThreadPoolExecutor
+from typing import final
 
 from helpers import Iostream, Datetime, ConnectionS3
 
@@ -15,7 +16,8 @@ class BaseLemon8:
     def __init__(self, **kwargs) -> None:
         self.__s3: bool = kwargs.get('s3')
         self.__request: ClientSession = None
-    
+
+    @final
     @staticmethod
     def get_user_profile(user_id: str) -> dict:
         response: Response = requests.get(
@@ -31,6 +33,7 @@ class BaseLemon8:
 
         return response.json()['data']
     
+    @final
     @staticmethod
     def get_user_posts(user_id: str) -> dict:
         response: Response = requests.get(
@@ -50,21 +53,25 @@ class BaseLemon8:
 
         return response.json()['data']['items']
 
+    @final
     @staticmethod
     def get_user_id(username: str) -> str:
         response: Response = requests.get(f'https://www.lemon8-app.com/{username}', params={'_data': None})
         return re.findall(r'"userId":"(\d+)"', response.text)[0]
 
+    @final
     @staticmethod
     def get_static_url(url: str) -> str:
         response: Response = requests.get(url)
         return re.findall(r'"(https://www.lemon8-app.com/.*?/\d+)', response.text)[0]
 
+    @final
     @staticmethod
     def get_url_by_post_id(post_id: str) -> str:
         response: Response = requests.get(f"https://www.lemon8-app.com/<>/{post_id}")
         return re.findall(r'<link\s+rel="canonical"\s+href="([^"]+)"', response.text)[0]
 
+    @final
     async def __get_comments(self, post_detail: dict, user_detail: dict) -> None:
         link: str = f'https://www.lemon8-app.com/{user_detail["user_unique_name"]}/{post_detail["item_id"]}'
         link_split: list = link.split('/')
@@ -128,6 +135,7 @@ class BaseLemon8:
         
         return await asyncio.gather(*(self.__get_detail_comment(comment["id"], headers, log) for comment in comments))        
     
+    @final
     async def __get_detail_comment(self, comment_id, headers: dict, log: dict) -> None:
         try:
             async with self.__request.get('https://api22-normal-useast1a.lemon8-app.com/api/550/comment_v2/detail',
@@ -176,8 +184,8 @@ class BaseLemon8:
         log['status'] = 'Done'
         Iostream.update_log(log, name=__name__)
 
-
-    async def by_user_id(self, user_id: str, **kwargs) -> None:
+    @final
+    async def _get_comments_by_user_id(self, user_id: str, **kwargs) -> None:
         self.__request: ClientSession = ClientSession(headers={
             'User-Agent': 'com.bd.nproject/55014 (Linux; U; Android 9; en_US; unknown; Build/PI;tt-ok/3.12.13.1)',
         })
@@ -194,19 +202,22 @@ class BaseLemon8:
 
         await self.__request.close()
     
-    def by_post_id(self, post_id: str) -> None:
-        self.by_url(self.get_url_by_post_id(post_id))
+    @final
+    def _get_comments_by_post_id(self, post_id: str) -> None:
+        self._get_comments_by_url(self.get_url_by_post_id(post_id))
     
-    def by_username(self, username: str, **kwargs) -> None:
-        asyncio.run(self.by_user_id(self.get_user_id(username), **kwargs))
+    @final
+    def _get_comments_by_username(self, username: str, **kwargs) -> None:
+        asyncio.run(self._get_comments_by_user_id(self.get_user_id(username), **kwargs))
     
-    def by_url(self, url: str) -> None:
-        if(not re.match(r'(^https://www.lemon8-app.com/.*?/\d+)', url)): url = self.get_static_url(url)
+    @final
+    def _get_comments_by_url(self, url: str) -> None:
+        if(not re.match(r'(^https://www.lemon8-app.com/.*?/\d+)', url)): url = self._get_static_url(url)
 
-        self.by_username(re.findall(r'https://www.lemon8-app.com/(.+)/', url)[0], post_id='7279238426292945413')
-        
+        self._get_comments_by_username(re.findall(r'https://www.lemon8-app.com/(.+)/', url)[0], post_id='7279238426292945413')
+
 # testing
 if(__name__ == '__main__'):
     lemon8: BaseLemon8 = BaseLemon8()
 
-    asyncio.run(lemon8.by_user_id('7138599741986915329'))
+    asyncio.run(lemon8.get_comments_by_user_id('7138599741986915329'))

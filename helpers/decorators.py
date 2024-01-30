@@ -12,12 +12,13 @@ class Decorator:
     @staticmethod
     def counter_time(func: Callable[..., None]) -> Callable[..., None]:
         @wraps(func)
-        def wrapper(self, *args: any, **kwargs: Any) -> None:
+        def wrapper(self, *args: Any, **kwargs: Any) -> None:
             start: float = perf_counter()
             logging.info('start crawling')
-            func(self, *args, **kwargs)
+            result: Any = func(self, *args, **kwargs)
             
-            return logging.info(f'task completed in {perf_counter() - start} seconds')
+            logging.info(f'task completed in {perf_counter() - start} seconds')
+            return result
         
         return wrapper
     
