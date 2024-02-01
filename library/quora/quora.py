@@ -173,34 +173,36 @@ class BaseQuora:
 
         all_detail = self.get_detail_question(question_str)
 
-        link_split: list = all_detail['link'].split('/')
+        print(len(all_detail['answers_n_relevant_answer']))
 
-        headers: dict = {
-            "link": all_detail['link'],
-            "domain": link_split[2],
-            "tag": link_split[2:],
-            "crawling_time": Datetime.now(),
-            "crawling_time_epoch": int(time()),
-            'question_detail': {
-                **all_detail['question_headers'],
-                **all_detail['question_detail']
-            },
-            "path_data_raw": f'S3://ai-pipeline-statistics/data/data_raw/data_review/quora/{all_detail["question_str"]}/json/detail.json',
-            "path_data_clean": f'S3://ai-pipeline-statistics/data/data_clean/data_review/quora/{all_detail["question_str"]}/json/detail.json',
-        }
+        # link_split: list = all_detail['link'].split('/')
 
-        paths: list = [path.replace('S3://ai-pipeline-statistics/', '') for path in [headers["path_data_raw"], headers["path_data_clean"]]] 
-        with ThreadPoolExecutor() as executor:
-                headers: dict = Iostream.dict_to_deep(headers)
-                try:
-                    if(self.__s3):
-                        executor.map(lambda path: ConnectionS3.upload(headers, path), paths)
-                    else:
-                        executor.map(lambda path: Iostream.write_json(headers, path), paths)
-                except Exception as e:
-                    raise e
+        # headers: dict = {
+        #     "link": all_detail['link'],
+        #     "domain": link_split[2],
+        #     "tag": link_split[2:],
+        #     "crawling_time": Datetime.now(),
+        #     "crawling_time_epoch": int(time()),
+        #     'question_detail': {
+        #         **all_detail['question_headers'],
+        #         **all_detail['question_detail']
+        #     },
+        #     "path_data_raw": f'S3://ai-pipeline-statistics/data/data_raw/data_review/quora/{all_detail["question_str"]}/json/detail.json',
+        #     "path_data_clean": f'S3://ai-pipeline-statistics/data/data_clean/data_review/quora/{all_detail["question_str"]}/json/detail.json',
+        # }
+
+        # paths: list = [path.replace('S3://ai-pipeline-statistics/', '') for path in [headers["path_data_raw"], headers["path_data_clean"]]] 
+        # with ThreadPoolExecutor() as executor:
+        #         headers: dict = Iostream.dict_to_deep(headers)
+        #         try:
+        #             if(self.__s3):
+        #                 executor.map(lambda path: ConnectionS3.upload(headers, path), paths)
+        #             else:
+        #                 executor.map(lambda path: Iostream.write_json(headers, path), paths)
+        #         except Exception as e:
+        #             raise e
                 
-        await asyncio.gather(*(self.__process_data(all_detail, i, headers) for i in all_detail['answers_n_relevant_answer']))
+        # await asyncio.gather(*(self.__process_data(all_detail, i, headers) for i in all_detail['answers_n_relevant_answer']))
 
         await self.__request.close()
 
