@@ -12,11 +12,6 @@ from time import time
 
 load_dotenv()
 
-# {
-#     'AllCommentsListQuery': '4225f312dd020c9a77077c5e224e8cf6d3b9bc60033099c979e8ea5dfda8bd05',
-#     'CommentableCommentAreaLoaderInnerQuery': '7049e6ccf2e18aa1683cf340f4ab83a167ffe783381fdc89195a88646d2bba57'
-# }
-
 class BaseQuora:
     def __init__(self, **kwargs) -> None:
         self.__s3: bool = kwargs.get('s3')
@@ -115,28 +110,52 @@ class BaseQuora:
             response: dict = self.__all_comments_list_query(answer_id, after)
             replies.extend(response['reply'])
 
-            if(response['has_next_page']): break        
+            if(not response['has_next_page']): break        
             after += 10
 
         return replies
-
     
-    def __get_reply(self, answer: str, headers: dict) -> None: 
+    def __process_data(self, all_detail: dict, answer: dict, headers: dict) -> None: 
         answer_id = re.findall(r'answer:(\d+)', Cryptography.decode_base64(answer['id']))[0]
         answer_id_encrypt = Cryptography.encode_base64(f'Answer@10:{answer_id}')
         total_reply: int = answer['answer']['numDisplayComments']
         
+        type: str = 'answers' if answer['__typename'] == 'QuestionAnswerItem2' else 'relevan_answers'
 
-        if(not total_reply): return
-        
-        answer['replies']: list = self.__get_replies(answer_id_encrypt)
-        
         data: dict = {
             **headers,
-            'answer_detail': answer
+            'answer_detail': answer,
+            "path_data_raw": f'S3://ai-pipeline-statistics/data/data_raw/data_review/quora/{all_detail["question_str"]}/json/{type}/{answer_id}.json',
+            "path_data_clean": f'S3://ai-pipeline-statistics/data/data_clean/data_review/quora/{all_detail["question_str"]}/json/{type}/{answer_id}.json',
         }
 
+        paths: list = [path.replace('S3://ai-pipeline-statistics/', '') for path in [data["path_data_raw"], data["path_data_clean"]]] 
 
+        if(not total_reply): 
+            with ThreadPoolExecutor() as executor:
+                    data: dict = Iostream.dict_to_deep(data)
+                    try:
+                        if(self.__s3):
+                            executor.map(lambda path: ConnectionS3.upload(data, path), paths)
+                        else:
+                            executor.map(lambda path: Iostream.write_json(data, path), paths)
+                    except Exception as e:
+                        raise e
+            return 
+        
+        data['answer_detail']['replies']: list = self.__get_replies(answer_id_encrypt)
+
+        data: dict = Iostream.dict_to_deep(data)
+        with ThreadPoolExecutor() as executor:
+                    data: dict = Iostream.dict_to_deep(data)
+                    try:
+                        if(self.__s3):
+                            executor.map(lambda path: ConnectionS3.upload(data, path), paths)
+                        else:
+                            executor.map(lambda path: Iostream.write_json(data, path), paths)
+                    except Exception as e:
+                        raise e
+        return 
 
     def __get_detail_answers(self, all_detail: dict) -> None:
         link_split: list = all_detail['link'].split('/')
@@ -155,6 +174,7 @@ class BaseQuora:
             "path_data_clean": f'S3://ai-pipeline-statistics/data/data_clean/data_review/quora/{all_detail["question_str"]}/json/detail.json',
         }
 
+        # paths: list = [path.replace('S3://ai-pipeline-statistics/', '') for path in [headers["path_data_raw"], headers["path_data_clean"]]] 
         # with ThreadPoolExecutor() as executor:
         #         headers: dict = Iostream.dict_to_deep(headers)
         #         try:
@@ -165,15 +185,8 @@ class BaseQuora:
         #         except Exception as e:
         #             raise e
 
-        # print(dumps(all_detail['answers_n_relevant_answer']))
-        # for i in all_detail['answers_n_relevant_answer']:
-        #     self.__get_reply(i)
-
-        self.__get_reply(all_detail['answers_n_relevant_answer'][0], headers)
-
-        # paths: list = [path.replace('S3://ai-pipeline-statistics/', '') for path in [headers["path_data_raw"], headers["path_data_clean"]]] 
-
-
+        for i in all_detail['answers_n_relevant_answer']:
+            self.__process_data(all_detail, i, headers)
     
     def _get_answers_by_question_str(self, question_str: str) -> None:
         return self.__get_detail_answers(self.get_detail_question(question_str))
