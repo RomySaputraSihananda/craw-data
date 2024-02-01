@@ -1,0 +1,340 @@
+{
+  "data": {
+    "node": {
+      "__typename": "Answer",
+      "__isCommentable": "Answer",
+      "id": "QW5zd2VyQDEwOjE3NDY5MzYxOQ==",
+      "containerId": 174693619,
+      "commentAds": {
+        "firstSlot": 0,
+        "id": "Q29tbWVudFNlY3Rpb25BZEl0ZW1AMTA6MTc0NjkzNjE5OjQ="
+      },
+      "genericCommentsLiveBannerHash": "113552213:113568048",
+      "allCommentsConnection": {
+        "id": "R2VuZXJpY0NvbW1lbnRzQ29ubmVjdGlvbkAxMDo0OjI6MTc0NjkzNjE5LTEwLTE=",
+        "__typename": "GenericCommentsConnection",
+        "pageInfo": { "hasNextPage": false, "endCursor": "3" },
+        "edges": [
+          {
+            "node": {
+              "id": "Q29tbWVudEAxMDoyNTRfMTEzNjgwMDU5",
+              "__typename": "Comment",
+              "contentQtextDocument": {
+                "id": "UXRleHREb2N1bWVudEAxMDpkNTExNmRhNDg3N2E3MzAyZTI5MWY5MTcyMTEzMjU0NA==",
+                "legacyJson": "{\"sections\": [{\"spans\": [{\"text\": \"Sebentar ada yang aneh\ud83e\udd14\", \"modifiers\": {}}], \"indent\": 0, \"quoted\": false, \"type\": \"plain\", \"is_rtl\": false}, {\"spans\": [{\"text\": \"ini kayaknya mas masih cantik kan? Orang ganteng susah dapet tumpangan soalnya\ud83e\udd23\ud83e\udd23\ud83e\udd23\", \"modifiers\": {}}], \"indent\": 0, \"quoted\": false, \"type\": \"plain\", \"is_rtl\": false}]}"
+              },
+              "isDeleted": false,
+              "commentId": 113680059,
+              "containerId": 174693619,
+              "deletedTime": 0,
+              "contentType": "answer_comment",
+              "isReply": false,
+              "viewerIsAuthor": false,
+              "user": {
+                "id": "VXNlckAxMDoyMDU3Mzg5MjI=",
+                "__typename": "User",
+                "uid": 205738922,
+                "isAnon": false,
+                "profileImageUrl": "https://qph.cf2.quoracdn.net/main-thumb-205738922-200-bdceslcaejtygnqoptrmdacslwhqlryf.jpeg",
+                "isVerified": false,
+                "businessStatus": null,
+                "consumerBundleActive": false,
+                "profileUrl": "https://id.quora.com/profile/Yogi-75",
+                "useTranslatedName": false,
+                "isMachineAnswerBot": false,
+                "names": [
+                  {
+                    "__typename": "UserName",
+                    "id": "VXNlck5hbWU6MjA1NzM4OTIyOkxBVE4=",
+                    "reverseOrder": false,
+                    "givenName": "Yogi",
+                    "familyName": "Adi",
+                    "scriptCode": "LATN"
+                  }
+                ],
+                "adminNames": [],
+                "isBlocking": false
+              },
+              "viewer": {
+                "canSeeDeletedContent": false,
+                "isAdmin": false,
+                "id": "Vmlld2VyQDEwOjA="
+              },
+              "commenterIsTribeModerator": false,
+              "commenterIsTribeAdmin": false,
+              "owner": {
+                "id": "VXNlckAxMDo4MTI3OTI1MDM=",
+                "__typename": "User",
+                "uid": 812792503
+              },
+              "creationTime": 1571368850918678,
+              "url": "https://id.quora.com/Bagaimana-kesanmu-terhadap-PT-Pos-Indonesia/answer/Riki-Kusumah-Purnama?comment_id=113680059&comment_type=2",
+              "tribe": null,
+              "authorIsBlockedByTribe": false,
+              "viewerCanDelete": false,
+              "viewerCanBlockCommentAuthor": false,
+              "viewerCanInviteToContribute": false,
+              "commentable": {
+                "__typename": "Answer",
+                "id": "QW5zd2VyQDEwOjE3NDY5MzYxOQ=="
+              },
+              "__isReportable": "Comment",
+              "reportableId": 113680059,
+              "canViewerReport": true,
+              "viewerInvitedAuthorToTribe": false,
+              "viewerDraft": {
+                "contentQtextDocument": null,
+                "id": "Q29tbWVudERyYWZ0QDEwOjE3NDY5MzYxOTo0"
+              },
+              "socialVoters": [],
+              "__isVotable": "Comment",
+              "viewerVoteType": "novote",
+              "numUpvotes": 0,
+              "__isContentObject": "Comment",
+              "oid": 113680059,
+              "repliesConnection": {
+                "id": "Q29tbWVudFJlcGxpZXNDb25uZWN0aW9uQDEwOjI1NDoxNzQ2OTM2MTk6MTEzNjgwMDU5",
+                "__typename": "CommentRepliesConnection",
+                "pageInfo": { "endCursor": null, "hasNextPage": false },
+                "edges": []
+              }
+            },
+            "cursor": "2",
+            "id": "Tm9kZUVkZ2U6MjU0XzExMzY4MDA1OToy"
+          },
+          {
+            "node": {
+              "id": "Q29tbWVudEAxMDoyNTRfMTEzNjAyNjE5",
+              "__typename": "Comment",
+              "contentQtextDocument": null,
+              "isDeleted": true,
+              "commentId": 113602619,
+              "containerId": 174693619,
+              "deletedTime": 1605717020123341,
+              "contentType": "answer_comment",
+              "isReply": false,
+              "viewerIsAuthor": false,
+              "user": {
+                "id": "VXNlckAxMDo3NjUxODI3Nzc=",
+                "__typename": "User",
+                "uid": 765182777,
+                "isAnon": false,
+                "profileImageUrl": "https://qsf.cf2.quoracdn.net/-4-images.new_grid.profile_default.png-26-688c79556f251aa0.png",
+                "isVerified": false,
+                "businessStatus": null,
+                "consumerBundleActive": false,
+                "profileUrl": null,
+                "useTranslatedName": false,
+                "isMachineAnswerBot": false,
+                "names": [
+                  {
+                    "__typename": "UserName",
+                    "id": "VXNlck5hbWU6NzY1MTgyNzc3OkxBVE4=",
+                    "reverseOrder": false,
+                    "givenName": "User-10052066651983304893",
+                    "familyName": "",
+                    "scriptCode": "LATN"
+                  }
+                ],
+                "adminNames": [],
+                "isBlocking": false
+              },
+              "viewer": {
+                "canSeeDeletedContent": false,
+                "isAdmin": false,
+                "id": "Vmlld2VyQDEwOjA="
+              },
+              "commenterIsTribeModerator": false,
+              "commenterIsTribeAdmin": false,
+              "owner": {
+                "id": "VXNlckAxMDo4MTI3OTI1MDM=",
+                "__typename": "User",
+                "uid": 812792503
+              },
+              "creationTime": 1571320899119859,
+              "url": "https://id.quora.com/Bagaimana-kesanmu-terhadap-PT-Pos-Indonesia/answer/Riki-Kusumah-Purnama?comment_id=113602619&comment_type=2",
+              "tribe": null,
+              "authorIsBlockedByTribe": false,
+              "viewerCanDelete": false,
+              "viewerCanBlockCommentAuthor": false,
+              "viewerCanInviteToContribute": false,
+              "commentable": {
+                "__typename": "Answer",
+                "id": "QW5zd2VyQDEwOjE3NDY5MzYxOQ=="
+              },
+              "__isReportable": "Comment",
+              "reportableId": 113602619,
+              "canViewerReport": true,
+              "viewerInvitedAuthorToTribe": false,
+              "viewerDraft": {
+                "contentQtextDocument": null,
+                "id": "Q29tbWVudERyYWZ0QDEwOjE3NDY5MzYxOTo0"
+              },
+              "socialVoters": [
+                {
+                  "id": "VXNlckAxMDo4MTI3OTI1MDM=",
+                  "__typename": "User",
+                  "uid": 812792503,
+                  "isAnon": false,
+                  "profileImageUrl": "https://qph.cf2.quoracdn.net/main-thumb-812792503-200-cqjirzyvyzlukmfilreftkrmidpqauxs.jpeg",
+                  "isVerified": false,
+                  "businessStatus": null,
+                  "consumerBundleActive": false,
+                  "profileUrl": "https://id.quora.com/profile/Riki-Kusumah-Purnama",
+                  "useTranslatedName": false,
+                  "isMachineAnswerBot": false,
+                  "names": [
+                    {
+                      "__typename": "UserName",
+                      "id": "VXNlck5hbWU6ODEyNzkyNTAzOkxBVE4=",
+                      "reverseOrder": false,
+                      "givenName": "Riki",
+                      "familyName": "Kusumah Purnama",
+                      "scriptCode": "LATN"
+                    }
+                  ],
+                  "adminNames": []
+                }
+              ],
+              "__isVotable": "Comment",
+              "viewerVoteType": "novote",
+              "numUpvotes": 2,
+              "__isContentObject": "Comment",
+              "oid": 113602619,
+              "repliesConnection": {
+                "id": "Q29tbWVudFJlcGxpZXNDb25uZWN0aW9uQDEwOjI1NDoxNzQ2OTM2MTk6MTEzNjAyNjE5",
+                "__typename": "CommentRepliesConnection",
+                "pageInfo": { "endCursor": "0", "hasNextPage": false },
+                "edges": [
+                  {
+                    "node": {
+                      "id": "Q29tbWVudEAxMDoyNTRfMTEzNjAzMDA0",
+                      "__typename": "Comment",
+                      "commentId": 113603004,
+                      "contentType": "answer_comment",
+                      "contentQtextDocument": {
+                        "id": "UXRleHREb2N1bWVudEAxMDpiYWE2NjU4MDNhZmVhMWJkYTg5NGQyMmVmMmI3YTA2NA==",
+                        "legacyJson": "{\"sections\": [{\"spans\": [{\"text\": \"Sekarang panggilnya rocker?? Padahal zamannya saya dulu. Kalau kaya gini, panggilannya gembel. hahaha \ud83d\ude05\", \"modifiers\": {}}], \"indent\": 0, \"quoted\": false, \"type\": \"plain\", \"is_rtl\": false}]}"
+                      },
+                      "isDeleted": false,
+                      "deletedTime": 0,
+                      "isReply": true,
+                      "viewerIsAuthor": false,
+                      "user": {
+                        "id": "VXNlckAxMDo4MTI3OTI1MDM=",
+                        "__typename": "User",
+                        "uid": 812792503,
+                        "isAnon": false,
+                        "profileImageUrl": "https://qph.cf2.quoracdn.net/main-thumb-812792503-200-cqjirzyvyzlukmfilreftkrmidpqauxs.jpeg",
+                        "isVerified": false,
+                        "businessStatus": null,
+                        "consumerBundleActive": false,
+                        "profileUrl": "https://id.quora.com/profile/Riki-Kusumah-Purnama",
+                        "useTranslatedName": false,
+                        "isMachineAnswerBot": false,
+                        "names": [
+                          {
+                            "__typename": "UserName",
+                            "id": "VXNlck5hbWU6ODEyNzkyNTAzOkxBVE4=",
+                            "reverseOrder": false,
+                            "givenName": "Riki",
+                            "familyName": "Kusumah Purnama",
+                            "scriptCode": "LATN"
+                          }
+                        ],
+                        "adminNames": [],
+                        "isBlocking": false
+                      },
+                      "viewer": {
+                        "canSeeDeletedContent": false,
+                        "isAdmin": false,
+                        "id": "Vmlld2VyQDEwOjA="
+                      },
+                      "commenterIsTribeModerator": false,
+                      "commenterIsTribeAdmin": false,
+                      "owner": {
+                        "id": "VXNlckAxMDo4MTI3OTI1MDM=",
+                        "__typename": "User",
+                        "uid": 812792503
+                      },
+                      "creationTime": 1571321095924117,
+                      "url": "https://id.quora.com/Bagaimana-kesanmu-terhadap-PT-Pos-Indonesia/answer/Riki-Kusumah-Purnama?comment_id=113603004&comment_type=2",
+                      "tribe": null,
+                      "authorIsBlockedByTribe": false,
+                      "viewerCanDelete": false,
+                      "viewerCanBlockCommentAuthor": false,
+                      "viewerCanInviteToContribute": false,
+                      "containerId": 174693619,
+                      "commentable": {
+                        "__typename": "Answer",
+                        "id": "QW5zd2VyQDEwOjE3NDY5MzYxOQ=="
+                      },
+                      "__isReportable": "Comment",
+                      "reportableId": 113603004,
+                      "canViewerReport": true,
+                      "viewerInvitedAuthorToTribe": false,
+                      "viewerDraft": {
+                        "contentQtextDocument": null,
+                        "id": "Q29tbWVudERyYWZ0QDEwOjE3NDY5MzYxOTo0"
+                      },
+                      "socialVoters": [],
+                      "__isVotable": "Comment",
+                      "viewerVoteType": "novote",
+                      "numUpvotes": 0,
+                      "__isContentObject": "Comment",
+                      "oid": 113603004,
+                      "repliesConnection": {
+                        "id": "Q29tbWVudFJlcGxpZXNDb25uZWN0aW9uQDEwOjI1NDoxNzQ2OTM2MTk6MTEzNjAzMDA0",
+                        "__typename": "CommentRepliesConnection",
+                        "edges": [],
+                        "pageInfo": { "endCursor": null, "hasNextPage": false }
+                      }
+                    },
+                    "id": "Q29tbWVudFJlcGx5RWRnZToxMTM2MDMwMDQ6MjU0OjA=",
+                    "__typename": "CommentReplyEdge",
+                    "cursor": "0"
+                  }
+                ]
+              }
+            },
+            "cursor": "3",
+            "id": "Tm9kZUVkZ2U6MjU0XzExMzYwMjYxOToz"
+          }
+        ]
+      }
+    }
+  },
+  "broadcastId": "main-w-chan67-8888-react_vkqpwugfbnbfxylu-yLUk",
+  "tchannelData": {
+    "minSeq": "0",
+    "channel": "main-w-chan67-8888-react_vkqpwugfbnbfxylu-yLUk",
+    "channelHash": "8532192467136897636",
+    "boxName": "chan67-8888",
+    "baseHost": "quora.com",
+    "targetUrl": "",
+    "enableWebsocket": true
+  },
+  "broadcastData": {
+    "categoryToDepkeys": {
+      "Answer:genericCommentsLiveBannerHash:QW5zd2VyQDEwOjE3NDY5MzYxOQ==": [
+        "n:10:cphldgql:4aa2399d595ce07d89b8ec6398af415e"
+      ],
+      "Comment:numUpvotes:Q29tbWVudEAxMDoyNTRfMTEzNjgwMDU5": [
+        "n:10:CVUROT:01dbca5c75c26489bafb701a4ce43ca6"
+      ],
+      "Comment:numUpvotes:Q29tbWVudEAxMDoyNTRfMTEzNjAyNjE5": [
+        "n:10:CVUROT:3e89f4cf20061d2b8c6b6223972cce73"
+      ],
+      "Comment:numUpvotes:Q29tbWVudEAxMDoyNTRfMTEzNjAzMDA0": [
+        "n:10:CVUROT:3a2e0655f7b1a78791087793d14dd48a"
+      ]
+    },
+    "depkeyToVersion": {
+      "n:10:CVUROT:3a2e0655f7b1a78791087793d14dd48a": 0,
+      "n:10:CVUROT:3e89f4cf20061d2b8c6b6223972cce73": 0,
+      "n:10:cphldgql:4aa2399d595ce07d89b8ec6398af415e": 0,
+      "n:10:CVUROT:01dbca5c75c26489bafb701a4ce43ca6": 0
+    }
+  },
+  "extensions": { "is_final": true }
+}
