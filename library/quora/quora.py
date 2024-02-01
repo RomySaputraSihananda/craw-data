@@ -121,7 +121,7 @@ class BaseQuora:
         return replies
 
     
-    def __get_reply(self, answer: str) -> None: 
+    def __get_reply(self, answer: str, headers: dict) -> None: 
         answer_id = re.findall(r'answer:(\d+)', Cryptography.decode_base64(answer['id']))[0]
         answer_id_encrypt = Cryptography.encode_base64(f'Answer@10:{answer_id}')
         total_reply: int = answer['answer']['numDisplayComments']
@@ -129,19 +129,14 @@ class BaseQuora:
 
         if(not total_reply): return
         
-        replies: list = self.__get_replies(answer_id_encrypt)
+        answer['replies']: list = self.__get_replies(answer_id_encrypt)
+        
+        data: dict = {
+            **headers,
+            'answer_detail': answer
+        }
 
-        # if answer['__typename'] == 'QuestionAnswerItem2': return self.__process_answer(answer, replies)
 
-        # return self.__process_relevant_answer(answer, replies)
-
-    def __process_answer(self, answer, replies) -> None:
-        # print(len(replies))
-        ...
-
-    def __process_relevant_answer(self, answer, replies) -> None:
-        # print(len(replies))
-        ...
 
     def __get_detail_answers(self, all_detail: dict) -> None:
         link_split: list = all_detail['link'].split('/')
@@ -160,12 +155,6 @@ class BaseQuora:
             "path_data_clean": f'S3://ai-pipeline-statistics/data/data_clean/data_review/quora/{all_detail["question_str"]}/json/detail.json',
         }
 
-        # print(dumps(all_detail['answers_n_relevant_answer']))
-        for i in all_detail['answers_n_relevant_answer']:
-            self.__get_reply(i)
-
-        # paths: list = [path.replace('S3://ai-pipeline-statistics/', '') for path in [headers["path_data_raw"], headers["path_data_clean"]]] 
-
         # with ThreadPoolExecutor() as executor:
         #         headers: dict = Iostream.dict_to_deep(headers)
         #         try:
@@ -175,6 +164,15 @@ class BaseQuora:
         #                 executor.map(lambda path: Iostream.write_json(headers, path), paths)
         #         except Exception as e:
         #             raise e
+
+        # print(dumps(all_detail['answers_n_relevant_answer']))
+        # for i in all_detail['answers_n_relevant_answer']:
+        #     self.__get_reply(i)
+
+        self.__get_reply(all_detail['answers_n_relevant_answer'][0], headers)
+
+        # paths: list = [path.replace('S3://ai-pipeline-statistics/', '') for path in [headers["path_data_raw"], headers["path_data_clean"]]] 
+
 
     
     def _get_answers_by_question_str(self, question_str: str) -> None:

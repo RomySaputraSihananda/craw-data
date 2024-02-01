@@ -79,7 +79,6 @@ class Iostream:
 from time import sleep
 # testing
 if(__name__ == '__main__'):
-    # Iostream.write_file('o.json', {"memek":"dshfh"})
     log = {
             "Crawlling_time": 'kdjs',
             "id_project": None,
