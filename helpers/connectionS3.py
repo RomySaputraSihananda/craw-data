@@ -18,5 +18,7 @@ class ConnectionS3:
         response:  Any = s3.put_object(Bucket=bucket, Key=key, Body=dumps(body, indent=4, ensure_ascii=False))
         if(response['ResponseMetadata']['HTTPStatusCode'] != 200): raise Exception('failed send s3')
 
+
+
 if(__name__ == '__main__'):
     ConnectionS3.upload({"apakah_berhasil": True, "update": 3}, 'test/initesting.json')
