@@ -3,7 +3,6 @@ import click
 
 from typing import final
 from helpers import logging
-from abc import abstractmethod
 
 from helpers.decorators import Decorator 
 from library.lemon8 import BaseLemon8, AbstractLemon8
@@ -48,4 +47,7 @@ class Lemon8(BaseLemon8, AbstractLemon8):
         return super()._get_comments_by_post_id(kwargs.get('post_id'))
 
 if(__name__ == '__main__'):
-    Lemon8(user_id='7138599741986915329', method='by_user_id')
+    Lemon8(**{
+        'user_id': '7138599741986915329', 
+        'method': 'by_user_id'
+    })

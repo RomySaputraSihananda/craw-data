@@ -6,6 +6,7 @@ from typing import Callable, Any, final
 from json import loads, dumps
 
 from config.logging import logging
+from click import style
 
 @final
 class Decorator:
@@ -23,7 +24,7 @@ class Decorator:
         return wrapper
     
     @staticmethod
-    def logging_path(name: str = 'CRAWLING') -> Callable[..., None]:
+    def logging_path(name: str = style('CRAWLING', fg='bright_green')) -> Callable[..., None]:
         def decorator(func: Callable[..., None]) -> Callable[..., None]:
             @wraps(func)
             def wrapper(*args: Any, **kwargs) -> None:

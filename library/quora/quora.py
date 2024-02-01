@@ -1,8 +1,10 @@
 import re
 import requests
 import os
+import asyncio
 
 from requests import Response, Session
+from aiohttp import ClientSession
 from json import loads, dumps
 from dotenv import load_dotenv
 from concurrent.futures import ThreadPoolExecutor
@@ -16,12 +18,15 @@ class BaseQuora:
     def __init__(self, **kwargs) -> None:
         self.__s3: bool = kwargs.get('s3')
         
-        self.__request: Session = Session()
-        self.__request.headers.update({
-            'cookie': os.getenv('QUORA_COOKIE'),
-            'quora-formkey': os.getenv('QUORA_FORMKEY'),
-            'user-agent': 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36',
-        })
+        self.__request: ClientSession = None
+        # self.__request: Session = Session()
+        # self.__request.headers.update({
+        #     'cookie': os.getenv('QUORA_COOKIE'),
+        #     'quora-formkey': os.getenv('QUORA_FORMKEY'),
+        #     'user-agent': 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36',
+        # })
+
+        
         
     @staticmethod
     def get_detail_question(question_str: str) -> dict:
@@ -52,8 +57,8 @@ class BaseQuora:
 
         return all_detail
     
-    def __all_comments_list_query(self, answer_id: str, after: int) -> dict:
-        response: Response = self.__request.post('https://id.quora.com/graphql/gql_para_POST',            
+    async def __all_comments_list_query(self, answer_id: str, after: int) -> dict:
+        async with self.__request.post('https://id.quora.com/graphql/gql_para_POST',            
                                                 params={
                                                     'q': 'AllCommentsListQuery',
                                                 },
@@ -67,17 +72,18 @@ class BaseQuora:
                                                     'extensions': {
                                                         'hash': '4225f312dd020c9a77077c5e224e8cf6d3b9bc60033099c979e8ea5dfda8bd05',
                                                     },
-                                                })
+                                                }) as response:
 
-        data: dict = response.json()['data']['node']['allCommentsConnection']
+            response_json: dict = await response.json()
+            data: dict = response_json['data']['node']['allCommentsConnection']
 
-        return {
-            'has_next_page': data['pageInfo']['hasNextPage'],
-            'reply': [node['node'] for node in data['edges']]
-        }
-    
-    def __commentable_comment_area_loader_inner_query(self, answer_id: str) -> None:
-        response: Response = self.__request.post('https://id.quora.com/graphql/gql_para_POST',            
+            return {
+                'has_next_page': data['pageInfo']['hasNextPage'],
+                'reply': [node['node'] for node in data['edges']]
+            }
+        
+    async def __commentable_comment_area_loader_inner_query(self, answer_id: str) -> None:
+        async with self.__request.post('https://id.quora.com/graphql/gql_para_POST',            
                                                 params={
                                                     'q': 'CommentableCommentAreaLoaderInnerQuery',
                                                 },
@@ -90,24 +96,25 @@ class BaseQuora:
                                                     'extensions': {
                                                         'hash': '7049e6ccf2e18aa1683cf340f4ab83a167ffe783381fdc89195a88646d2bba57',
                                                     },
-                                                })
+                                                }) as response:
 
-        data: dict = response.json()['data']['node']['allCommentsConnection']
+            response_json: dict = await response.json()
+            data: dict = response_json['data']['node']['allCommentsConnection']
 
-        return {
-            'has_next_page': data['pageInfo']['hasNextPage'],
-            'reply': [node['node'] for node in data['edges']]
-        }
+            return {
+                'has_next_page': data['pageInfo']['hasNextPage'],
+                'reply': [node['node'] for node in data['edges']]
+            }
     
-    def __get_replies(self, answer_id: str) -> dict:
-        first_response: dict = self.__commentable_comment_area_loader_inner_query(answer_id)
+    async def __get_replies(self, answer_id: str) -> dict:
+        first_response: dict = await self.__commentable_comment_area_loader_inner_query(answer_id)
         replies: list = first_response['reply']
         after: int = 9
 
         if(not first_response['has_next_page']): return replies
 
         while(True):
-            response: dict = self.__all_comments_list_query(answer_id, after)
+            response: dict = await self.__all_comments_list_query(answer_id, after)
             replies.extend(response['reply'])
 
             if(not response['has_next_page']): break        
@@ -115,7 +122,7 @@ class BaseQuora:
 
         return replies
     
-    def __process_data(self, all_detail: dict, answer: dict, headers: dict) -> None: 
+    async def __process_data(self, all_detail: dict, answer: dict, headers: dict) -> None: 
         answer_id = re.findall(r'answer:(\d+)', Cryptography.decode_base64(answer['id']))[0]
         answer_id_encrypt = Cryptography.encode_base64(f'Answer@10:{answer_id}')
         total_reply: int = answer['answer']['numDisplayComments']
@@ -143,7 +150,7 @@ class BaseQuora:
                         raise e
             return 
         
-        data['answer_detail']['replies']: list = self.__get_replies(answer_id_encrypt)
+        data['answer_detail']['replies']: list = await self.__get_replies(answer_id_encrypt)
 
         data: dict = Iostream.dict_to_deep(data)
         with ThreadPoolExecutor() as executor:
@@ -157,7 +164,15 @@ class BaseQuora:
                         raise e
         return 
 
-    def __get_detail_answers(self, all_detail: dict) -> None:
+    async def __get_detail_answers(self, question_str: str) -> None:
+        self.__request: ClientSession = ClientSession(headers={
+            'cookie': os.getenv('QUORA_COOKIE'),
+            'quora-formkey': os.getenv('QUORA_FORMKEY'),
+            'user-agent': 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36',
+        })
+
+        all_detail = self.get_detail_question(question_str)
+
         link_split: list = all_detail['link'].split('/')
 
         headers: dict = {
@@ -174,24 +189,26 @@ class BaseQuora:
             "path_data_clean": f'S3://ai-pipeline-statistics/data/data_clean/data_review/quora/{all_detail["question_str"]}/json/detail.json',
         }
 
-        # paths: list = [path.replace('S3://ai-pipeline-statistics/', '') for path in [headers["path_data_raw"], headers["path_data_clean"]]] 
-        # with ThreadPoolExecutor() as executor:
-        #         headers: dict = Iostream.dict_to_deep(headers)
-        #         try:
-        #             if(self.__s3):
-        #                 executor.map(lambda path: ConnectionS3.upload(headers, path), paths)
-        #             else:
-        #                 executor.map(lambda path: Iostream.write_json(headers, path), paths)
-        #         except Exception as e:
-        #             raise e
+        paths: list = [path.replace('S3://ai-pipeline-statistics/', '') for path in [headers["path_data_raw"], headers["path_data_clean"]]] 
+        with ThreadPoolExecutor() as executor:
+                headers: dict = Iostream.dict_to_deep(headers)
+                try:
+                    if(self.__s3):
+                        executor.map(lambda path: ConnectionS3.upload(headers, path), paths)
+                    else:
+                        executor.map(lambda path: Iostream.write_json(headers, path), paths)
+                except Exception as e:
+                    raise e
+                
+        await asyncio.gather(*(self.__process_data(all_detail, i, headers) for i in all_detail['answers_n_relevant_answer']))
 
-        for i in all_detail['answers_n_relevant_answer']:
-            self.__process_data(all_detail, i, headers)
+        await self.__request.close()
+
     
     def _get_answers_by_question_str(self, question_str: str) -> None:
-        return self.__get_detail_answers(self.get_detail_question(question_str))
+        return asyncio.run(self.__get_detail_answers(question_str))
 
 # testing
 if(__name__ == '__main__'):
-    BaseQuora()._get_answers_by_question_str('Bagaimana-kesanmu-terhadap-PT-Pos-Indonesia')
-    # BaseQuora().get_answers_by_quetion('Bagaimana-pengalamanmu-menggunakan-jasa-ekspedisi-sicepat')
+    # BaseQuora()._get_answers_by_question_str('Bagaimana-kesanmu-terhadap-PT-Pos-Indonesia')
+    BaseQuora()._get_answers_by_question_str('Bagaimana-pengalamanmu-menggunakan-jasa-ekspedisi-sicepat')

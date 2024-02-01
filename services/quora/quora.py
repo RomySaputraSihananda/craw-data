@@ -2,13 +2,12 @@ import click
 
 from typing import final
 from helpers import logging
-from abc import abstractmethod
 
 from helpers.decorators import Decorator 
-from library.quora import BaseQuora
+from library.quora import BaseQuora, AbstractQuora
 
 @final
-class Quora(BaseQuora):
+class Quora(BaseQuora, AbstractQuora):
     def __init__(self, **kwargs) -> None:
         super().__init__(**kwargs)
 
@@ -24,3 +23,9 @@ class Quora(BaseQuora):
     @Decorator.counter_time
     def get_answers_by_question_str(self, **kwargs) -> None:
         return super()._get_answers_by_question_str(kwargs.get('question'))
+
+if(__name__ == '__main__'):
+    Quora(**{
+        'question': 'Bagaimana-kesanmu-terhadap-PT-Pos-Indonesia', 
+        'method': 'by_question_str'
+    })
