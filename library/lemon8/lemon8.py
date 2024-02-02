@@ -3,14 +3,14 @@ import requests
 import re
 import asyncio
 
+from click import style
 from time import time
 from aiohttp import ClientSession
 from requests import Response
-from json import dumps, loads
 from concurrent.futures import ThreadPoolExecutor
 from typing import final
 
-from helpers import Iostream, Datetime, ConnectionS3
+from helpers import Iostream, Datetime, ConnectionS3, logging
 
 class BaseLemon8:
     def __init__(self, **kwargs) -> None:
@@ -174,15 +174,19 @@ class BaseLemon8:
                 
                 log['total_success'] += 1
                 Iostream.update_log(log, name=__name__)
+                logging.info(f'total data: [ {style(log["total_data"], fg="bright_blue")} ] total success: [ {style(log["total_success"], fg="bright_green")} ] total failed: [ {style(log["total_failed"], fg="bright_red")} ]')
         
         except Exception as e:
             Iostream.info_log(log, comment_id, 'failed', error=e, name=__name__)
 
             log['total_failed'] += 1
             Iostream.update_log(log, name=__name__)
+            logging.info(f'total data: [ {style(log["total_data"], fg="bright_blue")} ] total success: [ {style(log["total_success"], fg="bright_green")} ] total failed: [ {style(log["total_failed"], fg="bright_red")} ]')
         
         log['status'] = 'Done'
         Iostream.update_log(log, name=__name__)
+
+        logging.info(f'total data: [ {style(log["total_data"], fg="bright_blue")} ] total success: [ {style(log["total_success"], fg="bright_green")} ] total failed: [ {style(log["total_failed"], fg="bright_red")} ]')
 
     @final
     async def _get_comments_by_user_id(self, user_id: str, **kwargs) -> None:
@@ -220,4 +224,4 @@ class BaseLemon8:
 if(__name__ == '__main__'):
     lemon8: BaseLemon8 = BaseLemon8()
 
-    asyncio.run(lemon8.get_comments_by_user_id('7138599741986915329'))
+    asyncio.run(lemon8._get_comments_by_user_id('7138599741986915329'))
