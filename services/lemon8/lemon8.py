@@ -12,11 +12,11 @@ class Lemon8(BaseLemon8, AbstractLemon8):
     def __init__(self, **kwargs) -> None:
         super().__init__(**kwargs)
 
-        method: str = kwargs.get('method')
+        method: str = str(kwargs.get('method'))
 
         match(method):
             case 'by_user_id':
-                if(not kwargs.get('user_id')): raise click.BadParameter("--user_id is required for method 'by_user_id'")
+                if(not kwargs.get('user_id')): raise click.BadParameter("--user_id is required for :method 'by_user_id'")
                 self.get_comments_by_user_id(**kwargs)
             case 'by_username':
                 if(not kwargs.get('username')): raise click.BadParameter("--username is required for method 'by_username'")
@@ -32,19 +32,19 @@ class Lemon8(BaseLemon8, AbstractLemon8):
     
     @Decorator.counter_time
     def get_comments_by_user_id(self, **kwargs) -> None:
-        return asyncio.run(super()._get_comments_by_user_id(kwargs.get('user_id')))
+        return asyncio.run(super()._get_comments_by_user_id(str(kwargs.get('user_id'))))
     
     @Decorator.counter_time
     def get_comments_by_username(self, **kwargs) -> None:
-        return super()._get_comments_by_username(kwargs.get('username'))
-    
+        return super()._get_comments_by_username(str(kwargs.get('username')))
+
     @Decorator.counter_time
     def get_comments_by_url(self, **kwargs) -> None:
-        return super()._get_comments_by_url(kwargs.get('url'))
+        return super()._get_comments_by_url(str(kwargs.get('url')))
     
     @Decorator.counter_time
     def get_comments_by_post_id(self, **kwargs) -> None:
-        return super()._get_comments_by_post_id(kwargs.get('post_id'))
+            return super()._get_comments_by_post_id(str(kwargs.get('post_id')))
 
 if(__name__ == '__main__'):
     Lemon8(**{
