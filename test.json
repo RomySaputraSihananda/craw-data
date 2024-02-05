@@ -1,0 +1,2122 @@
+[
+    {
+        "demographicRatings": [
+            {
+                "category": "gender",
+                "categoryRatings": [
+                    {
+                        "categoryValue": "man",
+                        "ratings": {
+                            "overallRating": 4.4,
+                            "__typename": "EmployerRatings"
+                        },
+                        "__typename": "DemographicCategoryValueRatings"
+                    },
+                    {
+                        "categoryValue": "woman",
+                        "ratings": {
+                            "overallRating": 4.2,
+                            "__typename": "EmployerRatings"
+                        },
+                        "__typename": "DemographicCategoryValueRatings"
+                    },
+                    {
+                        "categoryValue": "nonBinary",
+                        "ratings": {
+                            "overallRating": 4.3,
+                            "__typename": "EmployerRatings"
+                        },
+                        "__typename": "DemographicCategoryValueRatings"
+                    }
+                ],
+                "__typename": "DemographicRatings"
+            },
+            {
+                "category": "raceEthnicity",
+                "categoryRatings": [
+                    {
+                        "categoryValue": "indigenousAmerican",
+                        "ratings": {
+                            "overallRating": 4.5,
+                            "__typename": "EmployerRatings"
+                        },
+                        "__typename": "DemographicCategoryValueRatings"
+                    },
+                    {
+                        "categoryValue": "asian",
+                        "ratings": {
+                            "overallRating": 4.4,
+                            "__typename": "EmployerRatings"
+                        },
+                        "__typename": "DemographicCategoryValueRatings"
+                    },
+                    {
+                        "categoryValue": "nativeHawaiian",
+                        "ratings": {
+                            "overallRating": 4.3,
+                            "__typename": "EmployerRatings"
+                        },
+                        "__typename": "DemographicCategoryValueRatings"
+                    },
+                    {
+                        "categoryValue": "middleEastern",
+                        "ratings": {
+                            "overallRating": 4.3,
+                            "__typename": "EmployerRatings"
+                        },
+                        "__typename": "DemographicCategoryValueRatings"
+                    },
+                    {
+                        "categoryValue": "blackOrAfricanAmerican",
+                        "ratings": {
+                            "overallRating": 4.2,
+                            "__typename": "EmployerRatings"
+                        },
+                        "__typename": "DemographicCategoryValueRatings"
+                    },
+                    {
+                        "categoryValue": "hispanicOrLatinx",
+                        "ratings": {
+                            "overallRating": 4.3,
+                            "__typename": "EmployerRatings"
+                        },
+                        "__typename": "DemographicCategoryValueRatings"
+                    },
+                    {
+                        "categoryValue": "white",
+                        "ratings": {
+                            "overallRating": 4.2,
+                            "__typename": "EmployerRatings"
+                        },
+                        "__typename": "DemographicCategoryValueRatings"
+                    }
+                ],
+                "__typename": "DemographicRatings"
+            },
+            {
+                "category": "sexualOrientation",
+                "categoryRatings": [
+                    {
+                        "categoryValue": "yes",
+                        "ratings": {
+                            "overallRating": 3.9,
+                            "__typename": "EmployerRatings"
+                        },
+                        "__typename": "DemographicCategoryValueRatings"
+                    },
+                    {
+                        "categoryValue": "no",
+                        "ratings": {
+                            "overallRating": 4.3,
+                            "__typename": "EmployerRatings"
+                        },
+                        "__typename": "DemographicCategoryValueRatings"
+                    }
+                ],
+                "__typename": "DemographicRatings"
+            },
+            {
+                "category": "disability",
+                "categoryRatings": [
+                    {
+                        "categoryValue": "yes",
+                        "ratings": {
+                            "overallRating": 3.8,
+                            "__typename": "EmployerRatings"
+                        },
+                        "__typename": "DemographicCategoryValueRatings"
+                    },
+                    {
+                        "categoryValue": "no",
+                        "ratings": {
+                            "overallRating": 4.3,
+                            "__typename": "EmployerRatings"
+                        },
+                        "__typename": "DemographicCategoryValueRatings"
+                    }
+                ],
+                "__typename": "DemographicRatings"
+            },
+            {
+                "category": "parentOrCaregiver",
+                "categoryRatings": [
+                    {
+                        "categoryValue": "parentOrGuardian",
+                        "ratings": {
+                            "overallRating": 4.1,
+                            "__typename": "EmployerRatings"
+                        },
+                        "__typename": "DemographicCategoryValueRatings"
+                    },
+                    {
+                        "categoryValue": "caregiver",
+                        "ratings": {
+                            "overallRating": 3.9,
+                            "__typename": "EmployerRatings"
+                        },
+                        "__typename": "DemographicCategoryValueRatings"
+                    },
+                    {
+                        "categoryValue": "no",
+                        "ratings": {
+                            "overallRating": 4.4,
+                            "__typename": "EmployerRatings"
+                        },
+                        "__typename": "DemographicCategoryValueRatings"
+                    }
+                ],
+                "__typename": "DemographicRatings"
+            },
+            {
+                "category": "veteranStatus",
+                "categoryRatings": [
+                    {
+                        "categoryValue": "yes",
+                        "ratings": {
+                            "overallRating": 4.1,
+                            "__typename": "EmployerRatings"
+                        },
+                        "__typename": "DemographicCategoryValueRatings"
+                    },
+                    {
+                        "categoryValue": "no",
+                        "ratings": {
+                            "overallRating": 4.3,
+                            "__typename": "EmployerRatings"
+                        },
+                        "__typename": "DemographicCategoryValueRatings"
+                    }
+                ],
+                "__typename": "DemographicRatings"
+            }
+        ],
+        "employer": {
+            "bestProfile": {
+                "id": 4505142,
+                "__typename": "EmployerProfile"
+            },
+            "id": 9079,
+            "shortName": "Google",
+            "ratings": {
+                "overallRating": 4.4,
+                "careerOpportunitiesRating": 4.2,
+                "compensationAndBenefitsRating": 4.5,
+                "cultureAndValuesRating": 4.2,
+                "diversityAndInclusionRating": 4.3,
+                "seniorManagementRating": 3.9,
+                "workLifeBalanceRating": 4.2,
+                "__typename": "DefaultEmployerRatings"
+            },
+            "__typename": "Employer"
+        },
+        "__typename": "UgcSearchV2EmployerResult"
+    },
+    {
+        "demographicRatings": [
+            {
+                "category": "gender",
+                "categoryRatings": [
+                    {
+                        "categoryValue": "man",
+                        "ratings": {
+                            "overallRating": 3.9,
+                            "__typename": "EmployerRatings"
+                        },
+                        "__typename": "DemographicCategoryValueRatings"
+                    },
+                    {
+                        "categoryValue": "woman",
+                        "ratings": {
+                            "overallRating": 3.8,
+                            "__typename": "EmployerRatings"
+                        },
+                        "__typename": "DemographicCategoryValueRatings"
+                    },
+                    {
+                        "categoryValue": "nonBinary",
+                        "ratings": {
+                            "overallRating": 3,
+                            "__typename": "EmployerRatings"
+                        },
+                        "__typename": "DemographicCategoryValueRatings"
+                    }
+                ],
+                "__typename": "DemographicRatings"
+            },
+            {
+                "category": "raceEthnicity",
+                "categoryRatings": [
+                    {
+                        "categoryValue": "indigenousAmerican",
+                        "ratings": {
+                            "overallRating": 3.8,
+                            "__typename": "EmployerRatings"
+                        },
+                        "__typename": "DemographicCategoryValueRatings"
+                    },
+                    {
+                        "categoryValue": "asian",
+                        "ratings": {
+                            "overallRating": 3.9,
+                            "__typename": "EmployerRatings"
+                        },
+                        "__typename": "DemographicCategoryValueRatings"
+                    },
+                    {
+                        "categoryValue": "nativeHawaiian",
+                        "ratings": {
+                            "overallRating": 3.6,
+                            "__typename": "EmployerRatings"
+                        },
+                        "__typename": "DemographicCategoryValueRatings"
+                    },
+                    {
+                        "categoryValue": "middleEastern",
+                        "ratings": {
+                            "overallRating": 3.5,
+                            "__typename": "EmployerRatings"
+                        },
+                        "__typename": "DemographicCategoryValueRatings"
+                    },
+                    {
+                        "categoryValue": "blackOrAfricanAmerican",
+                        "ratings": {
+                            "overallRating": 3.8,
+                            "__typename": "EmployerRatings"
+                        },
+                        "__typename": "DemographicCategoryValueRatings"
+                    },
+                    {
+                        "categoryValue": "hispanicOrLatinx",
+                        "ratings": {
+                            "overallRating": 3.9,
+                            "__typename": "EmployerRatings"
+                        },
+                        "__typename": "DemographicCategoryValueRatings"
+                    },
+                    {
+                        "categoryValue": "white",
+                        "ratings": {
+                            "overallRating": 3.9,
+                            "__typename": "EmployerRatings"
+                        },
+                        "__typename": "DemographicCategoryValueRatings"
+                    }
+                ],
+                "__typename": "DemographicRatings"
+            },
+            {
+                "category": "sexualOrientation",
+                "categoryRatings": [
+                    {
+                        "categoryValue": "yes",
+                        "ratings": {
+                            "overallRating": 3.8,
+                            "__typename": "EmployerRatings"
+                        },
+                        "__typename": "DemographicCategoryValueRatings"
+                    },
+                    {
+                        "categoryValue": "no",
+                        "ratings": {
+                            "overallRating": 3.9,
+                            "__typename": "EmployerRatings"
+                        },
+                        "__typename": "DemographicCategoryValueRatings"
+                    }
+                ],
+                "__typename": "DemographicRatings"
+            },
+            {
+                "category": "disability",
+                "categoryRatings": [
+                    {
+                        "categoryValue": "yes",
+                        "ratings": {
+                            "overallRating": 3.7,
+                            "__typename": "EmployerRatings"
+                        },
+                        "__typename": "DemographicCategoryValueRatings"
+                    },
+                    {
+                        "categoryValue": "no",
+                        "ratings": {
+                            "overallRating": 3.9,
+                            "__typename": "EmployerRatings"
+                        },
+                        "__typename": "DemographicCategoryValueRatings"
+                    }
+                ],
+                "__typename": "DemographicRatings"
+            },
+            {
+                "category": "parentOrCaregiver",
+                "categoryRatings": [
+                    {
+                        "categoryValue": "parentOrGuardian",
+                        "ratings": {
+                            "overallRating": 4,
+                            "__typename": "EmployerRatings"
+                        },
+                        "__typename": "DemographicCategoryValueRatings"
+                    },
+                    {
+                        "categoryValue": "caregiver",
+                        "ratings": {
+                            "overallRating": 3.8,
+                            "__typename": "EmployerRatings"
+                        },
+                        "__typename": "DemographicCategoryValueRatings"
+                    },
+                    {
+                        "categoryValue": "no",
+                        "ratings": {
+                            "overallRating": 3.9,
+                            "__typename": "EmployerRatings"
+                        },
+                        "__typename": "DemographicCategoryValueRatings"
+                    }
+                ],
+                "__typename": "DemographicRatings"
+            },
+            {
+                "category": "veteranStatus",
+                "categoryRatings": [
+                    {
+                        "categoryValue": "yes",
+                        "ratings": {
+                            "overallRating": 3.3,
+                            "__typename": "EmployerRatings"
+                        },
+                        "__typename": "DemographicCategoryValueRatings"
+                    },
+                    {
+                        "categoryValue": "no",
+                        "ratings": {
+                            "overallRating": 3.9,
+                            "__typename": "EmployerRatings"
+                        },
+                        "__typename": "DemographicCategoryValueRatings"
+                    }
+                ],
+                "__typename": "DemographicRatings"
+            }
+        ],
+        "employer": {
+            "bestProfile": {
+                "id": 2788,
+                "__typename": "EmployerProfile"
+            },
+            "id": 2784,
+            "shortName": "EY",
+            "ratings": {
+                "overallRating": 3.8,
+                "careerOpportunitiesRating": 4,
+                "compensationAndBenefitsRating": 3.4,
+                "cultureAndValuesRating": 3.7,
+                "diversityAndInclusionRating": 4,
+                "seniorManagementRating": 3.5,
+                "workLifeBalanceRating": 3,
+                "__typename": "DefaultEmployerRatings"
+            },
+            "__typename": "Employer"
+        },
+        "__typename": "UgcSearchV2EmployerResult"
+    },
+    {
+        "demographicRatings": [
+            {
+                "category": "gender",
+                "categoryRatings": [
+                    {
+                        "categoryValue": "man",
+                        "ratings": {
+                            "overallRating": 3.7,
+                            "__typename": "EmployerRatings"
+                        },
+                        "__typename": "DemographicCategoryValueRatings"
+                    },
+                    {
+                        "categoryValue": "woman",
+                        "ratings": {
+                            "overallRating": 3.7,
+                            "__typename": "EmployerRatings"
+                        },
+                        "__typename": "DemographicCategoryValueRatings"
+                    },
+                    {
+                        "categoryValue": "nonBinary",
+                        "ratings": {
+                            "overallRating": 3.3,
+                            "__typename": "EmployerRatings"
+                        },
+                        "__typename": "DemographicCategoryValueRatings"
+                    }
+                ],
+                "__typename": "DemographicRatings"
+            },
+            {
+                "category": "raceEthnicity",
+                "categoryRatings": [
+                    {
+                        "categoryValue": "indigenousAmerican",
+                        "ratings": {
+                            "overallRating": 3.3,
+                            "__typename": "EmployerRatings"
+                        },
+                        "__typename": "DemographicCategoryValueRatings"
+                    },
+                    {
+                        "categoryValue": "asian",
+                        "ratings": {
+                            "overallRating": 3.9,
+                            "__typename": "EmployerRatings"
+                        },
+                        "__typename": "DemographicCategoryValueRatings"
+                    },
+                    {
+                        "categoryValue": "nativeHawaiian",
+                        "ratings": {
+                            "overallRating": 3.6,
+                            "__typename": "EmployerRatings"
+                        },
+                        "__typename": "DemographicCategoryValueRatings"
+                    },
+                    {
+                        "categoryValue": "middleEastern",
+                        "ratings": {
+                            "overallRating": 3.7,
+                            "__typename": "EmployerRatings"
+                        },
+                        "__typename": "DemographicCategoryValueRatings"
+                    },
+                    {
+                        "categoryValue": "blackOrAfricanAmerican",
+                        "ratings": {
+                            "overallRating": 3.6,
+                            "__typename": "EmployerRatings"
+                        },
+                        "__typename": "DemographicCategoryValueRatings"
+                    },
+                    {
+                        "categoryValue": "hispanicOrLatinx",
+                        "ratings": {
+                            "overallRating": 3.7,
+                            "__typename": "EmployerRatings"
+                        },
+                        "__typename": "DemographicCategoryValueRatings"
+                    },
+                    {
+                        "categoryValue": "white",
+                        "ratings": {
+                            "overallRating": 3.6,
+                            "__typename": "EmployerRatings"
+                        },
+                        "__typename": "DemographicCategoryValueRatings"
+                    }
+                ],
+                "__typename": "DemographicRatings"
+            },
+            {
+                "category": "sexualOrientation",
+                "categoryRatings": [
+                    {
+                        "categoryValue": "yes",
+                        "ratings": {
+                            "overallRating": 3.3,
+                            "__typename": "EmployerRatings"
+                        },
+                        "__typename": "DemographicCategoryValueRatings"
+                    },
+                    {
+                        "categoryValue": "no",
+                        "ratings": {
+                            "overallRating": 3.7,
+                            "__typename": "EmployerRatings"
+                        },
+                        "__typename": "DemographicCategoryValueRatings"
+                    }
+                ],
+                "__typename": "DemographicRatings"
+            },
+            {
+                "category": "disability",
+                "categoryRatings": [
+                    {
+                        "categoryValue": "yes",
+                        "ratings": {
+                            "overallRating": 3.3,
+                            "__typename": "EmployerRatings"
+                        },
+                        "__typename": "DemographicCategoryValueRatings"
+                    },
+                    {
+                        "categoryValue": "no",
+                        "ratings": {
+                            "overallRating": 3.7,
+                            "__typename": "EmployerRatings"
+                        },
+                        "__typename": "DemographicCategoryValueRatings"
+                    }
+                ],
+                "__typename": "DemographicRatings"
+            },
+            {
+                "category": "parentOrCaregiver",
+                "categoryRatings": [
+                    {
+                        "categoryValue": "parentOrGuardian",
+                        "ratings": {
+                            "overallRating": 3.7,
+                            "__typename": "EmployerRatings"
+                        },
+                        "__typename": "DemographicCategoryValueRatings"
+                    },
+                    {
+                        "categoryValue": "caregiver",
+                        "ratings": {
+                            "overallRating": 3.5,
+                            "__typename": "EmployerRatings"
+                        },
+                        "__typename": "DemographicCategoryValueRatings"
+                    },
+                    {
+                        "categoryValue": "no",
+                        "ratings": {
+                            "overallRating": 3.7,
+                            "__typename": "EmployerRatings"
+                        },
+                        "__typename": "DemographicCategoryValueRatings"
+                    }
+                ],
+                "__typename": "DemographicRatings"
+            },
+            {
+                "category": "veteranStatus",
+                "categoryRatings": [
+                    {
+                        "categoryValue": "yes",
+                        "ratings": {
+                            "overallRating": 3.7,
+                            "__typename": "EmployerRatings"
+                        },
+                        "__typename": "DemographicCategoryValueRatings"
+                    },
+                    {
+                        "categoryValue": "no",
+                        "ratings": {
+                            "overallRating": 3.6,
+                            "__typename": "EmployerRatings"
+                        },
+                        "__typename": "DemographicCategoryValueRatings"
+                    }
+                ],
+                "__typename": "DemographicRatings"
+            }
+        ],
+        "employer": {
+            "bestProfile": {
+                "id": 7260272,
+                "__typename": "EmployerProfile"
+            },
+            "id": 655,
+            "shortName": "The Home Depot",
+            "ratings": {
+                "overallRating": 3.8,
+                "careerOpportunitiesRating": 3.6,
+                "compensationAndBenefitsRating": 3.6,
+                "cultureAndValuesRating": 3.8,
+                "diversityAndInclusionRating": 4,
+                "seniorManagementRating": 3.4,
+                "workLifeBalanceRating": 3.5,
+                "__typename": "DefaultEmployerRatings"
+            },
+            "__typename": "Employer"
+        },
+        "__typename": "UgcSearchV2EmployerResult"
+    },
+    {
+        "demographicRatings": [
+            {
+                "category": "gender",
+                "categoryRatings": [
+                    {
+                        "categoryValue": "man",
+                        "ratings": {
+                            "overallRating": 4,
+                            "__typename": "EmployerRatings"
+                        },
+                        "__typename": "DemographicCategoryValueRatings"
+                    },
+                    {
+                        "categoryValue": "woman",
+                        "ratings": {
+                            "overallRating": 3.8,
+                            "__typename": "EmployerRatings"
+                        },
+                        "__typename": "DemographicCategoryValueRatings"
+                    },
+                    {
+                        "categoryValue": "nonBinary",
+                        "ratings": {
+                            "overallRating": 3.4,
+                            "__typename": "EmployerRatings"
+                        },
+                        "__typename": "DemographicCategoryValueRatings"
+                    }
+                ],
+                "__typename": "DemographicRatings"
+            },
+            {
+                "category": "raceEthnicity",
+                "categoryRatings": [
+                    {
+                        "categoryValue": "indigenousAmerican",
+                        "ratings": {
+                            "overallRating": 4.1,
+                            "__typename": "EmployerRatings"
+                        },
+                        "__typename": "DemographicCategoryValueRatings"
+                    },
+                    {
+                        "categoryValue": "asian",
+                        "ratings": {
+                            "overallRating": 3.9,
+                            "__typename": "EmployerRatings"
+                        },
+                        "__typename": "DemographicCategoryValueRatings"
+                    },
+                    {
+                        "categoryValue": "nativeHawaiian",
+                        "ratings": {
+                            "overallRating": 3.9,
+                            "__typename": "EmployerRatings"
+                        },
+                        "__typename": "DemographicCategoryValueRatings"
+                    },
+                    {
+                        "categoryValue": "middleEastern",
+                        "ratings": {
+                            "overallRating": 3.7,
+                            "__typename": "EmployerRatings"
+                        },
+                        "__typename": "DemographicCategoryValueRatings"
+                    },
+                    {
+                        "categoryValue": "blackOrAfricanAmerican",
+                        "ratings": {
+                            "overallRating": 3.8,
+                            "__typename": "EmployerRatings"
+                        },
+                        "__typename": "DemographicCategoryValueRatings"
+                    },
+                    {
+                        "categoryValue": "hispanicOrLatinx",
+                        "ratings": {
+                            "overallRating": 4.1,
+                            "__typename": "EmployerRatings"
+                        },
+                        "__typename": "DemographicCategoryValueRatings"
+                    },
+                    {
+                        "categoryValue": "white",
+                        "ratings": {
+                            "overallRating": 3.9,
+                            "__typename": "EmployerRatings"
+                        },
+                        "__typename": "DemographicCategoryValueRatings"
+                    }
+                ],
+                "__typename": "DemographicRatings"
+            },
+            {
+                "category": "sexualOrientation",
+                "categoryRatings": [
+                    {
+                        "categoryValue": "yes",
+                        "ratings": {
+                            "overallRating": 3.9,
+                            "__typename": "EmployerRatings"
+                        },
+                        "__typename": "DemographicCategoryValueRatings"
+                    },
+                    {
+                        "categoryValue": "no",
+                        "ratings": {
+                            "overallRating": 3.9,
+                            "__typename": "EmployerRatings"
+                        },
+                        "__typename": "DemographicCategoryValueRatings"
+                    }
+                ],
+                "__typename": "DemographicRatings"
+            },
+            {
+                "category": "disability",
+                "categoryRatings": [
+                    {
+                        "categoryValue": "yes",
+                        "ratings": {
+                            "overallRating": 3.5,
+                            "__typename": "EmployerRatings"
+                        },
+                        "__typename": "DemographicCategoryValueRatings"
+                    },
+                    {
+                        "categoryValue": "no",
+                        "ratings": {
+                            "overallRating": 4,
+                            "__typename": "EmployerRatings"
+                        },
+                        "__typename": "DemographicCategoryValueRatings"
+                    }
+                ],
+                "__typename": "DemographicRatings"
+            },
+            {
+                "category": "parentOrCaregiver",
+                "categoryRatings": [
+                    {
+                        "categoryValue": "parentOrGuardian",
+                        "ratings": {
+                            "overallRating": 3.9,
+                            "__typename": "EmployerRatings"
+                        },
+                        "__typename": "DemographicCategoryValueRatings"
+                    },
+                    {
+                        "categoryValue": "caregiver",
+                        "ratings": {
+                            "overallRating": 3.8,
+                            "__typename": "EmployerRatings"
+                        },
+                        "__typename": "DemographicCategoryValueRatings"
+                    },
+                    {
+                        "categoryValue": "no",
+                        "ratings": {
+                            "overallRating": 3.9,
+                            "__typename": "EmployerRatings"
+                        },
+                        "__typename": "DemographicCategoryValueRatings"
+                    }
+                ],
+                "__typename": "DemographicRatings"
+            },
+            {
+                "category": "veteranStatus",
+                "categoryRatings": [
+                    {
+                        "categoryValue": "yes",
+                        "ratings": {
+                            "overallRating": 4,
+                            "__typename": "EmployerRatings"
+                        },
+                        "__typename": "DemographicCategoryValueRatings"
+                    },
+                    {
+                        "categoryValue": "no",
+                        "ratings": {
+                            "overallRating": 3.9,
+                            "__typename": "EmployerRatings"
+                        },
+                        "__typename": "DemographicCategoryValueRatings"
+                    }
+                ],
+                "__typename": "DemographicRatings"
+            }
+        ],
+        "employer": {
+            "bestProfile": {
+                "id": 5889260,
+                "__typename": "EmployerProfile"
+            },
+            "id": 8450,
+            "shortName": "PwC",
+            "ratings": {
+                "overallRating": 3.9,
+                "careerOpportunitiesRating": 4.1,
+                "compensationAndBenefitsRating": 3.5,
+                "cultureAndValuesRating": 3.8,
+                "diversityAndInclusionRating": 4.1,
+                "seniorManagementRating": 3.6,
+                "workLifeBalanceRating": 3.1,
+                "__typename": "DefaultEmployerRatings"
+            },
+            "__typename": "Employer"
+        },
+        "__typename": "UgcSearchV2EmployerResult"
+    },
+    {
+        "demographicRatings": [
+            {
+                "category": "gender",
+                "categoryRatings": [
+                    {
+                        "categoryValue": "man",
+                        "ratings": {
+                            "overallRating": 4.2,
+                            "__typename": "EmployerRatings"
+                        },
+                        "__typename": "DemographicCategoryValueRatings"
+                    },
+                    {
+                        "categoryValue": "woman",
+                        "ratings": {
+                            "overallRating": 3.9,
+                            "__typename": "EmployerRatings"
+                        },
+                        "__typename": "DemographicCategoryValueRatings"
+                    },
+                    {
+                        "categoryValue": "nonBinary",
+                        "ratings": {
+                            "overallRating": 3.9,
+                            "__typename": "EmployerRatings"
+                        },
+                        "__typename": "DemographicCategoryValueRatings"
+                    }
+                ],
+                "__typename": "DemographicRatings"
+            },
+            {
+                "category": "raceEthnicity",
+                "categoryRatings": [
+                    {
+                        "categoryValue": "indigenousAmerican",
+                        "ratings": {
+                            "overallRating": 4.2,
+                            "__typename": "EmployerRatings"
+                        },
+                        "__typename": "DemographicCategoryValueRatings"
+                    },
+                    {
+                        "categoryValue": "asian",
+                        "ratings": {
+                            "overallRating": 4.2,
+                            "__typename": "EmployerRatings"
+                        },
+                        "__typename": "DemographicCategoryValueRatings"
+                    },
+                    {
+                        "categoryValue": "nativeHawaiian",
+                        "ratings": {
+                            "overallRating": 4.2,
+                            "__typename": "EmployerRatings"
+                        },
+                        "__typename": "DemographicCategoryValueRatings"
+                    },
+                    {
+                        "categoryValue": "middleEastern",
+                        "ratings": {
+                            "overallRating": 4.1,
+                            "__typename": "EmployerRatings"
+                        },
+                        "__typename": "DemographicCategoryValueRatings"
+                    },
+                    {
+                        "categoryValue": "blackOrAfricanAmerican",
+                        "ratings": {
+                            "overallRating": 4,
+                            "__typename": "EmployerRatings"
+                        },
+                        "__typename": "DemographicCategoryValueRatings"
+                    },
+                    {
+                        "categoryValue": "hispanicOrLatinx",
+                        "ratings": {
+                            "overallRating": 4,
+                            "__typename": "EmployerRatings"
+                        },
+                        "__typename": "DemographicCategoryValueRatings"
+                    },
+                    {
+                        "categoryValue": "white",
+                        "ratings": {
+                            "overallRating": 3.9,
+                            "__typename": "EmployerRatings"
+                        },
+                        "__typename": "DemographicCategoryValueRatings"
+                    }
+                ],
+                "__typename": "DemographicRatings"
+            },
+            {
+                "category": "sexualOrientation",
+                "categoryRatings": [
+                    {
+                        "categoryValue": "yes",
+                        "ratings": {
+                            "overallRating": 3.9,
+                            "__typename": "EmployerRatings"
+                        },
+                        "__typename": "DemographicCategoryValueRatings"
+                    },
+                    {
+                        "categoryValue": "no",
+                        "ratings": {
+                            "overallRating": 4.1,
+                            "__typename": "EmployerRatings"
+                        },
+                        "__typename": "DemographicCategoryValueRatings"
+                    }
+                ],
+                "__typename": "DemographicRatings"
+            },
+            {
+                "category": "disability",
+                "categoryRatings": [
+                    {
+                        "categoryValue": "yes",
+                        "ratings": {
+                            "overallRating": 3.6,
+                            "__typename": "EmployerRatings"
+                        },
+                        "__typename": "DemographicCategoryValueRatings"
+                    },
+                    {
+                        "categoryValue": "no",
+                        "ratings": {
+                            "overallRating": 4.1,
+                            "__typename": "EmployerRatings"
+                        },
+                        "__typename": "DemographicCategoryValueRatings"
+                    }
+                ],
+                "__typename": "DemographicRatings"
+            },
+            {
+                "category": "parentOrCaregiver",
+                "categoryRatings": [
+                    {
+                        "categoryValue": "parentOrGuardian",
+                        "ratings": {
+                            "overallRating": 3.9,
+                            "__typename": "EmployerRatings"
+                        },
+                        "__typename": "DemographicCategoryValueRatings"
+                    },
+                    {
+                        "categoryValue": "caregiver",
+                        "ratings": {
+                            "overallRating": 3.8,
+                            "__typename": "EmployerRatings"
+                        },
+                        "__typename": "DemographicCategoryValueRatings"
+                    },
+                    {
+                        "categoryValue": "no",
+                        "ratings": {
+                            "overallRating": 4.1,
+                            "__typename": "EmployerRatings"
+                        },
+                        "__typename": "DemographicCategoryValueRatings"
+                    }
+                ],
+                "__typename": "DemographicRatings"
+            },
+            {
+                "category": "veteranStatus",
+                "categoryRatings": [
+                    {
+                        "categoryValue": "yes",
+                        "ratings": {
+                            "overallRating": 4.2,
+                            "__typename": "EmployerRatings"
+                        },
+                        "__typename": "DemographicCategoryValueRatings"
+                    },
+                    {
+                        "categoryValue": "no",
+                        "ratings": {
+                            "overallRating": 4,
+                            "__typename": "EmployerRatings"
+                        },
+                        "__typename": "DemographicCategoryValueRatings"
+                    }
+                ],
+                "__typename": "DemographicRatings"
+            }
+        ],
+        "employer": {
+            "bestProfile": {
+                "id": 2094282,
+                "__typename": "EmployerProfile"
+            },
+            "id": 1138,
+            "shortName": "Apple",
+            "ratings": {
+                "overallRating": 4.2,
+                "careerOpportunitiesRating": 3.8,
+                "compensationAndBenefitsRating": 4.2,
+                "cultureAndValuesRating": 4.1,
+                "diversityAndInclusionRating": 4.3,
+                "seniorManagementRating": 3.6,
+                "workLifeBalanceRating": 3.6,
+                "__typename": "DefaultEmployerRatings"
+            },
+            "__typename": "Employer"
+        },
+        "__typename": "UgcSearchV2EmployerResult"
+    },
+    {
+        "demographicRatings": [
+            {
+                "category": "gender",
+                "categoryRatings": [
+                    {
+                        "categoryValue": "man",
+                        "ratings": {
+                            "overallRating": 3.8,
+                            "__typename": "EmployerRatings"
+                        },
+                        "__typename": "DemographicCategoryValueRatings"
+                    },
+                    {
+                        "categoryValue": "woman",
+                        "ratings": {
+                            "overallRating": 3.5,
+                            "__typename": "EmployerRatings"
+                        },
+                        "__typename": "DemographicCategoryValueRatings"
+                    },
+                    {
+                        "categoryValue": "nonBinary",
+                        "ratings": {
+                            "overallRating": 3.3,
+                            "__typename": "EmployerRatings"
+                        },
+                        "__typename": "DemographicCategoryValueRatings"
+                    }
+                ],
+                "__typename": "DemographicRatings"
+            },
+            {
+                "category": "raceEthnicity",
+                "categoryRatings": [
+                    {
+                        "categoryValue": "indigenousAmerican",
+                        "ratings": {
+                            "overallRating": 3.8,
+                            "__typename": "EmployerRatings"
+                        },
+                        "__typename": "DemographicCategoryValueRatings"
+                    },
+                    {
+                        "categoryValue": "asian",
+                        "ratings": {
+                            "overallRating": 3.7,
+                            "__typename": "EmployerRatings"
+                        },
+                        "__typename": "DemographicCategoryValueRatings"
+                    },
+                    {
+                        "categoryValue": "nativeHawaiian",
+                        "ratings": {
+                            "overallRating": 4.1,
+                            "__typename": "EmployerRatings"
+                        },
+                        "__typename": "DemographicCategoryValueRatings"
+                    },
+                    {
+                        "categoryValue": "middleEastern",
+                        "ratings": {
+                            "overallRating": 3.5,
+                            "__typename": "EmployerRatings"
+                        },
+                        "__typename": "DemographicCategoryValueRatings"
+                    },
+                    {
+                        "categoryValue": "blackOrAfricanAmerican",
+                        "ratings": {
+                            "overallRating": 3.8,
+                            "__typename": "EmployerRatings"
+                        },
+                        "__typename": "DemographicCategoryValueRatings"
+                    },
+                    {
+                        "categoryValue": "hispanicOrLatinx",
+                        "ratings": {
+                            "overallRating": 3.7,
+                            "__typename": "EmployerRatings"
+                        },
+                        "__typename": "DemographicCategoryValueRatings"
+                    },
+                    {
+                        "categoryValue": "white",
+                        "ratings": {
+                            "overallRating": 3.7,
+                            "__typename": "EmployerRatings"
+                        },
+                        "__typename": "DemographicCategoryValueRatings"
+                    }
+                ],
+                "__typename": "DemographicRatings"
+            },
+            {
+                "category": "sexualOrientation",
+                "categoryRatings": [
+                    {
+                        "categoryValue": "yes",
+                        "ratings": {
+                            "overallRating": 3.6,
+                            "__typename": "EmployerRatings"
+                        },
+                        "__typename": "DemographicCategoryValueRatings"
+                    },
+                    {
+                        "categoryValue": "no",
+                        "ratings": {
+                            "overallRating": 3.7,
+                            "__typename": "EmployerRatings"
+                        },
+                        "__typename": "DemographicCategoryValueRatings"
+                    }
+                ],
+                "__typename": "DemographicRatings"
+            },
+            {
+                "category": "disability",
+                "categoryRatings": [
+                    {
+                        "categoryValue": "yes",
+                        "ratings": {
+                            "overallRating": 3.6,
+                            "__typename": "EmployerRatings"
+                        },
+                        "__typename": "DemographicCategoryValueRatings"
+                    },
+                    {
+                        "categoryValue": "no",
+                        "ratings": {
+                            "overallRating": 3.7,
+                            "__typename": "EmployerRatings"
+                        },
+                        "__typename": "DemographicCategoryValueRatings"
+                    }
+                ],
+                "__typename": "DemographicRatings"
+            },
+            {
+                "category": "parentOrCaregiver",
+                "categoryRatings": [
+                    {
+                        "categoryValue": "parentOrGuardian",
+                        "ratings": {
+                            "overallRating": 3.8,
+                            "__typename": "EmployerRatings"
+                        },
+                        "__typename": "DemographicCategoryValueRatings"
+                    },
+                    {
+                        "categoryValue": "caregiver",
+                        "ratings": {
+                            "overallRating": 3.8,
+                            "__typename": "EmployerRatings"
+                        },
+                        "__typename": "DemographicCategoryValueRatings"
+                    },
+                    {
+                        "categoryValue": "no",
+                        "ratings": {
+                            "overallRating": 3.6,
+                            "__typename": "EmployerRatings"
+                        },
+                        "__typename": "DemographicCategoryValueRatings"
+                    }
+                ],
+                "__typename": "DemographicRatings"
+            },
+            {
+                "category": "veteranStatus",
+                "categoryRatings": [
+                    {
+                        "categoryValue": "yes",
+                        "ratings": {
+                            "overallRating": 3.7,
+                            "__typename": "EmployerRatings"
+                        },
+                        "__typename": "DemographicCategoryValueRatings"
+                    },
+                    {
+                        "categoryValue": "no",
+                        "ratings": {
+                            "overallRating": 3.8,
+                            "__typename": "EmployerRatings"
+                        },
+                        "__typename": "DemographicCategoryValueRatings"
+                    }
+                ],
+                "__typename": "DemographicRatings"
+            }
+        ],
+        "employer": {
+            "bestProfile": {
+                "id": 41519,
+                "__typename": "EmployerProfile"
+            },
+            "id": 41322,
+            "shortName": "US Army",
+            "ratings": {
+                "overallRating": 3.8,
+                "careerOpportunitiesRating": 4.1,
+                "compensationAndBenefitsRating": 4,
+                "cultureAndValuesRating": 3.6,
+                "diversityAndInclusionRating": 4.1,
+                "seniorManagementRating": 3.1,
+                "workLifeBalanceRating": 2.7,
+                "__typename": "DefaultEmployerRatings"
+            },
+            "__typename": "Employer"
+        },
+        "__typename": "UgcSearchV2EmployerResult"
+    },
+    {
+        "demographicRatings": [
+            {
+                "category": "gender",
+                "categoryRatings": [
+                    {
+                        "categoryValue": "man",
+                        "ratings": {
+                            "overallRating": 3.5,
+                            "__typename": "EmployerRatings"
+                        },
+                        "__typename": "DemographicCategoryValueRatings"
+                    },
+                    {
+                        "categoryValue": "woman",
+                        "ratings": {
+                            "overallRating": 3.4,
+                            "__typename": "EmployerRatings"
+                        },
+                        "__typename": "DemographicCategoryValueRatings"
+                    },
+                    {
+                        "categoryValue": "nonBinary",
+                        "ratings": {
+                            "overallRating": 2.7,
+                            "__typename": "EmployerRatings"
+                        },
+                        "__typename": "DemographicCategoryValueRatings"
+                    }
+                ],
+                "__typename": "DemographicRatings"
+            },
+            {
+                "category": "raceEthnicity",
+                "categoryRatings": [
+                    {
+                        "categoryValue": "indigenousAmerican",
+                        "ratings": {
+                            "overallRating": 3.4,
+                            "__typename": "EmployerRatings"
+                        },
+                        "__typename": "DemographicCategoryValueRatings"
+                    },
+                    {
+                        "categoryValue": "asian",
+                        "ratings": {
+                            "overallRating": 3.7,
+                            "__typename": "EmployerRatings"
+                        },
+                        "__typename": "DemographicCategoryValueRatings"
+                    },
+                    {
+                        "categoryValue": "nativeHawaiian",
+                        "ratings": {
+                            "overallRating": 3.3,
+                            "__typename": "EmployerRatings"
+                        },
+                        "__typename": "DemographicCategoryValueRatings"
+                    },
+                    {
+                        "categoryValue": "middleEastern",
+                        "ratings": {
+                            "overallRating": 3.2,
+                            "__typename": "EmployerRatings"
+                        },
+                        "__typename": "DemographicCategoryValueRatings"
+                    },
+                    {
+                        "categoryValue": "blackOrAfricanAmerican",
+                        "ratings": {
+                            "overallRating": 3.5,
+                            "__typename": "EmployerRatings"
+                        },
+                        "__typename": "DemographicCategoryValueRatings"
+                    },
+                    {
+                        "categoryValue": "hispanicOrLatinx",
+                        "ratings": {
+                            "overallRating": 3.5,
+                            "__typename": "EmployerRatings"
+                        },
+                        "__typename": "DemographicCategoryValueRatings"
+                    },
+                    {
+                        "categoryValue": "white",
+                        "ratings": {
+                            "overallRating": 3.3,
+                            "__typename": "EmployerRatings"
+                        },
+                        "__typename": "DemographicCategoryValueRatings"
+                    }
+                ],
+                "__typename": "DemographicRatings"
+            },
+            {
+                "category": "sexualOrientation",
+                "categoryRatings": [
+                    {
+                        "categoryValue": "yes",
+                        "ratings": {
+                            "overallRating": 3.1,
+                            "__typename": "EmployerRatings"
+                        },
+                        "__typename": "DemographicCategoryValueRatings"
+                    },
+                    {
+                        "categoryValue": "no",
+                        "ratings": {
+                            "overallRating": 3.5,
+                            "__typename": "EmployerRatings"
+                        },
+                        "__typename": "DemographicCategoryValueRatings"
+                    }
+                ],
+                "__typename": "DemographicRatings"
+            },
+            {
+                "category": "disability",
+                "categoryRatings": [
+                    {
+                        "categoryValue": "yes",
+                        "ratings": {
+                            "overallRating": 3.1,
+                            "__typename": "EmployerRatings"
+                        },
+                        "__typename": "DemographicCategoryValueRatings"
+                    },
+                    {
+                        "categoryValue": "no",
+                        "ratings": {
+                            "overallRating": 3.5,
+                            "__typename": "EmployerRatings"
+                        },
+                        "__typename": "DemographicCategoryValueRatings"
+                    }
+                ],
+                "__typename": "DemographicRatings"
+            },
+            {
+                "category": "parentOrCaregiver",
+                "categoryRatings": [
+                    {
+                        "categoryValue": "parentOrGuardian",
+                        "ratings": {
+                            "overallRating": 3.4,
+                            "__typename": "EmployerRatings"
+                        },
+                        "__typename": "DemographicCategoryValueRatings"
+                    },
+                    {
+                        "categoryValue": "caregiver",
+                        "ratings": {
+                            "overallRating": 3.2,
+                            "__typename": "EmployerRatings"
+                        },
+                        "__typename": "DemographicCategoryValueRatings"
+                    },
+                    {
+                        "categoryValue": "no",
+                        "ratings": {
+                            "overallRating": 3.5,
+                            "__typename": "EmployerRatings"
+                        },
+                        "__typename": "DemographicCategoryValueRatings"
+                    }
+                ],
+                "__typename": "DemographicRatings"
+            },
+            {
+                "category": "veteranStatus",
+                "categoryRatings": [
+                    {
+                        "categoryValue": "yes",
+                        "ratings": {
+                            "overallRating": 3.3,
+                            "__typename": "EmployerRatings"
+                        },
+                        "__typename": "DemographicCategoryValueRatings"
+                    },
+                    {
+                        "categoryValue": "no",
+                        "ratings": {
+                            "overallRating": 3.4,
+                            "__typename": "EmployerRatings"
+                        },
+                        "__typename": "DemographicCategoryValueRatings"
+                    }
+                ],
+                "__typename": "DemographicRatings"
+            }
+        ],
+        "employer": {
+            "bestProfile": {
+                "id": 2081539,
+                "__typename": "EmployerProfile"
+            },
+            "id": 8876,
+            "shortName": "Wells Fargo",
+            "ratings": {
+                "overallRating": 3.6,
+                "careerOpportunitiesRating": 3.5,
+                "compensationAndBenefitsRating": 3.7,
+                "cultureAndValuesRating": 3.5,
+                "diversityAndInclusionRating": 3.9,
+                "seniorManagementRating": 3.1,
+                "workLifeBalanceRating": 3.6,
+                "__typename": "DefaultEmployerRatings"
+            },
+            "__typename": "Employer"
+        },
+        "__typename": "UgcSearchV2EmployerResult"
+    },
+    {
+        "demographicRatings": [
+            {
+                "category": "gender",
+                "categoryRatings": [
+                    {
+                        "categoryValue": "man",
+                        "ratings": {
+                            "overallRating": 3.7,
+                            "__typename": "EmployerRatings"
+                        },
+                        "__typename": "DemographicCategoryValueRatings"
+                    },
+                    {
+                        "categoryValue": "woman",
+                        "ratings": {
+                            "overallRating": 3.5,
+                            "__typename": "EmployerRatings"
+                        },
+                        "__typename": "DemographicCategoryValueRatings"
+                    },
+                    {
+                        "categoryValue": "nonBinary",
+                        "ratings": {
+                            "overallRating": 3,
+                            "__typename": "EmployerRatings"
+                        },
+                        "__typename": "DemographicCategoryValueRatings"
+                    }
+                ],
+                "__typename": "DemographicRatings"
+            },
+            {
+                "category": "raceEthnicity",
+                "categoryRatings": [
+                    {
+                        "categoryValue": "indigenousAmerican",
+                        "ratings": {
+                            "overallRating": 3.7,
+                            "__typename": "EmployerRatings"
+                        },
+                        "__typename": "DemographicCategoryValueRatings"
+                    },
+                    {
+                        "categoryValue": "asian",
+                        "ratings": {
+                            "overallRating": 3.7,
+                            "__typename": "EmployerRatings"
+                        },
+                        "__typename": "DemographicCategoryValueRatings"
+                    },
+                    {
+                        "categoryValue": "nativeHawaiian",
+                        "ratings": {
+                            "overallRating": 3.5,
+                            "__typename": "EmployerRatings"
+                        },
+                        "__typename": "DemographicCategoryValueRatings"
+                    },
+                    {
+                        "categoryValue": "middleEastern",
+                        "ratings": {
+                            "overallRating": 3.5,
+                            "__typename": "EmployerRatings"
+                        },
+                        "__typename": "DemographicCategoryValueRatings"
+                    },
+                    {
+                        "categoryValue": "blackOrAfricanAmerican",
+                        "ratings": {
+                            "overallRating": 3.5,
+                            "__typename": "EmployerRatings"
+                        },
+                        "__typename": "DemographicCategoryValueRatings"
+                    },
+                    {
+                        "categoryValue": "hispanicOrLatinx",
+                        "ratings": {
+                            "overallRating": 3.7,
+                            "__typename": "EmployerRatings"
+                        },
+                        "__typename": "DemographicCategoryValueRatings"
+                    },
+                    {
+                        "categoryValue": "white",
+                        "ratings": {
+                            "overallRating": 3.5,
+                            "__typename": "EmployerRatings"
+                        },
+                        "__typename": "DemographicCategoryValueRatings"
+                    }
+                ],
+                "__typename": "DemographicRatings"
+            },
+            {
+                "category": "sexualOrientation",
+                "categoryRatings": [
+                    {
+                        "categoryValue": "yes",
+                        "ratings": {
+                            "overallRating": 3.4,
+                            "__typename": "EmployerRatings"
+                        },
+                        "__typename": "DemographicCategoryValueRatings"
+                    },
+                    {
+                        "categoryValue": "no",
+                        "ratings": {
+                            "overallRating": 3.6,
+                            "__typename": "EmployerRatings"
+                        },
+                        "__typename": "DemographicCategoryValueRatings"
+                    }
+                ],
+                "__typename": "DemographicRatings"
+            },
+            {
+                "category": "disability",
+                "categoryRatings": [
+                    {
+                        "categoryValue": "yes",
+                        "ratings": {
+                            "overallRating": 3.4,
+                            "__typename": "EmployerRatings"
+                        },
+                        "__typename": "DemographicCategoryValueRatings"
+                    },
+                    {
+                        "categoryValue": "no",
+                        "ratings": {
+                            "overallRating": 3.6,
+                            "__typename": "EmployerRatings"
+                        },
+                        "__typename": "DemographicCategoryValueRatings"
+                    }
+                ],
+                "__typename": "DemographicRatings"
+            },
+            {
+                "category": "parentOrCaregiver",
+                "categoryRatings": [
+                    {
+                        "categoryValue": "parentOrGuardian",
+                        "ratings": {
+                            "overallRating": 3.6,
+                            "__typename": "EmployerRatings"
+                        },
+                        "__typename": "DemographicCategoryValueRatings"
+                    },
+                    {
+                        "categoryValue": "caregiver",
+                        "ratings": {
+                            "overallRating": 2.9,
+                            "__typename": "EmployerRatings"
+                        },
+                        "__typename": "DemographicCategoryValueRatings"
+                    },
+                    {
+                        "categoryValue": "no",
+                        "ratings": {
+                            "overallRating": 3.6,
+                            "__typename": "EmployerRatings"
+                        },
+                        "__typename": "DemographicCategoryValueRatings"
+                    }
+                ],
+                "__typename": "DemographicRatings"
+            },
+            {
+                "category": "veteranStatus",
+                "categoryRatings": [
+                    {
+                        "categoryValue": "yes",
+                        "ratings": {
+                            "overallRating": 3.4,
+                            "__typename": "EmployerRatings"
+                        },
+                        "__typename": "DemographicCategoryValueRatings"
+                    },
+                    {
+                        "categoryValue": "no",
+                        "ratings": {
+                            "overallRating": 3.6,
+                            "__typename": "EmployerRatings"
+                        },
+                        "__typename": "DemographicCategoryValueRatings"
+                    }
+                ],
+                "__typename": "DemographicRatings"
+            }
+        ],
+        "employer": {
+            "bestProfile": {
+                "id": 1741,
+                "__typename": "EmployerProfile"
+            },
+            "id": 1737,
+            "shortName": "Oracle",
+            "ratings": {
+                "overallRating": 3.8,
+                "careerOpportunitiesRating": 3.6,
+                "compensationAndBenefitsRating": 3.5,
+                "cultureAndValuesRating": 3.7,
+                "diversityAndInclusionRating": 4,
+                "seniorManagementRating": 3.5,
+                "workLifeBalanceRating": 4,
+                "__typename": "DefaultEmployerRatings"
+            },
+            "__typename": "Employer"
+        },
+        "__typename": "UgcSearchV2EmployerResult"
+    },
+    {
+        "demographicRatings": [
+            {
+                "category": "gender",
+                "categoryRatings": [
+                    {
+                        "categoryValue": "man",
+                        "ratings": {
+                            "overallRating": 4,
+                            "__typename": "EmployerRatings"
+                        },
+                        "__typename": "DemographicCategoryValueRatings"
+                    },
+                    {
+                        "categoryValue": "woman",
+                        "ratings": {
+                            "overallRating": 3.7,
+                            "__typename": "EmployerRatings"
+                        },
+                        "__typename": "DemographicCategoryValueRatings"
+                    },
+                    {
+                        "categoryValue": "nonBinary",
+                        "ratings": {
+                            "overallRating": 3.1,
+                            "__typename": "EmployerRatings"
+                        },
+                        "__typename": "DemographicCategoryValueRatings"
+                    }
+                ],
+                "__typename": "DemographicRatings"
+            },
+            {
+                "category": "raceEthnicity",
+                "categoryRatings": [
+                    {
+                        "categoryValue": "indigenousAmerican",
+                        "ratings": {
+                            "overallRating": 3.6,
+                            "__typename": "EmployerRatings"
+                        },
+                        "__typename": "DemographicCategoryValueRatings"
+                    },
+                    {
+                        "categoryValue": "asian",
+                        "ratings": {
+                            "overallRating": 4,
+                            "__typename": "EmployerRatings"
+                        },
+                        "__typename": "DemographicCategoryValueRatings"
+                    },
+                    {
+                        "categoryValue": "nativeHawaiian",
+                        "ratings": {
+                            "overallRating": 3.8,
+                            "__typename": "EmployerRatings"
+                        },
+                        "__typename": "DemographicCategoryValueRatings"
+                    },
+                    {
+                        "categoryValue": "middleEastern",
+                        "ratings": {
+                            "overallRating": 3.6,
+                            "__typename": "EmployerRatings"
+                        },
+                        "__typename": "DemographicCategoryValueRatings"
+                    },
+                    {
+                        "categoryValue": "blackOrAfricanAmerican",
+                        "ratings": {
+                            "overallRating": 3.8,
+                            "__typename": "EmployerRatings"
+                        },
+                        "__typename": "DemographicCategoryValueRatings"
+                    },
+                    {
+                        "categoryValue": "hispanicOrLatinx",
+                        "ratings": {
+                            "overallRating": 3.8,
+                            "__typename": "EmployerRatings"
+                        },
+                        "__typename": "DemographicCategoryValueRatings"
+                    },
+                    {
+                        "categoryValue": "white",
+                        "ratings": {
+                            "overallRating": 3.7,
+                            "__typename": "EmployerRatings"
+                        },
+                        "__typename": "DemographicCategoryValueRatings"
+                    }
+                ],
+                "__typename": "DemographicRatings"
+            },
+            {
+                "category": "sexualOrientation",
+                "categoryRatings": [
+                    {
+                        "categoryValue": "yes",
+                        "ratings": {
+                            "overallRating": 3.6,
+                            "__typename": "EmployerRatings"
+                        },
+                        "__typename": "DemographicCategoryValueRatings"
+                    },
+                    {
+                        "categoryValue": "no",
+                        "ratings": {
+                            "overallRating": 3.8,
+                            "__typename": "EmployerRatings"
+                        },
+                        "__typename": "DemographicCategoryValueRatings"
+                    }
+                ],
+                "__typename": "DemographicRatings"
+            },
+            {
+                "category": "disability",
+                "categoryRatings": [
+                    {
+                        "categoryValue": "yes",
+                        "ratings": {
+                            "overallRating": 3.5,
+                            "__typename": "EmployerRatings"
+                        },
+                        "__typename": "DemographicCategoryValueRatings"
+                    },
+                    {
+                        "categoryValue": "no",
+                        "ratings": {
+                            "overallRating": 3.9,
+                            "__typename": "EmployerRatings"
+                        },
+                        "__typename": "DemographicCategoryValueRatings"
+                    }
+                ],
+                "__typename": "DemographicRatings"
+            },
+            {
+                "category": "parentOrCaregiver",
+                "categoryRatings": [
+                    {
+                        "categoryValue": "parentOrGuardian",
+                        "ratings": {
+                            "overallRating": 3.8,
+                            "__typename": "EmployerRatings"
+                        },
+                        "__typename": "DemographicCategoryValueRatings"
+                    },
+                    {
+                        "categoryValue": "caregiver",
+                        "ratings": {
+                            "overallRating": 3.8,
+                            "__typename": "EmployerRatings"
+                        },
+                        "__typename": "DemographicCategoryValueRatings"
+                    },
+                    {
+                        "categoryValue": "no",
+                        "ratings": {
+                            "overallRating": 3.8,
+                            "__typename": "EmployerRatings"
+                        },
+                        "__typename": "DemographicCategoryValueRatings"
+                    }
+                ],
+                "__typename": "DemographicRatings"
+            },
+            {
+                "category": "veteranStatus",
+                "categoryRatings": [
+                    {
+                        "categoryValue": "yes",
+                        "ratings": {
+                            "overallRating": 3.8,
+                            "__typename": "EmployerRatings"
+                        },
+                        "__typename": "DemographicCategoryValueRatings"
+                    },
+                    {
+                        "categoryValue": "no",
+                        "ratings": {
+                            "overallRating": 3.8,
+                            "__typename": "EmployerRatings"
+                        },
+                        "__typename": "DemographicCategoryValueRatings"
+                    }
+                ],
+                "__typename": "DemographicRatings"
+            }
+        ],
+        "employer": {
+            "bestProfile": {
+                "id": 8950,
+                "__typename": "EmployerProfile"
+            },
+            "id": 8874,
+            "shortName": "Bank of America",
+            "ratings": {
+                "overallRating": 4,
+                "careerOpportunitiesRating": 3.8,
+                "compensationAndBenefitsRating": 3.9,
+                "cultureAndValuesRating": 3.9,
+                "diversityAndInclusionRating": 4.2,
+                "seniorManagementRating": 3.6,
+                "workLifeBalanceRating": 3.7,
+                "__typename": "DefaultEmployerRatings"
+            },
+            "__typename": "Employer"
+        },
+        "__typename": "UgcSearchV2EmployerResult"
+    },
+    {
+        "demographicRatings": [
+            {
+                "category": "gender",
+                "categoryRatings": [
+                    {
+                        "categoryValue": "man",
+                        "ratings": {
+                            "overallRating": 3.5,
+                            "__typename": "EmployerRatings"
+                        },
+                        "__typename": "DemographicCategoryValueRatings"
+                    },
+                    {
+                        "categoryValue": "woman",
+                        "ratings": {
+                            "overallRating": 3.4,
+                            "__typename": "EmployerRatings"
+                        },
+                        "__typename": "DemographicCategoryValueRatings"
+                    },
+                    {
+                        "categoryValue": "nonBinary",
+                        "ratings": {
+                            "overallRating": 2.9,
+                            "__typename": "EmployerRatings"
+                        },
+                        "__typename": "DemographicCategoryValueRatings"
+                    }
+                ],
+                "__typename": "DemographicRatings"
+            },
+            {
+                "category": "raceEthnicity",
+                "categoryRatings": [
+                    {
+                        "categoryValue": "indigenousAmerican",
+                        "ratings": {
+                            "overallRating": 3.4,
+                            "__typename": "EmployerRatings"
+                        },
+                        "__typename": "DemographicCategoryValueRatings"
+                    },
+                    {
+                        "categoryValue": "asian",
+                        "ratings": {
+                            "overallRating": 3.5,
+                            "__typename": "EmployerRatings"
+                        },
+                        "__typename": "DemographicCategoryValueRatings"
+                    },
+                    {
+                        "categoryValue": "nativeHawaiian",
+                        "ratings": {
+                            "overallRating": 3.8,
+                            "__typename": "EmployerRatings"
+                        },
+                        "__typename": "DemographicCategoryValueRatings"
+                    },
+                    {
+                        "categoryValue": "middleEastern",
+                        "ratings": {
+                            "overallRating": 3.9,
+                            "__typename": "EmployerRatings"
+                        },
+                        "__typename": "DemographicCategoryValueRatings"
+                    },
+                    {
+                        "categoryValue": "blackOrAfricanAmerican",
+                        "ratings": {
+                            "overallRating": 3.5,
+                            "__typename": "EmployerRatings"
+                        },
+                        "__typename": "DemographicCategoryValueRatings"
+                    },
+                    {
+                        "categoryValue": "hispanicOrLatinx",
+                        "ratings": {
+                            "overallRating": 3.4,
+                            "__typename": "EmployerRatings"
+                        },
+                        "__typename": "DemographicCategoryValueRatings"
+                    },
+                    {
+                        "categoryValue": "white",
+                        "ratings": {
+                            "overallRating": 3.4,
+                            "__typename": "EmployerRatings"
+                        },
+                        "__typename": "DemographicCategoryValueRatings"
+                    }
+                ],
+                "__typename": "DemographicRatings"
+            },
+            {
+                "category": "sexualOrientation",
+                "categoryRatings": [
+                    {
+                        "categoryValue": "yes",
+                        "ratings": {
+                            "overallRating": 3.2,
+                            "__typename": "EmployerRatings"
+                        },
+                        "__typename": "DemographicCategoryValueRatings"
+                    },
+                    {
+                        "categoryValue": "no",
+                        "ratings": {
+                            "overallRating": 3.4,
+                            "__typename": "EmployerRatings"
+                        },
+                        "__typename": "DemographicCategoryValueRatings"
+                    }
+                ],
+                "__typename": "DemographicRatings"
+            },
+            {
+                "category": "disability",
+                "categoryRatings": [
+                    {
+                        "categoryValue": "yes",
+                        "ratings": {
+                            "overallRating": 3.2,
+                            "__typename": "EmployerRatings"
+                        },
+                        "__typename": "DemographicCategoryValueRatings"
+                    },
+                    {
+                        "categoryValue": "no",
+                        "ratings": {
+                            "overallRating": 3.4,
+                            "__typename": "EmployerRatings"
+                        },
+                        "__typename": "DemographicCategoryValueRatings"
+                    }
+                ],
+                "__typename": "DemographicRatings"
+            },
+            {
+                "category": "parentOrCaregiver",
+                "categoryRatings": [
+                    {
+                        "categoryValue": "parentOrGuardian",
+                        "ratings": {
+                            "overallRating": 3.4,
+                            "__typename": "EmployerRatings"
+                        },
+                        "__typename": "DemographicCategoryValueRatings"
+                    },
+                    {
+                        "categoryValue": "caregiver",
+                        "ratings": {
+                            "overallRating": 3.2,
+                            "__typename": "EmployerRatings"
+                        },
+                        "__typename": "DemographicCategoryValueRatings"
+                    },
+                    {
+                        "categoryValue": "no",
+                        "ratings": {
+                            "overallRating": 3.4,
+                            "__typename": "EmployerRatings"
+                        },
+                        "__typename": "DemographicCategoryValueRatings"
+                    }
+                ],
+                "__typename": "DemographicRatings"
+            },
+            {
+                "category": "veteranStatus",
+                "categoryRatings": [
+                    {
+                        "categoryValue": "yes",
+                        "ratings": {
+                            "overallRating": 3.5,
+                            "__typename": "EmployerRatings"
+                        },
+                        "__typename": "DemographicCategoryValueRatings"
+                    },
+                    {
+                        "categoryValue": "no",
+                        "ratings": {
+                            "overallRating": 3.4,
+                            "__typename": "EmployerRatings"
+                        },
+                        "__typename": "DemographicCategoryValueRatings"
+                    }
+                ],
+                "__typename": "DemographicRatings"
+            }
+        ],
+        "employer": {
+            "bestProfile": {
+                "id": 7260236,
+                "__typename": "EmployerProfile"
+            },
+            "id": 415,
+            "shortName": "Lowe's Home Improvement",
+            "ratings": {
+                "overallRating": 3.5,
+                "careerOpportunitiesRating": 3.3,
+                "compensationAndBenefitsRating": 3.4,
+                "cultureAndValuesRating": 3.3,
+                "diversityAndInclusionRating": 3.8,
+                "seniorManagementRating": 3,
+                "workLifeBalanceRating": 3.1,
+                "__typename": "DefaultEmployerRatings"
+            },
+            "__typename": "Employer"
+        },
+        "__typename": "UgcSearchV2EmployerResult"
+    }
+]

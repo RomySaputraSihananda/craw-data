@@ -29,11 +29,11 @@ class Lemon8(BaseLemon8, AbstractLemon8):
                 self.get_comments_by_post_id(**kwargs)
             case _:
                 logging.error('Wait.............')
-    
+
     @Decorator.counter_time
     def get_comments_by_user_id(self, **kwargs) -> None:
         return asyncio.run(super()._get_comments_by_user_id(str(kwargs.get('user_id'))))
-    
+
     @Decorator.counter_time
     def get_comments_by_username(self, **kwargs) -> None:
         return super()._get_comments_by_username(str(kwargs.get('username')))
@@ -41,13 +41,14 @@ class Lemon8(BaseLemon8, AbstractLemon8):
     @Decorator.counter_time
     def get_comments_by_url(self, **kwargs) -> None:
         return super()._get_comments_by_url(str(kwargs.get('url')))
-    
+
     @Decorator.counter_time
     def get_comments_by_post_id(self, **kwargs) -> None:
             return super()._get_comments_by_post_id(str(kwargs.get('post_id')))
 
 if(__name__ == '__main__'):
     Lemon8(**{
-        'user_id': '7138599741986915329', 
+        'user_id': '7138599741986915329',
         'method': 'by_user_id'
     })
+    data = "test"

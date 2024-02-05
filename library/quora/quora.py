@@ -20,7 +20,8 @@ load_dotenv()
 
 class BaseQuora:
     def __init__(self, **kwargs) -> None:
-        self.__s3: bool = kwargs.get('s3')        
+        self.__s3: bool = kwargs.get('s3')
+        self.__clean: bool = kwargs.get('clean')
         self.__request: ClientSession = None
 
     @final
@@ -39,16 +40,16 @@ class BaseQuora:
             
         if 'acceptedAnswer' in question_detail: del question_detail['acceptedAnswer'] 
         if 'suggestedAnswer' in question_detail: del question_detail['suggestedAnswer']
-        
+       
         all_detail: dict = {
             'link': link,
-            'list_detail': all_detail['data']['question']['pagedListDataConnection']['edges'], 
+            'list_detail': all_detail['data']['question']['pagedListDataConnection']['edges'],
             'question_detail': question_detail,
             'question_id': Cryptography.encode_base64(f'Question@10:{question_id}'),
             'question_str': question_str,
             'answers_n_relevant_answer': [],
             'total_data': all_detail['data']['question']['pagedListDataConnection']['edges'][1]['node']['question']['mixRankedAnswersCount']
-        } 
+        }
 
         for data in all_detail['list_detail']:
             type: str = data['node']['__typename']
@@ -185,7 +186,10 @@ class BaseQuora:
                 "path_data_clean": f'S3://ai-pipeline-statistics/data/data_clean/data_review/quora/{all_detail["question_str"]}/json/{type}/{answer_id}.json',
             }
 
-            paths: list = [path.replace('S3://ai-pipeline-statistics/', '') for path in [data["path_data_raw"], data["path_data_clean"]]] 
+            paths: list = [path.replace('S3://ai-pipeline-statistics/', '') for path in [data["path_data_raw"]]] 
+            
+            if self.__clean:
+                paths: list = [path.replace('S3://ai-pipeline-statistics/', '') for path in [data["path_data_raw"], data["path_data_clean"]]] 
 
             if(not total_reply): 
                 with ThreadPoolExecutor() as executor:
@@ -263,7 +267,12 @@ class BaseQuora:
             "path_data_clean": f'S3://ai-pipeline-statistics/data/data_clean/data_review/quora/{all_detail["question_str"]}/json/detail.json',
         }
 
-        paths: list = [path.replace('S3://ai-pipeline-statistics/', '') for path in [headers["path_data_raw"], headers["path_data_clean"]]] 
+
+        paths: list = [path.replace('S3://ai-pipeline-statistics/', '') for path in [headers["path_data_raw"]]] 
+        
+        if(self.__clean):
+            paths: list = [path.replace('S3://ai-pipeline-statistics/', '') for path in [headers["path_data_raw"], headers["path_data_clean"]]] 
+        
         with ThreadPoolExecutor() as executor:
                 headers: dict = Iostream.dict_to_deep(headers)
                 try:

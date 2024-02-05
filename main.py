@@ -1,4 +1,4 @@
-import click 
+import click
 
 from typing import final
 
@@ -8,7 +8,6 @@ from services.quora import Quora
 @final
 class Main:
     @click.group()
-    @click.option('--s3', default=False, help='Send to S3 ?')
     def main(**kwargs) -> None:
         """ Main Engine """
         ...
@@ -20,13 +19,17 @@ class Main:
     @click.option('--post_id', default=None, help='Post ID')
     @click.option('--username', default=None, help='Username')
     @click.option('--url', default=None, help='Url')
+    @click.option('--s3', default=False, help='Send to S3 ?')
+    @click.option('--clean', default=False, help='Send to clean path')
     def lemon8(**kwargs):
         """ Lemon8 Engine """
         return Lemon8(**kwargs)
-    
+
     @staticmethod
     @main.command()
     @click.argument('method', metavar='METHOD', type=click.Choice(['by_question_str']))
+    @click.option('--s3', default=False, help='Send to S3 ?')
+    @click.option('--clean', default=False, help='Send to clean path')
     @click.option('--question', default=None, help='Question')
     def quora(**kwargs):
         """ Quora Engine """
