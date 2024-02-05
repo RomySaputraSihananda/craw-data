@@ -42,8 +42,11 @@ json_data = [
             ],
             'industries': [],
             'jobTitle': '',
-            'location': None,
-            'pageRequested': 1,
+            'location': {
+                'locationId': 2709872,
+                'locationType': "C"
+            },
+            'pageRequested': 2,
             'preferredTldId': 1,
             'sGocIds': [],
             'sectors': [],
@@ -58,4 +61,4 @@ response = requests.post('https://www.glassdoor.com/graph', headers=headers, jso
 data = response.json()[0]['data']['employerSearchV2']['employerResults']
 
 for i in data:
-    print(i['employer']['shortName'])
+    print(i['employer']['shortName'], i['employer']['bestProfile']['id'])
