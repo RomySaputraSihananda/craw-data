@@ -39,6 +39,6 @@ from json import dumps
 
 response = requests.post('https://www.glassdoor.com/graph', headers=headers, json=json_data)
 data = response.json()[0]['data']['employerSearchV2']['employerResults']
-
+# print(dumps(data, indent=4))
 for i in data:
     print(i['employer']['shortName'], i['employer']['bestProfile']['id'])
