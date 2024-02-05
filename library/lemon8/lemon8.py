@@ -86,7 +86,7 @@ class BaseLemon8:
             'post_detail': post_detail,
             "path_data_raw": f'S3://ai-pipeline-statistics/data/data_raw/data_review/lemon8/{user_detail["user_unique_name"]}/{post_detail["item_id"]}/json/detail.json',
             "path_data_clean": f'S3://ai-pipeline-statistics/data/data_clean/data_review/lemon8/{user_detail["user_unique_name"]}/{post_detail["item_id"]}/json/detail.json',
-        };
+        }
 
 
         async with self.__request.get('https://api22-normal-useast1a.lemon8-app.com/api/550/comment_v2/comments',                             
