@@ -1,0 +1,71 @@
+query EmployerBaseDataQuery(
+  $employerId: Int!
+  $isLoggedIn: Boolean!
+  $isROWProfile: Boolean!
+) {
+  employer(id: $employerId) {
+    id
+    shortName
+    website(useRow: $isROWProfile)
+    type
+    revenue(useRow: $isROWProfile)
+    headquarters(useRow: $isROWProfile)
+    size(useRow: $isROWProfile)
+    stock
+    squareLogoUrl(size: SMALL)
+    officeAddresses {
+      id
+      __typename
+    }
+    primaryIndustry {
+      industryId
+      industryName
+      sectorId
+      __typename
+    }
+    yearFounded
+    overview {
+      description
+      mission
+      __typename
+    }
+    links {
+      manageoLinkData {
+        url
+        urlText
+
+        employerSpecificText
+        __typename
+      }
+      overviewUrl
+      faqUrl
+
+      __typename
+    }
+    bestPlacesToWorkAwards: bestPlacesToWork(onlyCurrent: false, limit: 30) {
+      id
+      name
+      rank
+      timePeriod
+      __typename
+    }
+    legalActionBadges {
+      headerText
+      bodyText
+      __typename
+    }
+    competitors {
+      shortName
+      __typename
+    }
+    __typename
+  }
+  getCompanyFollowsForUser @include(if: $isLoggedIn) {
+    employer {
+      id
+      __typename
+    }
+    follow
+    __typename
+  }
+}

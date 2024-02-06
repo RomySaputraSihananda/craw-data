@@ -3,7 +3,8 @@ import os
 from dotenv import load_dotenv
 from requests import Session, Response
 from json import dumps
-from time import time
+from time import time, sleep
+from concurrent.futures import ThreadPoolExecutor
 
 from helpers import Iostream, Datetime, ConnectionS3, logging
 
@@ -11,6 +12,8 @@ load_dotenv()
 
 class BaseGlassDoor:
     def __init__(self) -> None:
+        self.__s3: bool = False 
+        self.__clean: bool = False
         self.__requests: Session = Session()
         self.__requests.headers.update({
             'cookie': os.getenv('COOKIE_GLASSDOOR'),
@@ -21,7 +24,7 @@ class BaseGlassDoor:
     def __requests_graphql(self, body: dict) -> Response:
         return self.__requests.post('https://www.glassdoor.com/graph', json=body)
         
-    def __get_reviews(self, employer_id: int, page: int) -> dict:
+    def __get_reviews(self, employer_id: int, page: int) -> tuple:
         response: Response = self.__requests_graphql({
             "operationName": "EIReviewsPageGraphQueryRG",
             "variables": {
@@ -46,7 +49,7 @@ class BaseGlassDoor:
             "dynamicProfileId": 4505142,
             "useRowProfileTldForRatings": True
             },
-            "query": "query EIReviewsPageGraphQueryRG($onlyCurrentEmployees: Boolean, $employerId: Int!, $jobTitle: JobTitleIdent, $location: LocationIdent, $employmentStatuses: [EmploymentStatusEnum], $goc: GOCIdent, $highlight: HighlightTerm, $page: Int!, $sort: ReviewsSortOrderEnum, $applyDefaultCriteria: Boolean, $worldwideFilter: Boolean, $language: String, $preferredTldId: Int, $isRowProfileEnabled: Boolean, $dynamicProfileId: Int, $useRowProfileTldForRatings: Boolean) {\n  employerReviews: employerReviewsRG(\n    employerReviewsInput: {onlyCurrentEmployees: $onlyCurrentEmployees, employer: {id: $employerId}, jobTitle: $jobTitle, location: $location, goc: $goc, employmentStatuses: $employmentStatuses, highlight: $highlight, sort: $sort, page: {num: $page, size: 10}, applyDefaultCriteria: $applyDefaultCriteria, worldwideFilter: $worldwideFilter, language: $language, preferredTldId: $preferredTldId, isRowProfileEnabled: $isRowProfileEnabled, dynamicProfileId: $dynamicProfileId, useRowProfileTldForRatings: $useRowProfileTldForRatings}\n  ) {\n    filteredReviewsCountByLang {\n      count\n      isoLanguage\n      __typename\n    }\n    employer {\n      legalActionBadges {\n        id\n        headerText\n        bodyText\n        __typename\n      }\n      bestPlacesToWork(onlyCurrent: true) {\n        bannerImageUrl\n        id\n        isCurrent\n        timePeriod\n        __typename\n      }\n      bestProfile {\n        id\n        __typename\n      }\n      ceo {\n        id\n        name\n        __typename\n      }\n      employerManagedContent(\n        parameters: [{employerId: $employerId, divisionProfileId: $dynamicProfileId}]\n      ) {\n        isContentPaidForTld\n        __typename\n      }\n      id\n      largeLogoUrl: squareLogoUrl(size: LARGE)\n      links {\n        jobsUrl\n        reviewsUrl\n        faqUrl\n        __typename\n      }\n      regularLogoUrl: squareLogoUrl(size: REGULAR)\n      shortName\n      squareLogoUrl\n      website\n      __typename\n    }\n    queryLocation {\n      id\n      type\n      shortName\n      longName\n      __typename\n    }\n    queryJobTitle {\n      id\n      text\n      __typename\n    }\n    currentPage\n    numberOfPages\n    lastReviewDateTime\n    allReviewsCount\n    ratedReviewsCount\n    filteredReviewsCount\n    ratings {\n      overallRating\n      reviewCount\n      ceoRating\n      recommendToFriendRating\n      cultureAndValuesRating\n      diversityAndInclusionRating\n      careerOpportunitiesRating\n      workLifeBalanceRating\n      seniorManagementRating\n      compensationAndBenefitsRating\n      businessOutlookRating\n      ceoRatingsCount\n      ratedCeo {\n        id\n        name\n        title\n        regularPhoto: photoUrl(size: REGULAR)\n        largePhoto: photoUrl(size: LARGE)\n        currentBestCeoAward {\n          displayName\n          timePeriod\n          __typename\n        }\n        __typename\n      }\n      __typename\n    }\n    reviews {\n      isLegal\n      reviewId\n      reviewDateTime\n      ratingOverall\n      ratingCeo\n      ratingBusinessOutlook\n      ratingWorkLifeBalance\n      ratingCultureAndValues\n      ratingDiversityAndInclusion\n      ratingSeniorLeadership\n      ratingRecommendToFriend\n      ratingCareerOpportunities\n      ratingCompensationAndBenefits\n      employer {\n        id\n        shortName\n        regularLogoUrl: squareLogoUrl(size: REGULAR)\n        largeLogoUrl: squareLogoUrl(size: LARGE)\n        __typename\n      }\n      isCurrentJob\n      lengthOfEmployment\n      employmentStatus\n      jobEndingYear\n      jobTitle {\n        id\n        text\n        __typename\n      }\n      location {\n        id\n        type\n        name\n        __typename\n      }\n      originalLanguageId\n      pros\n      prosOriginal\n      cons\n      consOriginal\n      summary\n      summaryOriginal\n      advice\n      adviceOriginal\n      isLanguageMismatch\n      countHelpful\n      countNotHelpful\n      employerResponses {\n        id\n        response\n        userJobTitle\n        responseDateTime(format: ISO)\n        countHelpful\n        countNotHelpful\n        responseOriginal\n        languageId\n        originalLanguageId\n        translationMethod\n        __typename\n      }\n      featured\n      isCovid19\n      topLevelDomainId\n      languageId\n      translationMethod\n      __typename\n    }\n    ratingCountDistribution {\n      overall {\n        _5\n        _4\n        _3\n        _2\n        _1\n        __typename\n      }\n      cultureAndValues {\n        _5\n        _4\n        _3\n        _2\n        _1\n        __typename\n      }\n      careerOpportunities {\n        _5\n        _4\n        _3\n        _2\n        _1\n        __typename\n      }\n      workLifeBalance {\n        _5\n        _4\n        _3\n        _2\n        _1\n        __typename\n      }\n      seniorManagement {\n        _5\n        _4\n        _3\n        _2\n        _1\n        __typename\n      }\n      compensationAndBenefits {\n        _5\n        _4\n        _3\n        _2\n        _1\n        __typename\n      }\n      diversityAndInclusion {\n        _5\n        _4\n        _3\n        _2\n        _1\n        __typename\n      }\n      recommendToFriend {\n        WONT_RECOMMEND\n        RECOMMEND\n        __typename\n      }\n      __typename\n    }\n    __typename\n  }\n  pageViewSummary {\n    totalCount\n    __typename\n  }\n  reviewLocationsV2(employer: {id: $employerId}) {\n    locations {\n      atlasType\n      id\n      name\n      __typename\n    }\n    employerHQLocation {\n      atlasType\n      id\n      name\n      __typename\n    }\n    __typename\n  }\n}\n"
+            "query": "query EIReviewsPageGraphQueryRG($onlyCurrentEmployees: Boolean, $employerId: Int!, $jobTitle: JobTitleIdent, $location: LocationIdent, $employmentStatuses: [EmploymentStatusEnum], $goc: GOCIdent, $highlight: HighlightTerm, $page: Int!, $sort: ReviewsSortOrderEnum, $applyDefaultCriteria: Boolean, $worldwideFilter: Boolean, $language: String, $preferredTldId: Int, $isRowProfileEnabled: Boolean, $dynamicProfileId: Int, $useRowProfileTldForRatings: Boolean) {\n  employerReviews: employerReviewsRG(\n    employerReviewsInput: {onlyCurrentEmployees: $onlyCurrentEmployees, employer: {id: $employerId}, jobTitle: $jobTitle, location: $location, goc: $goc, employmentStatuses: $employmentStatuses, highlight: $highlight, sort: $sort, page: {num: $page, size: 1000}, applyDefaultCriteria: $applyDefaultCriteria, worldwideFilter: $worldwideFilter, language: $language, preferredTldId: $preferredTldId, isRowProfileEnabled: $isRowProfileEnabled, dynamicProfileId: $dynamicProfileId, useRowProfileTldForRatings: $useRowProfileTldForRatings}\n  ) {\n    filteredReviewsCountByLang {\n      count\n      isoLanguage\n      __typename\n    }\n    employer {\n      legalActionBadges {\n        id\n        headerText\n        bodyText\n        __typename\n      }\n      bestPlacesToWork(onlyCurrent: true) {\n        bannerImageUrl\n        id\n        isCurrent\n        timePeriod\n        __typename\n      }\n      bestProfile {\n        id\n        __typename\n      }\n      ceo {\n        id\n        name\n        __typename\n      }\n      employerManagedContent(\n        parameters: [{employerId: $employerId, divisionProfileId: $dynamicProfileId}]\n      ) {\n        isContentPaidForTld\n        __typename\n      }\n      id\n      largeLogoUrl: squareLogoUrl(size: LARGE)\n      links {\n        jobsUrl\n        reviewsUrl\n        faqUrl\n        __typename\n      }\n      regularLogoUrl: squareLogoUrl(size: REGULAR)\n      shortName\n      squareLogoUrl\n      website\n      __typename\n    }\n    queryLocation {\n      id\n      type\n      shortName\n      longName\n      __typename\n    }\n    queryJobTitle {\n      id\n      text\n      __typename\n    }\n    currentPage\n    numberOfPages\n    lastReviewDateTime\n    allReviewsCount\n    ratedReviewsCount\n    filteredReviewsCount\n    ratings {\n      overallRating\n      reviewCount\n      ceoRating\n      recommendToFriendRating\n      cultureAndValuesRating\n      diversityAndInclusionRating\n      careerOpportunitiesRating\n      workLifeBalanceRating\n      seniorManagementRating\n      compensationAndBenefitsRating\n      businessOutlookRating\n      ceoRatingsCount\n      ratedCeo {\n        id\n        name\n        title\n        regularPhoto: photoUrl(size: REGULAR)\n        largePhoto: photoUrl(size: LARGE)\n        currentBestCeoAward {\n          displayName\n          timePeriod\n          __typename\n        }\n        __typename\n      }\n      __typename\n    }\n    reviews {\n      isLegal\n      reviewId\n      reviewDateTime\n      ratingOverall\n      ratingCeo\n      ratingBusinessOutlook\n      ratingWorkLifeBalance\n      ratingCultureAndValues\n      ratingDiversityAndInclusion\n      ratingSeniorLeadership\n      ratingRecommendToFriend\n      ratingCareerOpportunities\n      ratingCompensationAndBenefits\n      employer {\n        id\n        shortName\n        regularLogoUrl: squareLogoUrl(size: REGULAR)\n        largeLogoUrl: squareLogoUrl(size: LARGE)\n        __typename\n      }\n      isCurrentJob\n      lengthOfEmployment\n      employmentStatus\n      jobEndingYear\n      jobTitle {\n        id\n        text\n        __typename\n      }\n      location {\n        id\n        type\n        name\n        __typename\n      }\n      originalLanguageId\n      pros\n      prosOriginal\n      cons\n      consOriginal\n      summary\n      summaryOriginal\n      advice\n      adviceOriginal\n      isLanguageMismatch\n      countHelpful\n      countNotHelpful\n      employerResponses {\n        id\n        response\n        userJobTitle\n        responseDateTime(format: ISO)\n        countHelpful\n        countNotHelpful\n        responseOriginal\n        languageId\n        originalLanguageId\n        translationMethod\n        __typename\n      }\n      featured\n      isCovid19\n      topLevelDomainId\n      languageId\n      translationMethod\n      __typename\n    }\n    ratingCountDistribution {\n      overall {\n        _5\n        _4\n        _3\n        _2\n        _1\n        __typename\n      }\n      cultureAndValues {\n        _5\n        _4\n        _3\n        _2\n        _1\n        __typename\n      }\n      careerOpportunities {\n        _5\n        _4\n        _3\n        _2\n        _1\n        __typename\n      }\n      workLifeBalance {\n        _5\n        _4\n        _3\n        _2\n        _1\n        __typename\n      }\n      seniorManagement {\n        _5\n        _4\n        _3\n        _2\n        _1\n        __typename\n      }\n      compensationAndBenefits {\n        _5\n        _4\n        _3\n        _2\n        _1\n        __typename\n      }\n      diversityAndInclusion {\n        _5\n        _4\n        _3\n        _2\n        _1\n        __typename\n      }\n      recommendToFriend {\n        WONT_RECOMMEND\n        RECOMMEND\n        __typename\n      }\n      __typename\n    }\n    __typename\n  }\n  pageViewSummary {\n    totalCount\n    __typename\n  }\n  reviewLocationsV2(employer: {id: $employerId}) {\n    locations {\n      atlasType\n      id\n      name\n      __typename\n    }\n    employerHQLocation {\n      atlasType\n      id\n      name\n      __typename\n    }\n    __typename\n  }\n}\n"
         })
         data: dict = response.json()['data']['employerReviews']
         
@@ -54,7 +57,7 @@ class BaseGlassDoor:
 
         del data['reviews']
 
-        return [data, reviews]
+        return (data, reviews)
 
     def __get_employers(self, page: int) -> list:
         response: Response = self.__requests_graphql({
@@ -113,19 +116,74 @@ class BaseGlassDoor:
             "path_data_clean": f'S3://ai-pipeline-statistics/data/data_clean/data_review/glassdoor/{data["shortName"]}/json/detail.json',
         }
 
-        [employer_detail, reviews] = self.__get_reviews(employer_id, 1)
+        paths: list = [path.replace('S3://ai-pipeline-statistics/', '') for path in [headers["path_data_raw"], headers["path_data_clean"]]] 
+        if self.__clean:
+            paths: list = [path.replace('S3://ai-pipeline-statistics/', '') for path in [headers["path_data_raw"], headers["path_data_clean"]]] 
 
-        review_detail: dict = reviews[0]
+        with ThreadPoolExecutor() as executor:
+            headers: dict = Iostream.dict_to_deep(headers)
+            try:
+                if(self.__s3):
+                    executor.map(lambda path: ConnectionS3.upload(headers, path), paths)
+                else:
+                    executor.map(lambda path: Iostream.write_json(headers, path), paths)
+            except Exception as e:
+                raise e
+        
+        log: dict = {
+            "Crawlling_time": Datetime.now(),
+            "id_project": None,
+            "project": "Data Intelligence",
+            "sub_project": "data review",
+            "source_name": headers['domain'],
+            "sub_source_name": data["shortName"],
+            "id_sub_source": str(employer_id),
+            "total_data": 0,
+            "total_success": 0,
+            "total_failed": 0,
+            "status": "Process",
+            "assign": "romy",
+        }
+        Iostream.write_log(log, name=__name__)
+        
+        (page, sum) = (1, 0)
+        while(True):
+            (employer_detail, reviews) = self.__get_reviews(employer_id, page)
+            
+            sum += len(reviews)
+            if(not log['total_data']): log['total_data'] = employer_detail['filteredReviewsCount']
 
-        print(dumps({
-                        **headers,
-                        'employer_detail': {
-                            **data, **employer_detail 
-                        },
-                        'review_detail': review_detail,
-                        "path_data_raw": f'S3://ai-pipeline-statistics/data/data_raw/data_review/glassdoor/{data["shortName"]}/json/data_review/{review_detail["reviewId"]}.json',
-                        "path_data_clean": f'S3://ai-pipeline-statistics/data/data_clean/data_review/glassdoor/{data["shortName"]}/json/data_review/{review_detail["reviewId"]}.json',
-                    }, indent=4))
+            for review_detail in reviews:
+                data_final: dict ={
+                    **headers,
+                    'employer_detail': {
+                        **data, **employer_detail 
+                    },
+                    'review_detail': review_detail,
+                    "path_data_raw": f'S3://ai-pipeline-statistics/data/data_raw/data_review/glassdoor/{data["shortName"]}/json/data_review/{review_detail["reviewId"]}.json',
+                    "path_data_clean": f'S3://ai-pipeline-statistics/data/data_clean/data_review/glassdoor/{data["shortName"]}/json/data_review/{review_detail["reviewId"]}.json',
+                } 
+
+                paths: list = [path.replace('S3://ai-pipeline-statistics/', '') for path in [data_final["path_data_raw"], data_final["path_data_clean"]]] 
+                if self.__clean:
+                    paths: list = [path.replace('S3://ai-pipeline-statistics/', '') for path in [data_final["path_data_raw"], data_final["path_data_clean"]]] 
+
+                with ThreadPoolExecutor() as executor:
+                    data_final: dict = Iostream.dict_to_deep(data_final)
+                    try:
+                        if(self.__s3):
+                            executor.map(lambda path: ConnectionS3.upload(data_final, path), paths)
+                        else:
+                            executor.map(lambda path: Iostream.write_json(data_final, path), paths)
+                    except Exception as e:
+                        raise e
+
+
+            if(sum == employer_detail['filteredReviewsCount']): break
+            page += 1
+            sleep(3)
+
+
 
     
     def _get_all_detail(self, page: int) -> None:

@@ -1,0 +1,58 @@
+query ExplorerEmployerSearchGraphQuery(
+  $employerSearchRangeFilters: [EmployerSearchRangeFilter]
+  $industries: [IndustryIdent]
+  $jobTitle: String
+  $location: UgcSearchV2LocationIdent
+  $pageRequested: Int
+  $preferredTldId: Int
+  $sGocIds: [Int]
+  $sectors: [SectorIdent]
+) {
+  employerSearchV2(
+    employerSearchRangeFilters: $employerSearchRangeFilters
+    industries: $industries
+    jobTitle: $jobTitle
+    location: $location
+    pageRequested: $pageRequested
+    preferredTldId: $preferredTldId
+    sGocIds: $sGocIds
+    sectors: $sectors
+  ) {
+    employerResults {
+      demographicRatings {
+        category
+        categoryRatings {
+          categoryValue
+          ratings {
+            overallRating
+            __typename
+          }
+          __typename
+        }
+      }
+      employer {
+        bestProfile {
+          id
+          __typename
+        }
+        id
+        shortName
+        ratings {
+          overallRating
+          careerOpportunitiesRating
+          compensationAndBenefitsRating
+          cultureAndValuesRating
+          diversityAndInclusionRating
+          seniorManagementRating
+          workLifeBalanceRating
+          __typename
+        }
+        __typename
+      }
+      __typename
+    }
+    numOfPagesAvailable
+    numOfRecordsAvailable
+    __typename
+  }
+}

@@ -1,0 +1,30 @@
+[
+    {
+        "Crawlling_time": "2024-02-06 14:50:33",
+        "id_project": null,
+        "project": "Data Intelligence",
+        "sub_project": "data review",
+        "source_name": "www.glassdoor.com",
+        "sub_source_name": "Tokopedia",
+        "id_sub_source": "1050335",
+        "total_data": 0,
+        "total_success": 0,
+        "total_failed": 0,
+        "status": "Process",
+        "assign": "romy"
+    },
+    {
+        "Crawlling_time": "2024-02-06 14:56:51",
+        "id_project": null,
+        "project": "Data Intelligence",
+        "sub_project": "data review",
+        "source_name": "www.glassdoor.com",
+        "sub_source_name": "Tokopedia",
+        "id_sub_source": "1050335",
+        "total_data": 0,
+        "total_success": 0,
+        "total_failed": 0,
+        "status": "Process",
+        "assign": "romy"
+    }
+]
