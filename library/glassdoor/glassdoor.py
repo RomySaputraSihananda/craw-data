@@ -5,15 +5,16 @@ from requests import Session, Response
 from json import dumps
 from time import time, sleep
 from concurrent.futures import ThreadPoolExecutor
+from click import style
 
 from helpers import Iostream, Datetime, ConnectionS3, logging
 
 load_dotenv()
 
 class BaseGlassDoor:
-    def __init__(self) -> None:
-        self.__s3: bool = False 
-        self.__clean: bool = False
+    def __init__(self, **kwargs) -> None:
+        self.__s3: bool = kwargs.get('s3') 
+        self.__clean: bool = kwargs.get('clean')
         self.__requests: Session = Session()
         self.__requests.headers.update({
             'cookie': os.getenv('COOKIE_GLASSDOOR'),
@@ -111,12 +112,12 @@ class BaseGlassDoor:
             "crawling_time": Datetime.now(),
             "crawling_time_epoch": int(time()),
             'employer_detail': data,
-            'category_reviews': '',
+            'category_reviews': 'Data review perusahaan',
             "path_data_raw": f'S3://ai-pipeline-statistics/data/data_raw/data_review/glassdoor/{data["shortName"]}/json/detail.json',
             "path_data_clean": f'S3://ai-pipeline-statistics/data/data_clean/data_review/glassdoor/{data["shortName"]}/json/detail.json',
         }
 
-        paths: list = [path.replace('S3://ai-pipeline-statistics/', '') for path in [headers["path_data_raw"], headers["path_data_clean"]]] 
+        paths: list = [path.replace('S3://ai-pipeline-statistics/', '') for path in [headers["path_data_raw"]]] 
         if self.__clean:
             paths: list = [path.replace('S3://ai-pipeline-statistics/', '') for path in [headers["path_data_raw"], headers["path_data_clean"]]] 
 
@@ -149,46 +150,62 @@ class BaseGlassDoor:
         (page, sum) = (1, 0)
         while(True):
             (employer_detail, reviews) = self.__get_reviews(employer_id, page)
-            
+
             sum += len(reviews)
             if(not log['total_data']): log['total_data'] = employer_detail['filteredReviewsCount']
 
             for review_detail in reviews:
-                data_final: dict ={
-                    **headers,
-                    'employer_detail': {
-                        **data, **employer_detail 
-                    },
-                    'review_detail': review_detail,
-                    "path_data_raw": f'S3://ai-pipeline-statistics/data/data_raw/data_review/glassdoor/{data["shortName"]}/json/data_review/{review_detail["reviewId"]}.json',
-                    "path_data_clean": f'S3://ai-pipeline-statistics/data/data_clean/data_review/glassdoor/{data["shortName"]}/json/data_review/{review_detail["reviewId"]}.json',
-                } 
+                try:
+                    data_final: dict ={
+                        **headers,
+                        'employer_detail': {
+                            **data, **employer_detail 
+                        },
+                        'review_detail': review_detail,
+                        "path_data_raw": f'S3://ai-pipeline-statistics/data/data_raw/data_review/glassdoor/{data["shortName"]}/json/data_review/{review_detail["reviewId"]}.json',
+                        "path_data_clean": f'S3://ai-pipeline-statistics/data/data_clean/data_review/glassdoor/{data["shortName"]}/json/data_review/{review_detail["reviewId"]}.json',
+                    } 
 
-                paths: list = [path.replace('S3://ai-pipeline-statistics/', '') for path in [data_final["path_data_raw"], data_final["path_data_clean"]]] 
-                if self.__clean:
-                    paths: list = [path.replace('S3://ai-pipeline-statistics/', '') for path in [data_final["path_data_raw"], data_final["path_data_clean"]]] 
+                    paths: list = [path.replace('S3://ai-pipeline-statistics/', '') for path in [data_final["path_data_raw"]]] 
+                    if self.__clean:
+                        paths: list = [path.replace('S3://ai-pipeline-statistics/', '') for path in [data_final["path_data_raw"], data_final["path_data_clean"]]] 
 
-                with ThreadPoolExecutor() as executor:
-                    data_final: dict = Iostream.dict_to_deep(data_final)
-                    try:
-                        if(self.__s3):
-                            executor.map(lambda path: ConnectionS3.upload(data_final, path), paths)
-                        else:
-                            executor.map(lambda path: Iostream.write_json(data_final, path), paths)
-                    except Exception as e:
-                        raise e
+                    with ThreadPoolExecutor() as executor:
+                        data_final: dict = Iostream.dict_to_deep(data_final)
+                        try:
+                            if(self.__s3):
+                                executor.map(lambda path: ConnectionS3.upload(data_final, path), paths)
+                            else:
+                                executor.map(lambda path: Iostream.write_json(data_final, path), paths)
+                        except Exception as e:
+                            raise e
+                        
+                    Iostream.info_log(log, review_detail["reviewId"], 'success', name=__name__)
+                        
+                    log['total_success'] += 1
+                    Iostream.update_log(log, name=__name__)
+                    logging.info(f'[ {style(data["shortName"], fg="bright_magenta")} ] ::total data: [ {style(log["total_data"], fg="bright_blue")} ] total success: [ {style(log["total_success"], fg="bright_green")} ] total failed: [ {style(log["total_failed"], fg="bright_red")} ]')
+                
+                except Exception as e:
+                    Iostream.info_log(log, review_detail["reviewId"], 'failed', error=e, name=__name__)
 
+                    log['total_failed'] += 1
+                    Iostream.update_log(log, name=__name__)
+                    logging.info(f'[ {style(data["shortName"], fg="bright_magenta")} ] ::total data: [ {style(log["total_data"], fg="bright_blue")} ] total success: [ {style(log["total_success"], fg="bright_green")} ] total failed: [ {style(log["total_failed"], fg="bright_red")} ]')
+                
 
             if(sum == employer_detail['filteredReviewsCount']): break
             page += 1
-            sleep(3)
 
-
-
+        log['status'] = 'Done'
+        Iostream.update_log(log, name=__name__)
+        logging.info(f'[ {style(data["shortName"], fg="bright_magenta")} ] ::total data: [ {style(log["total_data"], fg="bright_blue")} ] total success: [ {style(log["total_success"], fg="bright_green")} ] total failed: [ {style(log["total_failed"], fg="bright_red")} ]')
     
-    def _get_all_detail(self, page: int) -> None:
+    def _get_detail_by_page(self, page: int) -> None:
         print(dumps(self.__get_employers(page), indent=4))
         
+    def _get_all_detail(self) -> None:
+        print('a')
 
 if(__name__ == '__main__'):
     glassdoor: BaseGlassDoor = BaseGlassDoor()

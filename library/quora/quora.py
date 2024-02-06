@@ -303,7 +303,6 @@ class BaseQuora:
             next_answers: list = self.get_next_answer(cursor, all_detail['question_id'])
             all_detail['answers_n_relevant_answer'].extend(next_answers)
         
-        
         await asyncio.gather(*([self.__process_data(all_detail, i, headers, log) for i in all_detail['answers_n_relevant_answer']]))
         
         await self.__request.close()
