@@ -11,7 +11,7 @@ class Main:
     @click.group()
     def main(**kwargs) -> None:
         """ Main Engine """
-        ...
+        pass
 
     @staticmethod
     @main.command()
