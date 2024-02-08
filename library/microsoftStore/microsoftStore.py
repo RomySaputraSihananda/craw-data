@@ -41,13 +41,25 @@ class BaseMicrosoftStore:
 
         return reviews
 
-    def _start(self):
+    async def _get_all(self):
+        self.__requests: ClientSession = ClientSession()
+        for media_type in ("games", "apps"):
+            async with self.__requests.get('https://microsoft-store.azurewebsites.net/api/Reco/GetCollectionFiltersList', 
+                                           params={
+                                               'mediaType': media_type
+                                           }) as response:
+                print(await response.json())
+        
+        await self.__requests.close()
+
+
+    async def _start(self):
         self.__requests: ClientSession = ClientSession()
         print("hello")
 
-        self.__requests.close()
+        await self.__requests.close()
 
 
 if(__name__ == '__main__'):
     microsoftStore: BaseMicrosoftStore = BaseMicrosoftStore()
-    microsoftStore._start()
+    asyncio.run(microsoftStore._get_all())
