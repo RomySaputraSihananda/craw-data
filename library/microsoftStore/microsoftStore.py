@@ -4,6 +4,10 @@ import re
 
 from aiohttp import ClientSession
 from requests import Response
+from json import dumps
+from time import time
+
+from helpers import Datetime
 
 class BaseMicrosoftStore:
     def __init__(self) -> None:
@@ -48,12 +52,22 @@ class BaseMicrosoftStore:
         rating: dict = await self.__get_rating(product_id)
         reviews: list = await self.__get_reviews(product_id)
 
-        link: str = f'https://microsoft-store.azurewebsites.net/detail/${app["productId"]}'
+        link: str = f'https://microsoft-store.azurewebsites.net/detail/{app["productId"]}'
         link_split: list = link.split("/")
 
-        # title: str = app['title']
+        title: str = app['title']
 
-        print(link_split[2])
+        headers: dict = {
+            'link': link,
+            'domain': link_split[2],
+            'tag': link_split[2:],
+            'crawling_time': Datetime.now(),
+            'crawling_time_epoch': int(time()),
+            'reviews_name': title,
+            'release_date_reviews': Datetime.execute(app['releaseDateUtc'])
+        }
+
+        print(dumps(headers, indent=4))
 
     async def _get_by_media_type(self, media_type: str):
         self.__requests: ClientSession = ClientSession()
