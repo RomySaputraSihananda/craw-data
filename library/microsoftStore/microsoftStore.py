@@ -49,11 +49,11 @@ class BaseMicrosoftStore:
         reviews: list = await self.__get_reviews(product_id)
 
         link: str = f'https://microsoft-store.azurewebsites.net/detail/${app["productId"]}'
-        link_split: list = list.split("/")
+        link_split: list = link.split("/")
 
-        title: str = app['title']
+        # title: str = app['title']
 
-        print(link)
+        print(link_split[2])
 
     async def _get_by_media_type(self, media_type: str):
         self.__requests: ClientSession = ClientSession()
