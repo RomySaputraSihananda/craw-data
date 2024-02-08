@@ -64,7 +64,14 @@ class BaseMicrosoftStore:
             'crawling_time': Datetime.now(),
             'crawling_time_epoch': int(time()),
             'reviews_name': title,
-            'release_date_reviews': Datetime.execute(app['releaseDateUtc'])
+            'release_date_reviews': Datetime.execute(app['releaseDateUtc']),
+            # 'release_date_epoch_reviews': new Date(app.releaseDateUtc).getTime(),
+            'description_reviews': app['description'],
+            'developer_reviews': app['developerName'] if len(app['developerName']) else None,
+            'publisher_reviews': app['publisherName'] if len(app['publisherName']) else None,
+            'features_reviews': app['features'],
+            'website_url_reviews': app['appWebsiteUrl'],
+            'product_ratings_reviews': [rating['description'] for rating in app['productRatings']]
         }
 
         print(dumps(headers, indent=4))
