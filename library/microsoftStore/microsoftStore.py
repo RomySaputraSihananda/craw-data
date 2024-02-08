@@ -1,4 +1,6 @@
 import asyncio
+import requests
+import re
 
 from aiohttp import ClientSession
 from requests import Response
@@ -40,19 +42,59 @@ class BaseMicrosoftStore:
             i += 1
 
         return reviews
+    
+    async def __process(self, product_id: str) -> None:
+        app: dict = await self.__get_detail(product_id)
+        rating: dict = await self.__get_rating(product_id)
+        reviews: list = await self.__get_reviews(product_id)
 
-    async def _get_all(self):
+        link: str = f'https://microsoft-store.azurewebsites.net/detail/${app["productId"]}'
+        link_split: list = list.split("/")
+
+        title: str = app['title']
+
+        print(link)
+
+    async def _get_by_media_type(self, media_type: str):
         self.__requests: ClientSession = ClientSession()
-        for media_type in ("games", "apps"):
-            async with self.__requests.get('https://microsoft-store.azurewebsites.net/api/Reco/GetCollectionFiltersList', 
-                                           params={
-                                               'mediaType': media_type
-                                           }) as response:
-                print(await response.json())
-        
+        async with self.__requests.get('https://microsoft-store.azurewebsites.net/api/Reco/GetCollectionFiltersList', 
+                                        params={
+                                            'mediaType': media_type
+                                        }) as response:
+            response_json = await response.json()
+            for choice in response_json[0]['choices']:
+                choice_id: str = re.sub(r'^.', choice['choiceId'][0].upper(), choice['choiceId'])
+
+                page: int = 1
+                while(True):
+                    response: Response = requests.get('https://microsoft-store.azurewebsites.net/api/Reco/GetComputedProductsList',
+                        params={
+                            'listName': choice_id,
+                            'pgNo': page,
+                            'noItems': 5,
+                            'filteredCategories': "AllProducts",
+                            'mediaType': media_type,
+                        }
+                    )
+                    
+                    response_json: dict = response.json()
+                    
+                    products_list: list = response_json['productsList']
+                    if (response_json['nextPageNumber'] < 0): break
+
+                    await asyncio.gather(*(self.__process(product['productId']) for product in products_list))
+                    break
+
+                    page += 1
+                
+                break
+
         await self.__requests.close()
 
-
+    async def _get_all(self):
+        for media_type in ("games", "apps"):
+            await self._get_by_media_type(media_type)
+        
     async def _start(self):
         self.__requests: ClientSession = ClientSession()
         print("hello")
@@ -62,4 +104,4 @@ class BaseMicrosoftStore:
 
 if(__name__ == '__main__'):
     microsoftStore: BaseMicrosoftStore = BaseMicrosoftStore()
-    asyncio.run(microsoftStore._get_all())
+    asyncio.run(microsoftStore._get_by_media_type('games'))
