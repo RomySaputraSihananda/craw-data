@@ -6,11 +6,14 @@ from aiohttp import ClientSession
 from requests import Response
 from json import dumps
 from time import time
+from concurrent.futures import ThreadPoolExecutor
 
-from helpers import Datetime, Iostream
+from helpers import Datetime, Iostream, ConnectionS3
 
 class BaseMicrosoftStore:
-    def __init__(self) -> None:
+    def __init__(self, **kwargs) -> None:
+        self.__s3: bool = kwargs.get('s3')
+        self.__clean: bool = kwargs.get('clean')
         self.__requests: ClientSession = None 
     
     async def __get_detail(self, product_id: int) -> dict:
@@ -47,7 +50,7 @@ class BaseMicrosoftStore:
 
         return reviews
     
-    async def __process(self, product_id: str) -> None:
+    async def __get_by_product_id(self, product_id: str) -> None:
         try:
             app: dict = await self.__get_detail(product_id)
             rating: dict = await self.__get_rating(product_id)
@@ -104,6 +107,21 @@ class BaseMicrosoftStore:
                 'path_data_clean': f'S3://ai-pipeline-statistics/data/data_clean/data_review/microsoft_store/{app["title"]}/json/detail.json',
             }
 
+            paths: list = [path.replace('S3://ai-pipeline-statistics/', '') for path in [headers["path_data_raw"]]] 
+        
+            if(self.__clean):
+                paths: list = [path.replace('S3://ai-pipeline-statistics/', '') for path in [headers["path_data_raw"], headers["path_data_clean"]]] 
+            
+            with ThreadPoolExecutor() as executor:
+                headers: dict = Iostream.dict_to_deep(headers)
+                try:
+                    if(self.__s3):
+                        executor.map(lambda path: ConnectionS3.upload(headers, path), paths)
+                    else:
+                        executor.map(lambda path: Iostream.write_json(headers, path), paths)
+                except Exception as e:
+                    raise e
+
             log: dict = {
                 'Crawlling_time': Datetime.now(),
                 'id_project': None,
@@ -126,6 +144,7 @@ class BaseMicrosoftStore:
                 review_id: str = review['reviewId']
                 try:
                     data: dict = {
+                        **headers,
                         'path_data_raw': f'S3://ai-pipeline-statistics/data/data_raw/data_review/microsoft_store/{title}/json/data_review/{review_id}.json',
                         'path_data_clean': f'S3://ai-pipeline-statistics/data/data_clean/data_review/microsoft_store/{title}/json/data_review/{review_id}.json',
                             'detail_reviews': {
@@ -148,6 +167,21 @@ class BaseMicrosoftStore:
                             'date_of_experience_epoch': None,
                         },
                     }
+
+                    paths: list = [path.replace('S3://ai-pipeline-statistics/', '') for path in [data["path_data_raw"]]] 
+            
+                    if self.__clean:
+                        paths: list = [path.replace('S3://ai-pipeline-statistics/', '') for path in [data["path_data_raw"], data["path_data_clean"]]] 
+
+                    with ThreadPoolExecutor() as executor:
+                            data: dict = Iostream.dict_to_deep(data)
+                            try:
+                                if(self.__s3):
+                                    executor.map(lambda path: ConnectionS3.upload(data, path), paths)
+                                else:
+                                    executor.map(lambda path: Iostream.write_json(data, path), paths)
+                            except Exception as e:
+                                raise e
 
                     Iostream.info_log(log, review_id, 'success', name=__name__)
 
@@ -193,7 +227,7 @@ class BaseMicrosoftStore:
                     products_list: list = response_json['productsList']
                     if (response_json['nextPageNumber'] < 0): break
 
-                    await asyncio.gather(*(self.__process(product['productId']) for product in products_list))
+                    await asyncio.gather(*(self.__get_by_product_id(product['productId']) for product in products_list))
                     break
 
                     page += 1
@@ -202,17 +236,18 @@ class BaseMicrosoftStore:
 
         await self.__requests.close()
 
-    async def _get_all(self):
-        for media_type in ("games", "apps"):
-            await self._get_by_media_type(media_type)
-        
-    async def _start(self):
+    async def _get_by_product_id(self, product_id: str) -> None:
         self.__requests: ClientSession = ClientSession()
-        print("hello")
+
+        await self.__get_by_product_id(product_id)
 
         await self.__requests.close()
 
+    async def _get_all_media(self):
+        for media_type in ("games", "apps"):
+            await self._get_by_media_type(media_type)
 
 if(__name__ == '__main__'):
     microsoftStore: BaseMicrosoftStore = BaseMicrosoftStore()
+    # asyncio.run(microsoftStore._get_by_product_id('9NBLGGGZM6WM'))
     asyncio.run(microsoftStore._get_by_media_type('games'))

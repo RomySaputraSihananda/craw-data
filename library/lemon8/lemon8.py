@@ -7,8 +7,8 @@ from click import style
 from time import time
 from aiohttp import ClientSession
 from requests import Response
-from concurrent.futures import ThreadPoolExecutor
 from typing import final
+from concurrent.futures import ThreadPoolExecutor
 
 from helpers import Iostream, Datetime, ConnectionS3, logging
 

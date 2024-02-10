@@ -5,7 +5,7 @@ from typing import final
 
 from helpers import logging
 from helpers.decorators import Decorator 
-from library.glassdoor import AbstractGlassdoor, BaseGlassDoor
+from library import AbstractGlassdoor, BaseGlassDoor
 
 @final
 class Glassdoor(BaseGlassDoor, AbstractGlassdoor):

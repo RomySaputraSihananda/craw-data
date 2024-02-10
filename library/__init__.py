@@ -1,4 +1,4 @@
-from .lemon8 import lemon8
-from .quora import quora
-from .glassdoor import glassdoor
-from .microsoftStore import microsoftStore
+from .lemon8 import BaseLemon8, AbstractLemon8
+from .quora import BaseQuora, AbstractQuora
+from .glassdoor import BaseGlassDoor, AbstractGlassdoor
+from .microsoftStore import BaseMicrosoftStore, AbstractMicrosoftStore

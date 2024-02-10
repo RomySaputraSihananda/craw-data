@@ -1,1 +1,2 @@
 from .microsoftStore import BaseMicrosoftStore
+from .abstract import AbstractMicrosoftStore

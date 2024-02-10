@@ -207,7 +207,7 @@ class BaseQuora:
                 Iostream.update_log(log, name=__name__)
                 return logging.info(f'total data: [ {style(log["total_data"], fg="bright_blue")} ] total success: [ {style(log["total_success"], fg="bright_green")} ] total failed: [ {style(log["total_failed"], fg="bright_red")} ]')
             
-            data['answer_detail']['replies']: list = await self.__get_replies(answer_id_encrypt)
+            data['answer_detail']['replies'] = await self.__get_replies(answer_id_encrypt)
 
             data: dict = Iostream.dict_to_deep(data)
             with ThreadPoolExecutor() as executor:

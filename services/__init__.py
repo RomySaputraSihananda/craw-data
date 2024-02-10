@@ -1,3 +1,4 @@
-from .lemon8 import lemon8
-from .quora import quora
-from .glassdoor import glassdoor
+from .lemon8 import Lemon8
+from .quora import Quora
+from .glassdoor import Glassdoor
+from .microsoftStore import MicrosoftStore

@@ -5,7 +5,7 @@ from typing import final
 
 from helpers import logging
 from helpers.decorators import Decorator 
-from library.lemon8 import BaseLemon8, AbstractLemon8
+from library import BaseLemon8, AbstractLemon8
 
 @final
 class Lemon8(BaseLemon8, AbstractLemon8):
