@@ -4,7 +4,7 @@ import re
 
 from aiohttp import ClientSession
 from requests import Response
-from json import dumps
+from typing import final
 from time import time
 from concurrent.futures import ThreadPoolExecutor
 
@@ -16,6 +16,7 @@ class BaseMicrosoftStore:
         self.__clean: bool = kwargs.get('clean')
         self.__requests: ClientSession = None 
     
+    @final
     async def __get_detail(self, product_id: int) -> dict:
         async with self.__requests.get('https://microsoft-store.azurewebsites.net/api/pages/pdp', 
                                         params={
@@ -23,11 +24,13 @@ class BaseMicrosoftStore:
                                         }) as response:
 
             return await response.json()
-        
+    
+    @final
     async def __get_rating(self, product_id: int) -> dict: 
         async with self.__requests.get(f'https://microsoft-store.azurewebsites.net/api/Products/GetReviewsSummary/{product_id}') as response:
             return await response.json()
-        
+
+    @final  
     async def __get_reviews(self, product_id: int) -> list: 
         reviews: list = []
         i: int = 1
@@ -50,6 +53,7 @@ class BaseMicrosoftStore:
 
         return reviews
     
+    @final
     async def __get_by_product_id(self, product_id: str) -> None:
         try:
             app: dict = await self.__get_detail(product_id)
@@ -199,7 +203,8 @@ class BaseMicrosoftStore:
 
         except Exception as e:
             print(e)
-        
+    
+    @final
     async def _get_by_media_type(self, media_type: str):
         self.__requests: ClientSession = ClientSession()
         async with self.__requests.get('https://microsoft-store.azurewebsites.net/api/Reco/GetCollectionFiltersList', 
@@ -236,6 +241,7 @@ class BaseMicrosoftStore:
 
         await self.__requests.close()
 
+    @final
     async def _get_by_product_id(self, product_id: str) -> None:
         self.__requests: ClientSession = ClientSession()
 
@@ -243,6 +249,7 @@ class BaseMicrosoftStore:
 
         await self.__requests.close()
 
+    @final
     async def _get_all_media(self):
         for media_type in ("games", "apps"):
             await self._get_by_media_type(media_type)
