@@ -174,19 +174,19 @@ class BaseLemon8:
                 
                 log['total_success'] += 1
                 Iostream.update_log(log, name=__name__)
-                logging.info(f'total data: [ {style(log["total_data"], fg="bright_blue")} ] total success: [ {style(log["total_success"], fg="bright_green")} ] total failed: [ {style(log["total_failed"], fg="bright_red")} ]')
+                
         
         except Exception as e:
             Iostream.info_log(log, comment_id, 'failed', error=e, name=__name__)
 
             log['total_failed'] += 1
             Iostream.update_log(log, name=__name__)
-            logging.info(f'total data: [ {style(log["total_data"], fg="bright_blue")} ] total success: [ {style(log["total_success"], fg="bright_green")} ] total failed: [ {style(log["total_failed"], fg="bright_red")} ]')
+            
         
         log['status'] = 'Done'
         Iostream.update_log(log, name=__name__)
 
-        logging.info(f'total data: [ {style(log["total_data"], fg="bright_blue")} ] total success: [ {style(log["total_success"], fg="bright_green")} ] total failed: [ {style(log["total_failed"], fg="bright_red")} ]')
+        
 
     @final
     async def _get_comments_by_user_id(self, user_id: str, **kwargs) -> None:
