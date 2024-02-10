@@ -3,14 +3,13 @@ import requests
 import re
 import asyncio
 
-from click import style
 from time import time
 from aiohttp import ClientSession
 from requests import Response
 from typing import final
 from concurrent.futures import ThreadPoolExecutor
 
-from helpers import Iostream, Datetime, ConnectionS3, logging
+from helpers import Iostream, Datetime, ConnectionS3
 
 class BaseLemon8:
     def __init__(self, **kwargs) -> None:

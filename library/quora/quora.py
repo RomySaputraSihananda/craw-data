@@ -4,7 +4,6 @@ import os
 import asyncio
 
 from requests import Response
-from click import style
 from aiohttp import ClientSession
 from json import loads
 from dotenv import load_dotenv

@@ -190,16 +190,16 @@ class BaseMicrosoftStore:
                     Iostream.info_log(log, review_id, 'success', name=__name__)
 
                     log['total_success'] += 1
-                    Iostream.update_log(log, name=__name__)
+                    Iostream.update_log(log, name=__name__, title=title)
 
                 except Exception as e:
                     Iostream.info_log(log, review_id, 'failed', error=e, name=__name__)
 
                     log['total_failed'] += 1
-                    Iostream.update_log(log, name=__name__)
+                    Iostream.update_log(log, name=__name__, title=title)
                 
             log['status'] = 'Done'
-            Iostream.update_log(log, name=__name__)
+            Iostream.update_log(log, name=__name__, title=title)
 
         except Exception as e:
             print(e)

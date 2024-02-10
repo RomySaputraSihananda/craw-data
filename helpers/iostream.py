@@ -30,7 +30,9 @@ class Iostream:
         ]
 
         Iostream.write_json(updated_logs, f'logging/{kwargs.get("name").split(".")[-1] if kwargs.get("name") else "test"}/{file_name}')
-        logging.info(f'total data: [ {style(data["total_data"], fg="bright_blue")} ] total success: [ {style(data["total_success"], fg="bright_green")} ] total failed: [ {style(data["total_failed"], fg="bright_red")} ]')
+        
+        title: str = f'[ {style(kwargs.get("title"), fg="bright_magenta")} ] :: ' 
+        logging.info(f'{title if kwargs.get("title") else ""}[ {style(data["total_data"], fg="bright_blue")} ] [ {style(data["total_success"], fg="bright_green")} ] [ {style(data["total_failed"], fg="bright_red")} ]')
 
     @staticmethod
     def write_log(data: dict, file_name="Monitoring_data.json", **kwargs):

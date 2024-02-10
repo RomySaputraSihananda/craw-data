@@ -9,7 +9,7 @@ from aiohttp import ClientSession
 from click import style
 from typing import final
 
-from helpers import Iostream, Datetime, ConnectionS3, logging
+from helpers import Iostream, Datetime, ConnectionS3
 
 load_dotenv()
 
@@ -42,14 +42,12 @@ class BaseGlassDoor:
                 
             log['total_success'] += 1
             Iostream.update_log(log, name=__name__)
-            logging.info(f'[ {style(data["shortName"], fg="bright_magenta")} ] :: [ {style(log["total_data"], fg="bright_blue")} ] total success: [ {style(log["total_success"], fg="bright_green")} ] total failed: [ {style(log["total_failed"], fg="bright_red")} ]')
         
         except Exception as e:
             Iostream.info_log(log, review_detail["reviewId"], 'failed', error=e, name=__name__)
 
             log['total_failed'] += 1
             Iostream.update_log(log, name=__name__)
-            logging.info(f'[ {style(data["shortName"], fg="bright_magenta")} ] :: [ {style(log["total_data"], fg="bright_blue")} ] total success: [ {style(log["total_success"], fg="bright_green")} ] total failed: [ {style(log["total_failed"], fg="bright_red")} ]')
     
     @final
     def __requests_graphql(self, body: dict) -> Response:
@@ -225,7 +223,6 @@ class BaseGlassDoor:
 
                 log['status'] = 'Done'
                 Iostream.update_log(log, name=__name__)
-                logging.info(f'[ {style(data["shortName"], fg="bright_magenta")} ] :: [ {style(log["total_data"], fg="bright_blue")} ] total success: [ {style(log["total_success"], fg="bright_green")} ] total failed: [ {style(log["total_failed"], fg="bright_red")} ]')
 
     @final
     async def _get_detail_by_page(self, page: int) -> None: 
