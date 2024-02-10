@@ -57,7 +57,7 @@ class BaseMicrosoftStore:
             link_split: list = link.split("/")
 
             title: str = app['title']
-            print(app['releaseDateUtc'])
+
             headers: dict = {
                 'link': link,
                 'domain': link_split[2],

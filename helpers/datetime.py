@@ -28,4 +28,4 @@ class Datetime:
         return date
     
 if(__name__ == '__main__'):
-    print(Datetime.utc_epoch('2016-01-21T22:09:15.1484054Z'))
+    print(Datetime.utc('2012-08-16T00:03:43.2882034Z'))
