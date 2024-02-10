@@ -56,7 +56,7 @@ class BaseMicrosoftStore:
         link_split: list = link.split("/")
 
         title: str = app['title']
-
+        print(app['releaseDateUtc'])
         headers: dict = {
             'link': link,
             'domain': link_split[2],
@@ -64,8 +64,8 @@ class BaseMicrosoftStore:
             'crawling_time': Datetime.now(),
             'crawling_time_epoch': int(time()),
             'reviews_name': title,
-            'release_date_reviews': Datetime.execute(app['releaseDateUtc']),
-            # 'release_date_epoch_reviews': new Date(app.releaseDateUtc).getTime(),
+            'release_date_reviews': Datetime.utc(app['releaseDateUtc']),
+            'release_date_epoch_reviews': Datetime.utc_epoch(app['releaseDateUtc']),
             'description_reviews': app['description'],
             'developer_reviews': app['developerName'] if len(app['developerName']) else None,
             'publisher_reviews': app['publisherName'] if len(app['publisherName']) else None,
