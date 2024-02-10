@@ -13,12 +13,12 @@ class Datetime:
             raise e
         
     def utc(text: str) -> str:
-        if(re.search('\.(\d{7})Z$', text)):
+        if(re.search('\.\d+Z$', text)):
             return datetime.strptime(text[:-2], "%Y-%m-%dT%H:%M:%S.%f").strftime("%Y-%m-%d %H:%M:%S")
         return datetime.strptime(text, "%Y-%m-%dT%H:%M:%SZ").strftime("%Y-%m-%d %H:%M:%S")
     
     def utc_epoch(text: str) -> int:
-        if(match := re.search('\.\d{7}Z$', text)):
+        if(match := re.search('\.\d+Z$', text)):
             return int(datetime.strptime(text.replace(match.group(0), ''), "%Y-%m-%dT%H:%M:%S").timestamp())
         return int(datetime.strptime(text, "%Y-%m-%dT%H:%M:%SZ").timestamp())
 
