@@ -6,11 +6,14 @@ from typing import final
 
 @final
 class Datetime:
-    def execute(text: str) -> str:
+    def execute(text: str | int) -> str:
         try:
             return datetime.strptime(text, "%Y%m%d%H%M%S%f").strftime("%Y-%m-%d %H:%M:%S")
         except Exception as e:
-            raise e
+            try:
+                return datetime.fromtimestamp(text).strftime("%Y-%m-%d %H:%M:%S")
+            except Exception as e:
+                raise e
         
     def utc(text: str) -> str:
         if(re.search('\.\d+Z$', text)):

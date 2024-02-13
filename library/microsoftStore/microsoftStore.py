@@ -15,6 +15,7 @@ class BaseMicrosoftStore:
         self.__s3: bool = kwargs.get('s3')
         self.__clean: bool = kwargs.get('clean')
         self.__requests: ClientSession = None 
+        self.__medias: tuple = ("games", "apps")
     
     @final
     async def __get_detail(self, product_id: int) -> dict:
@@ -206,6 +207,7 @@ class BaseMicrosoftStore:
     
     @final
     async def _get_by_media_type(self, media_type: str):
+        if media_type not in self.__medias: return  
         self.__requests: ClientSession = ClientSession()
         async with self.__requests.get('https://microsoft-store.azurewebsites.net/api/Reco/GetCollectionFiltersList', 
                                         params={
@@ -251,10 +253,10 @@ class BaseMicrosoftStore:
 
     @final
     async def _get_all_media(self):
-        for media_type in ("games", "apps"):
+        for media_type in self.__medias:
             await self._get_by_media_type(media_type)
 
 if(__name__ == '__main__'):
     microsoftStore: BaseMicrosoftStore = BaseMicrosoftStore()
     # asyncio.run(microsoftStore._get_by_product_id('9NBLGGGZM6WM'))
-    asyncio.run(microsoftStore._get_by_media_type('games'))
+    asyncio.run(microsoftStore._get_by_media_type('gams'))

@@ -2,7 +2,7 @@ import click
 
 from typing import final
 
-from services import Lemon8, Quora, Glassdoor, MicrosoftStore 
+from services import Lemon8, Quora, Glassdoor, MicrosoftStore, Taptap
 
 @final
 class Main:
@@ -64,9 +64,9 @@ class Main:
     @click.option('--clean', is_flag=True, help='Send to clean path')
     @click.option('--product_id', default=None, help='Product id')
     @click.option('--media', default=None, help='Media type')
-    def test(**kwargs):
-        """ for testing """
-        return print(kwargs)
+    def taptap(**kwargs):
+        """ TapTap Engine """
+        return Taptap(**kwargs)
     
 
 if(__name__ == "__main__"):
