@@ -208,7 +208,6 @@ class BaseQuora:
             
             data['answer_detail']['replies'] = await self.__get_replies(answer_id_encrypt)
 
-            data: dict = Iostream.dict_to_deep(data)
             with ThreadPoolExecutor() as executor:
                         data: dict = Iostream.dict_to_deep(data)
                         try:

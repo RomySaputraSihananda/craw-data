@@ -30,11 +30,11 @@ class BaseTaptap:
           
           return response_json['data']['app']
     
-    async def __get_reviews(self, app_id: str, page: int) -> list:
+    async def __get_reviews(self, app_id: str, start: int) -> list:
         async with self.__requests.get('https://www.taptap.io/webapiv2/feeds/v1/app-ratings',
                                        params={
                                             'app_id': app_id,
-                                            'from': page,
+                                            'from': start,
                                             'limit': 50,
                                             "X-UA": self.__xua,
                                        }) as response:
@@ -108,6 +108,47 @@ class BaseTaptap:
             
             return await asyncio.gather(*(self.__parser_reply(reply) for reply in response_json['data']['list']))
     
+    async def __process_review(self, review: dict, headers: dict, app: dict) -> list:
+        user: dict= review['user']
+
+        username: dict = user['name'].replace("/", "").replace("\n", "")
+        stat: dict = review['stat'] if review['stat'] else {} 
+        rating: dict = review['list_fields']['app_ratings'][str(app['id'])]['score'] if 'app_ratings' in review['list_fields'] else None
+
+        data: dict = {
+            **headers,
+            'path_data_raw': f'S3://ai-pipeline-statistics/data/data_raw/data_review/taptap_io/{app["title"]}/json/data_review/{review["id"]}.json',
+            'path_data_clean': f'S3://ai-pipeline-statistics/data/data_clean/data_review/taptap_io/{app["title"]}/json/data_review/{review["id"]}.json',
+            'detail_reviews': {
+                'username_reviews': username,
+                'gender_reviews': user['gender'] if user['gender'] else None,
+                'avatar_reviews': user['avatar'],
+                'media_reviews': review['files'],
+                'created_time': Datetime.execute(review['published_time']),
+                'created_time_epoch': review['published_time'],
+                'edited_time': Datetime.execute(review['edited_time']),
+                'edited_time_epoch': review['edited_time'],
+                'email_reviews': None,
+                'company_name': None,
+                'location_reviews': None,
+                'title_detail_reviews': review['title'],
+                'reviews_rating': rating,
+                'detail_reviews_rating': None,
+                'total_likes_reviews': stat['ups'] if 'ups' in stat else 0,
+                'total_dislikes_reviews': None,
+                'total_reply_reviews': stat['comments'] if 'comments' in stat else 0,
+                'total_favorites_reviews': stat['favorites'] if 'favorites' in stat else 0,
+                'content_reviews': " ".join([
+                    "".join([e["text"] for e in content["children"]])
+                    for content in review['contents']['json']
+                    if content["type"] == "paragraph" and any(content["children"])
+                ]),
+                'reply_content_reviews': await self.__get_replies(review['id_str']) if stat and 'comments' in stat else [],
+                'date_of_experience': None,
+                'date_of_experience_epoch': None,
+            },
+        }
+
     async def _get_by_game_id(self, game_id: str) -> None:
         self.__requests: ClientSession = ClientSession() 
 
@@ -141,53 +182,14 @@ class BaseTaptap:
             'path_data_clean': f'S3://ai-pipeline-statistics/data/data_clean/data_review/taptap_io/{app["title"]}/json/detail.json',
         }
 
-        page: int = 1
-        # while(True):
-        reviews: list = await self.__get_reviews(app['id'], page)
-        # review: dict = reviews[0] 
-        for i, review in enumerate(reviews):
-            user: dict= review['user']
+        start: int = 0
+        while(True):
+            reviews: list = await self.__get_reviews(app['id'], start)
+            print(len(reviews))
 
-
-            username: dict = user['name'].replace("/", "").replace("\n", "")
-            stat: dict = review['stat'] if review['stat'] else {} 
-            rating: dict = review['list_fields']['app_ratings'][str(app['id'])]['score'] if 'app_ratings' in review['list_fields'] else None
-
-            data: dict = {
-                **headers,
-                'path_data_raw': f'S3://ai-pipeline-statistics/data/data_raw/data_review/taptap_io/{app["title"]}/json/data_review/{review["id"]}.json',
-                'path_data_clean': f'S3://ai-pipeline-statistics/data/data_clean/data_review/taptap_io/{app["title"]}/json/data_review/{review["id"]}.json',
-                'detail_reviews': {
-                    'username_reviews': username,
-                    'gender_reviews': user['gender'] if user['gender'] else None,
-                    'avatar_reviews': user['avatar'],
-                    'media_reviews': review['files'],
-                    'created_time': Datetime.execute(review['published_time']),
-                    'created_time_epoch': review['published_time'],
-                    'edited_time': Datetime.execute(review['edited_time']),
-                    'edited_time_epoch': review['edited_time'],
-                    'email_reviews': None,
-                    'company_name': None,
-                    'location_reviews': None,
-                    'title_detail_reviews': review['title'],
-                    'reviews_rating': rating,
-                    'detail_reviews_rating': None,
-                    'total_likes_reviews': stat['ups'] if 'ups' in stat else 0,
-                    'total_dislikes_reviews': None,
-                    'total_reply_reviews': stat['comments'] if 'comments' in stat else 0,
-                    'total_favorites_reviews': stat['favorites'] if 'favorites' in stat else 0,
-                    'content_reviews': " ".join([
-                        "".join([e["text"] for e in content["children"]])
-                        for content in review['contents']['json']
-                        if content["type"] == "paragraph" and any(content["children"])
-                    ]),
-                    'reply_content_reviews': await self.__get_replies(review['id_str']) if stat and 'comments' in stat else [],
-                    'date_of_experience': None,
-                    'date_of_experience_epoch': None,
-                },
-            }
-            # page += 1
-            Iostream.write_json(data, f'test/{i}.json')
+            # await asyncio.gather(*(self.__process_review(review, headers, app) for review in reviews))
+            
+            start += 50
 
         await self.__requests.close()
 
