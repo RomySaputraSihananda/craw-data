@@ -30,7 +30,7 @@ class BaseTaptap:
           
           return response_json['data']['app']
     
-    async def __get_reviews(self, app_id: str, start: int) -> list:
+    async def __get_reviews(self, app_id: str, start: int) -> list | None:
         async with self.__requests.get('https://www.taptap.io/webapiv2/feeds/v1/app-ratings',
                                        params={
                                             'app_id': app_id,
@@ -39,6 +39,8 @@ class BaseTaptap:
                                             "X-UA": self.__xua,
                                        }) as response:
             response_json: dict = await response.json()
+
+            if('list' not in response_json['data']): return None
             
             reviews: list = [review['post'] for review in response_json['data']['list']]
             detail_reviews: list = await asyncio.gather(*(self.__get_detail_review(review['id_str']) for review in reviews))
@@ -80,7 +82,7 @@ class BaseTaptap:
     async def __parser_reply(self, reply: dict) -> dict:
         return {
             'username_reply_reviews': reply['user']['name'],
-            'content_reply_reviews': reply['contents']['raw_text'],
+            'content_reply_reviews': reply['contents']['raw_text'] if 'raw_text' in reply['contents'] else "",
             'image_reply_reviews': reply['images'] if 'images' in reply else None,
             'avatar_reply_reviews': reply['user']['avatar'],
             'gender_reviews': reply['user']['gender'] if reply['user']['gender'] else None,
@@ -108,7 +110,7 @@ class BaseTaptap:
             
             return await asyncio.gather(*(self.__parser_reply(reply) for reply in response_json['data']['list']))
     
-    async def __process_review(self, review: dict, headers: dict, app: dict) -> list:
+    async def __process_review(self, review: dict, headers: dict, app: dict, log: dict) -> list:
         user: dict= review['user']
 
         username: dict = user['name'].replace("/", "").replace("\n", "")
@@ -149,6 +151,26 @@ class BaseTaptap:
             },
         }
 
+        paths: list = [path.replace('S3://ai-pipeline-statistics/', '') for path in [data["path_data_raw"]]] 
+        
+        if(self.__clean):
+            paths: list = [path.replace('S3://ai-pipeline-statistics/', '') for path in [data["path_data_raw"], data["path_data_clean"]]] 
+        
+        with ThreadPoolExecutor() as executor:
+                data: dict = Iostream.dict_to_deep(data)
+                try:
+                    if(self.__s3):
+                        executor.map(lambda path: ConnectionS3.upload(data, path), paths)
+                    else:
+                        executor.map(lambda path: Iostream.write_json(data, path), paths)
+                except Exception as e:
+                    raise e
+                
+        Iostream.info_log(log, review["id_str"], 'success', name=__name__)
+                
+        log['total_success'] += 1
+        Iostream.update_log(log, name=__name__, title=app['title'])
+
     async def _get_by_game_id(self, game_id: str) -> None:
         self.__requests: ClientSession = ClientSession() 
 
@@ -182,12 +204,46 @@ class BaseTaptap:
             'path_data_clean': f'S3://ai-pipeline-statistics/data/data_clean/data_review/taptap_io/{app["title"]}/json/detail.json',
         }
 
+        paths: list = [path.replace('S3://ai-pipeline-statistics/', '') for path in [headers["path_data_raw"]]] 
+        
+        if(self.__clean):
+            paths: list = [path.replace('S3://ai-pipeline-statistics/', '') for path in [headers["path_data_raw"], headers["path_data_clean"]]] 
+        
+        with ThreadPoolExecutor() as executor:
+                headers: dict = Iostream.dict_to_deep(headers)
+                try:
+                    if(self.__s3):
+                        executor.map(lambda path: ConnectionS3.upload(headers, path), paths)
+                    else:
+                        executor.map(lambda path: Iostream.write_json(headers, path), paths)
+                except Exception as e:
+                    raise e
+        
+        log: dict = {
+            "Crawlling_time": Datetime.now(),
+            "id_project": None,
+            "project": "Data Intelligence",
+            "sub_project": "data review",
+            "source_name": headers['domain'],
+            "sub_source_name": app['title'],
+            "id_sub_source": str(app['id']),
+            "total_data": 0,
+            "total_success": 0,
+            "total_failed": 0,
+            "status": "Process",
+            "assign": "romy",
+        }
+        Iostream.write_log(log, name=__name__)
+
         start: int = 0
         while(True):
-            reviews: list = await self.__get_reviews(app['id'], start)
-            print(len(reviews))
+            reviews: list | None = await self.__get_reviews(app['id'], start)
+            if(not reviews): break
 
-            # await asyncio.gather(*(self.__process_review(review, headers, app) for review in reviews))
+            log['total_data'] += len(reviews)
+            Iostream.update_log(log, name=__name__, title=app['title'])
+
+            await asyncio.gather(*(self.__process_review(review, headers, app, log) for review in reviews))
             
             start += 50
 
@@ -205,4 +261,4 @@ class BaseTaptap:
 if(__name__ == '__main__'):
     baseTaptap: BaseTaptap = BaseTaptap()
     # baseTaptap._get_by_platform("android")
-    asyncio.run(baseTaptap._get_by_game_id("178299"))
+    asyncio.run(baseTaptap._get_by_game_id("232311"))
