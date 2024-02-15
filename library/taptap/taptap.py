@@ -171,8 +171,8 @@ class BaseTaptap:
         log['total_success'] += 1
         Iostream.update_log(log, name=__name__, title=app['title'])
 
-    async def _get_by_game_id(self, game_id: str) -> None:
-        self.__requests: ClientSession = ClientSession() 
+    async def _get_by_app_id(self, game_id: str) -> None:
+        if(not self.__requests): self.__requests: ClientSession = ClientSession()
 
         app: dict = await self.__get_detail_game(game_id)
         link: str = f'https://www.taptap.io/app/{app["id"]}'
@@ -247,18 +247,44 @@ class BaseTaptap:
             
             start += 50
 
-        await self.__requests.close()
+        if(self.__requests): await self.__requests.close()
 
     async def _get_by_platform(self, platform: str) -> None:
-        self.__requests: ClientSession = ClientSession() 
+        self.__requests: ClientSession = ClientSession()
+
         if platform not in self.__platforms: return
-        print(platform)
 
-        await self.__requests.close()
+        start: int = 0
+        while(True):
+            response: Response = requests.get('https://www.taptap.io/webapiv2/i/app-top/v2/hits',
+                                                params={
+                                                    'from': start,
+                                                    'limit': 2,
+                                                    'platform': platform,
+                                                    'type_name': "hot",
+                                                    "X-UA": self.__xua,
+                                                }) 
+            
+            response_json: dict = response.json()
+
+            apps: list = [app['app'] for app in response_json['data']['list']] 
+
+            await asyncio.gather(*(self._get_by_app_id(app['id']) for app in apps))
         
+            if(not response_json['next_page']): break
 
+            start += 2
+        
+        await self.__requests.close()
+
+    
+    async def _get_all_platform(self) -> None:
+        for platform in self.__platforms:
+            await self._get_by_platform(platform)
+            
 
 if(__name__ == '__main__'):
     baseTaptap: BaseTaptap = BaseTaptap()
-    # baseTaptap._get_by_platform("android")
-    asyncio.run(baseTaptap._get_by_game_id("232311"))
+    asyncio.run(baseTaptap._get_all_platform())
+    # asyncio.run(baseTaptap._get_by_platform("android"))
+    # asyncio.run(baseTaptap._get_by_app_id("232311"))
