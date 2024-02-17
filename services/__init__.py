@@ -3,3 +3,6 @@ from .quora import Quora
 from .glassdoor import Glassdoor
 from .microsoftStore import MicrosoftStore
 from .taptap import Taptap
+
+
+from .dataDivtik import Cekbpom

@@ -3,16 +3,27 @@ import click
 from typing import final
 
 from services import Lemon8, Quora, Glassdoor, MicrosoftStore, Taptap
+from services.dataDivtik import Cekbpom
 
 @final
 class Main:
     @click.group()
     def main(**kwargs) -> None:
         """ Main Engine """
-        pass
+        ...
+
+    @main.group()
+    def data_review():
+        """ Data Review """
+        ... 
+
+    @main.group()
+    def data_divtik():
+        """ Data Divtik """
+        ... 
 
     @staticmethod
-    @main.command()
+    @data_review.command()
     @click.argument('method', metavar='METHOD', type=click.Choice(['by_user_id', 'by_username', 'by_url', 'by_post_id']))
     @click.option('--user_id', default=None, help='User ID')
     @click.option('--post_id', default=None, help='Post ID')
@@ -25,7 +36,7 @@ class Main:
         return Lemon8(**kwargs)
 
     @staticmethod
-    @main.command()
+    @data_review.command()
     @click.argument('method', metavar='METHOD', type=click.Choice(['by_question_str']))
     @click.option('--s3', is_flag=True, help='Send to S3 ?')
     @click.option('--clean', is_flag=True, help='Send to clean path')
@@ -36,7 +47,7 @@ class Main:
 
 
     @staticmethod
-    @main.command()
+    @data_review.command()
     @click.argument('method', metavar='METHOD', type=click.Choice(['by_employer_id', 'by_page', 'all_detail']))
     @click.option('--s3', is_flag=True, help='Send to S3 ?')
     @click.option('--clean', is_flag=True, help='Send to clean path')
@@ -47,7 +58,7 @@ class Main:
         return Glassdoor(**kwargs)
     
     @staticmethod
-    @main.command()
+    @data_review.command()
     @click.argument('method', metavar='METHOD', type=click.Choice(['by_product_id', 'by_media_type', 'all_media']))
     @click.option('--s3', is_flag=True, help='Send to S3 ?')
     @click.option('--clean', is_flag=True, help='Send to clean path')
@@ -58,7 +69,7 @@ class Main:
         return MicrosoftStore(**kwargs)
     
     @staticmethod
-    @main.command()
+    @data_review.command()
     @click.argument('method', metavar='METHOD', type=click.Choice(['by_product_id', 'by_media_type', 'all_media']))
     @click.option('--s3', is_flag=True, help='Send to S3 ?')
     @click.option('--clean', is_flag=True, help='Send to clean path')
@@ -67,6 +78,16 @@ class Main:
     def taptap(**kwargs):
         """ TapTap Engine """
         return Taptap(**kwargs)
+    
+    @staticmethod
+    @data_divtik.command()
+    @click.argument('method', metavar='METHOD', type=click.Choice(['by_product_id', 'by_media_type', 'all_media']))
+    @click.option('--s3', is_flag=True, help='Send to S3 ?')
+    @click.option('--clean', is_flag=True, help='Send to clean path')
+    @click.option('--product_id', default=None, help='Product id')
+    @click.option('--media', default=None, help='Media type')
+    def Cekbpom(**kwargs):
+        return Cekbpom(**kwargs)
     
 
 if(__name__ == "__main__"):
