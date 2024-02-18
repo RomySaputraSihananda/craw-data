@@ -38,7 +38,7 @@ class BaseCekbpom:
             re.findall(r'onclick="get_detail\(\'(.*?)\*(\d+)\'\)"', content)
         )
 
-    async def _get_product_by_page(self, page: int) -> bool:
+    async def _get_product_by_page(self, page: int, all: bool = False) -> bool:
         response: Response = self.__requests.post('https://cekbpom.pom.go.id/prev_next_pagination_all_produk', 
                                                     data={
                                                         'st_filter': '1',
@@ -51,81 +51,111 @@ class BaseCekbpom:
                                                     })
         data_all_produk: list = response.json()['data_all_produk']
 
+        link: str = 'https://cekbpom.pom.go.id/search_home_produk'
+        link_split: list = link.split('/')
+
+        data: dict = {
+                'link': link,
+                'domain': link_split[2],
+                'tag': link_split[2:],
+                'crawling_time': Datetime.now(),
+                'crawling_time_epoch': int(time()),
+        }
+
+        log: dict = {
+            "Crawlling_time": Datetime.now(),
+            "id_project": None,
+            "project": "Data Intelligence",
+            "sub_project": "data divtik",
+            "source_name": data['domain'],
+            "sub_source_name": 'product',
+            "id_sub_source": None,
+            "total_data": self.__count_data_all_produk if all else 0,
+            "total_success": 0,
+            "total_failed": 0,
+            "status": "Process",
+            "assign": "romy",
+        }
+        Iostream.write_log(log, name=__name__)
+
         if(not data_all_produk): return False 
 
         if(self.__product_first):
-            await asyncio.gather(*(self._get_detail_by_product_id(*product) for product in self.__product_first))
+            log['total_data'] += len(self.__product_first)
+            await asyncio.gather(*(self._get_detail_by_product_id(*product, data, log) for product in self.__product_first))
             self.__product_first = None
 
-        
-        await asyncio.gather(*(self._get_detail_by_product_id(product['PRODUCT_ID'], product['APPLICATION_ID']) for product in data_all_produk))
+        if(not all): log['total_data'] += len(data_all_produk)
+        await asyncio.gather(*(self._get_detail_by_product_id(product['PRODUCT_ID'], product['APPLICATION_ID'], data, log) for product in data_all_produk))
+
+        if(not all): 
+            log['status'] = 'Done'
+            Iostream.update_log(log, name=__name__)
 
         return True
     
-    async def _get_detail_by_product_id(self, product_id: str, aplication_id: str) -> None:
-        async with ClientSession() as session:
-            async with session.post('https://cekbpom.pom.go.id/get_detail_produk_obat',
-                                    headers=self.__headers,
-                                    data={
-                                        'product_id': product_id,
-                                        'aplication_id': aplication_id
-                                    }, verify_ssl=False) as response:
+    async def _get_detail_by_product_id(self, product_id: str, aplication_id: str, data: dict, log: dict) -> None:
+        try:
+            async with ClientSession() as session:
+                async with session.post('https://cekbpom.pom.go.id/get_detail_produk_obat',
+                                        headers=self.__headers,
+                                        data={
+                                            'product_id': product_id,
+                                            'aplication_id': aplication_id
+                                        }, verify_ssl=False) as response:
 
-                soup: Parser = Parser(await response.text())
+                    soup: Parser = Parser(await response.text())
 
-                keys: list = soup.select('.form-field-caption').map(lambda element: re.sub(r'\s+', ' ', element.text.replace('\n', '')).lower().replace(' ', '_'))
-                values: list = soup.select('.form-field-input div').map(lambda element: re.sub(r'\s+', ' ', element.text.replace('\n', '')).strip(' '))
+                    keys: list = soup.select('.form-field-caption').map(lambda element: re.sub(r'\s+', ' ', element.text.replace('\n', '')).lower().replace(' ', '_'))
+                    values: list = soup.select('.form-field-input div').map(lambda element: re.sub(r'\s+', ' ', element.text.replace('\n', '')).strip(' '))
 
-                link: str = 'https://cekbpom.pom.go.id/search_home_produk'
-                link_split: list = link.split('/')
-
-                data: dict = {
-                        'link': link,
-                        'domain': link_split[2],
-                        'tag': link_split[2:],
-                        'crawling_time': Datetime.now(),
-                        'crawling_time_epoch': int(time()),
-                }
-                for i, key in enumerate(keys):
-                    if(key == "_" or key == "" or key == " "):
-                        data[keys[i -1]] = [data[keys[i -1]], values[i]]
-                    else:
-                        try:
-                            data[key] = Datetime.format(values[i], "%d-%m-%Y")
-                        except Exception:
-                            if(re.search(r'-\s', values[i])):
-                                value_split = [value.strip(' ') for value in values[i].split('- ')]
-                                if("" in value_split): 
-                                    data[key] = value_split[1:]
-                                else:
-                                    data[key] = value_split
-                            else:
-                                data[key] = values[i]
-
-                data.update({
-                    'path_data_raw': f'S3://ai-pipeline-statistics/data/data_raw/data_divtik/bpom/product/{data["produk"]}/json/{product_id}.json',   
-                    'path_data_clean': f'S3://ai-pipeline-statistics/data/data_clean/data_divtik/bpom/product/{data["produk"]}/json/{product_id}.json',   
-                })
-                paths: list = [path.replace('S3://ai-pipeline-statistics/', '') for path in [data["path_data_raw"]]] 
-                
-                if(self.__clean):
-                    paths: list = [path.replace('S3://ai-pipeline-statistics/', '') for path in [data["path_data_raw"], data["path_data_clean"]]] 
-                
-                with ThreadPoolExecutor() as executor:
-                    data: dict = Iostream.dict_to_deep(data)
-                    try:
-                        if(self.__s3):
-                            executor.map(lambda path: ConnectionS3.upload(data, path), paths)
+                    for i, key in enumerate(keys):
+                        if(key == "_" or key == "" or key == " "):
+                            data[keys[i -1]] = [data[keys[i -1]], values[i]]
                         else:
-                            executor.map(lambda path: Iostream.write_json(data, path), paths)
-                    except Exception as e:
-                        raise e    
+                            try:
+                                data[key] = Datetime.format(values[i], "%d-%m-%Y")
+                            except Exception:
+                                if(re.search(r'-\s', values[i])):
+                                    value_split = [value.strip(' ') for value in values[i].split('- ')]
+                                    if("" in value_split): 
+                                        data[key] = value_split[1:]
+                                    else:
+                                        data[key] = value_split
+                                else:
+                                    data[key] = values[i]
+
+                    data.update({
+                        'path_data_raw': f'S3://ai-pipeline-statistics/data/data_raw/data_divtik/bpom/product/{data["produk"]}/json/{product_id}.json',   
+                        'path_data_clean': f'S3://ai-pipeline-statistics/data/data_clean/data_divtik/bpom/product/{data["produk"]}/json/{product_id}.json',   
+                    })
+                    paths: list = [path.replace('S3://ai-pipeline-statistics/', '') for path in [data["path_data_raw"]]] 
+                    
+                    if(self.__clean):
+                        paths: list = [path.replace('S3://ai-pipeline-statistics/', '') for path in [data["path_data_raw"], data["path_data_clean"]]] 
+                    
+                    with ThreadPoolExecutor() as executor:
+                        data: dict = Iostream.dict_to_deep(data)
+                        try:
+                            if(self.__s3):
+                                executor.map(lambda path: ConnectionS3.upload(data, path), paths)
+                            else:
+                                executor.map(lambda path: Iostream.write_json(data, path), paths)
+                        except Exception as e:
+                            raise e  
+                    
+                    Iostream.info_log(log, product_id, 'success', name=__name__)
+                
+                    log['total_success'] += 1
+                    Iostream.update_log(log, name=__name__)
+        except Exception as e:
+            print(e)
         
     def _get_all(self):
         page: int = 1
         while(True):
             print(page)
-            success: bool = asyncio.run(self._get_product_by_page(page))
+            success: bool = asyncio.run(self._get_product_by_page(page, all=True))
 
             if(not success): break
             
@@ -134,5 +164,5 @@ class BaseCekbpom:
 
 if(__name__ == '__main__'):
     baseCekbpom: BaseCekbpom = BaseCekbpom()
-    asyncio.run(baseCekbpom._get_product_by_page(1))
-    # baseCekbpom._get_all()
+    # asyncio.run(baseCekbpom._get_product_by_page(2))
+    baseCekbpom._get_all()

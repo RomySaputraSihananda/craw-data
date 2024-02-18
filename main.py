@@ -14,7 +14,8 @@ class Main:
     
     @click.group()
     @click.version_option(version='2.0.0', prog_name='Engine Crawler Data', message=f'{click.style("%(prog)s", fg="bright_magenta")} version {click.style("%(version)s", fg="bright_magenta")}')
-    @click.pass_context
+    @click.option('--s3', is_flag=True, default=False, help='send s3')
+    @click.option('--clean', is_flag=True, default=False, help='data clean')
     @click.pass_context
     def main(ctx: Context, **kwargs) -> None:
         """ Engine Crawler Data """
@@ -86,9 +87,9 @@ class Main:
     
     @staticmethod
     @data_divtik.command()
-    @click.argument('method', metavar='METHOD', type=click.Choice(['by_product_id', 'by_media_type', 'all_media']))
+    @click.argument('method', metavar='METHOD', type=click.Choice(['by_product_id', 'by_page', 'all_product']))
     @click.option('--product_id', default=None, help='Product id')
-    @click.option('--media', default=None, help='Media type')
+    @click.option('--page', default=None, help='Number page')
     @click.pass_context
     def Cekbpom(ctx: Context, **kwargs):
         return Cekbpom(**Main.merge(ctx, **kwargs))
