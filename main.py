@@ -1,5 +1,6 @@
 import click
 
+from click.core import Context
 from typing import final
 
 from services import Lemon8, Quora, Glassdoor, MicrosoftStore, Taptap
@@ -7,18 +8,28 @@ from services.dataDivtik import Cekbpom
 
 @final
 class Main:
+    @staticmethod
+    def merge(ctx: Context, **kwargs) -> dict:
+        return {**ctx.obj, **kwargs}
+    
     @click.group()
-    def main(**kwargs) -> None:
-        """ Main Engine """
-        ...
+    @click.version_option(version='2.0.0', prog_name='Engine Crawler Data', message=f'{click.style("%(prog)s", fg="bright_magenta")} version {click.style("%(version)s", fg="bright_magenta")}')
+    @click.option('--s3', is_flag=True, help='Send to S3 ?')
+    @click.option('--clean', is_flag=True, help='Send to clean path')
+    @click.pass_context
+    def main(ctx: Context, **kwargs) -> None:
+        """ Engine Crawler Data """
+        ctx.obj = kwargs
 
     @main.group()
-    def data_review():
+    @click.pass_context
+    def data_review(ctx: Context):
         """ Data Review """
         ... 
 
     @main.group()
-    def data_divtik():
+    @click.pass_context
+    def data_divtik(ctx: Context):
         """ Data Divtik """
         ... 
 
@@ -29,11 +40,10 @@ class Main:
     @click.option('--post_id', default=None, help='Post ID')
     @click.option('--username', default=None, help='Username')
     @click.option('--url', default=None, help='Url')
-    @click.option('--s3', is_flag=True, help='Send to S3 ?')
-    @click.option('--clean', is_flag=True, help='Send to clean path')
-    def lemon8(**kwargs):
+    @click.pass_context
+    def lemon8(ctx: Context, **kwargs):
         """ Lemon8 Engine """
-        return Lemon8(**kwargs)
+        return Lemon8(**Main.merge(ctx, **kwargs))
 
     @staticmethod
     @data_review.command()
@@ -82,12 +92,11 @@ class Main:
     @staticmethod
     @data_divtik.command()
     @click.argument('method', metavar='METHOD', type=click.Choice(['by_product_id', 'by_media_type', 'all_media']))
-    @click.option('--s3', is_flag=True, help='Send to S3 ?')
-    @click.option('--clean', is_flag=True, help='Send to clean path')
     @click.option('--product_id', default=None, help='Product id')
     @click.option('--media', default=None, help='Media type')
-    def Cekbpom(**kwargs):
-        return Cekbpom(**kwargs)
+    @click.pass_context
+    def Cekbpom(ctx: Context, **kwargs):
+        return Cekbpom(**Main.merge(ctx, **kwargs))
     
 
 if(__name__ == "__main__"):
