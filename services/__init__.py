@@ -1,8 +1,5 @@
-from .lemon8 import Lemon8
-from .quora import Quora
-from .glassdoor import Glassdoor
-from .microsoftStore import MicrosoftStore
-from .taptap import Taptap
-
-
+from .dataReview import Lemon8, Quora, Glassdoor, MicrosoftStore, Taptap
 from .dataDivtik import Cekbpom
+
+from .dataReview import DataReview
+from .dataDivtik import DataDivtik

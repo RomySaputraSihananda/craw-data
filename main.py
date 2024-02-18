@@ -3,7 +3,7 @@ import click
 from click.core import Context
 from typing import final
 
-from services import Lemon8, Quora, Glassdoor, MicrosoftStore, Taptap
+from services.dataReview import Lemon8, Quora, Glassdoor, MicrosoftStore, Taptap
 from services.dataDivtik import Cekbpom
 
 @final
