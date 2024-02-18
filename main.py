@@ -14,8 +14,7 @@ class Main:
     
     @click.group()
     @click.version_option(version='2.0.0', prog_name='Engine Crawler Data', message=f'{click.style("%(prog)s", fg="bright_magenta")} version {click.style("%(version)s", fg="bright_magenta")}')
-    @click.option('--s3', is_flag=True, help='Send to S3 ?')
-    @click.option('--clean', is_flag=True, help='Send to clean path')
+    @click.pass_context
     @click.pass_context
     def main(ctx: Context, **kwargs) -> None:
         """ Engine Crawler Data """
@@ -48,46 +47,42 @@ class Main:
     @staticmethod
     @data_review.command()
     @click.argument('method', metavar='METHOD', type=click.Choice(['by_question_str']))
-    @click.option('--s3', is_flag=True, help='Send to S3 ?')
-    @click.option('--clean', is_flag=True, help='Send to clean path')
     @click.option('--question', default=None, help='Question')
-    def quora(**kwargs):
+    @click.pass_context
+    def quora(ctx: Context, **kwargs):
         """ Quora Engine """
-        return Quora(**kwargs)
+        return Quora(**Main.merge(ctx, **kwargs))
 
 
     @staticmethod
     @data_review.command()
     @click.argument('method', metavar='METHOD', type=click.Choice(['by_employer_id', 'by_page', 'all_detail']))
-    @click.option('--s3', is_flag=True, help='Send to S3 ?')
-    @click.option('--clean', is_flag=True, help='Send to clean path')
     @click.option('--employer_id', default=None, help='Employer id')
     @click.option('--page', default=None, help='Number page')
-    def glassdoor(**kwargs):
+    @click.pass_context
+    def glassdoor(ctx: Context, **kwargs):
         """ Glassdoor Engine """
-        return Glassdoor(**kwargs)
+        return Glassdoor(**Main.merge(ctx, **kwargs))
     
     @staticmethod
     @data_review.command()
     @click.argument('method', metavar='METHOD', type=click.Choice(['by_product_id', 'by_media_type', 'all_media']))
-    @click.option('--s3', is_flag=True, help='Send to S3 ?')
-    @click.option('--clean', is_flag=True, help='Send to clean path')
     @click.option('--product_id', default=None, help='Product id')
     @click.option('--media', default=None, help='Media type')
-    def microsoftStore(**kwargs):
+    @click.pass_context
+    def microsoftStore(ctx: Context, **kwargs):
         """ MicrosoftStore Engine """
-        return MicrosoftStore(**kwargs)
+        return MicrosoftStore(**Main.merge(ctx, **kwargs))
     
     @staticmethod
     @data_review.command()
     @click.argument('method', metavar='METHOD', type=click.Choice(['by_product_id', 'by_media_type', 'all_media']))
-    @click.option('--s3', is_flag=True, help='Send to S3 ?')
-    @click.option('--clean', is_flag=True, help='Send to clean path')
     @click.option('--product_id', default=None, help='Product id')
     @click.option('--media', default=None, help='Media type')
-    def taptap(**kwargs):
+    @click.pass_context
+    def taptap(ctx: Context, **kwargs):
         """ TapTap Engine """
-        return Taptap(**kwargs)
+        return Taptap(**Main.merge(ctx, **kwargs))
     
     @staticmethod
     @data_divtik.command()
