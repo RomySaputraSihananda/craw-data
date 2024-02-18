@@ -4,7 +4,7 @@ from typing import final
 from helpers import logging
 
 from helpers.decorators import Decorator 
-from library import BaseQuora, AbstractQuora
+from library.dataReview import BaseQuora, AbstractQuora
 
 @final
 class Quora(BaseQuora, AbstractQuora):

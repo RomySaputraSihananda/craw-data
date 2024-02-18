@@ -1,4 +1,4 @@
-from library import BaseTaptap, AbstractTaptap
+from library.dataReview import BaseTaptap, AbstractTaptap
 
 class Taptap(BaseTaptap, AbstractTaptap):
     def __init__(self) -> None:

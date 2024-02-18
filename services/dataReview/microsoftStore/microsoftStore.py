@@ -3,7 +3,7 @@ import asyncio
 from click import BadParameter
 from typing import final
 
-from library import BaseMicrosoftStore, AbstractMicrosoftStore
+from library.dataReview import BaseMicrosoftStore, AbstractMicrosoftStore
 from helpers import Decorator, logging
 
 @final
