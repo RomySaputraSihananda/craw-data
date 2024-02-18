@@ -26,11 +26,14 @@ class Cekbpom(BaseCekbpom, AbstractCekbpom):
             case _:
                 logging.error('Wait.............')
 
+    @Decorator.counter_time
     def get_detail_by_product_id(self, **kwargs) -> None:
         return asyncio.run(super()._get_detail_by_product_id(kwargs.get('product_id')))
-
+    
+    @Decorator.counter_time
     def get_detail_by_page(self, **kwargs) -> None:
         return asyncio.run(super()._get_product_by_page(int(kwargs.get('page'))))
 
+    @Decorator.counter_time
     def get_all_detail(self, **kwargs) -> None:
         return super()._get_all()
