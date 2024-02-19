@@ -36,4 +36,4 @@ class Cekbpom(BaseCekbpom, AbstractCekbpom):
 
     @Decorator.counter_time
     def get_all_detail(self, **kwargs) -> None:
-        return super()._get_all()
+        return super()._get_all(kwargs.get('start'))

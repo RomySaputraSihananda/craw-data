@@ -87,9 +87,10 @@ class Main:
     
     @staticmethod
     @data_divtik.command()
-    @click.argument('method', metavar='METHOD', type=click.Choice(['by_product_id', 'by_page', 'all_product']))
+    @click.argument('method', metavar='METHOD', type=click.Choice(['by_product_id', 'by_page', 'all_detail']))
     @click.option('--product_id', default=None, help='Product id')
     @click.option('--page', default=None, help='Number page')
+    @click.option('--start', default=1, help='start page')
     @click.pass_context
     def Cekbpom(ctx: Context, **kwargs):
         return Cekbpom(**Main.merge(ctx, **kwargs))
