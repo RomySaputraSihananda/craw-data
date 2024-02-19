@@ -10,7 +10,7 @@ from aiohttp import ClientSession
 from concurrent.futures import ThreadPoolExecutor
 
 from requests import Response, Session
-from helpers import Parser, Datetime, Iostream, ConnectionS3
+from helpers import Parser, Datetime, Iostream, ConnectionS3, logging
 
 urllib3.disable_warnings()
 
@@ -39,7 +39,8 @@ class BaseCekbpom:
         )
 
     async def _get_product_by_page(self, page: int, data: dict, log: dict = None) -> bool:
-        response: Response = self.__requests.post('https://cekbpom.pom.go.id/prev_next_pagination_all_produk', 
+        try:
+            response: Response = self.__requests.post('https://cekbpom.pom.go.id/prev_next_pagination_all_produk', 
                                                     data={
                                                         'st_filter': '1',
                                                         'input_search': '',
@@ -48,24 +49,27 @@ class BaseCekbpom:
                                                         'next_prev': page * 10,
                                                         'count_data_all_produk': self.__count_data_all_produk,
                                                         'marked': 'next',
-                                                    })
-        data_all_produk: list = response.json()['data_all_produk']
+                                                    }, timeout=30)
+            data_all_produk: list = response.json()['data_all_produk']
 
-        if(not data_all_produk): return False 
+            if(not data_all_produk): return False 
 
-        if(self.__product_first):
-            log['total_data'] += len(self.__product_first)
-            await asyncio.gather(*(self._get_detail_by_product_id(*product, data, log) for product in self.__product_first))
-            self.__product_first = None
+            if(self.__product_first):
+                log['total_data'] += len(self.__product_first)
+                await asyncio.gather(*(self._get_detail_by_product_id(*product, data, log) for product in self.__product_first))
+                self.__product_first = None
 
-        if(not all): log['total_data'] += len(data_all_produk)
-        await asyncio.gather(*(self._get_detail_by_product_id(product['PRODUCT_ID'], product['APPLICATION_ID'], data, log) for product in data_all_produk))
+            if(not all): log['total_data'] += len(data_all_produk)
+            await asyncio.gather(*(self._get_detail_by_product_id(product['PRODUCT_ID'], product['APPLICATION_ID'], data, log) for product in data_all_produk))
 
-        if(not all): 
-            log['status'] = 'Done'
-            Iostream.update_log(log, name=__name__)
+            if(not all): 
+                log['status'] = 'Done'
+                Iostream.update_log(log, name=__name__)
 
-        return True
+            return True
+        except Exception as e:
+            logging.error(f'Error Time Out page {page}')
+            
     
     async def _get_detail_by_product_id(self, product_id: str, aplication_id: str, data: dict, log: dict) -> None:
         link: str = 'https://cekbpom.pom.go.id/search_home_produk'
@@ -77,7 +81,7 @@ class BaseCekbpom:
                                         data={
                                             'product_id': product_id,
                                             'aplication_id': aplication_id
-                                        }, verify_ssl=False) as response:
+                                        }, verify_ssl=False, timeout=30) as response:
 
                     soup: Parser = Parser(await response.text())
 

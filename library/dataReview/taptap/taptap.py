@@ -269,7 +269,9 @@ class BaseTaptap:
 
             apps: list = [app['app'] for app in response_json['data']['list']] 
 
-            await asyncio.gather(*(self._get_by_app_id(app['id']) for app in apps))
+            # await asyncio.gather(*(self._get_by_app_id(app['id']) for app in apps))
+            for app in apps:
+                asyncio.run(self._get_by_app_id(app['id']))
         
             if(not response_json['next_page']): break
 
@@ -278,9 +280,9 @@ class BaseTaptap:
         await self.__requests.close()
 
     
-    async def _get_all_platform(self) -> None:
+    def _get_all_platform(self) -> None:
         for platform in self.__platforms:
-            await self._get_by_platform(platform)
+            asyncio.run(self._get_by_platform(platform))
             
 
 if(__name__ == '__main__'):
