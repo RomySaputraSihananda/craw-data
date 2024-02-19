@@ -271,7 +271,7 @@ class BaseTaptap:
 
             # await asyncio.gather(*(self._get_by_app_id(app['id']) for app in apps))
             for app in apps:
-                asyncio.run(self._get_by_app_id(app['id']))
+                await self._get_by_app_id(app['id'])
         
             if(not response_json['next_page']): break
 
