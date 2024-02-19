@@ -1,2 +1,2 @@
-from .dataReview import lemon8, quora, glassdoor, microsoftStore, taptap
+from .dataReview import lemon8, quora, glassdoor, microsoftStore, taptap, galaxystore
 from .dataDivtik import cekbpom

@@ -172,7 +172,7 @@ class BaseTaptap:
         Iostream.update_log(log, name=__name__, title=app['title'])
 
     async def _get_by_app_id(self, game_id: str) -> None:
-        if(not self.__requests): self.__requests: ClientSession = ClientSession()
+        # if(not self.__requests): self.__requests: ClientSession = ClientSession()
 
         app: dict = await self.__get_detail_game(game_id)
         link: str = f'https://www.taptap.io/app/{app["id"]}'
@@ -242,15 +242,15 @@ class BaseTaptap:
 
             log['total_data'] += len(reviews)
             Iostream.update_log(log, name=__name__, title=app['title'])
-
-            await asyncio.gather(*(self.__process_review(review, headers, app, log) for review in reviews))
+            
+            for review in reviews:
+                await self.__process_review(review, headers, app, log)
             
             start += 50
 
-        if(self.__requests): await self.__requests.close()
+        # if(self.__requests): await self.__requests.close()
 
     async def _get_by_platform(self, platform: str) -> None:
-        self.__requests: ClientSession = ClientSession()
 
         if platform not in self.__platforms: return
 
@@ -269,20 +269,21 @@ class BaseTaptap:
 
             apps: list = [app['app'] for app in response_json['data']['list']] 
 
-            # await asyncio.gather(*(self._get_by_app_id(app['id']) for app in apps))
-            for app in apps:
-                await self._get_by_app_id(app['id'])
+            await asyncio.gather(*(self._get_by_app_id(app['id']) for app in apps))
+            # for app in apps:
+            #     await self._get_by_app_id(app['id'])
         
             if(not response_json['next_page']): break
 
             start += 2
         
-        await self.__requests.close()
 
     
-    def _get_all_platform(self) -> None:
+    async def _get_all_platform(self) -> None:
+        self.__requests: ClientSession = ClientSession()
         for platform in self.__platforms:
-            asyncio.run(self._get_by_platform(platform))
+            await self._get_by_platform(platform)
+        await self.__requests.close()
             
 
 if(__name__ == '__main__'):

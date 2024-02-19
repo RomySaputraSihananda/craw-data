@@ -32,9 +32,8 @@ class BaseGlassDoor:
                 try:
                     if(self.__s3):
                         executor.map(lambda path: ConnectionS3.upload(data_final, path), paths)
-                        await asyncio.gather(*[asyncio.to_thread(lambda path: ConnectionS3.upload(data_final, path), path) for path in paths])
                     else:
-                        await asyncio.gather(*(asyncio.to_thread(lambda path: Iostream.write_json(data_final, path), path) for path in paths))
+                        executor.map(lambda path: Iostream.write_json(data_final, path), paths)
                 except Exception as e:
                     raise e
                 
@@ -225,19 +224,20 @@ class BaseGlassDoor:
                 Iostream.update_log(log, name=__name__)
 
     @final
-    async def _get_detail_by_page(self, page: int) -> None: 
+    async def _get_detail_by_page(self, page: int) -> bool: 
         employers: list = self.__get_employers(page)
-        await asyncio.gather(*(self._get_detail_by_employer_id(employer['id']) for employer in employers))
+        if(not employers): return False
+        for employer in employers:
+            await self._get_detail_by_employer_id(employer['id'])
+        return True
 
     @final
     async def _get_all_detail(self) -> None:
         page: int = 1
         while(True):
-            employers: list = self.__get_employers(page)
-            
-            if(not employers): break
-        
-            await asyncio.gather(*(self._get_detail_by_employer_id(employer['id']) for employer in employers))
+            success: bool = await self._get_detail_by_page(page)
+
+            if(not success): break
 
             page += 1
 

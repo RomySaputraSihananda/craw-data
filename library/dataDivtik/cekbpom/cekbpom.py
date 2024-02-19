@@ -6,6 +6,7 @@ import asyncio
 
 from json import dumps
 from time import time
+from time import sleep
 from aiohttp import ClientSession
 from concurrent.futures import ThreadPoolExecutor
 
@@ -69,6 +70,8 @@ class BaseCekbpom:
             return True
         except Exception as e:
             logging.error(f'Error Time Out page {page}')
+            asyncio.sleep(5)
+            return await self._get_product_by_page(page, data, log)
             
     
     async def _get_detail_by_product_id(self, product_id: str, aplication_id: str, data: dict, log: dict) -> None:

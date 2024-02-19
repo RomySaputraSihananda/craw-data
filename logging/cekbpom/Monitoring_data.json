@@ -390,5 +390,19 @@
         "total_failed": 0,
         "status": "Process",
         "assign": "romy"
+    },
+    {
+        "Crawlling_time": "2024-02-19 21:45:40",
+        "id_project": null,
+        "project": "Data Intelligence",
+        "sub_project": "data divtik",
+        "source_name": "cekbpom.pom.go.id",
+        "sub_source_name": "product",
+        "id_sub_source": null,
+        "total_data": 651765,
+        "total_success": 0,
+        "total_failed": 0,
+        "status": "Process",
+        "assign": "romy"
     }
 ]
