@@ -130,11 +130,10 @@ class BaseCekbpom:
                     Iostream.update_log(log, name=__name__)
                     data['tag'] = link_split[2:]
         except Exception as e:
-            raise e
-            # Iostream.info_log(log, product_id, 'failed', error=e, name=__name__)
+            Iostream.info_log(log, product_id, 'failed', error=e, name=__name__)
 
-            # log['total_failed'] += 1
-            # Iostream.update_log(log, name=__name__)
+            log['total_failed'] += 1
+            Iostream.update_log(log, name=__name__)
         
     def _get_all(self, start: int = 1):
         link: str = 'https://cekbpom.pom.go.id/search_home_produk'

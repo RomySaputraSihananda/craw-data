@@ -77,9 +77,9 @@ class Main:
     
     @staticmethod
     @data_review.command()
-    @click.argument('method', metavar='METHOD', type=click.Choice(['by_product_id', 'by_media_type', 'all_media']))
-    @click.option('--product_id', default=None, help='Product id')
-    @click.option('--media', default=None, help='Media type')
+    @click.argument('method', metavar='METHOD', type=click.Choice(['by_app_id', 'by_platform', 'all_platform']))
+    @click.option('--app_id', default=None, help='App id')
+    @click.option('--platform', default=None, help='platform type')
     @click.pass_context
     def taptap(ctx: Context, **kwargs):
         """ TapTap Engine """
