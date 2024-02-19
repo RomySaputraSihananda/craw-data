@@ -235,12 +235,9 @@ class BaseMicrosoftStore:
                     if (response_json['nextPageNumber'] < 0): break
 
                     await asyncio.gather(*(self.__get_by_product_id(product['productId']) for product in products_list))
-                    break
 
                     page += 1
                 
-                break
-
         await self.__requests.close()
 
     @final

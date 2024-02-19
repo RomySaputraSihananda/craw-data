@@ -68,5 +68,19 @@
         "total_failed": 0,
         "status": "Done",
         "assign": "romy"
+    },
+    {
+        "Crawlling_time": "2024-02-19 14:34:54",
+        "id_project": null,
+        "project": "Data Intelligence",
+        "sub_project": "data review",
+        "source_name": "microsoft-store.azurewebsites.net",
+        "sub_source_name": "Minecraft Launcher",
+        "id_sub_source": "9pgw18npbzv5",
+        "total_data": 233,
+        "total_success": 68,
+        "total_failed": 0,
+        "status": "Process",
+        "assign": "romy"
     }
 ]
