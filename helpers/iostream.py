@@ -26,7 +26,7 @@ class Iostream:
             logs = []
 
         updated_logs = [
-            {**e, **data} if e["id_sub_source"] == data["id_sub_source"] and not e.get("id_data") else e for e in logs
+            {**e, **data} if e["id_sub_source"] == data["id_sub_source"] and not e.get("id_data") and e['Crawlling_time'] == data['Crawlling_time'] else e for e in logs
         ]
 
         Iostream.write_json(updated_logs, f'logging/{kwargs.get("name").split(".")[-1] if kwargs.get("name") else "test"}/{file_name}')
@@ -78,7 +78,7 @@ class Iostream:
                     try:
                         data[key] = loads(value)
                     except Exception:
-                        data[key] = re.sub('<.*?>', '', value)
+                        data[key] = re.sub('<.*?>', ' ', value)
         return data
 
 from time import sleep

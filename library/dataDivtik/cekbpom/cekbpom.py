@@ -4,7 +4,7 @@ import urllib3
 import requests
 import asyncio
 
-from json import dumps
+from json import loads
 from time import time
 from time import sleep
 from aiohttp import ClientSession
@@ -41,36 +41,40 @@ class BaseCekbpom:
 
     async def _get_product_by_page(self, page: int, data: dict, log: dict = None) -> bool:
         try:
-            response: Response = self.__requests.post('https://cekbpom.pom.go.id/prev_next_pagination_all_produk', 
-                                                    data={
-                                                        'st_filter': '1',
-                                                        'input_search': '',
-                                                        'from_home_flag': 'Y',
-                                                        'offset': (page - 1) * 10 + 1,
-                                                        'next_prev': page * 10,
-                                                        'count_data_all_produk': self.__count_data_all_produk,
-                                                        'marked': 'next',
-                                                    }, timeout=30)
-            data_all_produk: list = response.json()['data_all_produk']
+            async with ClientSession() as session:
+                async with session.post('https://cekbpom.pom.go.id/prev_next_pagination_all_produk', 
+                                        headers=self.__headers,
+                                        data={
+                                            'st_filter': '1',
+                                            'input_search': '',
+                                            'from_home_flag': 'Y',
+                                            'offset': (page - 1) * 10 + 1,
+                                            'next_prev': page * 10,
+                                            'count_data_all_produk': self.__count_data_all_produk,
+                                            'marked': 'next',
+                                        }, timeout=30) as response:
+                    response_json: dict = loads(await response.text())
 
-            if(not data_all_produk): return False 
+                    data_all_produk: list = response_json['data_all_produk']
 
-            if(self.__product_first):
-                log['total_data'] += len(self.__product_first)
-                await asyncio.gather(*(self._get_detail_by_product_id(*product, data, log) for product in self.__product_first))
-                self.__product_first = None
+                    if(not data_all_produk): return False 
 
-            if(not all): log['total_data'] += len(data_all_produk)
-            await asyncio.gather(*(self._get_detail_by_product_id(product['PRODUCT_ID'], product['APPLICATION_ID'], data, log) for product in data_all_produk))
+                    if(self.__product_first):
+                        log['total_data'] += len(self.__product_first)
+                        await asyncio.gather(*(self._get_detail_by_product_id(*product, data, log) for product in self.__product_first))
+                        self.__product_first = None
 
-            if(not all): 
-                log['status'] = 'Done'
-                Iostream.update_log(log, name=__name__)
+                    if(not all): log['total_data'] += len(data_all_produk)
+                    await asyncio.gather(*(self._get_detail_by_product_id(product['PRODUCT_ID'], product['APPLICATION_ID'], data, log) for product in data_all_produk))
 
-            return True
+                    if(not all): 
+                        log['status'] = 'Done'
+                        Iostream.update_log(log, name=__name__)
+
+                    return True
         except Exception as e:
             logging.error(f'Error Time Out page {page}')
-            asyncio.sleep(5)
+            logging.error(e)
             return await self._get_product_by_page(page, data, log)
             
     
@@ -142,7 +146,7 @@ class BaseCekbpom:
             log['total_failed'] += 1
             Iostream.update_log(log, name=__name__)
         
-    def _get_all(self, start: int = 1):
+    async def _get_all(self, start: int = 1):
         link: str = 'https://cekbpom.pom.go.id/search_home_produk'
         link_split: list = link.split('/')
         data: dict = {
@@ -162,7 +166,7 @@ class BaseCekbpom:
             "sub_source_name": 'product',
             "id_sub_source": None,
             "total_data": self.__count_data_all_produk if all else 0,
-            "total_success": 0,
+            "total_success": start * 10,
             "total_failed": 0,
             "status": "Process",
             "assign": "romy",
@@ -171,11 +175,11 @@ class BaseCekbpom:
         
         page: int = start
         while(True):
-            success: bool = asyncio.run(self._get_product_by_page(page, data, log))
+            success: bool = await asyncio.gather(*(self._get_product_by_page(i, data, log) for i in range(page, page + 10)))
 
-            if(not success): break
+            if(False in success): break
             
-            page += 1
+            page += 10
 
         log['status'] = 'Done'
         Iostream.update_log(log, name=__name__)

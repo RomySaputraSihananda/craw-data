@@ -27,28 +27,19 @@ class BaseTravelokaEvent:
             'x-route-prefix': 'en-id'
         })
     
-    async def __get_user_reviews(self, session: ClientSession, experience_id: str) -> dict:
-        async with session.post('https://www.traveloka.com/api/v2/experience/reviews',       
-                                                json={
-                                                    'fields': [],
-                                                    'data': {
-                                                        'experienceId': experience_id,
-                                                        'skip': 0,
-                                                        'rowsToReturn': 20,
-                                                    },
-                                                    'clientInterface': 'desktop',
-                                                },
-                                                headers={
-                                                    'user-agent': 'Mozilla/5.0 (Linux; Android 13; SM-S901B) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/112.0.0.0 Mobile Safari/537.36',
-                                                    'cookie': os.getenv('COOKIE_TRAVELOKA'),
-                                                    'sec-ch-ua': '"Not_A Brand";v="8", "Chromium";v="120", "Google Chrome";v="120"',
-                                                    'origin': 'https://www.traveloka.com',
-                                                    'x-domain': 'experience',
-                                                    'x-route-prefix': 'en-id'
-                                                }) as response:
-            response_json: dict = await response.json()
-
-            return response_json['data']['userReviews']
+    def __get_user_reviews(self, experience_id: str) -> dict:
+        response: Response = self.__requests.post('https://www.traveloka.com/api/v2/experience/reviews',         
+                                                    json={
+                                                        'fields': [],
+                                                        'data': {
+                                                            'experienceId': experience_id,
+                                                            'skip': 0,
+                                                            'rowsToReturn': 20,
+                                                        },
+                                                        'clientInterface': 'desktop',
+                                                    })
+        
+        return response.json()['data']['userReviews']
 
     def __get_tickets(self, experience_id: str) -> list:
         response: Response = self.__requests.post('https://www.traveloka.com/api/v2/experience/ticketListV2',       
@@ -93,7 +84,7 @@ class BaseTravelokaEvent:
 
                 tickets: list = self.__get_tickets(experience_id)
                 (ticket_price_details, ticket_available) = self.__get_ticket_avaliable_dates(experience_id)
-                user_reviews: dict = await self.__get_user_reviews(session, experience_id)
+                user_reviews: dict = self.__get_user_reviews(experience_id)
 
                 province: str = event_detail["experienceSearchInfo"]["subLabel"].split(',')[1].replace('Province', '').strip(' ')
 
