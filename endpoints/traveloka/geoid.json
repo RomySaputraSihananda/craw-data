@@ -1,0 +1,1409 @@
+{
+    "geoFilters": [
+        {
+          "geoId": "102813",
+          "geoName": "Jakarta",
+          "geoNameEN": "Jakarta",
+          "geoType": "REGION",
+          "childGeoFilters": [
+            {
+              "geoId": "102899",
+              "geoName": "Jakarta Pusat",
+              "geoNameEN": "Jakarta Pusat",
+              "geoType": "CITY",
+              "childGeoFilters": []
+            },
+            {
+              "geoId": "102990",
+              "geoName": "Jakarta Selatan",
+              "geoNameEN": "Jakarta Selatan",
+              "geoType": "CITY",
+              "childGeoFilters": []
+            },
+            {
+              "geoId": "103066",
+              "geoName": "Jakarta Barat",
+              "geoNameEN": "Jakarta Barat",
+              "geoType": "CITY",
+              "childGeoFilters": []
+            },
+            {
+              "geoId": "102814",
+              "geoName": "Jakarta Timur",
+              "geoNameEN": "Jakarta Timur",
+              "geoType": "CITY",
+              "childGeoFilters": []
+            },
+            {
+              "geoId": "102952",
+              "geoName": "Jakarta Utara",
+              "geoNameEN": "Jakarta Utara",
+              "geoType": "CITY",
+              "childGeoFilters": []
+            },
+            {
+              "geoId": "102890",
+              "geoName": "Pulau Seribu",
+              "geoNameEN": "Pulau Seribu",
+              "geoType": "CITY",
+              "childGeoFilters": []
+            }
+          ]
+        },
+        {
+          "geoId": "102746",
+          "geoName": "Bali",
+          "geoNameEN": "Bali",
+          "geoType": "REGION",
+          "childGeoFilters": [
+            {
+              "geoId": "102747",
+              "geoName": "Denpasar",
+              "geoNameEN": "Denpasar",
+              "geoType": "CITY",
+              "childGeoFilters": []
+            },
+            {
+              "geoId": "30010498",
+              "geoName": "Sanur",
+              "geoNameEN": "Sanur",
+              "geoType": "CITY",
+              "childGeoFilters": []
+            },
+            {
+              "geoId": "102758",
+              "geoName": "Badung",
+              "geoNameEN": "Badung",
+              "geoType": "CITY",
+              "childGeoFilters": []
+            },
+            {
+              "geoId": "102783",
+              "geoName": "Karangasem",
+              "geoNameEN": "Karangasem",
+              "geoType": "CITY",
+              "childGeoFilters": []
+            },
+            {
+              "geoId": "102773",
+              "geoName": "Buleleng",
+              "geoNameEN": "Buleleng",
+              "geoType": "CITY",
+              "childGeoFilters": []
+            },
+            {
+              "geoId": "102792",
+              "geoName": "Tabanan",
+              "geoNameEN": "Tabanan",
+              "geoType": "CITY",
+              "childGeoFilters": []
+            },
+            {
+              "geoId": "102765",
+              "geoName": "Gianyar",
+              "geoNameEN": "Gianyar",
+              "geoType": "CITY",
+              "childGeoFilters": []
+            },
+            {
+              "geoId": "102808",
+              "geoName": "Klungkung",
+              "geoNameEN": "Klungkung",
+              "geoType": "CITY",
+              "childGeoFilters": []
+            },
+            {
+              "geoId": "102803",
+              "geoName": "Bangli",
+              "geoNameEN": "Bangli",
+              "geoType": "CITY",
+              "childGeoFilters": []
+            }
+          ]
+        },
+        {
+          "geoId": "107409",
+          "geoName": "Daerah Istimewa Yogyakarta",
+          "geoNameEN": "Yogyakarta Province",
+          "geoType": "REGION",
+          "childGeoFilters": [
+            {
+              "geoId": "107442",
+              "geoName": "Yogyakarta",
+              "geoNameEN": "Yogyakarta",
+              "geoType": "CITY",
+              "childGeoFilters": []
+            },
+            {
+              "geoId": "107410",
+              "geoName": "Gunung Kidul",
+              "geoNameEN": "Gunung Kidul",
+              "geoType": "CITY",
+              "childGeoFilters": []
+            },
+            {
+              "geoId": "107457",
+              "geoName": "Sleman",
+              "geoNameEN": "Sleman",
+              "geoType": "CITY",
+              "childGeoFilters": []
+            },
+            {
+              "geoId": "107475",
+              "geoName": "Bantul",
+              "geoNameEN": "Bantul",
+              "geoType": "CITY",
+              "childGeoFilters": []
+            },
+            {
+              "geoId": "107429",
+              "geoName": "Kulon Progo",
+              "geoNameEN": "Kulon Progo",
+              "geoType": "CITY",
+              "childGeoFilters": []
+            }
+          ]
+        },
+        {
+          "geoId": "104896",
+          "geoName": "Provinsi Jambi",
+          "geoNameEN": "Jambi Province",
+          "geoType": "REGION",
+          "childGeoFilters": [
+            {
+              "geoId": "104978",
+              "geoName": "Jambi",
+              "geoNameEN": "Jambi",
+              "geoType": "CITY",
+              "childGeoFilters": []
+            },
+            {
+              "geoId": "104911",
+              "geoName": "Kerinci",
+              "geoNameEN": "Kerinci",
+              "geoType": "CITY",
+              "childGeoFilters": []
+            }
+          ]
+        },
+        {
+          "geoId": "100004",
+          "geoName": "Provinsi Lampung",
+          "geoNameEN": "Lampung Province",
+          "geoType": "REGION",
+          "childGeoFilters": [
+            {
+              "geoId": "100133",
+              "geoName": "Bandar Lampung",
+              "geoNameEN": "Bandar Lampung",
+              "geoType": "CITY",
+              "childGeoFilters": []
+            },
+            {
+              "geoId": "100127",
+              "geoName": "Metro",
+              "geoNameEN": "Metro",
+              "geoType": "CITY",
+              "childGeoFilters": []
+            },
+            {
+              "geoId": "100154",
+              "geoName": "Lampung Selatan",
+              "geoNameEN": "Lampung Selatan",
+              "geoType": "CITY",
+              "childGeoFilters": []
+            },
+            {
+              "geoId": "100042",
+              "geoName": "Lampung Tengah",
+              "geoNameEN": "Lampung Tengah",
+              "geoType": "CITY",
+              "childGeoFilters": []
+            },
+            {
+              "geoId": "30020555",
+              "geoName": "Pesawaran",
+              "geoNameEN": "Pesawaran",
+              "geoType": "CITY",
+              "childGeoFilters": []
+            }
+          ]
+        },
+        {
+          "geoId": "105319",
+          "geoName": "Kepulauan Bangka Belitung",
+          "geoNameEN": "Kepulauan Bangka Belitung",
+          "geoType": "REGION",
+          "childGeoFilters": [
+            {
+              "geoId": "30010286",
+              "geoName": "Belitung",
+              "geoNameEN": "Belitung",
+              "geoType": "CITY",
+              "childGeoFilters": []
+            },
+            {
+              "geoId": "30010285",
+              "geoName": "Bangka",
+              "geoNameEN": "Bangka",
+              "geoType": "CITY",
+              "childGeoFilters": []
+            }
+          ]
+        },
+        {
+          "geoId": "105602",
+          "geoName": "Provinsi Bengkulu",
+          "geoNameEN": "Bengkulu Province",
+          "geoType": "REGION",
+          "childGeoFilters": [
+            {
+              "geoId": "105642",
+              "geoName": "Bengkulu",
+              "geoNameEN": "Bengkulu",
+              "geoType": "CITY",
+              "childGeoFilters": []
+            }
+          ]
+        },
+        {
+          "geoId": "103130",
+          "geoName": "Jawa Timur",
+          "geoNameEN": "Jawa Timur",
+          "geoType": "REGION",
+          "childGeoFilters": [
+            {
+              "geoId": "103570",
+              "geoName": "Surabaya",
+              "geoNameEN": "Surabaya",
+              "geoType": "CITY",
+              "childGeoFilters": []
+            },
+            {
+              "geoId": "103760",
+              "geoName": "Malang",
+              "geoNameEN": "Malang",
+              "geoType": "CITY",
+              "childGeoFilters": []
+            },
+            {
+              "geoId": "103299",
+              "geoName": "Banyuwangi",
+              "geoNameEN": "Banyuwangi",
+              "geoType": "CITY",
+              "childGeoFilters": []
+            },
+            {
+              "geoId": "103361",
+              "geoName": "Jember",
+              "geoNameEN": "Jember",
+              "geoType": "CITY",
+              "childGeoFilters": []
+            },
+            {
+              "geoId": "103447",
+              "geoName": "Madiun",
+              "geoNameEN": "Madiun",
+              "geoType": "CITY",
+              "childGeoFilters": []
+            },
+            {
+              "geoId": "103741",
+              "geoName": "Sidoarjo",
+              "geoNameEN": "Sidoarjo",
+              "geoType": "CITY",
+              "childGeoFilters": []
+            },
+            {
+              "geoId": "102798",
+              "geoName": "Kota Kediri",
+              "geoNameEN": "Kediri City",
+              "geoType": "CITY",
+              "childGeoFilters": []
+            },
+            {
+              "geoId": "103355",
+              "geoName": "Probolinggo",
+              "geoNameEN": "Probolinggo",
+              "geoType": "CITY",
+              "childGeoFilters": []
+            },
+            {
+              "geoId": "103566",
+              "geoName": "Blitar",
+              "geoNameEN": "Blitar",
+              "geoType": "CITY",
+              "childGeoFilters": []
+            },
+            {
+              "geoId": "103393",
+              "geoName": "Mojokerto",
+              "geoNameEN": "Mojokerto",
+              "geoType": "CITY",
+              "childGeoFilters": []
+            },
+            {
+              "geoId": "103179",
+              "geoName": "Tulungagung",
+              "geoNameEN": "Tulungagung",
+              "geoType": "CITY",
+              "childGeoFilters": []
+            },
+            {
+              "geoId": "103324",
+              "geoName": "Pacitan",
+              "geoNameEN": "Pacitan",
+              "geoType": "CITY",
+              "childGeoFilters": []
+            },
+            {
+              "geoId": "103396",
+              "geoName": "Lamongan",
+              "geoNameEN": "Lamongan",
+              "geoType": "CITY",
+              "childGeoFilters": []
+            },
+            {
+              "geoId": "103262",
+              "geoName": "Pasuruan",
+              "geoNameEN": "Pasuruan",
+              "geoType": "CITY",
+              "childGeoFilters": []
+            },
+            {
+              "geoId": "103514",
+              "geoName": "Bojonegoro",
+              "geoNameEN": "Bojonegoro",
+              "geoType": "CITY",
+              "childGeoFilters": []
+            },
+            {
+              "geoId": "103627",
+              "geoName": "Ponorogo",
+              "geoNameEN": "Ponorogo",
+              "geoType": "CITY",
+              "childGeoFilters": []
+            },
+            {
+              "geoId": "103693",
+              "geoName": "Tuban",
+              "geoNameEN": "Tuban",
+              "geoType": "CITY",
+              "childGeoFilters": []
+            },
+            {
+              "geoId": "103337",
+              "geoName": "Situbondo",
+              "geoNameEN": "Situbondo",
+              "geoType": "CITY",
+              "childGeoFilters": []
+            },
+            {
+              "geoId": "103199",
+              "geoName": "Jombang",
+              "geoNameEN": "Jombang",
+              "geoType": "CITY",
+              "childGeoFilters": []
+            },
+            {
+              "geoId": "103476",
+              "geoName": "Gresik",
+              "geoNameEN": "Gresik",
+              "geoType": "CITY",
+              "childGeoFilters": []
+            },
+            {
+              "geoId": "103221",
+              "geoName": "Lumajang",
+              "geoNameEN": "Lumajang",
+              "geoType": "CITY",
+              "childGeoFilters": []
+            },
+            {
+              "geoId": "103810",
+              "geoName": "Nganjuk",
+              "geoNameEN": "Nganjuk",
+              "geoType": "CITY",
+              "childGeoFilters": []
+            },
+            {
+              "geoId": "103247",
+              "geoName": "Trenggalek",
+              "geoNameEN": "Trenggalek",
+              "geoType": "CITY",
+              "childGeoFilters": []
+            },
+            {
+              "geoId": "30017840",
+              "geoName": "Pulau Madura",
+              "geoNameEN": "Madura Island",
+              "geoType": "CITY",
+              "childGeoFilters": []
+            }
+          ]
+        },
+        {
+          "geoId": "103831",
+          "geoName": "Jawa Barat",
+          "geoNameEN": "Jawa Barat",
+          "geoType": "REGION",
+          "childGeoFilters": [
+            {
+              "geoId": "103859",
+              "geoName": "Bandung",
+              "geoNameEN": "Bandung",
+              "geoType": "CITY",
+              "childGeoFilters": []
+            },
+            {
+              "geoId": "103909",
+              "geoName": "Bogor",
+              "geoNameEN": "Bogor",
+              "geoType": "CITY",
+              "childGeoFilters": []
+            },
+            {
+              "geoId": "107816",
+              "geoName": "Puncak",
+              "geoNameEN": "Puncak",
+              "geoType": "CITY",
+              "childGeoFilters": []
+            },
+            {
+              "geoId": "103890",
+              "geoName": "Cirebon",
+              "geoNameEN": "Cirebon",
+              "geoType": "CITY",
+              "childGeoFilters": []
+            },
+            {
+              "geoId": "103896",
+              "geoName": "Bekasi",
+              "geoNameEN": "Bekasi",
+              "geoType": "CITY",
+              "childGeoFilters": []
+            },
+            {
+              "geoId": "107824",
+              "geoName": "Pangandaran",
+              "geoNameEN": "Pangandaran",
+              "geoType": "CITY",
+              "childGeoFilters": []
+            },
+            {
+              "geoId": "104524",
+              "geoName": "Garut",
+              "geoNameEN": "Garut",
+              "geoType": "CITY",
+              "childGeoFilters": []
+            },
+            {
+              "geoId": "103988",
+              "geoName": "Depok",
+              "geoNameEN": "Depok",
+              "geoType": "CITY",
+              "childGeoFilters": []
+            },
+            {
+              "geoId": "103916",
+              "geoName": "Sukabumi",
+              "geoNameEN": "Sukabumi",
+              "geoType": "CITY",
+              "childGeoFilters": []
+            },
+            {
+              "geoId": "104338",
+              "geoName": "Tasikmalaya",
+              "geoNameEN": "Tasikmalaya",
+              "geoType": "CITY",
+              "childGeoFilters": []
+            },
+            {
+              "geoId": "104307",
+              "geoName": "Karawang",
+              "geoNameEN": "Karawang",
+              "geoType": "CITY",
+              "childGeoFilters": []
+            },
+            {
+              "geoId": "104750",
+              "geoName": "Purwakarta",
+              "geoNameEN": "Purwakarta",
+              "geoType": "CITY",
+              "childGeoFilters": []
+            },
+            {
+              "geoId": "104625",
+              "geoName": "Kuningan",
+              "geoNameEN": "Kuningan",
+              "geoType": "CITY",
+              "childGeoFilters": []
+            },
+            {
+              "geoId": "104450",
+              "geoName": "Cianjur",
+              "geoNameEN": "Cianjur",
+              "geoType": "CITY",
+              "childGeoFilters": []
+            },
+            {
+              "geoId": "104594",
+              "geoName": "Subang",
+              "geoNameEN": "Subang",
+              "geoType": "CITY",
+              "childGeoFilters": []
+            },
+            {
+              "geoId": "104718",
+              "geoName": "Indramayu",
+              "geoNameEN": "Indramayu",
+              "geoType": "CITY",
+              "childGeoFilters": []
+            },
+            {
+              "geoId": "104567",
+              "geoName": "Sumedang",
+              "geoNameEN": "Sumedang",
+              "geoType": "CITY",
+              "childGeoFilters": []
+            },
+            {
+              "geoId": "103832",
+              "geoName": "Majalengka",
+              "geoNameEN": "Majalengka",
+              "geoType": "CITY",
+              "childGeoFilters": []
+            },
+            {
+              "geoId": "104349",
+              "geoName": "Banjar",
+              "geoNameEN": "Banjar",
+              "geoType": "CITY",
+              "childGeoFilters": []
+            }
+          ]
+        },
+        {
+          "geoId": "100900",
+          "geoName": "Gorontalo",
+          "geoNameEN": "Gorontalo",
+          "geoType": "REGION",
+          "childGeoFilters": [
+            {
+              "geoId": "100960",
+              "geoName": "Kota Gorontalo",
+              "geoNameEN": "Kota Gorontalo",
+              "geoType": "CITY",
+              "childGeoFilters": []
+            }
+          ]
+        },
+        {
+          "geoId": "105889",
+          "geoName": "Sumatra Utara",
+          "geoNameEN": "Sumatra Utara",
+          "geoType": "REGION",
+          "childGeoFilters": [
+            {
+              "geoId": "106161",
+              "geoName": "Medan",
+              "geoNameEN": "Medan",
+              "geoType": "CITY",
+              "childGeoFilters": []
+            },
+            {
+              "geoId": "107827",
+              "geoName": "Danau Toba",
+              "geoNameEN": "Danau Toba",
+              "geoType": "CITY",
+              "childGeoFilters": []
+            },
+            {
+              "geoId": "106143",
+              "geoName": "Karo",
+              "geoNameEN": "Karo",
+              "geoType": "CITY",
+              "childGeoFilters": []
+            },
+            {
+              "geoId": "106199",
+              "geoName": "Binjai",
+              "geoNameEN": "Binjai",
+              "geoType": "CITY",
+              "childGeoFilters": []
+            },
+            {
+              "geoId": "106080",
+              "geoName": "Nias",
+              "geoNameEN": "Nias",
+              "geoType": "CITY",
+              "childGeoFilters": []
+            },
+            {
+              "geoId": "106110",
+              "geoName": "Labuhanbatu",
+              "geoNameEN": "Labuhanbatu",
+              "geoType": "CITY",
+              "childGeoFilters": []
+            },
+            {
+              "geoId": "106214",
+              "geoName": "Asahan",
+              "geoNameEN": "Asahan",
+              "geoType": "CITY",
+              "childGeoFilters": []
+            }
+          ]
+        },
+        {
+          "geoId": "106447",
+          "geoName": "Jawa Tengah",
+          "geoNameEN": "Jawa Tengah",
+          "geoType": "REGION",
+          "childGeoFilters": [
+            {
+              "geoId": "106587",
+              "geoName": "Semarang",
+              "geoNameEN": "Semarang",
+              "geoType": "CITY",
+              "childGeoFilters": []
+            },
+            {
+              "geoId": "106469",
+              "geoName": "Solo",
+              "geoNameEN": "Solo",
+              "geoType": "CITY",
+              "childGeoFilters": []
+            },
+            {
+              "geoId": "106975",
+              "geoName": "Magelang",
+              "geoNameEN": "Magelang",
+              "geoType": "CITY",
+              "childGeoFilters": []
+            },
+            {
+              "geoId": "106979",
+              "geoName": "Jepara",
+              "geoNameEN": "Jepara",
+              "geoType": "CITY",
+              "childGeoFilters": []
+            },
+            {
+              "geoId": "106792",
+              "geoName": "Pekalongan",
+              "geoNameEN": "Pekalongan",
+              "geoType": "CITY",
+              "childGeoFilters": []
+            },
+            {
+              "geoId": "107034",
+              "geoName": "Tegal",
+              "geoNameEN": "Tegal",
+              "geoType": "CITY",
+              "childGeoFilters": []
+            },
+            {
+              "geoId": "106723",
+              "geoName": "Salatiga",
+              "geoNameEN": "Salatiga",
+              "geoType": "CITY",
+              "childGeoFilters": []
+            },
+            {
+              "geoId": "106767",
+              "geoName": "Cilacap",
+              "geoNameEN": "Cilacap",
+              "geoType": "CITY",
+              "childGeoFilters": []
+            },
+            {
+              "geoId": "106843",
+              "geoName": "Wonosobo",
+              "geoNameEN": "Wonosobo",
+              "geoType": "CITY",
+              "childGeoFilters": []
+            },
+            {
+              "geoId": "106965",
+              "geoName": "Kudus",
+              "geoNameEN": "Kudus",
+              "geoType": "CITY",
+              "childGeoFilters": []
+            },
+            {
+              "geoId": "106797",
+              "geoName": "Klaten",
+              "geoNameEN": "Klaten",
+              "geoType": "CITY",
+              "childGeoFilters": []
+            },
+            {
+              "geoId": "106637",
+              "geoName": "Pati",
+              "geoNameEN": "Pati",
+              "geoType": "CITY",
+              "childGeoFilters": []
+            },
+            {
+              "geoId": "106604",
+              "geoName": "Karanganyar",
+              "geoNameEN": "Karanganyar",
+              "geoType": "CITY",
+              "childGeoFilters": []
+            },
+            {
+              "geoId": "107074",
+              "geoName": "Kebumen",
+              "geoNameEN": "Kebumen",
+              "geoType": "CITY",
+              "childGeoFilters": []
+            },
+            {
+              "geoId": "107017",
+              "geoName": "Purworejo",
+              "geoNameEN": "Purworejo",
+              "geoType": "CITY",
+              "childGeoFilters": []
+            },
+            {
+              "geoId": "106996",
+              "geoName": "Kendal",
+              "geoNameEN": "Kendal",
+              "geoType": "CITY",
+              "childGeoFilters": []
+            },
+            {
+              "geoId": "106660",
+              "geoName": "Banyumas",
+              "geoNameEN": "Banyumas",
+              "geoType": "CITY",
+              "childGeoFilters": []
+            },
+            {
+              "geoId": "106876",
+              "geoName": "Sragen",
+              "geoNameEN": "Sragen",
+              "geoType": "CITY",
+              "childGeoFilters": []
+            },
+            {
+              "geoId": "107101",
+              "geoName": "Grobogan",
+              "geoNameEN": "Grobogan",
+              "geoType": "CITY",
+              "childGeoFilters": []
+            },
+            {
+              "geoId": "106746",
+              "geoName": "Temanggung",
+              "geoNameEN": "Temanggung",
+              "geoType": "CITY",
+              "childGeoFilters": []
+            }
+          ]
+        },
+        {
+          "geoId": "100196",
+          "geoName": "Banten",
+          "geoNameEN": "Banten",
+          "geoType": "REGION",
+          "childGeoFilters": [
+            {
+              "geoId": "100330",
+              "geoName": "Tangerang",
+              "geoNameEN": "Tangerang",
+              "geoType": "CITY",
+              "childGeoFilters": []
+            },
+            {
+              "geoId": "100286",
+              "geoName": "Tangerang Selatan",
+              "geoNameEN": "Tangerang Selatan",
+              "geoType": "CITY",
+              "childGeoFilters": []
+            },
+            {
+              "geoId": "100344",
+              "geoName": "Serang",
+              "geoNameEN": "Serang",
+              "geoType": "CITY",
+              "childGeoFilters": []
+            },
+            {
+              "geoId": "100351",
+              "geoName": "Cilegon",
+              "geoNameEN": "Cilegon",
+              "geoType": "CITY",
+              "childGeoFilters": []
+            },
+            {
+              "geoId": "100288",
+              "geoName": "Pandeglang",
+              "geoNameEN": "Pandeglang",
+              "geoType": "CITY",
+              "childGeoFilters": []
+            },
+            {
+              "geoId": "100197",
+              "geoName": "Lebak",
+              "geoNameEN": "Lebak",
+              "geoType": "CITY",
+              "childGeoFilters": []
+            }
+          ]
+        },
+        {
+          "geoId": "101586",
+          "geoName": "Sumatra Barat",
+          "geoNameEN": "Sumatera Barat",
+          "geoType": "REGION",
+          "childGeoFilters": [
+            {
+              "geoId": "101687",
+              "geoName": "Padang",
+              "geoNameEN": "Padang",
+              "geoType": "CITY",
+              "childGeoFilters": []
+            },
+            {
+              "geoId": "101587",
+              "geoName": "Agam",
+              "geoNameEN": "Agam",
+              "geoType": "CITY",
+              "childGeoFilters": []
+            }
+          ]
+        },
+        {
+          "geoId": "104768",
+          "geoName": "Nusa Tenggara Barat",
+          "geoNameEN": "Nusa Tenggara Barat",
+          "geoType": "REGION",
+          "childGeoFilters": [
+            {
+              "geoId": "107703",
+              "geoName": "Lombok",
+              "geoNameEN": "Lombok",
+              "geoType": "CITY",
+              "childGeoFilters": []
+            },
+            {
+              "geoId": "30012598",
+              "geoName": "Kepulauan Gili",
+              "geoNameEN": "Gili Islands",
+              "geoType": "CITY",
+              "childGeoFilters": []
+            }
+          ]
+        },
+        {
+          "geoId": "100970",
+          "geoName": "Sulawesi Utara",
+          "geoNameEN": "Sulawesi Utara",
+          "geoType": "REGION",
+          "childGeoFilters": [
+            {
+              "geoId": "101092",
+              "geoName": "Manado",
+              "geoNameEN": "Manado",
+              "geoType": "CITY",
+              "childGeoFilters": []
+            },
+            {
+              "geoId": "101038",
+              "geoName": "Tomohon",
+              "geoNameEN": "Tomohon",
+              "geoType": "CITY",
+              "childGeoFilters": []
+            },
+            {
+              "geoId": "101029",
+              "geoName": "Bitung",
+              "geoNameEN": "Bitung",
+              "geoType": "CITY",
+              "childGeoFilters": []
+            },
+            {
+              "geoId": "100971",
+              "geoName": "Kotamobagu",
+              "geoNameEN": "Kotamobagu",
+              "geoType": "CITY",
+              "childGeoFilters": []
+            },
+            {
+              "geoId": "101018",
+              "geoName": "Minahasa Utara",
+              "geoNameEN": "Minahasa Utara",
+              "geoType": "CITY",
+              "childGeoFilters": []
+            }
+          ]
+        },
+        {
+          "geoId": "101786",
+          "geoName": "Kalimantan Timur",
+          "geoNameEN": "Kalimantan Timur",
+          "geoType": "REGION",
+          "childGeoFilters": [
+            {
+              "geoId": "101894",
+              "geoName": "Balikpapan",
+              "geoNameEN": "Balikpapan",
+              "geoType": "CITY",
+              "childGeoFilters": []
+            },
+            {
+              "geoId": "101901",
+              "geoName": "Samarinda",
+              "geoNameEN": "Samarinda",
+              "geoType": "CITY",
+              "childGeoFilters": []
+            }
+          ]
+        },
+        {
+          "geoId": "100595",
+          "geoName": "Sulawesi Selatan",
+          "geoNameEN": "Sulawesi Selatan",
+          "geoType": "REGION",
+          "childGeoFilters": [
+            {
+              "geoId": "100805",
+              "geoName": "Makassar",
+              "geoNameEN": "Makassar",
+              "geoType": "CITY",
+              "childGeoFilters": []
+            },
+            {
+              "geoId": "100633",
+              "geoName": "Tana Toraja",
+              "geoNameEN": "Tana Toraja",
+              "geoType": "CITY",
+              "childGeoFilters": []
+            },
+            {
+              "geoId": "100696",
+              "geoName": "Bulukumba",
+              "geoNameEN": "Bulukumba",
+              "geoType": "CITY",
+              "childGeoFilters": []
+            },
+            {
+              "geoId": "30010505",
+              "geoName": "Toraja Utara",
+              "geoNameEN": "Toraja Utara",
+              "geoType": "CITY",
+              "childGeoFilters": []
+            },
+            {
+              "geoId": "100790",
+              "geoName": "Maros",
+              "geoNameEN": "Maros",
+              "geoType": "CITY",
+              "childGeoFilters": []
+            },
+            {
+              "geoId": "100775",
+              "geoName": "Palopo",
+              "geoNameEN": "Palopo",
+              "geoType": "CITY",
+              "childGeoFilters": []
+            },
+            {
+              "geoId": "100596",
+              "geoName": "Wajo",
+              "geoNameEN": "Wajo",
+              "geoType": "CITY",
+              "childGeoFilters": []
+            },
+            {
+              "geoId": "100881",
+              "geoName": "Gowa",
+              "geoNameEN": "Gowa",
+              "geoType": "CITY",
+              "childGeoFilters": []
+            }
+          ]
+        },
+        {
+          "geoId": "101115",
+          "geoName": "Aceh",
+          "geoNameEN": "Aceh",
+          "geoType": "REGION",
+          "childGeoFilters": [
+            {
+              "geoId": "101116",
+              "geoName": "Banda Aceh",
+              "geoNameEN": "Banda Aceh",
+              "geoType": "CITY",
+              "childGeoFilters": []
+            },
+            {
+              "geoId": "101244",
+              "geoName": "Sabang",
+              "geoNameEN": "Sabang",
+              "geoType": "CITY",
+              "childGeoFilters": []
+            },
+            {
+              "geoId": "101288",
+              "geoName": "Lhokseumawe",
+              "geoNameEN": "Lhokseumawe",
+              "geoType": "CITY",
+              "childGeoFilters": []
+            },
+            {
+              "geoId": "101185",
+              "geoName": "Aceh Barat",
+              "geoNameEN": "Aceh Barat",
+              "geoType": "CITY",
+              "childGeoFilters": []
+            },
+            {
+              "geoId": "101282",
+              "geoName": "Langsa",
+              "geoNameEN": "Langsa",
+              "geoType": "CITY",
+              "childGeoFilters": []
+            }
+          ]
+        },
+        {
+          "geoId": "105728",
+          "geoName": "Riau",
+          "geoNameEN": "Riau",
+          "geoType": "REGION",
+          "childGeoFilters": [
+            {
+              "geoId": "105839",
+              "geoName": "Pekanbaru",
+              "geoNameEN": "Pekanbaru",
+              "geoType": "CITY",
+              "childGeoFilters": []
+            },
+            {
+              "geoId": "105742",
+              "geoName": "Dumai",
+              "geoNameEN": "Dumai",
+              "geoType": "CITY",
+              "childGeoFilters": []
+            },
+            {
+              "geoId": "105813",
+              "geoName": "Bengkalis",
+              "geoNameEN": "Bengkalis",
+              "geoType": "CITY",
+              "childGeoFilters": []
+            },
+            {
+              "geoId": "105763",
+              "geoName": "Kampar",
+              "geoNameEN": "Kampar",
+              "geoType": "CITY",
+              "childGeoFilters": []
+            },
+            {
+              "geoId": "105852",
+              "geoName": "Rokan Hilir",
+              "geoNameEN": "Rokan Hilir",
+              "geoType": "CITY",
+              "childGeoFilters": []
+            }
+          ]
+        },
+        {
+          "geoId": "100360",
+          "geoName": "Kepulauan Riau",
+          "geoNameEN": "Kepulauan Riau",
+          "geoType": "REGION",
+          "childGeoFilters": [
+            {
+              "geoId": "100361",
+              "geoName": "Batam",
+              "geoNameEN": "Batam",
+              "geoType": "CITY",
+              "childGeoFilters": []
+            },
+            {
+              "geoId": "100400",
+              "geoName": "Tanjung Pinang",
+              "geoNameEN": "Tanjung Pinang",
+              "geoType": "CITY",
+              "childGeoFilters": []
+            },
+            {
+              "geoId": "100414",
+              "geoName": "Bintan",
+              "geoNameEN": "Bintan",
+              "geoType": "CITY",
+              "childGeoFilters": []
+            }
+          ]
+        },
+        {
+          "geoId": "105041",
+          "geoName": "Nusa Tenggara Timur",
+          "geoNameEN": "Nusa Tenggara Timur",
+          "geoType": "REGION",
+          "childGeoFilters": [
+            {
+              "geoId": "105094",
+              "geoName": "Kupang",
+              "geoNameEN": "Kupang",
+              "geoType": "CITY",
+              "childGeoFilters": []
+            },
+            {
+              "geoId": "105308",
+              "geoName": "Manggarai Barat",
+              "geoNameEN": "Manggarai Barat",
+              "geoType": "CITY",
+              "childGeoFilters": []
+            },
+            {
+              "geoId": "105240",
+              "geoName": "Ngada",
+              "geoNameEN": "Ngada",
+              "geoType": "CITY",
+              "childGeoFilters": []
+            },
+            {
+              "geoId": "105042",
+              "geoName": "Manggarai",
+              "geoNameEN": "Manggarai",
+              "geoType": "CITY",
+              "childGeoFilters": []
+            },
+            {
+              "geoId": "30017967",
+              "geoName": "Pulau Sumba",
+              "geoNameEN": "Sumba Island",
+              "geoType": "CITY",
+              "childGeoFilters": []
+            }
+          ]
+        },
+        {
+          "geoId": "107242",
+          "geoName": "Kalimantan Selatan",
+          "geoNameEN": "Kalimantan Selatan",
+          "geoType": "REGION",
+          "childGeoFilters": [
+            {
+              "geoId": "107385",
+              "geoName": "Banjarmasin",
+              "geoNameEN": "Banjarmasin",
+              "geoType": "CITY",
+              "childGeoFilters": []
+            },
+            {
+              "geoId": "107281",
+              "geoName": "Hulu Sungai Selatan",
+              "geoNameEN": "Hulu Sungai Selatan",
+              "geoType": "CITY",
+              "childGeoFilters": []
+            }
+          ]
+        },
+        {
+          "geoId": "101946",
+          "geoName": "Sumatra Selatan",
+          "geoNameEN": "Sumatera Selatan",
+          "geoType": "REGION",
+          "childGeoFilters": [
+            {
+              "geoId": "101980",
+              "geoName": "Palembang",
+              "geoNameEN": "Palembang",
+              "geoType": "CITY",
+              "childGeoFilters": []
+            },
+            {
+              "geoId": "101997",
+              "geoName": "LubukLinggau",
+              "geoNameEN": "Lubuklinggau",
+              "geoType": "CITY",
+              "childGeoFilters": []
+            },
+            {
+              "geoId": "102151",
+              "geoName": "Lahat",
+              "geoNameEN": "Lahat",
+              "geoType": "CITY",
+              "childGeoFilters": []
+            },
+            {
+              "geoId": "101947",
+              "geoName": "Ogan Komering Ulu",
+              "geoNameEN": "Ogan Komering Ulu",
+              "geoType": "CITY",
+              "childGeoFilters": []
+            }
+          ]
+        },
+        {
+          "geoId": "102361",
+          "geoName": "Papua",
+          "geoNameEN": "Papua",
+          "geoType": "REGION",
+          "childGeoFilters": [
+            {
+              "geoId": "102565",
+              "geoName": "Jayapura",
+              "geoNameEN": "Jayapura",
+              "geoType": "CITY",
+              "childGeoFilters": []
+            }
+          ]
+        },
+        {
+          "geoId": "105524",
+          "geoName": "Maluku",
+          "geoNameEN": "Maluku",
+          "geoType": "REGION",
+          "childGeoFilters": [
+            {
+              "geoId": "105550",
+              "geoName": "Ambon",
+              "geoNameEN": "Ambon",
+              "geoType": "CITY",
+              "childGeoFilters": []
+            }
+          ]
+        },
+        {
+          "geoId": "100425",
+          "geoName": "Sulawesi Tengah",
+          "geoNameEN": "Sulawesi Tengah",
+          "geoType": "REGION",
+          "childGeoFilters": [
+            {
+              "geoId": "100588",
+              "geoName": "Palu",
+              "geoNameEN": "Palu",
+              "geoType": "CITY",
+              "childGeoFilters": []
+            },
+            {
+              "geoId": "100549",
+              "geoName": "Poso",
+              "geoNameEN": "Poso",
+              "geoType": "CITY",
+              "childGeoFilters": []
+            }
+          ]
+        },
+        {
+          "geoId": "102173",
+          "geoName": "Kalimantan Barat",
+          "geoNameEN": "Kalimantan Barat",
+          "geoType": "REGION",
+          "childGeoFilters": [
+            {
+              "geoId": "102354",
+              "geoName": "Pontianak",
+              "geoNameEN": "Pontianak",
+              "geoType": "CITY",
+              "childGeoFilters": []
+            },
+            {
+              "geoId": "102199",
+              "geoName": "Singkawang",
+              "geoNameEN": "Singkawang",
+              "geoType": "CITY",
+              "childGeoFilters": []
+            }
+          ]
+        },
+        {
+          "geoId": "105373",
+          "geoName": "Kalimantan Tengah",
+          "geoNameEN": "Kalimantan Tengah",
+          "geoType": "REGION",
+          "childGeoFilters": [
+            {
+              "geoId": "105503",
+              "geoName": "Palangka Raya",
+              "geoNameEN": "Palangkaraya",
+              "geoType": "CITY",
+              "childGeoFilters": []
+            },
+            {
+              "geoId": "105391",
+              "geoName": "Kapuas",
+              "geoNameEN": "Kapuas",
+              "geoType": "CITY",
+              "childGeoFilters": []
+            }
+          ]
+        },
+        {
+          "geoId": "101405",
+          "geoName": "Sulawesi Tenggara",
+          "geoNameEN": "Sulawesi Tenggara",
+          "geoType": "REGION",
+          "childGeoFilters": [
+            {
+              "geoId": "101436",
+              "geoName": "Kendari",
+              "geoNameEN": "Kendari",
+              "geoType": "CITY",
+              "childGeoFilters": []
+            }
+          ]
+        },
+        {
+          "geoId": "107121",
+          "geoName": "Papua Barat",
+          "geoNameEN": "Papua Barat",
+          "geoType": "REGION",
+          "childGeoFilters": [
+            {
+              "geoId": "107180",
+              "geoName": "Sorong",
+              "geoNameEN": "Sorong",
+              "geoType": "CITY",
+              "childGeoFilters": []
+            },
+            {
+              "geoId": "107217",
+              "geoName": "Raja Ampat",
+              "geoNameEN": "Raja Ampat",
+              "geoType": "CITY",
+              "childGeoFilters": []
+            }
+          ]
+        },
+        {
+          "geoId": "106338",
+          "geoName": "Maluku Utara",
+          "geoNameEN": "Maluku Utara",
+          "geoType": "REGION",
+          "childGeoFilters": [
+            {
+              "geoId": "106426",
+              "geoName": "Ternate",
+              "geoNameEN": "Ternate",
+              "geoType": "CITY",
+              "childGeoFilters": []
+            }
+          ]
+        },
+        {
+          "geoId": "106282",
+          "geoName": "Sulawesi Barat",
+          "geoNameEN": "Sulawesi Barat",
+          "geoType": "REGION",
+          "childGeoFilters": [
+            {
+              "geoId": "106326",
+              "geoName": "Mamuju",
+              "geoNameEN": "Mamuju",
+              "geoType": "CITY",
+              "childGeoFilters": []
+            }
+          ]
+        }
+      ]
+}
