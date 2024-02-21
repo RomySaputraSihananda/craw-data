@@ -175,11 +175,11 @@ class BaseCekbpom:
         
         page: int = start
         while(True):
-            success: bool = await asyncio.gather(*(self._get_product_by_page(i, data, log) for i in range(page, page + 10)))
+            success: bool = await asyncio.gather(*(self._get_product_by_page(i, data, log) for i in range(page, page + 5)))
 
             if(False in success): break
             
-            page += 10
+            page += 5
 
         log['status'] = 'Done'
         Iostream.update_log(log, name=__name__)
