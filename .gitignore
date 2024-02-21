@@ -7,7 +7,7 @@ __pycache__/
 *.so
 
 *.html
-
+logging/
 data/
 
 # Distribution / packaging
