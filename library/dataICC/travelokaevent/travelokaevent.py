@@ -10,6 +10,7 @@ from time import time
 from concurrent.futures import ThreadPoolExecutor
 
 from helpers import Iostream, Datetime, ConnectionS3, Decorator
+from .geoenum import GeoEnum
 
 load_dotenv()
 
@@ -27,6 +28,46 @@ class BaseTravelokaEvent:
             'x-route-prefix': 'en-id'
         })
     
+    async def __get_recomendation_by_loation(self, location_id: str) -> None:
+        await self.__get_detail_experience(self.__get_recomendation_by_loation_page(location_id, 0)[0])
+
+    def __get_recomendation_by_loation_page(self, location_id: str, start: int) -> list:
+        response: Response = self.__requests.post('https://www.traveloka.com/api/v2/experience/softRecommendation',
+                                                    json={
+                                                        'fields': [],
+                                                        'data': {
+                                                            'caller': 'SEARCH_RESULT',
+                                                            'currency': 'IDR',
+                                                            'sortType': 'MOST_POPULAR',
+                                                            'filters': {
+                                                                'typeFilterList': [
+                                                                    'EVENT',
+                                                                ],
+                                                                'priceFilter': {
+                                                                    'minPrice': None,
+                                                                    'maxPrice': None,
+                                                                },
+                                                                'instantVoucherOnly': False,
+                                                                'subTypeFilter': [],
+                                                                'durationFilter': [],
+                                                                'geoIdsFilter': [],
+                                                                'availabilityFilter': [],
+                                                                'featureFilter': [],
+                                                                'promoFilterList': [],
+                                                            },
+                                                            'basicSearchSpec': {
+                                                                'searchType': 'GEO',
+                                                                'entityId': location_id,
+                                                            },
+                                                            'rowsToReturn': 12,
+                                                            'skip': start,
+                                                            'recommendationType': None,
+                                                        },
+                                                        'clientInterface': 'desktop',
+                                                    })
+        
+        return response.json()['data']['results']
+
     def __get_user_reviews(self, experience_id: str) -> dict:
         response: Response = self.__requests.post('https://www.traveloka.com/api/v2/experience/reviews',         
                                                     json={
@@ -86,20 +127,20 @@ class BaseTravelokaEvent:
                 (ticket_price_details, ticket_available) = self.__get_ticket_avaliable_dates(experience_id)
                 user_reviews: dict = self.__get_user_reviews(experience_id)
 
-                province: str = event_detail["experienceSearchInfo"]["subLabel"].split(',')[1].replace('Province', '').strip(' ')
+                address: list = [label.replace('Province', '').strip(' ') for label in event_detail["experienceSearchInfo"]["subLabel"].split(',')]
 
                 headers: dict = {
                     "link": link,
                     "domain": link_split[2],
-                    "tag": link_split[2:],
+                    "tag": [*link_split[2:], *address],
                     "crawling_time": Datetime.now(),
                     "crawling_time_epoch": int(time()),
                     'event_detail': event_detail | experience,
                     'detail_tickets': [ticket | ticket_price_details[i] for i, ticket in enumerate(tickets)],
                     'ticket_available': ticket_available,
                     'user_reviews': user_reviews,
-                    "path_data_raw": f'S3://ai-pipeline-statistics/data/data_raw/traveloka/event/{province}/{link_split[-1]}.json',
-                    "path_data_clean": f'S3://ai-pipeline-statistics/data/data_raw/traveloka/event/{province}/{link_split[-1]}.json',
+                    "path_data_raw": f'S3://ai-pipeline-statistics/data/data_raw/traveloka/event/{address[1]}/{link_split[-1]}.json',
+                    "path_data_clean": f'S3://ai-pipeline-statistics/data/data_raw/traveloka/event/{address[1]}/{link_split[-1]}.json',
                 }
 
                 paths: list = [path.replace('S3://ai-pipeline-statistics/', '') for path in [headers["path_data_raw"]]] 
@@ -119,7 +160,8 @@ class BaseTravelokaEvent:
 
                 return Iostream.dict_to_deep(headers)
 
-    async def __get_experience_by_location(self, location_id: str) -> None:
+    async def __get_experience_by_location(self, geo: GeoEnum) -> None:
+        location_id: str = geo.value
         response: Response = self.__requests.post('https://www.traveloka.com/api/v2/experience/searchV2',
                                                   json={
                                                     'fields': [],
@@ -154,14 +196,17 @@ class BaseTravelokaEvent:
                                                 })
 
         experiences: list = response.json()['data']['results']
+        
+        if(not experiences): return await self.__get_recomendation_by_loation(location_id)
 
-        await asyncio.gather(*(self.__get_detail_experience(experience) for experience in experiences))
+        return await asyncio.gather(*(self.__get_detail_experience(experience) for experience in experiences))
 
     @Decorator.counter_time
     def start(self) -> None:
-        asyncio.run(self.__get_experience_by_location('100003'))
+        asyncio.run(self.__get_experience_by_location(GeoEnum.TANGERANG_SELATAN))
 
 if(__name__ == '__main__'):
     baseTravelokaEvent: BaseTravelokaEvent = BaseTravelokaEvent()
 
     baseTravelokaEvent.start()
+
