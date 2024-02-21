@@ -29,7 +29,15 @@ class BaseTravelokaEvent:
         })
     
     async def __get_recomendation_by_loation(self, location_id: str) -> None:
-        await self.__get_detail_experience(self.__get_recomendation_by_loation_page(location_id, 0)[0])
+        start: int = 0
+        while(True):
+            experiences: list = self.__get_recomendation_by_loation_page(location_id, start)
+            
+            if(not experiences): return
+
+            await asyncio.gather(*(self.__get_detail_experience(experience) for experience in experiences))
+
+            start += 12
 
     def __get_recomendation_by_loation_page(self, location_id: str, start: int) -> list:
         response: Response = self.__requests.post('https://www.traveloka.com/api/v2/experience/softRecommendation',
@@ -129,7 +137,7 @@ class BaseTravelokaEvent:
 
                 address: list = [label.replace('Province', '').strip(' ') for label in event_detail["experienceSearchInfo"]["subLabel"].split(',')]
 
-                headers: dict = {
+                data: dict = {
                     "link": link,
                     "domain": link_split[2],
                     "tag": [*link_split[2:], *address],
@@ -143,22 +151,20 @@ class BaseTravelokaEvent:
                     "path_data_clean": f'S3://ai-pipeline-statistics/data/data_raw/traveloka/event/{address[1]}/{link_split[-1]}.json',
                 }
 
-                paths: list = [path.replace('S3://ai-pipeline-statistics/', '') for path in [headers["path_data_raw"]]] 
+                paths: list = [path.replace('S3://ai-pipeline-statistics/', '') for path in [data["path_data_raw"]]] 
                 
                 if(self.__clean):
-                    paths: list = [path.replace('S3://ai-pipeline-statistics/', '') for path in [headers["path_data_raw"], headers["path_data_clean"]]] 
+                    paths: list = [path.replace('S3://ai-pipeline-statistics/', '') for path in [data["path_data_raw"], data["path_data_clean"]]] 
                 
                 with ThreadPoolExecutor() as executor:
-                    headers: dict = Iostream.dict_to_deep(headers)
+                    data: dict = Iostream.dict_to_deep(data)
                     try:
                         if(self.__s3):
-                            executor.map(lambda path: ConnectionS3.upload(headers, path), paths)
+                            executor.map(lambda path: ConnectionS3.upload(data, path), paths)
                         else:
-                            executor.map(lambda path: Iostream.write_json(headers, path), paths)
+                            executor.map(lambda path: Iostream.write_json(data, path), paths)
                     except Exception as e:
                         raise e
-
-                return Iostream.dict_to_deep(headers)
 
     async def __get_experience_by_location(self, geo: GeoEnum) -> None:
         location_id: str = geo.value
@@ -194,6 +200,10 @@ class BaseTravelokaEvent:
                                                     },
                                                     'clientInterface': 'desktop',
                                                 })
+        
+        log: dict = {
+
+        }
 
         experiences: list = response.json()['data']['results']
         
@@ -203,7 +213,7 @@ class BaseTravelokaEvent:
 
     @Decorator.counter_time
     def start(self) -> None:
-        asyncio.run(self.__get_experience_by_location(GeoEnum.TANGERANG_SELATAN))
+        asyncio.run(self.__get_experience_by_location(GeoEnum.JAWA_TIMUR))
 
 if(__name__ == '__main__'):
     baseTravelokaEvent: BaseTravelokaEvent = BaseTravelokaEvent()
