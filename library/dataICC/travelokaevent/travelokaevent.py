@@ -28,18 +28,24 @@ class BaseTravelokaEvent:
             'x-route-prefix': 'en-id'
         })
     
-    async def __get_recomendation_by_loation(self, location_id: str) -> None:
+    async def __get_recomendation_by_loation(self, geo: GeoEnum, log: dict) -> None:
         start: int = 0
         while(True):
-            experiences: list = self.__get_recomendation_by_loation_page(location_id, start)
+            experiences: list = self.__get_recomendation_by_loation_page(geo, start)
             
-            if(not experiences): return
+            if(not experiences): break
 
-            await asyncio.gather(*(self.__get_detail_experience(experience) for experience in experiences))
+            log['total_data'] += len(experiences)
+            Iostream.update_log(log, name=__name__, title=geo.name)
+
+            await asyncio.gather(*(self.__get_detail_experience(experience, log, geo) for experience in experiences))
 
             start += 12
 
-    def __get_recomendation_by_loation_page(self, location_id: str, start: int) -> list:
+        log['status'] = 'Done'
+        Iostream.update_log(log, name=__name__, title=geo.name)
+
+    def __get_recomendation_by_loation_page(self, geo: GeoEnum, start: int) -> list:
         response: Response = self.__requests.post('https://www.traveloka.com/api/v2/experience/softRecommendation',
                                                     json={
                                                         'fields': [],
@@ -65,7 +71,7 @@ class BaseTravelokaEvent:
                                                             },
                                                             'basicSearchSpec': {
                                                                 'searchType': 'GEO',
-                                                                'entityId': location_id,
+                                                                'entityId': geo.value,
                                                             },
                                                             'rowsToReturn': 12,
                                                             'skip': start,
@@ -118,7 +124,7 @@ class BaseTravelokaEvent:
 
         return (data['defaultExperienceTicketIdWithPriceDetails'], data['ticketAvailableDateGroups'])
 
-    async def __get_detail_experience(self, experience: dict) -> None:
+    async def __get_detail_experience(self, experience: dict, log: dict, geo: GeoEnum) -> None:
         experience_id: str = experience["experienceId"]
 
         link: str = f'https://www.traveloka.com/en-id/activities/indonesia/product/{experience_id}'
@@ -165,8 +171,11 @@ class BaseTravelokaEvent:
                             executor.map(lambda path: Iostream.write_json(data, path), paths)
                     except Exception as e:
                         raise e
+                
+                log['total_success'] += 1
+                Iostream.update_log(log, name=__name__, title=geo.name)
 
-    async def __get_experience_by_location(self, geo: GeoEnum) -> None:
+    async def _get_experience_by_location(self, geo: GeoEnum) -> None:
         location_id: str = geo.value
         response: Response = self.__requests.post('https://www.traveloka.com/api/v2/experience/searchV2',
                                                   json={
@@ -200,23 +209,37 @@ class BaseTravelokaEvent:
                                                     },
                                                     'clientInterface': 'desktop',
                                                 })
-        
-        log: dict = {
-
-        }
-
         experiences: list = response.json()['data']['results']
         
-        if(not experiences): return await self.__get_recomendation_by_loation(location_id)
 
-        return await asyncio.gather(*(self.__get_detail_experience(experience) for experience in experiences))
+        log: dict = {
+            "Crawlling_time": Datetime.now(),
+            "id_project": None,
+            "project": "Data Intelligence",
+            "sub_project": "data ICC",
+            "source_name": 'traveloka',
+            "sub_source_name": geo.name,
+            "id_sub_source": location_id,
+            "total_data": len(experiences),
+            "total_success": 0,
+            "total_failed": 0,
+            "status": "Process",
+            "assign": "romy",
+        }
+        Iostream.write_log(log, indent=2, name=__name__)
 
-    @Decorator.counter_time
-    def start(self) -> None:
-        asyncio.run(self.__get_experience_by_location(GeoEnum.JAWA_TIMUR))
+        if(not experiences): return await self.__get_recomendation_by_loation(geo, log)
+        
+
+        await asyncio.gather(*(self.__get_detail_experience(experience, log, geo) for experience in experiences))
+
+        log['status'] = 'Done'
+        Iostream.update_log(log, name=__name__, title=geo.name)
+
+    def _get_experience_all_location(self) -> None:
+        for i in GeoEnum:
+            asyncio.run(self._get_experience_by_location(i))
 
 if(__name__ == '__main__'):
     baseTravelokaEvent: BaseTravelokaEvent = BaseTravelokaEvent()
-
-    baseTravelokaEvent.start()
 

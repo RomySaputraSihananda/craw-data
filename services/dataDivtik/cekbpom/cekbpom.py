@@ -3,8 +3,7 @@ import asyncio
 
 from typing import final
 
-from helpers import logging
-from helpers.decorators import Decorator 
+from helpers import logging, Decorator 
 from library.dataDivtik import AbstractCekbpom, BaseCekbpom
 
 @final

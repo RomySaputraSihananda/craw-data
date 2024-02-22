@@ -5,6 +5,7 @@ from typing import final
 
 from services.dataReview import Lemon8, Quora, Glassdoor, MicrosoftStore, Taptap
 from services.dataDivtik import Cekbpom
+from services.dataICC import TravelokaEvent
 
 @final
 class Main:
@@ -31,6 +32,12 @@ class Main:
     @click.pass_context
     def data_divtik(ctx: Context):
         """ Data Divtik """
+        ... 
+
+    @main.group()
+    @click.pass_context
+    def data_icc(ctx: Context):
+        """ Data ICC """
         ... 
 
     @staticmethod
@@ -92,8 +99,16 @@ class Main:
     @click.option('--page', default=None, help='Number page')
     @click.option('--start', default=1, help='start page')
     @click.pass_context
-    def Cekbpom(ctx: Context, **kwargs):
+    def cekbpom(ctx: Context, **kwargs):
         return Cekbpom(**Main.merge(ctx, **kwargs))
+    
+    @staticmethod
+    @data_icc.command()
+    @click.argument('method', metavar='METHOD', type=click.Choice(['by_location', 'all_location']))
+    @click.option('--location', default=None, help='Location name')
+    @click.pass_context
+    def travelokaEvent(ctx: Context, **kwargs):
+        return TravelokaEvent(**Main.merge(ctx, **kwargs))
     
 
 if(__name__ == "__main__"):
