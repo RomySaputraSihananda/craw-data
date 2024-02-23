@@ -132,61 +132,65 @@ class BaseTravelokaEvent:
         return (data['defaultExperienceTicketIdWithPriceDetails'], data['ticketAvailableDateGroups'])
 
     async def __get_detail_experience(self, experience: dict, log: dict, geo: GeoEnum) -> None:
-        experience_id: str = experience["experienceId"]
+        try:
+            experience_id: str = experience["experienceId"]
 
-        link: str = f'https://www.traveloka.com/en-id/activities/indonesia/product/{experience_id}'
+            link: str = f'https://www.traveloka.com/en-id/activities/indonesia/product/{experience_id}'
 
-        async with ClientSession() as session:
-            async with session.get(link) as response:
-                response_text: str = await response.text()
-                event_detail: dict = loads(re.findall(r'<script id="__NEXT_DATA__" type="application/json" nonce="[^"]*" crossorigin="anonymous">(.*?)</script>', response_text)[0])['props']['pageProps']["productDetailData"]
+            async with ClientSession() as session:
+                async with session.get(link) as response:
+                    response_text: str = await response.text()
+                    event_detail: dict = loads(re.findall(r'<script id="__NEXT_DATA__" type="application/json" nonce="[^"]*" crossorigin="anonymous">(.*?)</script>', response_text)[0])['props']['pageProps']["productDetailData"]
 
-                link: str = f'https://www.traveloka.com/en-id/activities/indonesia/product/{event_detail["experienceSearchInfo"]["labelEN"]}-{experience_id}'
-                link_split: list = link.split('/')
+                    link: str = f'https://www.traveloka.com/en-id/activities/indonesia/product/{event_detail["experienceSearchInfo"]["labelEN"]}-{experience_id}'
+                    link_split: list = link.split('/')
 
-                tickets: list = self.__get_tickets(experience_id)
-                (ticket_price_details, ticket_available) = self.__get_ticket_avaliable_dates(experience_id)
-                user_reviews: dict = self.__get_user_reviews(experience_id)
+                    tickets: list = self.__get_tickets(experience_id)
+                    (ticket_price_details, ticket_available) = self.__get_ticket_avaliable_dates(experience_id)
+                    user_reviews: dict = self.__get_user_reviews(experience_id)
 
-                address: list = [label.replace('Province', '').strip(' ') for label in event_detail["experienceSearchInfo"]["subLabel"].split(',')]
+                    address: list = [label.replace('Province', '').strip(' ') for label in event_detail["experienceSearchInfo"]["subLabel"].split(',')]
 
-                data: dict = {
-                    "link": link,
-                    "domain": link_split[2],
-                    "tag": [*link_split[2:], *address],
-                    "crawling_time": Datetime.now(),
-                    "crawling_time_epoch": int(time()),
-                    'event_detail': event_detail | experience,
-                    'detail_tickets': [ticket | ticket_price_details[i] for i, ticket in enumerate(tickets)],
-                    'ticket_available': ticket_available,
-                    'user_reviews': user_reviews,
-                    "path_data_raw": f'S3://ai-pipeline-statistics/data/data_raw/traveloka/event/{address[1]}/{link_split[-1]}.json',
-                    "path_data_clean": f'S3://ai-pipeline-statistics/data/data_raw/traveloka/event/{address[1]}/{link_split[-1]}.json',
-                }
+                    data: dict = {
+                        "link": link,
+                        "domain": link_split[2],
+                        "tag": [*link_split[2:], *address],
+                        "crawling_time": Datetime.now(),
+                        "crawling_time_epoch": int(time()),
+                        'event_detail': event_detail | experience,
+                        'detail_tickets': [ticket | ticket_price_details[i] for i, ticket in enumerate(tickets)],
+                        'ticket_available': ticket_available,
+                        'user_reviews': user_reviews,
+                        "path_data_raw": f'S3://ai-pipeline-statistics/data/data_raw/traveloka/event/{address[1]}/{link_split[-1]}.json',
+                        "path_data_clean": f'S3://ai-pipeline-statistics/data/data_raw/traveloka/event/{address[1]}/{link_split[-1]}.json',
+                    }
 
-                paths: list = [path.replace('S3://ai-pipeline-statistics/', '') for path in [data["path_data_raw"]]] 
-                
-                if(self.__clean):
-                    paths: list = [path.replace('S3://ai-pipeline-statistics/', '') for path in [data["path_data_raw"], data["path_data_clean"]]] 
-                
+                    paths: list = [path.replace('S3://ai-pipeline-statistics/', '') for path in [data["path_data_raw"]]] 
+                    
+                    if(self.__clean):
+                        paths: list = [path.replace('S3://ai-pipeline-statistics/', '') for path in [data["path_data_raw"], data["path_data_clean"]]] 
+                    
 
-                data: dict = Iostream.dict_to_deep(data)
-                
-                if(self.__kafka):
-                    self.__connectionKafka.send(self.__topik, data)
-                else:
-                    with ThreadPoolExecutor() as executor:
-                        try:
-                            if(self.__s3):
-                                executor.map(lambda path: ConnectionS3.upload(data, path), paths)
-                            else:
-                                executor.map(lambda path: Iostream.write_json(data, path), paths)
-                        except Exception as e:
-                            raise e
-                
-                
-                log['total_success'] += 1
-                Iostream.update_log(log, name=__name__, title=geo.name)
+                    data: dict = Iostream.dict_to_deep(data)
+                    
+                    if(self.__kafka):
+                        self.__connectionKafka.send(self.__topik, data)
+                    else:
+                        with ThreadPoolExecutor() as executor:
+                            try:
+                                if(self.__s3):
+                                    executor.map(lambda path: ConnectionS3.upload(data, path), paths)
+                                else:
+                                    executor.map(lambda path: Iostream.write_json(data, path), paths)
+                            except Exception as e:
+                                raise e
+                    
+                    
+                    log['total_success'] += 1
+                    Iostream.update_log(log, name=__name__, title=geo.name)
+        
+        except Exception as e:
+            self.__get_detail_experience(experience, log, geo)
 
     async def _get_experience_by_location(self, geo: GeoEnum) -> None:
         location_id: str = geo.value
