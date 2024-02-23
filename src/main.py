@@ -29,6 +29,12 @@ class Main:
 
     @main.group()
     @click.pass_context
+    def data(ctx: Context):
+        """ Data T4 """
+        ... 
+
+    @main.group()
+    @click.pass_context
     def data_review(ctx: Context):
         """ Data Review """
         ... 
@@ -119,5 +125,3 @@ class Main:
 
 if(__name__ == "__main__"):
     Main.main()
-    # print('ok')
-

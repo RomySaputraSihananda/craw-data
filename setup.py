@@ -6,7 +6,7 @@ setup(
     packages=find_packages(),
     entry_points={
         'console_scripts': [
-            'engine_romy = src:main'
+            'engine_romy = src.main:Main.main'
         ]
     },
 )
