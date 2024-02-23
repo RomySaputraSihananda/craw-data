@@ -1,0 +1,111 @@
+src/
+├── config
+│   ├── __init__.py
+│   └── logging.py
+├── endpoints
+│   ├── bpom
+│   ├── glassdor
+│   │   ├── getcompanies.gql
+│   │   ├── getdetailemployer.gql
+│   │   └── getReview.py
+│   ├── lemon8
+│   │   ├── async_ex.py
+│   │   ├── get_by_hastag.py
+│   │   ├── get_comments.py
+│   │   ├── get_detail_comments.py
+│   │   ├── get_post.py
+│   │   ├── get_profile.py
+│   │   ├── get_search_account.py
+│   │   └── get_search.py
+│   ├── quora
+│   │   └── reply.py
+│   └── traveloka
+│       ├── geoid.json
+│       ├── get_avaliable_ticket.py
+│       ├── get_event.py
+│       ├── get_recomendation.py
+│       ├── get_review.py
+│       ├── get_ticket.py
+│       └── load.py
+├── helpers
+│   ├── connectionKafka.py
+│   ├── connectionS3.py
+│   ├── cryptography.py
+│   ├── datetime.py
+│   ├── decorators.py
+│   ├── __init__.py
+│   ├── iostream.py
+│   └── parser.py
+├── __init__.py
+├── library
+│   ├── dataDivtik
+│   │   ├── cekbpom
+│   │   │   ├── abstract.py
+│   │   │   ├── cekbpom.py
+│   │   │   └── __init__.py
+│   │   └── __init__.py
+│   ├── dataICC
+│   │   ├── __init__.py
+│   │   └── travelokaevent
+│   │       ├── abstract.py
+│   │       ├── geoenum.py
+│   │       ├── __init__.py
+│   │       └── travelokaevent.py
+│   ├── dataReview
+│   │   ├── galaxystore
+│   │   │   ├── abstract.py
+│   │   │   ├── galaxystore.py
+│   │   │   └── __init__.py
+│   │   ├── glassdoor
+│   │   │   ├── abstract.py
+│   │   │   ├── glassdoor.py
+│   │   │   └── __init__.py
+│   │   ├── __init__.py
+│   │   ├── lemon8
+│   │   │   ├── abstract.py
+│   │   │   ├── __init__.py
+│   │   │   └── lemon8.py
+│   │   ├── microsoftStore
+│   │   │   ├── abstract.py
+│   │   │   ├── __init__.py
+│   │   │   └── microsoftStore.py
+│   │   ├── quora
+│   │   │   ├── abstract.py
+│   │   │   ├── __init__.py
+│   │   │   └── quora.py
+│   │   └── taptap
+│   │       ├── abstract.py
+│   │       ├── __init__.py
+│   │       └── taptap.py
+│   └── __init__.py
+├── main.py
+└── services
+    ├── dataDivtik
+    │   ├── cekbpom
+    │   │   ├── cekbpom.py
+    │   │   └── __init__.py
+    │   └── __init__.py
+    ├── dataICC
+    │   ├── dataICC.py
+    │   ├── __init__.py
+    │   └── travelokaevent
+    │       ├── __init__.py
+    │       └── travelokaevent.py
+    ├── dataReview
+    │   ├── glassdoor
+    │   │   ├── glassdoor.py
+    │   │   └── __init__.py
+    │   ├── __init__.py
+    │   ├── lemon8
+    │   │   ├── __init__.py
+    │   │   └── lemon8.py
+    │   ├── microsoftStore
+    │   │   ├── __init__.py
+    │   │   └── microsoftStore.py
+    │   ├── quora
+    │   │   ├── __init__.py
+    │   │   └── quora.py
+    │   └── taptap
+    │       ├── __init__.py
+    │       └── taptap.py
+    └── __init__.py
