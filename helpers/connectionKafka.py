@@ -16,7 +16,8 @@ class ConnectionKafka:
     def send(self, topic: str, data: dict) -> None:
         if(not data): return
         try:
-            return self.__producer.send(topic=topic, value=data)
+            self.__producer.send(topic=topic, value=data)
+            return sleep(0.7) 
         except Exception as e:
             return logging.error(f'failed send to kafka {self.__bootstrap_servers}')
         
