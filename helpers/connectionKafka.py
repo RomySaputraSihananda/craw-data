@@ -1,26 +1,24 @@
 from kafka import KafkaProducer
 from json import dumps
 from time import sleep
+from click import style
 
+from helpers import Decorator 
 from config import logging
 
-producer = KafkaProducer(bootstrap_servers=[...], value_serializer=lambda x: dumps(x).encode('utf-8'))
 
 class ConnectionKafka:
-    @staticmethod
-    def send(topic: str, datas: dict) -> None:
-        if(not datas): return
+    def __init__(self, bootstrap_servers: str = None) -> None:
+        self.__bootstrap_servers = bootstrap_servers
+        self.__producer = KafkaProducer(bootstrap_servers=[bootstrap_servers], value_serializer=lambda x: dumps(x).encode('utf-8'))
+    
+    @Decorator.logging_path(style('SEND KAFKA', fg='bright_cyan'))
+    def send(self, topic: str, data: dict) -> None:
+        if(not data): return
+        try:
+            return self.__producer.send(topic=topic, value=data)
+        except Exception as e:
+            return logging.error(f'failed send to kafka {self.__bootstrap_servers}')
         
-        if(isinstance(datas, dict)):
-            print(len(datas['data']))
-            for data in datas['data']:
-                logging.info(f'Send to Kafka {data["kabupaten"]["id_ID"]}')
-                producer.send(topic=topic, value=data)
-                sleep(2) 
-            return
-
-        producer.send(topic=topic, value=datas)
-        sleep(2)
-
 if(__name__ == '__main__'):
-    ConnectionKafka.send()
+    ConnectionKafka('kafka01.production02.bt:9092')

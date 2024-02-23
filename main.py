@@ -16,10 +16,15 @@ class Main:
     @click.group()
     @click.version_option(version='2.0.0', prog_name='Engine Crawler Data', message=f'{click.style("%(prog)s", fg="bright_magenta")} version {click.style("%(version)s", fg="bright_magenta")}')
     @click.option('--s3', is_flag=True, default=False, help='send s3')
+    @click.option('--kafka', is_flag=True, default=False, help='send kafka')
+    @click.option('--bootstrap', default=None, help='bootstrap kafka')
+    @click.option('--topic', default=None, help='topic kafka')
     @click.option('--clean', is_flag=True, default=False, help='data clean')
     @click.pass_context
     def main(ctx: Context, **kwargs) -> None:
         """ Engine Crawler Data """
+        if(kwargs.get('kafka') and (not kwargs.get('bootstrap') or not kwargs.get('topic'))):
+            raise click.BadParameter('--bootstrap and --topic is required')
         ctx.obj = kwargs
 
     @main.group()
@@ -113,3 +118,4 @@ class Main:
 
 if(__name__ == "__main__"):
     Main.main()
+

@@ -9,7 +9,7 @@ from dotenv import load_dotenv
 from time import time
 from concurrent.futures import ThreadPoolExecutor
 
-from helpers import Iostream, Datetime, ConnectionS3, Decorator
+from helpers import Iostream, Datetime, ConnectionS3, ConnectionKafka
 from .geoenum import GeoEnum
 
 load_dotenv()
@@ -17,7 +17,14 @@ load_dotenv()
 class BaseTravelokaEvent:
     def __init__(self, **kwargs) -> None:
         self.__s3: bool = kwargs.get('s3')
+        self.__kafka: bool = kwargs.get('kafka')
         self.__clean: bool = kwargs.get('clean')
+        
+        if(self.__kafka): 
+            self.__bootstrap: str = kwargs.get('bootstrap')
+            self.__topik: str = kwargs.get('topic')
+            self.__connectionKafka: ConnectionKafka = ConnectionKafka(kwargs.get('bootstrap')) 
+        
         self.__requests: Session = Session()
         self.__requests.headers.update({
             'user-agent': 'Mozilla/5.0 (Linux; Android 13; SM-S901B) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/112.0.0.0 Mobile Safari/537.36',
@@ -162,15 +169,21 @@ class BaseTravelokaEvent:
                 if(self.__clean):
                     paths: list = [path.replace('S3://ai-pipeline-statistics/', '') for path in [data["path_data_raw"], data["path_data_clean"]]] 
                 
-                with ThreadPoolExecutor() as executor:
-                    data: dict = Iostream.dict_to_deep(data)
-                    try:
-                        if(self.__s3):
-                            executor.map(lambda path: ConnectionS3.upload(data, path), paths)
-                        else:
-                            executor.map(lambda path: Iostream.write_json(data, path), paths)
-                    except Exception as e:
-                        raise e
+
+                data: dict = Iostream.dict_to_deep(data)
+                
+                if(self.__kafka):
+                    self.__connectionKafka.send(self.__topik, data)
+                else:
+                    with ThreadPoolExecutor() as executor:
+                        try:
+                            if(self.__s3):
+                                executor.map(lambda path: ConnectionS3.upload(data, path), paths)
+                            else:
+                                executor.map(lambda path: Iostream.write_json(data, path), paths)
+                        except Exception as e:
+                            raise e
+                
                 
                 log['total_success'] += 1
                 Iostream.update_log(log, name=__name__, title=geo.name)
