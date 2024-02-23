@@ -19,7 +19,10 @@ class TravelokaEvent(BaseTravelokaEvent, AbstractTravelokaEvent):
 
                 self.get_experience_by_location(location=location)
             case 'all_location':
-                self.get_experience_all_location(**kwargs)
+                start: str = kwargs.get('start').replace('_', ' ').replace(' ', '_').upper()
+                if(start not in GeoEnum.__members__): raise click.BadParameter("start location not found !!")
+        
+                self.get_experience_all_location(start=start)
             case _:
                 logging.error('Wait.............')
 
@@ -29,7 +32,7 @@ class TravelokaEvent(BaseTravelokaEvent, AbstractTravelokaEvent):
     
     @Decorator.counter_time
     def get_experience_all_location(self, **kwargs) -> None:
-        return super()._get_experience_all_location()
+        return super()._get_experience_all_location(GeoEnum[kwargs.get('start')])
 
 if(__name__ == '__main__'):
     TravelokaEvent(**{

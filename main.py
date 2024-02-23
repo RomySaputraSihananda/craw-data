@@ -111,6 +111,7 @@ class Main:
     @data_icc.command()
     @click.argument('method', metavar='METHOD', type=click.Choice(['by_location', 'all_location']))
     @click.option('--location', default=None, help='Location name')
+    @click.option('--start', default=None, help='strtstart location')
     @click.pass_context
     def travelokaEvent(ctx: Context, **kwargs):
         return TravelokaEvent(**Main.merge(ctx, **kwargs))

@@ -249,8 +249,8 @@ class BaseTravelokaEvent:
         log['status'] = 'Done'
         Iostream.update_log(log, name=__name__, title=geo.name)
 
-    def _get_experience_all_location(self) -> None:
-        for i in GeoEnum:
+    def _get_experience_all_location(self, start: GeoEnum) -> None:
+        for i in GeoEnum if not start else list(GeoEnum)[list(GeoEnum).index(start):]:
             asyncio.run(self._get_experience_by_location(i))
 
 if(__name__ == '__main__'):
