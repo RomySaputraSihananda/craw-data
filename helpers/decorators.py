@@ -29,7 +29,7 @@ class Decorator:
             @wraps(func)
             def wrapper(*args: Any, **kwargs) -> None:
                 func(*args, **kwargs)
-                logging.info(f'[ {name} ] :: {args[1]}')
+                logging.info(f'[ {name} ] :: {args[1]} {kwargs.get("name") if kwargs.get("name") else ""}')
             return wrapper
         
         return decorator if isinstance(name, str) else decorator(name)

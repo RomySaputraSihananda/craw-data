@@ -174,7 +174,7 @@ class BaseTravelokaEvent:
                     data: dict = Iostream.dict_to_deep(data)
                     
                     if(self.__kafka):
-                        self.__connectionKafka.send(self.__topik, data)
+                        self.__connectionKafka.send(self.__topik, data, name=self.__bootstrap)
                     else:
                         with ThreadPoolExecutor() as executor:
                             try:
