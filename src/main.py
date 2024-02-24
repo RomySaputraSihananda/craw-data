@@ -29,12 +29,6 @@ class Main:
 
     @main.group()
     @click.pass_context
-    def data(ctx: Context):
-        """ Data T4 """
-        ... 
-
-    @main.group()
-    @click.pass_context
     def data_review(ctx: Context):
         """ Data Review """
         ... 
