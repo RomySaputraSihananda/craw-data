@@ -23,17 +23,19 @@ class BaseTravelokaEvent:
         if(self.__kafka): 
             self.__bootstrap: str = kwargs.get('bootstrap')
             self.__topik: str = kwargs.get('topic')
-            self.__connectionKafka: ConnectionKafka = ConnectionKafka(kwargs.get('bootstrap')) 
-        
-        self.__requests: Session = Session()
-        self.__requests.headers.update({
+            self.__connectionKafka: ConnectionKafka = ConnectionKafka(kwargs.get('bootstrap'))
+
+        self.__headers: dict = {
             'user-agent': 'Mozilla/5.0 (Linux; Android 13; SM-S901B) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/112.0.0.0 Mobile Safari/537.36',
             'cookie': os.getenv('COOKIE_TRAVELOKA'),
             'sec-ch-ua': '"Not_A Brand";v="8", "Chromium";v="120", "Google Chrome";v="120"',
             'origin': 'https://www.traveloka.com',
             'x-domain': 'experience',
-            'x-route-prefix': 'en-id'
-        })
+            'x-route-prefix': 'id-id'
+        }
+        
+        self.__requests: Session = Session()
+        self.__requests.headers.update(self.__headers)
     
     async def __get_recomendation_by_loation(self, geo: GeoEnum, log: dict) -> None:
         start: int = 0
@@ -135,14 +137,14 @@ class BaseTravelokaEvent:
         try:
             experience_id: str = experience["experienceId"]
 
-            link: str = f'https://www.traveloka.com/en-id/activities/indonesia/product/{experience_id}'
+            link: str = f'https://www.traveloka.com/id-id/activities/indonesia/product/{experience_id}'
 
             async with ClientSession() as session:
-                async with session.get(link) as response:
+                async with session.get(link, headers=self.__headers) as response:
                     response_text: str = await response.text()
                     event_detail: dict = loads(re.findall(r'<script id="__NEXT_DATA__" type="application/json" nonce="[^"]*" crossorigin="anonymous">(.*?)</script>', response_text)[0])['props']['pageProps']["productDetailData"]
 
-                    link: str = f'https://www.traveloka.com/en-id/activities/indonesia/product/{event_detail["experienceSearchInfo"]["labelEN"]}-{experience_id}'
+                    link: str = f'https://www.traveloka.com/id-id/activities/indonesia/product/{event_detail["experienceSearchInfo"]["labelEN"]}-{experience_id}'
                     link_split: list = link.split('/')
 
                     tickets: list = self.__get_tickets(experience_id)

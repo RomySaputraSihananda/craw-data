@@ -71,7 +71,7 @@ class BaseCekbpom:
                     if(not all): 
                         log['status'] = 'Done'
                         Iostream.update_log(log, name=__name__)
-
+ 
                     return True
         except Exception as e:
             logging.error(f'Error Time Out page {page}')

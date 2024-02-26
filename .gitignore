@@ -9,6 +9,7 @@ __pycache__/
 *.html
 logging/
 data/
+test/
 
 # Distribution / packaging
 .Python
