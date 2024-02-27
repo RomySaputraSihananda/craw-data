@@ -2,11 +2,11 @@ from setuptools import setup, find_packages
 
 setup(
     name='engine crawler',
-    version='2.0.0',
+    version='3.1.6',
     packages=find_packages(),
     entry_points={
         'console_scripts': [
-            'engine_romy = src.main:Main.main'
+            'engine_romy = src.__init__:main'
         ]
     },
 )
