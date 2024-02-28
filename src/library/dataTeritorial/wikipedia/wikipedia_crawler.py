@@ -1,14 +1,15 @@
 __author__ = 'Gumilar Ganjar Permana'
 
 import re
-import json
 import requests
-from requests import Response
-from .kabupaten import KabupatenEnum
+import asyncio
 
+from requests import Response
 from bs4 import BeautifulSoup
+from aiohttp import ClientSession
 
 from src.helpers import Iostream
+from .kabupaten import KabupatenEnum
 
 class WikipediaCrawler:
     def __init__(self) -> None:
@@ -27,33 +28,34 @@ class WikipediaCrawler:
         
         return clean_text
 
-    def _get_wikipedia_detail_by_location(self, location: KabupatenEnum) -> dict:
-        response: Response = requests.get(location.value).text
-        soup: BeautifulSoup = BeautifulSoup(response, 'html.parser')
-        rows: list  = soup.select('.infobox.ib-settlement.vcard tbody tr')
-        
-        data = {}
-        for row in rows:
-            try:
-                data.update({
-                    self.__clean_text(row.find('th').get_text()): self.__clean_text(row.find('td').get_text()) if not row.select('li') else [self.__clean_text(li.get_text()) for li in row.select('li')]
-                })
-            except:
-                if(images := row.select('img')):
-                    for image in images:
-                        value: str = 'https:' + image.attrs['src'] if not 'https:' in image.attrs['src'] else image.attrs['src']
-                        key: str = value if not 'alt' in image.attrs else image.attrs['alt']
-                        key: str = re.sub(r'\d+px-', '', value.split('/')[-1].split('.')[0]) if not key or 'https' in key else key
-                        data: dict = {
-                            **data,
-                            'images': data['images'] | {key: value} if 'images' in data else {key: value}
-                        }
-        Iostream.write_json(data, f'test/{data["Provinsi"].replace(" ", "_")}/{location.name.title()}.json')
+    async def _get_wikipedia_detail_by_location(self, location: KabupatenEnum) -> dict:
+        async with ClientSession() as session:
+            async with session.get(location.value) as response:
+                soup: BeautifulSoup = BeautifulSoup(await response.text(), 'html.parser')
+                rows: list  = soup.select('.infobox.ib-settlement.vcard tbody tr')
+                
+                headers = {}
+                for row in rows:
+                    try:
+                        data.update({
+                            self.__clean_text(row.find('th').get_text()): self.__clean_text(row.find('td').get_text()) if not row.select('li') else [self.__clean_text(li.get_text()) for li in row.select('li')]
+                        })
+                    except:
+                        if(images := row.select('img')):
+                            for image in images:
+                                value: str = 'https:' + image.attrs['src'] if not 'https:' in image.attrs['src'] else image.attrs['src']
+                                key: str = value if not 'alt' in image.attrs else image.attrs['alt']
+                                key: str = re.sub(r'\d+px-', '', value.split('/')[-1].split('.')[0]) if not key or 'https' in key else key
+                                data: dict = {
+                                    **headers,
+                                    'images': headers['images'] | {key: value} if 'images' in headers else {key: value}
+                                }
+                Iostream.write_json(data, f'test/{data["Provinsi"].replace(" ", "_")}/{location.name.title()}.json')
     
-    def _get_all_location(self) -> None:
-        for kabupate in KabupatenEnum:
-            data = self._get_wikipedia_detail_by_location(kabupate)
+
+    async def _get_all_location(self) -> None:
+        await asyncio.gather(*(self._get_wikipedia_detail_by_location(kabupaten) for kabupaten in KabupatenEnum))
 
 if(__name__ == '__main__'):
-    WikipediaCrawler()._get_all_location()
+    asyncio.run(WikipediaCrawler()._get_all_location())
     # WikipediaCrawler()._get_wikipedia_detail_by_location(KabupatenEnum.KABUPATEN_BANTAENG)
