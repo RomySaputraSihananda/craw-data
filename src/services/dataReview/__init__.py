@@ -1,7 +1,7 @@
 import click
 
 from click import Context
-from typing import Any
+from typing import Any, final
 
 from .lemon8 import Lemon8
 from .quora import Quora
@@ -10,7 +10,7 @@ from .microsoftStore import MicrosoftStore
 from .taptap import Taptap
 from src.interfaces import BaseGroupClick
 
-
+@final
 class DataReview(BaseGroupClick):
     @click.group()
     @click.pass_context

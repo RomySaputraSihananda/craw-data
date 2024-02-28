@@ -2,7 +2,7 @@
 
 ```bash
 ╰─λ engine_romy --version
-Engine Crawler Data version 3.1.6
+Engine Crawler Data version 3.1.7
 ```
 
 ```bash
@@ -19,4 +19,9 @@ Options:
 --topic TEXT      topic kafka
 --clean           data clean
 --help            Show this message and exit.
+
+Commands:
+data_divtik  Data Divtik
+data_icc     Data ICC
+data_review  Data Review
 ```

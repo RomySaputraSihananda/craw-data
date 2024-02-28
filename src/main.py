@@ -13,7 +13,7 @@ from src.interfaces import BaseGroupClick
 @final
 class EngineCrawler(BaseGroupClick):
     @click.group()
-    @click.version_option(version='3.1.6', prog_name='Engine Crawler Data', message=f'{click.style("%(prog)s", fg="bright_magenta")} version {click.style("%(version)s", fg="bright_magenta")}')
+    @click.version_option(version='3.1.7', prog_name='Engine Crawler Data', message=f'{click.style("%(prog)s", fg="bright_magenta")} version {click.style("%(version)s", fg="bright_magenta")}')
     @click.option('--s3', is_flag=True, default=False, help='send s3')
     @click.option('--kafka', is_flag=True, default=False, help='send kafka')
     @click.option('--bootstrap', default=None, help='bootstrap kafka')
