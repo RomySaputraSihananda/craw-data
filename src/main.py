@@ -1,13 +1,8 @@
 import click
 
 from click.core import Context
-from typing import Any, MutableMapping, Sequence, final
+from typing import Any, final
 
-from src.services.dataReview import Lemon8, Quora, Glassdoor, MicrosoftStore, Taptap
-from src.services.dataDivtik import Cekbpom
-from src.services.dataICC import TravelokaEvent
-
-from src.services.dataDivtik import DataDivtik
 from src.interfaces import BaseGroupClick
 
 @final
