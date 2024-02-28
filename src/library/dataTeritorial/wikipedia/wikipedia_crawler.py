@@ -43,19 +43,17 @@ class WikipediaCrawler:
                     for image in images:
                         value: str = 'https:' + image.attrs['src'] if not 'https:' in image.attrs['src'] else image.attrs['src']
                         key: str = value if not 'alt' in image.attrs else image.attrs['alt']
-                        key: str = re.findall(r'px-(.*)', value.split('/')[-1].split('.')[0]) if not key or 'https' in key else key
-                        print(key)
-                        # data = {
-                        #     **data,
-                        #     'images': data['images'] | {key: value} if 'images' in data else {key: value}
-                        # }
-        return data
+                        key: str = re.sub(r'\d+px-', '', value.split('/')[-1].split('.')[0]) if not key or 'https' in key else key
+                        data: dict = {
+                            **data,
+                            'images': data['images'] | {key: value} if 'images' in data else {key: value}
+                        }
+        Iostream.write_json(data, f'test/{data["Provinsi"].replace(" ", "_")}/{location.name.title()}.json')
     
     def _get_all_location(self) -> None:
-        for i in KabupatenEnum:
-            data = self._get_wikipedia_detail_by_location(i)
-            Iostream.write_json(data, f'test/{data["Provinsi"].replace(" ", "_")}/{i.name.title()}.json')
+        for kabupate in KabupatenEnum:
+            data = self._get_wikipedia_detail_by_location(kabupate)
 
 if(__name__ == '__main__'):
-    # WikipediaCrawler()._get_all_location()
-    WikipediaCrawler()._get_wikipedia_detail_by_location(KabupatenEnum.KABUPATEN_BANTAENG)
+    WikipediaCrawler()._get_all_location()
+    # WikipediaCrawler()._get_wikipedia_detail_by_location(KabupatenEnum.KABUPATEN_BANTAENG)
