@@ -7,7 +7,7 @@ from src.interfaces import BaseGroupClick
 from .cekbpom import Cekbpom
 
 class DataDivtik(BaseGroupClick):
-    @click.group
+    @click.group()
     @click.pass_context
     def main(ctx: Context) -> Any:
         """ Data Divtik """
