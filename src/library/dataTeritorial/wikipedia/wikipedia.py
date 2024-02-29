@@ -55,6 +55,8 @@ class BaseWikipedia:
     async def _get_wikipedia_detail_by_location(self, location: KabupatenEnum) -> dict:
         link: str = location.value
         link_split: list = link.split('/')
+
+        [provinsi, kabupaten] = [e.title() for e in location.name.split('Z')]
         async with ClientSession() as session:
             async with session.get(link) as response:
                 
@@ -62,12 +64,12 @@ class BaseWikipedia:
                 data: dict = {
                     "link": link,
                     "domain": link_split[2],
-                    "tag": link_split[2:],
+                    "tag": [*link_split[2:], provinsi, kabupaten],
                     "crawling_time": Datetime.now(),
                     "crawling_time_epoch": int(time()),
                     **data,
-                    "path_data_raw": f'S3://ai-pipeline-statistics/data/data_raw/wikipedia/data teritorial/json/{data["Provinsi"].replace(" ", "_")}/{location.name.title()}.json',
-                    "path_data_clean": f'S3://ai-pipeline-statistics/data/data_clean/wikipedia/data teritorial/json/{data["Provinsi"].replace(" ", "_")}/{location.name.title()}.json',
+                    "path_data_raw": f'S3://ai-pipeline-statistics/data/data_raw/wikipedia/data teritorial/json/{provinsi}/{kabupaten}.json',
+                    "path_data_clean": f'S3://ai-pipeline-statistics/data/data_clean/wikipedia/data teritorial/json/{provinsi}/{kabupaten}.json',
                 }
 
                 paths: list = [path.replace('S3://ai-pipeline-statistics/', '') for path in [data["path_data_raw"]]] 
