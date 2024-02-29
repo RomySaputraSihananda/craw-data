@@ -164,14 +164,13 @@ class BaseTravelokaEvent:
                         'ticket_available': ticket_available,
                         'user_reviews': user_reviews,
                         "path_data_raw": f'S3://ai-pipeline-statistics/data/data_raw/traveloka/event/{address[1]}/{link_split[-1]}.json',
-                        "path_data_clean": f'S3://ai-pipeline-statistics/data/data_raw/traveloka/event/{address[1]}/{link_split[-1]}.json',
+                        "path_data_clean": f'S3://ai-pipeline-statistics/data/data_clean/traveloka/event/{address[1]}/{link_split[-1]}.json',
                     }
 
                     paths: list = [path.replace('S3://ai-pipeline-statistics/', '') for path in [data["path_data_raw"]]] 
                     
                     if(self.__clean):
                         paths: list = [path.replace('S3://ai-pipeline-statistics/', '') for path in [data["path_data_raw"], data["path_data_clean"]]] 
-                    
 
                     data: dict = Iostream.dict_to_deep(data)
                     
