@@ -68,6 +68,7 @@ class BaseWikipedia:
                     "crawling_time": Datetime.now(),
                     "crawling_time_epoch": int(time()),
                     **data,
+                    'Provinsi': provinsi.replace('_', ' ').replace('Provinsi', ''),
                     "path_data_raw": f'S3://ai-pipeline-statistics/data/data_raw/wikipedia/data teritorial/json/{provinsi}/{kabupaten}.json',
                     "path_data_clean": f'S3://ai-pipeline-statistics/data/data_clean/wikipedia/data teritorial/json/{provinsi}/{kabupaten}.json',
                 }
