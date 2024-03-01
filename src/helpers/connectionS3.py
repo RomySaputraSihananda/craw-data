@@ -1,7 +1,6 @@
 import boto3
 import os
 import requests
-import aioboto3
 import asyncio
 
 from click import style
