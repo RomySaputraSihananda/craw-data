@@ -38,7 +38,7 @@ class ConnectionS3:
     def get_all_prefix(prefix: str, bucket: str = 'ai-pipeline-statistics') -> list:
         response = s3.list_objects_v2(Bucket=bucket, Prefix=prefix)
         all_prefix: list = response.get('Contents', [])
-        # return [prefix['Key'] for prefix in all_prefix]
+        return [prefix['Key'] for prefix in all_prefix]
 
         while(response.get('NextContinuationToken')):
             response = s3.list_objects_v2(Bucket=bucket, Prefix=prefix, ContinuationToken=response['NextContinuationToken'])
