@@ -10,7 +10,7 @@ from src.helpers import ConnectionS3, ConnectionKafka
 @click.command()
 def s32k():
     for prefix in ConnectionS3.get_all_prefix('data/data_raw/bpom/product/'):
-        conn = ConnectionKafka('kafka01.production02.bt:9092')
+        conn = ConnectionKafka(['kafka01.research.ai', 'kafka02.research.ai', 'kafka02.research.ai'])
         conn.send('data-knowledge-repo-general_10', ConnectionS3.get_content(prefix))
 
 def main():

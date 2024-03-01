@@ -7,9 +7,9 @@ from src.helpers import Decorator
 from src.config import logging
 
 class ConnectionKafka:
-    def __init__(self, bootstrap_servers: str = None) -> None:
+    def __init__(self, bootstrap_servers: str | list = None) -> None:
         self.__bootstrap_servers: str = bootstrap_servers
-        self.__producer: KafkaProducer = KafkaProducer(bootstrap_servers=[bootstrap_servers], value_serializer=lambda x: dumps(x).encode('utf-8'))
+        self.__producer: KafkaProducer = KafkaProducer(bootstrap_servers=[*bootstrap_servers], value_serializer=lambda x: dumps(x).encode('utf-8'))
     
     @Decorator.logging_path(style('SEND KAFKA', fg='bright_cyan'))
     def send(self, topic: str, data: dict, **kwargs) -> None:
