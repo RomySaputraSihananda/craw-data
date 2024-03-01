@@ -1,9 +1,11 @@
 import click
+from json import dumps
 
 from click.core import Context
 from typing import Any, final
 
 from src.interfaces import BaseGroupClick
+from src.helpers import ConnectionS3, ConnectionKafka
 
 @final
 class EngineCrawler(BaseGroupClick):
@@ -20,6 +22,19 @@ class EngineCrawler(BaseGroupClick):
         if(kwargs.get('kafka') and (not kwargs.get('bootstrap') or not kwargs.get('topic'))):
             raise click.BadParameter('--bootstrap and --topic is required')
         ctx.obj = kwargs 
+    
+    @main.command()
+    @click.option('--prefix', required=True, help='prefix of s3', type=str)
+    @click.option('--broker', required=True, help='broker name of kafka', type=str)
+    @click.option('--topic', required=True, help='topic name of kafka', type=str)
+    def s32k(**kwargs):
+        """ S3 To Kafka """
+        try:
+            conn = ConnectionKafka(kwargs.get('broker').split(','))
+            for prefix in ConnectionS3.get_all_prefix(kwargs.get('prefix')):
+                conn.send(kwargs.get('topic'), dumps(ConnectionS3.get_content(prefix)))
+        except Exception as e:
+            raise click.BadParameter('--broker is bad value')
 
 from src.services.dataICC import DataICC
 if(__name__ == "__main__"):
