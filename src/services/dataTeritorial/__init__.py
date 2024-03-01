@@ -9,7 +9,7 @@ class DataTeritorial(BaseGroupClick):
     @click.group()
     @click.pass_context
     def main(ctx: Context):
-            """ Data Review """
+            """ Data Teritorial """
     
     @staticmethod
     @main.command()
