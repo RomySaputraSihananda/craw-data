@@ -28,12 +28,13 @@ class Decorator:
         def decorator(func: Callable[..., None]) -> Callable[..., None]:
             @wraps(func)
             def wrapper(*args: Any, **kwargs) -> None:
-                func(*args, **kwargs)
                 try:
                     path = args[1]
                 except:
                     path = args[0]
                 logging.info(f'[ {name} ] :: {path} {kwargs.get("name") if kwargs.get("name") else ""}')
+                
+                return func(*args, **kwargs)
             return wrapper
         
         return decorator if isinstance(name, str) else decorator(name)

@@ -5,6 +5,7 @@ from src.services.dataDivtik import DataDivtik
 from src.services.dataReview import DataReview
 from src.services.dataTeritorial import DataTeritorial
 
+import json
 import click
 from src.helpers import ConnectionS3, ConnectionKafka
 @click.command()
@@ -12,7 +13,7 @@ def s32k():
     # conn = ConnectionKafka(['kafka01.research.ai:9092', 'kafka02.research.ai:9092', 'kafka03.research.ai:9092'])
     conn = ConnectionKafka(['localhost:9092'])
     for prefix in ConnectionS3.get_all_prefix('data/data_raw/bpom/product/'):
-        conn.send('data-knowledge-repo-general_10', ConnectionS3.get_content(prefix))
+        conn.send('data-knowledge-repo-general_10', json.dumps(ConnectionS3.get_content(prefix)))
 
 def main():
     cli: EngineCrawler = EngineCrawler()

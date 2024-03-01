@@ -48,9 +48,8 @@ class ConnectionS3:
     
     @staticmethod
     @Decorator.logging_path(style('GET S3 FILE', fg='bright_red'))
-    def get_content(key: str, bucket: str = 'ai-pipeline-statistics') -> dict:
-        response = s3.get_object(Bucket=bucket, Key = key)
-        return loads(response['Body'].read())
+    def get_content(key: str, bucket: str = 'ai-pipeline-statistics') -> str:
+        return loads(s3.get_object(Bucket=bucket, Key = key)['Body'].read())
 
     # @staticmethod
     # @Decorator.logging_path(style('SEND S3 CONTENT', fg='bright_red'))
@@ -59,7 +58,7 @@ class ConnectionS3:
     #     if(response['ResponseMetadata']['HTTPStatusCode'] != 200): raise Exception('failed send s3')
 
 if(__name__ == '__main__'):
-    data = ConnectionS3.get_content('data/data_raw/bpom/product/Kosmetika/json/125924-2.json')
+    data = ConnectionS3.get_content('data/data_raw/bpom/product/Kosmetika/json/103137-2.json')
     print(data)
     # ConnectionS3.upload({"apakah_berhasil": True, "update": 3}, 'test/initesting.json')
     # response: Response = requests.get('https://avatars.githubusercontent.com/u/1242887?v=4')
