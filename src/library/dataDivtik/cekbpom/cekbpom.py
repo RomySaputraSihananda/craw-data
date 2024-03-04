@@ -142,7 +142,7 @@ class BaseCekbpom:
                     Iostream.update_log(log, name=__name__)
                     data['tag'] = link_split[2:]
         except Exception as e:
-            Iostream.info_log(log, product_id, 'failed', error=e, name=__name__)
+            Iostream.info_log(log, f'{product_id};{aplication_id}', 'failed', error=e, name=__name__)
 
             log['total_failed'] += 1
             Iostream.update_log(log, name=__name__)
@@ -184,9 +184,17 @@ class BaseCekbpom:
 
         log['status'] = 'Done'
         Iostream.update_log(log, name=__name__)
-            
+    
+    def _retry_error(self):
+        log_errors: list = Iostream.get_log_error(name=__name__)
+        
+        for log_error in [log_error['id_data'] for log_error in log_errors]:
+            # [product_id, aplication_id] = log_error.split(';')
+            [product_id, aplication_id] = log_error.split(';')
+
+            print(product_id)
 
 if(__name__ == '__main__'):
     baseCekbpom: BaseCekbpom = BaseCekbpom()
-    # asyncio.run(baseCekbpom._get_product_by_page(2))
-    baseCekbpom._get_all()
+    asyncio.run(baseCekbpom._get_product_by_page(2))
+    # baseCekbpom._retry_error()

@@ -80,6 +80,14 @@ class Iostream:
                     except Exception:
                         data[key] = re.sub('<.*?>', ' ', value)
         return data
+    
+    @staticmethod
+    def get_log_error(file_name: str = 'Monitoring_log_error.json', **kwargs) -> list:
+        print(f'logging/{kwargs.get("name").split(".")[-1] if kwargs.get("name") else "test"}/{file_name}')
+        with open(f'logging/{kwargs.get("name").split(".")[-1] if kwargs.get("name") else "test"}/{file_name}', "r") as file:
+            logs: dict = json.load(file)
+        
+        return [log for log in logs if log['status'] == 'failed']
 
 from time import sleep
 # testing

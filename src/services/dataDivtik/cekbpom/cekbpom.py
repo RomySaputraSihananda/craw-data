@@ -22,6 +22,8 @@ class Cekbpom(BaseCekbpom, AbstractCekbpom):
                 self.get_detail_by_page(**kwargs)
             case 'all_detail':
                 self.get_all_detail(**kwargs)
+            case 'retry_error':
+                self.retry_error(**kwargs)
             case _:
                 logging.error('Wait.............')
 
@@ -36,3 +38,7 @@ class Cekbpom(BaseCekbpom, AbstractCekbpom):
     @Decorator.counter_time
     def get_all_detail(self, **kwargs) -> None:
         return asyncio.run(super()._get_all(kwargs.get('start')))
+
+    @Decorator.counter_time
+    def retry_error(self, **kwargs) -> None:
+        return super()._retry_error()
