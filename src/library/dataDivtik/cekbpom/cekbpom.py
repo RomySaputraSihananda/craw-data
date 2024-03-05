@@ -12,14 +12,21 @@ from concurrent.futures import ThreadPoolExecutor
 
 from requests import Response, Session
 
-from src.helpers import Parser, Datetime, Iostream, ConnectionS3, logging
+from src.helpers import Parser, Datetime, Iostream, ConnectionS3, logging, ConnectionKafka
 
 urllib3.disable_warnings()
 
 class BaseCekbpom:
     def __init__(self, **kwargs) -> None:
         self.__s3: bool = kwargs.get('s3')
+        self.__kafka: bool = kwargs.get('kafka')
         self.__clean: bool = kwargs.get('clean')
+
+        if(self.__kafka): 
+            self.__bootstrap: str = kwargs.get('bootstrap')
+            self.__topik: str = kwargs.get('topic')
+            self.__connectionKafka: ConnectionKafka = ConnectionKafka(kwargs.get('bootstrap'))
+
         self.__requests: Session = Session() 
         self.__headers: dict = {
             'Cookie': 'webreg=f3rs64qmrr4k7lln0cud4virv480jdca',
@@ -126,8 +133,12 @@ class BaseCekbpom:
                         paths: list = [path.replace('S3://ai-pipeline-statistics/', '') for path in [data["path_data_raw"], data["path_data_clean"]]] 
                     
                     data['tag'] = [*data['tag'], data["produk"]]
+                    data: dict = Iostream.dict_to_deep(data)
+                    
+                    if(self.__kafka):
+                        self.__connectionKafka.send(self.__topik, data, name=self.__bootstrap)
+
                     with ThreadPoolExecutor() as executor:
-                        data: dict = Iostream.dict_to_deep(data)
                         try:
                             if(self.__s3):
                                 executor.map(lambda path: ConnectionS3.upload(data, path), paths)
