@@ -1,17 +1,17 @@
 import click
-from json import dumps
+import uvicorn
+import socket
 
+from json import dumps
 from click.core import Context
 from typing import Any, final
 
 from src.interfaces import BaseGroupClick
 from src.helpers import ConnectionS3, ConnectionKafka
+from src.controller import app
 
 @final
 class EngineCrawler(BaseGroupClick):
-    def add(self):
-        self.main.add_command()
-
     @click.group()
     @click.version_option(version='3.1.7', prog_name='Engine Crawler Data', message=f'{click.style("%(prog)s", fg="bright_magenta")} version {click.style("%(version)s", fg="bright_magenta")}')
     @click.option('--s3', is_flag=True, default=False, help='send s3')
@@ -38,6 +38,12 @@ class EngineCrawler(BaseGroupClick):
                 conn.send(dumps(ConnectionS3.get_content(prefix)))
         except Exception as e:
             raise click.BadParameter('--broker is bad value')
+    
+    @main.command()
+    @click.option('--port', help='port of service', default=4444)
+    @click.option('--local', is_flag=True, help='serve to local network')
+    def serve(**kwargs):
+        return uvicorn.run(app, port=kwargs.get('port'), host=socket.gethostbyname(socket.gethostname()))
 
 from src.services.dataICC import DataICC
 if(__name__ == "__main__"):
