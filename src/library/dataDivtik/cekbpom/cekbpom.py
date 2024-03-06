@@ -24,8 +24,7 @@ class BaseCekbpom:
 
         if(self.__kafka): 
             self.__bootstrap: str = kwargs.get('bootstrap')
-            self.__topik: str = kwargs.get('topic')
-            self.__connectionKafka: ConnectionKafka = ConnectionKafka(kwargs.get('bootstrap'))
+            self.__connectionKafka: ConnectionKafka = ConnectionKafka(kwargs.get('topic'), kwargs.get('bootstrap'))
 
         self.__requests: Session = Session() 
         self.__headers: dict = {
@@ -136,7 +135,7 @@ class BaseCekbpom:
                     data: dict = Iostream.dict_to_deep(data)
                     
                     if(self.__kafka):
-                        self.__connectionKafka.send(self.__topik, data, name=self.__bootstrap)
+                        self.__connectionKafka.send(data, name=self.__bootstrap)
 
                     with ThreadPoolExecutor() as executor:
                         try:

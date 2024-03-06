@@ -22,8 +22,7 @@ class BaseTravelokaEvent:
         
         if(self.__kafka): 
             self.__bootstrap: str = kwargs.get('bootstrap')
-            self.__topik: str = kwargs.get('topic')
-            self.__connectionKafka: ConnectionKafka = ConnectionKafka(kwargs.get('bootstrap'))
+            self.__connectionKafka: ConnectionKafka = ConnectionKafka(kwargs.get('topic'), kwargs.get('bootstrap'))
 
         self.__headers: dict = {
             'user-agent': 'Mozilla/5.0 (Linux; Android 13; SM-S901B) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/112.0.0.0 Mobile Safari/537.36',
@@ -175,7 +174,7 @@ class BaseTravelokaEvent:
                     data: dict = Iostream.dict_to_deep(data)
                     
                     if(self.__kafka):
-                        self.__connectionKafka.send(self.__topik, data, name=self.__bootstrap)
+                        self.__connectionKafka.send(data, name=self.__bootstrap)
                     else:
                         with ThreadPoolExecutor() as executor:
                             try:

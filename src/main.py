@@ -33,9 +33,9 @@ class EngineCrawler(BaseGroupClick):
     def s32k(**kwargs):
         """ S3 To Kafka """
         try:
-            conn = ConnectionKafka(kwargs.get('broker').split(','))
+            conn = ConnectionKafka(kwargs.get('topic'), kwargs.get('broker').split(','))
             for prefix in ConnectionS3.get_all_prefix(kwargs.get('prefix')):
-                conn.send(kwargs.get('topic'), dumps(ConnectionS3.get_content(prefix)))
+                conn.send(dumps(ConnectionS3.get_content(prefix)))
         except Exception as e:
             raise click.BadParameter('--broker is bad value')
 
