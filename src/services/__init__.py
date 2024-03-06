@@ -3,3 +3,4 @@ from .dataDivtik import Cekbpom
 
 from .dataReview import DataReview
 from .dataDivtik import DataDivtik
+from .other import kafkaConsumer
