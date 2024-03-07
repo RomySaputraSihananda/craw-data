@@ -1,6 +1,6 @@
 from setuptools import setup, find_packages
 
-from src import __version__, __url__, __author_email__, __autor__, __description__, __license__, __title__ 
+from src.__version__ import __version__, __url__, __author_email__, __autor__, __description__, __license__, __title__ 
 
 def reader(file_name: str) -> str:
 	with open(file_name, "r") as file:
@@ -18,7 +18,6 @@ setup(
     long_description_content_type="text/markdown",
     packages=find_packages(),
     include_package_data=True,
-    package_dir={"": "src"},
     python_requires=">=3.11",
     install_requires=reader( "requirements.txt" ).split( "\x0a" ),
     license=__license__,
