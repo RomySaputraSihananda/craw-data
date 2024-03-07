@@ -6,6 +6,7 @@ from src.services.dataReview import DataReview
 from src.services.dataTeritorial import DataTeritorial
 from src.services.other import Other
 
+from __version__ import __title__, __author_email__, __autor__, __description__, __license__, __url__, __version__
 
 def main():
     cli: EngineCrawler = EngineCrawler()

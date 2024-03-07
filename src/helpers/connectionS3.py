@@ -58,8 +58,8 @@ class ConnectionS3:
     #     if(response['ResponseMetadata']['HTTPStatusCode'] != 200): raise Exception('failed send s3')
 
 if(__name__ == '__main__'):
-    data = ConnectionS3.get_content('data/data_raw/bpom/product/Kosmetika/json/103137-2.json')
-    print(data)
+    data = ConnectionS3.get_all_prefix('data/data_raw/wikipedia/data teritorial/json/')
+    print(len(data))
     # ConnectionS3.upload({"apakah_berhasil": True, "update": 3}, 'test/initesting.json')
     # response: Response = requests.get('https://avatars.githubusercontent.com/u/1242887?v=4')
     # ConnectionS3.upload_content(response.content, 'test/test.jpg')

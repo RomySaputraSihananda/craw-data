@@ -9,11 +9,12 @@ from typing import Any, final
 from src.interfaces import BaseGroupClick
 from src.helpers import ConnectionS3, ConnectionKafka
 from src.controller import app
+from __version__ import __version__, __title__
 
 @final
 class EngineCrawler(BaseGroupClick):
     @click.group()
-    @click.version_option(version='3.1.7', prog_name='Engine Crawler Data', message=f'{click.style("%(prog)s", fg="bright_magenta")} version {click.style("%(version)s", fg="bright_magenta")}')
+    @click.version_option(version=__version__, prog_name=__title__, message=f'{click.style("%(prog)s", fg="bright_magenta")} version {click.style("%(version)s", fg="bright_magenta")}')
     @click.option('--s3', is_flag=True, default=False, help='send s3')
     @click.option('--kafka', is_flag=True, default=False, help='send kafka')
     @click.option('--bootstrap', default=None, help='bootstrap kafka')
