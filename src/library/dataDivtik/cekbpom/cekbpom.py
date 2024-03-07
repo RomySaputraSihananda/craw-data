@@ -1,4 +1,3 @@
-import os
 import re
 import urllib3
 import requests
@@ -6,7 +5,6 @@ import asyncio
 
 from json import loads
 from time import time
-from time import sleep
 from aiohttp import ClientSession
 from concurrent.futures import ThreadPoolExecutor
 

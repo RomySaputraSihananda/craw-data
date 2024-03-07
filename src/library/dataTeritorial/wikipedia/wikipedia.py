@@ -20,9 +20,7 @@ class BaseWikipedia:
     @staticmethod
     def __clean_text(text: str) -> str:
         clean_text: str = re.sub(r'(\n)?\[.*\](\n)?', ' ', text).replace(' • ', ' ').replace(' ', ' ').strip(' ')
-        if(match := re.findall(r'Rp\.?\s*([+-]?\s*\d{1,3}(?:\.\d{3})*)(?:,\d+)?', clean_text)):
-            return int("".join(match).replace('.', ''))
-        elif '\n' in clean_text:
+        if '\n' in clean_text:
             return [clean for clean in clean_text.split('\n') if clean]
         elif '), ' in clean_text:
             clean_texts: list = [clean for clean in clean_text.split('), ') if clean]
@@ -35,10 +33,12 @@ class BaseWikipedia:
         rows: list  = soup.select('.infobox.ib-settlement.vcard tbody tr')
 
         data: dict = {}
-        for row in rows:
+        for i, row in enumerate(rows):
             try:
+                key: str = self.__clean_text(row.find('th').get_text()) if not self.__clean_text(row.find('th').get_text()) == 'Total' else f'{self.__clean_text(row.find("th").get_text())}_{self.__clean_text(rows[i - 1].find("th").get_text())}'.split(' ')[0] 
+                
                 data.update({
-                    self.__clean_text(row.find('th').get_text()): self.__clean_text(row.find('td').get_text()) if not row.select('li') else [self.__clean_text(li.get_text()) for li in row.select('li')]
+                    key: self.__clean_text(row.find('td').get_text()) if not row.select('li') else [self.__clean_text(li.get_text()) for li in row.select('li')]
                 })
             except:
                 if(images := row.select('img')):
@@ -78,7 +78,7 @@ class BaseWikipedia:
                 if(self.__clean):
                     paths: list = [path.replace('S3://ai-pipeline-statistics/', '') for path in [data["path_data_raw"], data["path_data_clean"]]] 
                     
-                data: dict = Iostream.dict_to_deep(data)
+                # data: dict = Iostream.dict_to_deep(data)
                 
                 if(self.__kafka):
                     # self.__connectionKafka.send(self.__topik, data, name=self.__bootstrap)
@@ -95,6 +95,7 @@ class BaseWikipedia:
 
     async def _get_all_location(self) -> None:
         await asyncio.gather(*(self._get_wikipedia_detail_by_location(kabupaten) for kabupaten in KabupatenEnum))
+        # await self._get_wikipedia_detail_by_location(KabupatenEnum.PROVINSI_ACEHZKABUPATEN_ACEH_BARAT_DAYA)
 
 if(__name__ == '__main__'):
     asyncio.run(BaseWikipedia()._get_all_location())
