@@ -9,7 +9,7 @@ from typing import Any, final
 from src.interfaces import BaseGroupClick
 from src.helpers import ConnectionS3, ConnectionKafka
 from src.controller import app
-from .__version__ import __version__, __title__
+from .__version__ import __version__, __title__  
 
 @final
 class EngineCrawler(BaseGroupClick):
