@@ -10,6 +10,7 @@ __pycache__/
 logging/
 data/
 test/
+env.yaml
 
 # Distribution / packaging
 .Python

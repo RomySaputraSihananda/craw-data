@@ -34,7 +34,7 @@ class BaseCekbpom:
 
         (self.__count_data_all_produk, self.__product_first) = self.get_count_data_all_produk()
 
-    @staticmethod
+    @staticmethod 
     def get_count_data_all_produk() -> tuple:
         response: Response = requests.get('https://cekbpom.pom.go.id/search_home_produk')
         content: str = response.text
