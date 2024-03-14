@@ -26,7 +26,7 @@ class BaseCekbpom:
 
         self.__requests: Session = Session() 
         self.__headers: dict = {
-            'Cookie': 'webreg=f3rs64qmrr4k7lln0cud4virv480jdca',
+            'Cookie': 'TS01d5cb1b=016cc907c041f35a20ba4f75ce35c21a8c8bb4266cabee1211e09c8a597c7d8a6f4ecff13c090953edf595fd4f626e9f3d7137fe825e92ba63021d00a4b7b50838c5c1456c2f5eb710e2cd8cbe35987ecd27b55a89; webreg=j1id6p76a0uqhvct6pfk2r8nfahu2l68',
             'User-Agent': 'Mozilla/5.0 (Linux; Android 9; Pixel 2 Build/PI; wv) AppleWebKit/537.36 (KHTML, like Gecko) Version/4.0 Chrome/121.0.6167.101 Mobile Safari/537.36',
             'X-Requested-With': 'XMLHttpRequest',
         }
@@ -57,7 +57,7 @@ class BaseCekbpom:
                                             'next_prev': page * 10,
                                             'count_data_all_produk': self.__count_data_all_produk,
                                             'marked': 'next',
-                                        }, timeout=30) as response:
+                                        }, timeout=120) as response:
                     response_json: dict = loads(await response.text())
 
                     data_all_produk: list = response_json['data_all_produk']
@@ -79,7 +79,7 @@ class BaseCekbpom:
                     return True
         except Exception as e:
             logging.error(f'Error Time Out page {page}')
-            logging.error(e)
+            logging.error(response.status)
             return await self._get_product_by_page(page, data, log)
             
     
