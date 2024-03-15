@@ -79,9 +79,7 @@ class BaseCekbpom:
                     return True
         except Exception as e:
             logging.error(f'Error Time Out page {page}')
-            logging.error(response.status)
             return await self._get_product_by_page(page, data, log)
-            
     
     async def _get_detail_by_product_id(self, product_id: str, aplication_id: str, data: dict, log: dict) -> None:
         link: str = 'https://cekbpom.pom.go.id/search_home_produk'
