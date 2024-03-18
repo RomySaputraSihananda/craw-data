@@ -41,4 +41,4 @@ class Cekbpom(BaseCekbpom, AbstractCekbpom):
 
     @Decorator.counter_time
     def retry_error(self, **kwargs) -> None:
-        return super()._retry_error()
+        return asyncio.run(super()._retry_error())

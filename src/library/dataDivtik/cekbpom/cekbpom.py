@@ -6,6 +6,7 @@ import asyncio
 from json import loads
 from time import time
 from aiohttp import ClientSession
+from typing import Generator 
 from concurrent.futures import ThreadPoolExecutor
 
 from requests import Response, Session
@@ -191,16 +192,42 @@ class BaseCekbpom:
         log['status'] = 'Done'
         Iostream.update_log(log, name=__name__)
     
-    def _retry_error(self):
-        log_errors: list = Iostream.get_log_error(name=__name__)
+    async def _retry_error(self):
+        link: str = 'https://cekbpom.pom.go.id/search_home_produk'
+        link_split: list = link.split('/')
+        log_errors: Generator = [log_error['id_data'] for log_error in Iostream.get_log_error(name=__name__)] 
+
+        data: dict = {
+                'link': link,
+                'domain': link_split[2],
+                'tag': link_split[2:],
+                'crawling_time': Datetime.now(),
+                'crawling_time_epoch': int(time()),
+        }
+
+        log: dict = {
+            "Crawlling_time": Datetime.now(),
+            "id_project": None,
+            "project": "Data Intelligence",
+            "sub_project": "data divtik",
+            "source_name": data['domain'],
+            "sub_source_name": 'product',
+            "id_sub_source": None,
+            "total_data": len(list(log_errors)),
+            "total_success": 0,
+            "total_failed": 0,
+            "status": "Process",
+            "assign": "romy",
+        }
+        Iostream.write_log(log, name=__name__)
+
+        for log_error in [log_errors[i:i+10] for i in range(0, len(log_errors), 10)]:
+            await asyncio.gather(*(self._get_detail_by_product_id(*error.split(';'), data, log) for error in log_error))
         
-        for log_error in [log_error['id_data'] for log_error in log_errors]:
-            # [product_id, aplication_id] = log_error.split(';')
-            [product_id, aplication_id] = log_error.split(';')
-
-            print(product_id)
-
+        log['status'] = 'Done'
+        Iostream.update_log(log, name=__name__)
+    
 if(__name__ == '__main__'):
     baseCekbpom: BaseCekbpom = BaseCekbpom()
-    asyncio.run(baseCekbpom._get_product_by_page(2))
-    # baseCekbpom._retry_error()
+    # asyncio.run(baseCekbpom._get_product_by_page(2))
+    asyncio.run(baseCekbpom._retry_error())

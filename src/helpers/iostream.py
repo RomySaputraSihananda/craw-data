@@ -1,8 +1,9 @@
 import re
 import json
+import os
 
 from json import dumps, loads
-from typing import final
+from typing import final, Generator
 from click import style
 
 from .decorators import Decorator
@@ -82,58 +83,69 @@ class Iostream:
         return data
     
     @staticmethod
-    def get_log_error(file_name: str = 'Monitoring_log_error.json', **kwargs) -> list:
-        print(f'logging/{kwargs.get("name").split(".")[-1] if kwargs.get("name") else "test"}/{file_name}')
-        with open(f'logging/{kwargs.get("name").split(".")[-1] if kwargs.get("name") else "test"}/{file_name}', "r") as file:
-            logs: dict = json.load(file)
-        
-        return [log for log in logs if log['status'] == 'failed']
+    def get_log_error(file_name: str = 'Monitoring_log_error.json', **kwargs) -> Generator:
+        file_path: str = f'logging/{kwargs.get("name").split(".")[-1]}'
+
+        for path in (path for path in os.listdir(file_path) if path.startswith('Monitoring_log_error')):
+            try:
+                with open(f'{file_path}/{path}', "r") as file:
+
+                    yield from [log for log in json.load(file) if log['status'] == 'failed']
+            except Exception as e:
+                continue
 
 from time import sleep
 # testing
 if(__name__ == '__main__'):
-    log = {
-            "Crawlling_time": 'kdjs',
-            "id_project": None,
-            "project": "Data Intelligence",
-            "sub_project": "data review",
-            "source_name": 'domain',
-            "sub_source_name": "user_unique_name",
-            "id_sub_source": "item_id",
-            "total_data": 'comments',
-            "total_success": 0,
-            "total_failed": 0,
-            "status": "Process",
-            "assign": "romy",
-        }
-    Iostream.write_log(log)
-    for i in range(10):
-        Iostream.update_log({
-            "Crawlling_time": 'kdjs',
-            "id_project": None,
-            "project": "Data Intelligence",
-            "sub_project": "data review",
-            "source_name": 'domain',
-            "sub_source_name": "user_unique_name",
-            "id_sub_source": "item_id",
-            "total_data": 'comments',
-            "total_success": i if bool(i % 2) else 0, 
-            "total_failed": 0,
-            "status": "Process",
-            "assign": "romy",
-        })
-        sleep(0.5)
-    Iostream.update_log({
-            "Crawlling_time": 'kdjs',
-            "id_project": None,
-            "project": "Data Intelligence",
-            "sub_project": "data review",
-            "source_name": 'domain',
-            "sub_source_name": "user_unique_name",
-            "id_sub_source": "item_id",
-            "total_data": 'comments',
-            "total_success": i if bool(i % 2) else 0, 
-            "total_failed": 0,
-            "status": "Done",
-            "assign": "romy",
-        })
+    print(
+        len(    
+            list(
+                Iostream.get_log_error(name='cekbpom')
+            )
+        )
+    )
+    # log = {
+    #         "Crawlling_time": 'kdjs',
+    #         "id_project": None,
+    #         "project": "Data Intelligence",
+    #         "sub_project": "data review",
+    #         "source_name": 'domain',
+    #         "sub_source_name": "user_unique_name",
+    #         "id_sub_source": "item_id",
+    #         "total_data": 'comments',
+    #         "total_success": 0,
+    #         "total_failed": 0,
+    #         "status": "Process",
+    #         "assign": "romy",
+    #     }
+    # Iostream.write_log(log)
+    # for i in range(10):
+    #     Iostream.update_log({
+    #         "Crawlling_time": 'kdjs',
+    #         "id_project": None,
+    #         "project": "Data Intelligence",
+    #         "sub_project": "data review",
+    #         "source_name": 'domain',
+    #         "sub_source_name": "user_unique_name",
+    #         "id_sub_source": "item_id",
+    #         "total_data": 'comments',
+    #         "total_success": i if bool(i % 2) else 0, 
+    #         "total_failed": 0,
+    #         "status": "Process",
+    #         "assign": "romy",
+    #     })
+    #     sleep(0.5)
+    # Iostream.update_log({
+    #         "Crawlling_time": 'kdjs',
+    #         "id_project": None,
+    #         "project": "Data Intelligence",
+    #         "sub_project": "data review",
+    #         "source_name": 'domain',
+    #         "sub_source_name": "user_unique_name",
+    #         "id_sub_source": "item_id",
+    #         "total_data": 'comments',
+    #         "total_success": i if bool(i % 2) else 0, 
+    #         "total_failed": 0,
+    #         "status": "Done",
+    #         "assign": "romy",
+    #     })
