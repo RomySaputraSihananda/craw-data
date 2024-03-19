@@ -19,7 +19,7 @@ class Bkpm:
         self.__clean: bool = kwargs.get('clean')
 
         self.__options: ChromeOptions = ChromeOptions()
-        self.__options.add_argument('--headless')
+        # self.__options.add_argument('--headless')
         self.__options.add_argument("--kiosk-printing")
         self.__options.add_argument("--disable-popup-blocking")
         self.__options.add_argument("--disable-notifications")
@@ -60,6 +60,7 @@ class Bkpm:
 
 
     def __get_provs(self) -> list:
+        sleep(1)
         try:
             self.__wait_element('#tableau_base_widget_LegacyCategoricalQuickFilter_1 > div > div.CFContent > span > div.tabComboBoxNameContainer.tab-ctrl-formatted-fixedsize', 10).click()
         except: ...
@@ -67,6 +68,7 @@ class Bkpm:
         return self.__driver.find_elements(By.CSS_SELECTOR, '.tileContainer div[role="listbox"] > div .facetOverflow')
     
     def __get_kabs(self) -> list:
+        sleep(1)
         try:
             self.__wait_element('#tableau_base_widget_LegacyCategoricalQuickFilter_0 > div > div.CFContent > span > div.tabComboBoxNameContainer.tab-ctrl-formatted-fixedsize').click()
         except: ...
@@ -78,7 +80,7 @@ class Bkpm:
         self.__wait_element('#download').click()
         self.__wait_element('#viz-viewer-toolbar-download-menu > div:nth-of-type(2)').click()
         
-        sleep(3)
+        sleep(10)
         self.__wait_element('html > body > div:nth-of-type(7) > div > div > div > div > div:nth-of-type(3) > div > div > button').click()
         
         [ data ] = [request for request in self.__driver.requests if request.url.find('get-view-data-dialog-tab-pres-model') > 0]
@@ -130,8 +132,8 @@ class Bkpm:
                             ],
                             'page_info': page_info, 
                             'detail_data': detail_data,
-                            'path_data_raw': f'S3://ai-pipeline-statistics/data/data_raw/Divtik/bkpm/{provinsi_name}/json/{kabupaten_name}.json', 
-                            'path_data_clean': f'S3://ai-pipeline-statistics/data/data_clean/Divtik/bkpm/{provinsi_name}/json/{kabupaten_name}.json',   
+                            'path_data_raw': f'S3://ai-pipeline-statistics/data/data_raw/Divtik/bkpm/PMDN/{provinsi_name}/json/{kabupaten_name}.json', 
+                            'path_data_clean': f'S3://ai-pipeline-statistics/data/data_clean/Divtik/bkpm/PMDN/{provinsi_name}/json/{kabupaten_name}.json',   
                         }
                         paths: list = [path.replace('S3://ai-pipeline-statistics/', '') for path in [data["path_data_raw"]]] 
                         
@@ -150,12 +152,14 @@ class Bkpm:
                             except Exception as e:
                                 raise e
                         
-                        # break
+                        break
                     except Exception as e:
+                        # raise e
                         continue
 
-                # break
+                break
             except Exception as e:
+                # raise e
                 continue
         
         self.__driver.close()
