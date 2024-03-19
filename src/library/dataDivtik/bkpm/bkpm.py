@@ -152,12 +152,12 @@ class Bkpm:
                             except Exception as e:
                                 raise e
                         
-                        break
+                        # break
                     except Exception as e:
                         # raise e
                         continue
 
-                break
+                # break
             except Exception as e:
                 # raise e
                 continue
