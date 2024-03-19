@@ -1,0 +1,316 @@
+{
+    "vqlCmdResponse": {
+      "layoutStatus": {
+        "active_tab": "DB-per-KABKOT",
+        "isViewModified": false,
+        "undoPosition": 2,
+        "urlActionList": [],
+        "vizStateList": [],
+        "applicationPresModel": {
+          "renderMode": "render-mode-client",
+          "dateFormat": "M/d/yyyy",
+          "timeFormat": "h:mm tt",
+          "numberFormats": [
+            "",
+            "-1",
+            "t",
+            "",
+            "",
+            "",
+            "0",
+            ".",
+            ",",
+            "3;0"
+          ],
+          "dashboardObjectsLibrary": []
+        },
+        "isWorldNew": false,
+        "guid": ""
+      },
+      "cmdResultList": [
+        {
+          "commandName": "tabdoc:get-view-data-dialog-tab-pres-model",
+          "commandReturn": {
+            "viewDataDialogTabPresModel": {
+              "viewDataTableId": "",
+              "allColumns": [
+                "[sqlproxy.09fz0i709uly2k188w3ia1169spp].[none:MAP_NAMA_SEKTOR:nk]",
+                "[sqlproxy.09fz0i709uly2k188w3ia1169spp].[usr:Calculation_966373970665787397:nk]",
+                "[sqlproxy.09fz0i709uly2k188w3ia1169spp].[attr:Calculation_966373970677694474:nk]",
+                "[Parameters].[Parameter 1]",
+                "[sqlproxy.09fz0i709uly2k188w3ia1169spp].[sum:Calculation_1162210185439584266:qk]"
+              ],
+              "underlyingDataTableColumns": [
+                {
+                  "dataType": "cstring",
+                  "fieldCaption": "Map Nama Sektor",
+                  "fn": "[sqlproxy.09fz0i709uly2k188w3ia1169spp].[none:MAP_NAMA_SEKTOR:nk]",
+                  "isReferenced": true,
+                  "valueIndices": [],
+                  "formatValIdxs": [],
+                  "aliasIndices": [],
+                  "fieldIconRes": "text-discrete",
+                  "tableCaption": "ODS_IUT_LKPM"
+                },
+                {
+                  "dataType": "cstring",
+                  "fieldCaption": "Select Date Periode - Tooltips",
+                  "fn": "[sqlproxy.09fz0i709uly2k188w3ia1169spp].[usr:Calculation_966373970665787397:nk]",
+                  "isReferenced": true,
+                  "valueIndices": [],
+                  "formatValIdxs": [],
+                  "aliasIndices": [],
+                  "fieldIconRes": "text-discrete-calc",
+                  "tableCaption": "ODS_IUT_LKPM"
+                },
+                {
+                  "dataType": "cstring",
+                  "fieldCaption": "Select Periode - Tooltips",
+                  "fn": "[sqlproxy.09fz0i709uly2k188w3ia1169spp].[attr:Calculation_966373970677694474:nk]",
+                  "isReferenced": true,
+                  "valueIndices": [],
+                  "formatValIdxs": [],
+                  "aliasIndices": [],
+                  "fieldIconRes": "text-discrete-calc",
+                  "tableCaption": "ODS_IUT_LKPM"
+                },
+                {
+                  "dataType": "cstring",
+                  "fieldCaption": "Pilihan Mata Uang",
+                  "fn": "[Parameters].[Parameter 1]",
+                  "isReferenced": true,
+                  "valueIndices": [],
+                  "formatValIdxs": [],
+                  "aliasIndices": [],
+                  "fieldIconRes": "text-discrete",
+                  "tableCaption": ""
+                },
+                {
+                  "dataType": "real",
+                  "fieldCaption": "Nilai Investasi",
+                  "fn": "[sqlproxy.09fz0i709uly2k188w3ia1169spp].[sum:Calculation_1162210185439584266:qk]",
+                  "isReferenced": true,
+                  "valueIndices": [],
+                  "formatValIdxs": [],
+                  "aliasIndices": [],
+                  "fieldIconRes": "number-continuous-calc",
+                  "tableCaption": "ODS_IUT_LKPM"
+                }
+              ],
+              "viewDataTablePagePresModel": {
+                "pageInfo": {
+                  "rowIndex": 0,
+                  "columnIndex": 0,
+                  "uRowCount": 22,
+                  "uColumnCount": 5
+                },
+                "viewDataColumnValuesPresModels": [
+                  {
+                    "uniqueName": "[sqlproxy.09fz0i709uly2k188w3ia1169spp].[none:MAP_NAMA_SEKTOR:nk]",
+                    "valueIndices": [],
+                    "formatValIdxs": [
+                      0,
+                      1,
+                      2,
+                      3,
+                      4,
+                      5,
+                      6,
+                      7,
+                      8,
+                      9,
+                      10,
+                      11,
+                      12,
+                      13,
+                      14,
+                      15,
+                      16,
+                      17,
+                      18,
+                      19,
+                      20,
+                      21
+                    ]
+                  },
+                  {
+                    "uniqueName": "[sqlproxy.09fz0i709uly2k188w3ia1169spp].[usr:Calculation_966373970665787397:nk]",
+                    "valueIndices": [],
+                    "formatValIdxs": [
+                      22,
+                      -24,
+                      -24,
+                      -24,
+                      -24,
+                      -24,
+                      -24,
+                      -24,
+                      -24,
+                      -24,
+                      -24,
+                      -24,
+                      -24,
+                      -24,
+                      -24,
+                      -24,
+                      -24,
+                      -24,
+                      -24,
+                      -24,
+                      -24,
+                      -24
+                    ]
+                  },
+                  {
+                    "uniqueName": "[sqlproxy.09fz0i709uly2k188w3ia1169spp].[attr:Calculation_966373970677694474:nk]",
+                    "valueIndices": [],
+                    "formatValIdxs": [
+                      24,
+                      24,
+                      24,
+                      24,
+                      24,
+                      24,
+                      24,
+                      24,
+                      24,
+                      24,
+                      24,
+                      24,
+                      24,
+                      24,
+                      24,
+                      24,
+                      24,
+                      24,
+                      24,
+                      24,
+                      24,
+                      24
+                    ]
+                  },
+                  {
+                    "uniqueName": "[Parameters].[Parameter 1]",
+                    "valueIndices": [],
+                    "formatValIdxs": [
+                      25,
+                      25,
+                      25,
+                      25,
+                      25,
+                      25,
+                      25,
+                      25,
+                      25,
+                      25,
+                      25,
+                      25,
+                      25,
+                      25,
+                      25,
+                      25,
+                      25,
+                      25,
+                      25,
+                      25,
+                      25,
+                      25
+                    ]
+                  },
+                  {
+                    "uniqueName": "[sqlproxy.09fz0i709uly2k188w3ia1169spp].[sum:Calculation_1162210185439584266:qk]",
+                    "valueIndices": [],
+                    "formatValIdxs": [
+                      26,
+                      26,
+                      27,
+                      28,
+                      29,
+                      30,
+                      31,
+                      32,
+                      33,
+                      34,
+                      35,
+                      36,
+                      37,
+                      38,
+                      39,
+                      40,
+                      41,
+                      42,
+                      43,
+                      44,
+                      45,
+                      46
+                    ]
+                  }
+                ],
+                "dataDictionary": {
+                  "dataSegments": {
+                    "0": {
+                      "dataColumns": [
+                        {
+                          "dataType": "cstring",
+                          "dataValues": [
+                            "Industri Kayu",
+                            "Industri Mineral Non Logam",
+                            "Industri Kertas dan Percetakan",
+                            "Perikanan",
+                            "Konstruksi",
+                            "Tanaman Pangan, Perkebunan, dan Peternakan",
+                            "Industri Lainnya",
+                            "Industri Logam Dasar, Barang Logam, Bukan Mesin dan Peralatannya",
+                            "Industri Kendaraan Bermotor dan Alat Transportasi Lain",
+                            "Pertambangan",
+                            "Industri Barang dari Kulit dan Alas Kaki",
+                            "Industri  Mesin, Elektronik, Instrumen Kedokteran, Peralatan Listrik, Presisi, Optik dan Jam",
+                            "Industri Karet dan Plastik",
+                            "Perdagangan dan Reparasi",
+                            "Listrik, Gas dan Air",
+                            "Jasa Lainnya",
+                            "Hotel dan Restoran",
+                            "Industri Makanan",
+                            "Industri Kimia Dan Farmasi",
+                            "Transportasi, Gudang dan Telekomunikasi",
+                            "Industri Tekstil",
+                            "Perumahan, Kawasan Industri dan Perkantoran",
+                            "2021",
+                            "Null",
+                            "Tahun",
+                            "(triliun) Rupiah",
+                            "0.00000",
+                            "0.00001",
+                            "0.00029",
+                            "0.00199",
+                            "0.00295",
+                            "0.00353",
+                            "0.00377",
+                            "0.00888",
+                            "0.01498",
+                            "0.04733",
+                            "0.08958",
+                            "0.11837",
+                            "0.18344",
+                            "0.28354",
+                            "0.28837",
+                            "0.53413",
+                            "1.08487",
+                            "1.32008",
+                            "1.80307",
+                            "1.89503",
+                            "2.47238"
+                          ]
+                        }
+                      ]
+                    }
+                  }
+                }
+              },
+              "totalRowCount": 22
+            }
+          }
+        }
+      ]
+    }
+  }
