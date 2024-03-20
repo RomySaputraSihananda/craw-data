@@ -19,7 +19,7 @@ class Bkpm:
         self.__clean: bool = kwargs.get('clean')
 
         self.__options: ChromeOptions = ChromeOptions()
-        self.__options.add_argument('--headless')
+        self.__options.add_argument('--headless') 
         self.__options.add_argument("--kiosk-printing")
         self.__options.add_argument("--disable-popup-blocking")
         self.__options.add_argument("--disable-notifications")
