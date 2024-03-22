@@ -1,0 +1,635 @@
+
+
+import requests
+
+cookies = {
+    'ASP.NET_SessionId': 'wu0wwavny4ygcwyrqm3ry5ho',
+    'agoda.firstclicks': '-1||||2024-03-22T12:59:00||wu0wwavny4ygcwyrqm3ry5ho||{"IsPaid":false,"gclid":"","Type":""}',
+    'agoda.lastclicks': '-1||||2024-03-22T12:59:00||wu0wwavny4ygcwyrqm3ry5ho||{"IsPaid":false,"gclid":"","Type":""}',
+    'agoda.landings': '-1|||wu0wwavny4ygcwyrqm3ry5ho|2024-03-22T12:59:00|False|19-----1|||wu0wwavny4ygcwyrqm3ry5ho|2024-03-22T12:59:00|False|20-----1|||wu0wwavny4ygcwyrqm3ry5ho|2024-03-22T12:59:00|False|99',
+    'agoda.attr.03': 'ATItems=-1$03-22-2024 12:59$',
+    'agoda.familyMode': 'Mode=0',
+    'xsrf_token': 'CfDJ8Dkuqwv-0VhLoFfD8dw7lYw3NdcVcs6gyNs64cjJbl6ofC2B4m_gDdK1PznE-vJyOI5RUKFcwh7-gc0g4WsV1dECMitkTptZh7RCWcZti6hjDb5WMLcwioy6UMGW0fXacwFOcZ4T06MHN5_sm1AeOEI',
+    'agoda.user.03': 'UserId=20b73fd5-66a8-4ca7-8e33-94e733534f12',
+    'agoda.prius': 'PriusID=0&PointsMaxTraffic=Agoda',
+    'tealiumEnable': 'true',
+    'deviceId': 'f29f7921-dcb8-49e2-ba8f-e61160d0e318',
+    'agoda.consent': 'ID||2024-03-22 05:59:02Z',
+    '_gcl_au': '1.1.934088841.1711087146',
+    'FPID': 'FPID2.2.omnqUA3A6%2BSBVaBbEpOrr9%2B8tETaxysQQM9V9kykrRo%3D.1711087147',
+    'ab.storage.userId.d999de98-30bc-4346-8124-a15900a101ae': '%7B%22g%22%3A%2220b73fd5-66a8-4ca7-8e33-94e733534f12%22%2C%22c%22%3A1711087147860%2C%22l%22%3A1711087147860%7D',
+    'ab.storage.deviceId.d999de98-30bc-4346-8124-a15900a101ae': '%7B%22g%22%3A%2248341cd9-d236-7f8c-d9db-6887d5a797bc%22%2C%22c%22%3A1711087147862%2C%22l%22%3A1711087147862%7D',
+    'FPLC': 'OzcJmIYRlkFBl1l3MsT4pMFTTXSKdw7JYMV8bik2Bv5KrRjJfRpuAHjdvX%2FTsPTmL7trj3QNH9cwX7lNLxlPvT8Tz6WYIdWRaanl0eunriFwcnaUsWvYtc%2FOCv1qlQ%3D%3D',
+    '_ab50group': 'GroupB',
+    '_40-40-20Split': 'Group40A',
+    '_gid': 'GA1.2.736300821.1711087200',
+    '_fbp': 'fb.1.1711087200511.525159099',
+    '__gads': 'ID=1936071f19322052:T=1711087252:RT=1711088483:S=ALNI_MZZZ6lTZLkOra4AnYRTM0zW9SzYzw',
+    '__gpi': 'UID=00000d52a0f04267:T=1711087252:RT=1711088483:S=ALNI_MaPGWbgW9ouH72ALOp0lXvzixziCQ',
+    '_gali': 'SearchBoxContainer',
+    '_gat_t3': '1',
+    'utag_main': 'v_id:018e64be9593001ab4482752ccfa05065003005d00bd0$_sn:1$_se:34$_ss:0$_st:1711090406001$ses_id:1711087195541%3Bexp-session$_pn:9%3Bexp-session',
+    '_ga': 'GA1.2.1663303741.1711087147',
+    '_uetsid': '6b222260e81111eeb48c3b2010beb21a',
+    '_uetvid': '6b22fdd0e81111ee999471816a926272',
+    'ab.storage.sessionId.d999de98-30bc-4346-8124-a15900a101ae': '%7B%22g%22%3A%22a7a91efd-a365-c7e4-78db-f6f85c67350f%22%2C%22e%22%3A1711090406736%2C%22c%22%3A1711087147861%2C%22l%22%3A1711088606736%7D',
+    'cto_bundle': '7WSGlF8yZEJUamk2Y0RFaFRIRTVHOHlrSDklMkJ4R29OQWloa0xxMjlZVXljbVk1QjRoSTB1V2ZaZSUyRiUyRmNpdjhReklhQ1piQ2JpVGJuYUNnZUJLSEolMkZlVFFvS0ZUTElETzRLbWE3RlRVM1o3ZE9RUTJzcFZFOXZ5WVl3OExtTUJ6QzRWWXJrYVhodWh6UkJMMk1NVVpBNVpKRllOZyUzRCUzRA',
+    '_ga_C07L4VP9DZ': 'GS1.2.1711087200.1.1.1711088606.52.0.0',
+    'ul.token': 'eyJhbGciOiJFUzI1NiJ9.eyJtIjo0MjgwMDc1NDgsInIiOltdLCJlIjoiSUJDOFU0WEBTVG1aSDg4VW1lZ2VJKilcXDdIWExuZWtmJWFLTjpAWTFVJD5ZbyhKVVBQRXMmOiVfUilkPyVKYDwxUS9dUDZEcXQ6a0Nubzk_Iiwic3JjIjoic3JjIiwic3ViIjoiM1ltWm94ZjFUZlNvQ2cwMFFONlI2dyIsImp0aSI6Il8yVVhacjhUUU1HZ1djd0liZDZlLXciLCJpYXQiOjE3MTEwODg2MTEsImV4cCI6MTcxODg2NDYxMSwid2x0IjoiZjFhNTkwNWYtOTYyMC00NWU1LTlkOTEtZDI1MWMwN2UwYjQyIiwicyI6Nn0.eBR_hHW1SmKoVqP3Kr0khCUkJsQgNi8Y4utsWNnuspIP-cSQBH-ZhJlR-0qTVmErbGv5JtHYSxCnwA9b7fD_sA',
+    'agoda.analytics': 'Id=-1373840866693057680&Signature=2205232201488102609&Expiry=1711092210991',
+    '__hl': '638467106113165494',
+    'useCookie': 'True',
+    'token': 'eyJhbGciOiJFUzI1NiJ9.eyJtIjo0MjgwMDc1NDgsInIiOltdLCJlIjoiSUJDOFU0WEBTVG1aSDg4VW1lZ2VJKilcXDdIWExuZWtmJWFLTjpAWTFVJD5ZbyhKVVBQRXMmOiVfUilkPyVKYDwxUS9dUDZEcXQ6a0Nubzk_Iiwic3JjIjoic3JjIiwic3ViIjoiM1ltWm94ZjFUZlNvQ2cwMFFONlI2dyIsImp0aSI6Il8yVVhacjhUUU1HZ1djd0liZDZlLXciLCJpYXQiOjE3MTEwODg2MTEsImV4cCI6MTcxODg2NDYxMSwid2x0IjoiZjFhNTkwNWYtOTYyMC00NWU1LTlkOTEtZDI1MWMwN2UwYjQyIiwicyI6Nn0.eBR_hHW1SmKoVqP3Kr0khCUkJsQgNi8Y4utsWNnuspIP-cSQBH-ZhJlR-0qTVmErbGv5JtHYSxCnwA9b7fD_sA',
+    'agoda.l2': 'eyJhbGciOiJIUzM4NCIsInR5cCI6IkpXVCJ9.eyJ1aWQiOiIyMGI3M2ZkNS02NmE4LTRjYTctOGUzMy05NGU3MzM1MzRmMTIiLCJtaWQiOjQyODAwNzU0OCwibmJmIjoxNzExMDg4NjExLCJleHAiOjE3MTEwOTA0MTEsImlhdCI6MTcxMTA4ODYxMX0.rZsGjAaHm8rs8N3TngeCggEI69INrsbiRfQ9zFAtyU61jFVSipffWdFIVK8IPSli',
+    '_amb': '7BB744795D86D6FBE7E1351E214591F4CD00D76C4BFBEF989CC6419B5C47E804059DB94D2C27222A4FDCC7F86C9C861A',
+    'agoda.price.01': 'PriceView=1&ApplyGC=1&DefaultApplyGC=1',
+    'agoda.search.01': 'SHist=1$18943$8490$1$1$2$0$0$1711088294$$0|1$105948$8490$1$1$2$0$0$1711088476$$0|1$5414$8490$1$1$2$0$0$1711088611$$0&H=',
+    'agoda.version.03': 'CookieId=8e0681f8-949d-4173-8683-3327beded15b&TItems=2$-1$03-22-2024 12:59$04-21-2024 12:59$&DLang=id-id&CurLabel=IDR',
+    '_ga_T408Z268D2': 'GS1.1.1711087146.1.1.1711088612.0.0.1520674213',
+}
+
+headers = {
+    'accept': '*/*',
+    'accept-language': 'en-US,en;q=0.9,id;q=0.8',
+    'access-control-max-age': '7200',
+    'ag-analytics-session-id': '-1373840866693057680',
+    'ag-correlation-id': 'ab8fd83d-c30a-417a-a45a-f981e29155b0',
+    'ag-debug-override-origin': 'ID',
+    'ag-language-locale': 'id-id',
+    'ag-page-type-id': '103',
+    'ag-request-attempt': '1',
+    'ag-request-id': '3ee64432-1c64-4905-9d73-ea639c398af8',
+    'ag-retry-attempt': '0',
+    'content-type': 'application/json',
+    # 'cookie': 'ASP.NET_SessionId=wu0wwavny4ygcwyrqm3ry5ho; agoda.firstclicks=-1||||2024-03-22T12:59:00||wu0wwavny4ygcwyrqm3ry5ho||{"IsPaid":false,"gclid":"","Type":""}; agoda.lastclicks=-1||||2024-03-22T12:59:00||wu0wwavny4ygcwyrqm3ry5ho||{"IsPaid":false,"gclid":"","Type":""}; agoda.landings=-1|||wu0wwavny4ygcwyrqm3ry5ho|2024-03-22T12:59:00|False|19-----1|||wu0wwavny4ygcwyrqm3ry5ho|2024-03-22T12:59:00|False|20-----1|||wu0wwavny4ygcwyrqm3ry5ho|2024-03-22T12:59:00|False|99; agoda.attr.03=ATItems=-1$03-22-2024 12:59$; agoda.familyMode=Mode=0; xsrf_token=CfDJ8Dkuqwv-0VhLoFfD8dw7lYw3NdcVcs6gyNs64cjJbl6ofC2B4m_gDdK1PznE-vJyOI5RUKFcwh7-gc0g4WsV1dECMitkTptZh7RCWcZti6hjDb5WMLcwioy6UMGW0fXacwFOcZ4T06MHN5_sm1AeOEI; agoda.user.03=UserId=20b73fd5-66a8-4ca7-8e33-94e733534f12; agoda.prius=PriusID=0&PointsMaxTraffic=Agoda; tealiumEnable=true; deviceId=f29f7921-dcb8-49e2-ba8f-e61160d0e318; agoda.consent=ID||2024-03-22 05:59:02Z; _gcl_au=1.1.934088841.1711087146; FPID=FPID2.2.omnqUA3A6%2BSBVaBbEpOrr9%2B8tETaxysQQM9V9kykrRo%3D.1711087147; ab.storage.userId.d999de98-30bc-4346-8124-a15900a101ae=%7B%22g%22%3A%2220b73fd5-66a8-4ca7-8e33-94e733534f12%22%2C%22c%22%3A1711087147860%2C%22l%22%3A1711087147860%7D; ab.storage.deviceId.d999de98-30bc-4346-8124-a15900a101ae=%7B%22g%22%3A%2248341cd9-d236-7f8c-d9db-6887d5a797bc%22%2C%22c%22%3A1711087147862%2C%22l%22%3A1711087147862%7D; FPLC=OzcJmIYRlkFBl1l3MsT4pMFTTXSKdw7JYMV8bik2Bv5KrRjJfRpuAHjdvX%2FTsPTmL7trj3QNH9cwX7lNLxlPvT8Tz6WYIdWRaanl0eunriFwcnaUsWvYtc%2FOCv1qlQ%3D%3D; _ab50group=GroupB; _40-40-20Split=Group40A; _gid=GA1.2.736300821.1711087200; _fbp=fb.1.1711087200511.525159099; __gads=ID=1936071f19322052:T=1711087252:RT=1711088483:S=ALNI_MZZZ6lTZLkOra4AnYRTM0zW9SzYzw; __gpi=UID=00000d52a0f04267:T=1711087252:RT=1711088483:S=ALNI_MaPGWbgW9ouH72ALOp0lXvzixziCQ; _gali=SearchBoxContainer; _gat_t3=1; utag_main=v_id:018e64be9593001ab4482752ccfa05065003005d00bd0$_sn:1$_se:34$_ss:0$_st:1711090406001$ses_id:1711087195541%3Bexp-session$_pn:9%3Bexp-session; _ga=GA1.2.1663303741.1711087147; _uetsid=6b222260e81111eeb48c3b2010beb21a; _uetvid=6b22fdd0e81111ee999471816a926272; ab.storage.sessionId.d999de98-30bc-4346-8124-a15900a101ae=%7B%22g%22%3A%22a7a91efd-a365-c7e4-78db-f6f85c67350f%22%2C%22e%22%3A1711090406736%2C%22c%22%3A1711087147861%2C%22l%22%3A1711088606736%7D; cto_bundle=7WSGlF8yZEJUamk2Y0RFaFRIRTVHOHlrSDklMkJ4R29OQWloa0xxMjlZVXljbVk1QjRoSTB1V2ZaZSUyRiUyRmNpdjhReklhQ1piQ2JpVGJuYUNnZUJLSEolMkZlVFFvS0ZUTElETzRLbWE3RlRVM1o3ZE9RUTJzcFZFOXZ5WVl3OExtTUJ6QzRWWXJrYVhodWh6UkJMMk1NVVpBNVpKRllOZyUzRCUzRA; _ga_C07L4VP9DZ=GS1.2.1711087200.1.1.1711088606.52.0.0; ul.token=eyJhbGciOiJFUzI1NiJ9.eyJtIjo0MjgwMDc1NDgsInIiOltdLCJlIjoiSUJDOFU0WEBTVG1aSDg4VW1lZ2VJKilcXDdIWExuZWtmJWFLTjpAWTFVJD5ZbyhKVVBQRXMmOiVfUilkPyVKYDwxUS9dUDZEcXQ6a0Nubzk_Iiwic3JjIjoic3JjIiwic3ViIjoiM1ltWm94ZjFUZlNvQ2cwMFFONlI2dyIsImp0aSI6Il8yVVhacjhUUU1HZ1djd0liZDZlLXciLCJpYXQiOjE3MTEwODg2MTEsImV4cCI6MTcxODg2NDYxMSwid2x0IjoiZjFhNTkwNWYtOTYyMC00NWU1LTlkOTEtZDI1MWMwN2UwYjQyIiwicyI6Nn0.eBR_hHW1SmKoVqP3Kr0khCUkJsQgNi8Y4utsWNnuspIP-cSQBH-ZhJlR-0qTVmErbGv5JtHYSxCnwA9b7fD_sA; agoda.analytics=Id=-1373840866693057680&Signature=2205232201488102609&Expiry=1711092210991; __hl=638467106113165494; useCookie=True; token=eyJhbGciOiJFUzI1NiJ9.eyJtIjo0MjgwMDc1NDgsInIiOltdLCJlIjoiSUJDOFU0WEBTVG1aSDg4VW1lZ2VJKilcXDdIWExuZWtmJWFLTjpAWTFVJD5ZbyhKVVBQRXMmOiVfUilkPyVKYDwxUS9dUDZEcXQ6a0Nubzk_Iiwic3JjIjoic3JjIiwic3ViIjoiM1ltWm94ZjFUZlNvQ2cwMFFONlI2dyIsImp0aSI6Il8yVVhacjhUUU1HZ1djd0liZDZlLXciLCJpYXQiOjE3MTEwODg2MTEsImV4cCI6MTcxODg2NDYxMSwid2x0IjoiZjFhNTkwNWYtOTYyMC00NWU1LTlkOTEtZDI1MWMwN2UwYjQyIiwicyI6Nn0.eBR_hHW1SmKoVqP3Kr0khCUkJsQgNi8Y4utsWNnuspIP-cSQBH-ZhJlR-0qTVmErbGv5JtHYSxCnwA9b7fD_sA; agoda.l2=eyJhbGciOiJIUzM4NCIsInR5cCI6IkpXVCJ9.eyJ1aWQiOiIyMGI3M2ZkNS02NmE4LTRjYTctOGUzMy05NGU3MzM1MzRmMTIiLCJtaWQiOjQyODAwNzU0OCwibmJmIjoxNzExMDg4NjExLCJleHAiOjE3MTEwOTA0MTEsImlhdCI6MTcxMTA4ODYxMX0.rZsGjAaHm8rs8N3TngeCggEI69INrsbiRfQ9zFAtyU61jFVSipffWdFIVK8IPSli; _amb=7BB744795D86D6FBE7E1351E214591F4CD00D76C4BFBEF989CC6419B5C47E804059DB94D2C27222A4FDCC7F86C9C861A; agoda.price.01=PriceView=1&ApplyGC=1&DefaultApplyGC=1; agoda.search.01=SHist=1$18943$8490$1$1$2$0$0$1711088294$$0|1$105948$8490$1$1$2$0$0$1711088476$$0|1$5414$8490$1$1$2$0$0$1711088611$$0&H=; agoda.version.03=CookieId=8e0681f8-949d-4173-8683-3327beded15b&TItems=2$-1$03-22-2024 12:59$04-21-2024 12:59$&DLang=id-id&CurLabel=IDR; _ga_T408Z268D2=GS1.1.1711087146.1.1.1711088612.0.0.1520674213',
+    'origin': 'https://www.agoda.com',
+    'referer': 'https://www.agoda.com/id-id/search?guid=dd4791c0-783e-4b56-84d5-b9807f454b59&asq=u2qcKLxwzRU5NDuxJ0kOF3T91go8JoYYMxAgy8FkBH1BN0lGAtYH25sdXoy34qb9BAN3D8BqWJBEGDHVPw%2FoVQudxwyYs0Ia8Vdom7uvFMSVGboJZOzWUzqqR7Fhancn%2BEb154g2%2BAvy%2BAt%2BHc%2FRX8MajKdIhymwaQvNSic4SL1NIxqiVSOD96fkq%2BVCtKDBxfkFVjQ6pq54JTx%2BnutqKw%3D%3D&city=5414&tick=638467105842&isdym=true&searchterm=jawa+timur&txtuuid=dd4791c0-783e-4b56-84d5-b9807f454b59&locale=id-id&ckuid=20b73fd5-66a8-4ca7-8e33-94e733534f12&prid=0&currency=IDR&correlationId=cb65dfff-34c0-4312-ba0c-6970b3e6804d&analyticsSessionId=-1373840866693057680&pageTypeId=103&realLanguageId=26&languageId=26&origin=ID&cid=-1&userId=20b73fd5-66a8-4ca7-8e33-94e733534f12&whitelabelid=1&loginLvl=0&storefrontId=3&currencyId=25&currencyCode=IDR&htmlLanguage=id-id&cultureInfoName=id-id&machineName=sg-pc-6f-acm-web-user-84555f76d8-kz44b&trafficGroupId=4&sessionId=wu0wwavny4ygcwyrqm3ry5ho&trafficSubGroupId=4&aid=130243&useFullPageLogin=true&cttp=4&isRealUser=true&mode=production&browserFamily=Chrome&cdnDomain=agoda.net&checkIn=2024-03-31&checkOut=2024-04-01&rooms=1&adults=2&children=0&priceCur=IDR&los=1&textToSearch=jawa+timur&productType=-1&travellerType=1&familyMode=off&ds=G1kfzDp7UZIiGrvi',
+    'sec-ch-ua': '"Google Chrome";v="123", "Not:A-Brand";v="8", "Chromium";v="123"',
+    'sec-ch-ua-mobile': '?0',
+    'sec-ch-ua-platform': '"Linux"',
+    'sec-fetch-dest': 'empty',
+    'sec-fetch-mode': 'cors',
+    'sec-fetch-site': 'same-origin',
+    'user-agent': 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/123.0.0.0 Safari/537.36',
+}
+
+json_data = {
+    'operationName': 'citySearch',
+    'variables': {
+        'CitySearchRequest': {
+            'cityId': 5414,
+            'searchRequest': {
+                'searchCriteria': {
+                    'isAllowBookOnRequest': True,
+                    'bookingDate': '2024-03-22T06:23:33.640Z',
+                    'checkInDate': '2024-03-30T17:00:00.000Z',
+                    'localCheckInDate': '2024-03-31',
+                    'los': 1,
+                    'rooms': 1,
+                    'adults': 2,
+                    'children': 0,
+                    'childAges': [],
+                    'ratePlans': [],
+                    'featureFlagRequest': {
+                        'fetchNamesForTealium': True,
+                        'fiveStarDealOfTheDay': True,
+                        'isAllowBookOnRequest': False,
+                        'showUnAvailable': True,
+                        'showRemainingProperties': True,
+                        'isMultiHotelSearch': False,
+                        'enableAgencySupplyForPackages': True,
+                        'flags': [
+                            {
+                                'feature': 'FamilyChildFriendlyPopularFilter',
+                                'enable': True,
+                            },
+                            {
+                                'feature': 'FamilyChildFriendlyPropertyTypeFilter',
+                                'enable': True,
+                            },
+                            {
+                                'feature': 'FamilyMode',
+                                'enable': False,
+                            },
+                        ],
+                        'enablePageToken': False,
+                        'enableDealsOfTheDayFilter': False,
+                        'isEnableSupplierFinancialInfo': False,
+                        'ignoreRequestedNumberOfRoomsForNha': False,
+                        'isFlexibleMultiRoomSearch': False,
+                    },
+                    'isUserLoggedIn': True,
+                    'currency': 'IDR',
+                    'travellerType': 'Couple',
+                    'isAPSPeek': False,
+                    'enableOpaqueChannel': False,
+                    'isEnabledPartnerChannelSelection': None,
+                    'sorting': {
+                        'sortField': 'Ranking',
+                        'sortOrder': 'Desc',
+                        'sortParams': None,
+                    },
+                    'requiredBasis': 'PRPN',
+                    'requiredPrice': 'Exclusive',
+                    'suggestionLimit': 0,
+                    'synchronous': False,
+                    'supplierPullMetadataRequest': None,
+                    'isRoomSuggestionRequested': False,
+                    'isAPORequest': False,
+                    'hasAPOFilter': False,
+                },
+                'searchContext': {
+                    'userId': '20b73fd5-66a8-4ca7-8e33-94e733534f12',
+                    'memberId': 428007548,
+                    'locale': 'id-id',
+                    'cid': -1,
+                    'origin': 'ID',
+                    'platform': 1,
+                    'deviceTypeId': 1,
+                    'experiments': {
+                        'forceByVariant': None,
+                        'forceByExperiment': [
+                            {
+                                'id': 'UMRAH-B2B',
+                                'variant': 'B',
+                            },
+                            {
+                                'id': 'UMRAH-B2C-REGIONAL',
+                                'variant': 'B',
+                            },
+                            {
+                                'id': 'UMRAH-B2C',
+                                'variant': 'Z',
+                            },
+                            {
+                                'id': 'JGCW-204',
+                                'variant': 'B',
+                            },
+                        ],
+                    },
+                    'isRetry': False,
+                    'showCMS': False,
+                    'storeFrontId': 3,
+                    'pageTypeId': 103,
+                    'whiteLabelKey': None,
+                    'ipAddress': '139.255.221.98',
+                    'endpointSearchType': 'CitySearch',
+                    'trackSteps': None,
+                    'searchId': 'f0897a64-6fc4-4f56-8cf5-de30793267b1',
+                },
+                'matrix': None,
+                'matrixGroup': [
+                    {
+                        'matrixGroup': 'NumberOfBedrooms',
+                        'size': 100,
+                    },
+                    {
+                        'matrixGroup': 'LandmarkIds',
+                        'size': 10,
+                    },
+                    {
+                        'matrixGroup': 'GroupedBedTypes',
+                        'size': 100,
+                    },
+                    {
+                        'matrixGroup': 'RoomBenefits',
+                        'size': 100,
+                    },
+                    {
+                        'matrixGroup': 'AtmosphereIds',
+                        'size': 100,
+                    },
+                    {
+                        'matrixGroup': 'RoomAmenities',
+                        'size': 100,
+                    },
+                    {
+                        'matrixGroup': 'AffordableCategory',
+                        'size': 100,
+                    },
+                    {
+                        'matrixGroup': 'HotelFacilities',
+                        'size': 100,
+                    },
+                    {
+                        'matrixGroup': 'BeachAccessTypeIds',
+                        'size': 100,
+                    },
+                    {
+                        'matrixGroup': 'StarRating',
+                        'size': 20,
+                    },
+                    {
+                        'matrixGroup': 'AllGuestReviewBreakdown',
+                        'size': 100,
+                    },
+                    {
+                        'matrixGroup': 'MetroSubwayStationLandmarkIds',
+                        'size': 20,
+                    },
+                    {
+                        'matrixGroup': 'CityCenterDistance',
+                        'size': 100,
+                    },
+                    {
+                        'matrixGroup': 'ProductType',
+                        'size': 100,
+                    },
+                    {
+                        'matrixGroup': 'TripPurpose',
+                        'size': 5,
+                    },
+                    {
+                        'matrixGroup': 'BusStationLandmarkIds',
+                        'size': 20,
+                    },
+                    {
+                        'matrixGroup': 'IsSustainableTravel',
+                        'size': 2,
+                    },
+                    {
+                        'matrixGroup': 'ReviewLocationScore',
+                        'size': 3,
+                    },
+                    {
+                        'matrixGroup': 'LandmarkSubTypeCategoryIds',
+                        'size': 20,
+                    },
+                    {
+                        'matrixGroup': 'ReviewScore',
+                        'size': 100,
+                    },
+                    {
+                        'matrixGroup': 'AccommodationType',
+                        'size': 100,
+                    },
+                    {
+                        'matrixGroup': 'PaymentOptions',
+                        'size': 100,
+                    },
+                    {
+                        'matrixGroup': 'TrainStationLandmarkIds',
+                        'size': 20,
+                    },
+                    {
+                        'matrixGroup': 'HotelAreaId',
+                        'size': 100,
+                    },
+                    {
+                        'matrixGroup': 'HotelChainId',
+                        'size': 10,
+                    },
+                    {
+                        'matrixGroup': 'RecommendedByDestinationCity',
+                        'size': 10,
+                    },
+                    {
+                        'matrixGroup': 'Deals',
+                        'size': 100,
+                    },
+                ],
+                'filterRequest': {
+                    'idsFilters': [],
+                    'rangeFilters': [],
+                    'textFilters': [],
+                },
+                'page': {
+                    'pageSize': 45,
+                    'pageNumber': 1,
+                    'pageToken': '',
+                },
+                'apoRequest': {
+                    'apoPageSize': 10,
+                },
+                'searchHistory': None,
+                'searchDetailRequest': {
+                    'priceHistogramBins': 50,
+                },
+                'isTrimmedResponseRequested': False,
+                'featuredAgodaHomesRequest': None,
+                'featuredLuxuryHotelsRequest': None,
+                'highlyRatedAgodaHomesRequest': {
+                    'numberOfAgodaHomes': 30,
+                    'minimumReviewScore': 7.5,
+                    'minimumReviewCount': 3,
+                    'accommodationTypes': [
+                        28,
+                        29,
+                        30,
+                        102,
+                        103,
+                        106,
+                        107,
+                        108,
+                        109,
+                        110,
+                        114,
+                        115,
+                        120,
+                        131,
+                    ],
+                    'sortVersion': 0,
+                },
+                'extraAgodaHomesRequest': None,
+                'extraHotels': {
+                    'extraHotelIds': [],
+                    'enableFiltersForExtraHotels': False,
+                },
+                'packaging': None,
+                'flexibleSearchRequest': {
+                    'fromDate': '2024-03-22',
+                    'toDate': '2024-04-30',
+                    'alternativeDateSize': 4,
+                    'isFullFlexibleDateSearch': False,
+                },
+                'rankingRequest': {
+                    'isNhaKeywordSearch': False,
+                },
+                'rocketmilesRequestV2': None,
+                'featuredPulsePropertiesRequest': {
+                    'numberOfPulseProperties': 15,
+                },
+            },
+        },
+        'ContentSummaryRequest': {
+            'context': {
+                'rawUserId': '20b73fd5-66a8-4ca7-8e33-94e733534f12',
+                'memberId': 0,
+                'userOrigin': 'ID',
+                'locale': 'id-id',
+                'forceExperimentsByIdNew': [
+                    {
+                        'key': 'UMRAH-B2B',
+                        'value': 'B',
+                    },
+                    {
+                        'key': 'UMRAH-B2C-REGIONAL',
+                        'value': 'B',
+                    },
+                    {
+                        'key': 'UMRAH-B2C',
+                        'value': 'Z',
+                    },
+                    {
+                        'key': 'JGCW-204',
+                        'value': 'B',
+                    },
+                ],
+                'apo': False,
+                'searchCriteria': {
+                    'cityId': 5414,
+                },
+                'platform': {
+                    'id': 1,
+                },
+                'storeFrontId': 3,
+                'cid': '-1',
+                'occupancy': {
+                    'numberOfAdults': 2,
+                    'numberOfChildren': 0,
+                    'travelerType': 2,
+                    'checkIn': '2024-03-30T17:00:00.000Z',
+                },
+                'deviceTypeId': 1,
+                'whiteLabelKey': '',
+                'correlationId': '',
+            },
+            'summary': {
+                'highlightedFeaturesOrderPriority': None,
+                'includeHotelCharacter': True,
+            },
+            'reviews': {
+                'commentary': None,
+                'demographics': {
+                    'providerIds': None,
+                    'filter': {
+                        'defaultProviderOnly': True,
+                    },
+                },
+                'summaries': {
+                    'providerIds': None,
+                    'apo': True,
+                    'limit': 1,
+                    'travellerType': 2,
+                },
+                'cumulative': {
+                    'providerIds': None,
+                },
+                'filters': None,
+            },
+            'images': {
+                'page': None,
+                'maxWidth': 0,
+                'maxHeight': 0,
+                'imageSizes': None,
+                'indexOffset': None,
+            },
+            'rooms': {
+                'images': None,
+                'featureLimit': 0,
+                'filterCriteria': None,
+                'includeMissing': False,
+                'includeSoldOut': False,
+                'includeDmcRoomId': False,
+                'soldOutRoomCriteria': None,
+                'showRoomSize': True,
+                'showRoomFacilities': True,
+                'showRoomName': False,
+            },
+            'nonHotelAccommodation': True,
+            'engagement': True,
+            'highlights': {
+                'maxNumberOfItems': 0,
+                'images': {
+                    'imageSizes': [
+                        {
+                            'key': 'full',
+                            'size': {
+                                'width': 0,
+                                'height': 0,
+                            },
+                        },
+                    ],
+                },
+            },
+            'personalizedInformation': True,
+            'localInformation': {
+                'images': None,
+            },
+            'features': None,
+            'rateCategories': True,
+            'contentRateCategories': {
+                'escapeRateCategories': {},
+            },
+            'synopsis': True,
+        },
+        'PricingSummaryRequest': {
+            'cheapestOnly': True,
+            'context': {
+                'isAllowBookOnRequest': True,
+                'abTests': [
+                    {
+                        'testId': 9021,
+                        'abUser': 'B',
+                    },
+                    {
+                        'testId': 9023,
+                        'abUser': 'B',
+                    },
+                    {
+                        'testId': 9024,
+                        'abUser': 'B',
+                    },
+                    {
+                        'testId': 9025,
+                        'abUser': 'B',
+                    },
+                    {
+                        'testId': 9027,
+                        'abUser': 'B',
+                    },
+                    {
+                        'testId': 9029,
+                        'abUser': 'B',
+                    },
+                ],
+                'clientInfo': {
+                    'cid': -1,
+                    'languageId': 26,
+                    'languageUse': 1,
+                    'origin': 'ID',
+                    'platform': 1,
+                    'searchId': 'f0897a64-6fc4-4f56-8cf5-de30793267b1',
+                    'storefront': 3,
+                    'userId': '20b73fd5-66a8-4ca7-8e33-94e733534f12',
+                    'ipAddress': '139.255.221.98',
+                },
+                'experiment': [
+                    {
+                        'name': 'UMRAH-B2B',
+                        'variant': 'B',
+                    },
+                    {
+                        'name': 'UMRAH-B2C-REGIONAL',
+                        'variant': 'B',
+                    },
+                    {
+                        'name': 'UMRAH-B2C',
+                        'variant': 'Z',
+                    },
+                    {
+                        'name': 'JGCW-204',
+                        'variant': 'B',
+                    },
+                ],
+                'sessionInfo': {
+                    'isLogin': True,
+                    'memberId': 428007548,
+                    'sessionId': 1,
+                },
+                'packaging': None,
+            },
+            'isSSR': True,
+            'pricing': {
+                'bookingDate': '2024-03-22T06:23:33.631Z',
+                'checkIn': '2024-03-30T17:00:00.000Z',
+                'checkout': '2024-03-31T17:00:00.000Z',
+                'localCheckInDate': '2024-03-31',
+                'localCheckoutDate': '2024-04-01',
+                'currency': 'IDR',
+                'details': {
+                    'cheapestPriceOnly': False,
+                    'itemBreakdown': False,
+                    'priceBreakdown': False,
+                },
+                'featureFlag': [
+                    'ClientDiscount',
+                    'PriceHistory',
+                    'VipPlatinum',
+                    'RatePlanPromosCumulative',
+                    'PromosCumulative',
+                    'CouponSellEx',
+                    'MixAndSave',
+                    'StackChannelDiscount',
+                    'AutoApplyPromos',
+                    'EnableAgencySupplyForPackages',
+                    'EnableCashback',
+                    'CreditCardPromotionPeek',
+                    'EnableCofundedCashback',
+                    'DispatchGoLocalForInternational',
+                    'EnableGoToTravelCampaign',
+                    'EnablePriceTrend',
+                ],
+                'features': {
+                    'crossOutRate': False,
+                    'isAPSPeek': False,
+                    'isAllOcc': False,
+                    'isApsEnabled': False,
+                    'isIncludeUsdAndLocalCurrency': False,
+                    'isMSE': True,
+                    'isRPM2Included': True,
+                    'maxSuggestions': 0,
+                    'isEnableSupplierFinancialInfo': False,
+                    'isLoggingAuctionData': False,
+                    'newRateModel': False,
+                    'overrideOccupancy': False,
+                    'filterCheapestRoomEscapesPackage': False,
+                    'priusId': 0,
+                    'synchronous': False,
+                    'enableRichContentOffer': True,
+                    'showCouponAmountInUserCurrency': False,
+                    'disableEscapesPackage': False,
+                    'enablePushDayUseRates': False,
+                    'enableDayUseCor': False,
+                },
+                'filters': {
+                    'cheapestRoomFilters': [],
+                    'filterAPO': False,
+                    'ratePlans': [
+                        1,
+                    ],
+                    'secretDealOnly': False,
+                    'suppliers': [],
+                    'nosOfBedrooms': [],
+                },
+                'includedPriceInfo': False,
+                'occupancy': {
+                    'adults': 2,
+                    'children': 0,
+                    'childAges': [],
+                    'rooms': 1,
+                    'childrenTypes': [],
+                },
+                'supplierPullMetadata': {
+                    'requiredPrecheckAccuracyLevel': 0,
+                },
+                'mseHotelIds': [],
+                'ppLandingHotelIds': [],
+                'searchedHotelIds': [],
+                'paymentId': -1,
+                'externalLoyaltyRequest': None,
+            },
+            'suggestedPrice': 'Exclusive',
+        },
+        'PriceStreamMetaLabRequest': {
+            'attributesId': [
+                8,
+                1,
+                18,
+                7,
+                11,
+                2,
+                3,
+            ],
+        },
+    },
+    'query': 'query citySearch($CitySearchRequest: CitySearchRequest!, $ContentSummaryRequest: ContentSummaryRequest!, $PricingSummaryRequest: PricingRequestParameters, $PriceStreamMetaLabRequest: PriceStreamMetaLabRequest) {\n  citySearch(CitySearchRequest: $CitySearchRequest) {\n    featuredPulseProperties(ContentSummaryRequest: $ContentSummaryRequest, PricingSummaryRequest: $PricingSummaryRequest) {\n      propertyId\n      propertyResultType\n      pricing {\n        pulseCampaignMetadata {\n          promotionTypeId\n          webCampaignId\n          campaignTypeId\n          campaignBadgeText\n          campaignBadgeDescText\n          dealExpiryTime\n          showPulseMerchandise\n        }\n        isAvailable\n        isReady\n        offers {\n          roomOffers {\n            room {\n              pricing {\n                currency\n                price {\n                  perNight {\n                    exclusive {\n                      crossedOutPrice\n                      display\n                    }\n                    inclusive {\n                      crossedOutPrice\n                      display\n                    }\n                  }\n                  perRoomPerNight {\n                    exclusive {\n                      crossedOutPrice\n                      display\n                    }\n                    inclusive {\n                      crossedOutPrice\n                      display\n                    }\n                  }\n                }\n              }\n            }\n          }\n        }\n      }\n      content {\n        reviews {\n          contentReview {\n            isDefault\n            providerId\n            cumulative {\n              reviewCount\n              score\n            }\n          }\n          cumulative {\n            reviewCount\n            score\n          }\n        }\n        images {\n          hotelImages {\n            urls {\n              value\n            }\n          }\n        }\n        informationSummary {\n          hasHostExperience\n          displayName\n          rating\n          propertyLinks {\n            propertyPage\n          }\n          address {\n            country {\n              id\n            }\n            area {\n              name\n            }\n            city {\n              name\n            }\n          }\n          nhaSummary {\n            hostType\n          }\n        }\n      }\n    }\n    searchResult {\n      sortMatrix {\n        result {\n          fieldId\n          sorting {\n            sortField\n            sortOrder\n            sortParams {\n              id\n            }\n          }\n          display {\n            name\n          }\n          childMatrix {\n            fieldId\n            sorting {\n              sortField\n              sortOrder\n              sortParams {\n                id\n              }\n            }\n            display {\n              name\n            }\n            childMatrix {\n              fieldId\n              sorting {\n                sortField\n                sortOrder\n                sortParams {\n                  id\n                }\n              }\n              display {\n                name\n              }\n            }\n          }\n        }\n      }\n      searchInfo {\n        flexibleSearch {\n          currentDate {\n            checkIn\n            price\n          }\n          alternativeDates {\n            checkIn\n            price\n          }\n        }\n        hasSecretDeal\n        isComplete\n        totalFilteredHotels\n        hasEscapesPackage\n        searchStatus {\n          searchCriteria {\n            checkIn\n          }\n          searchStatus\n        }\n        objectInfo {\n          objectName\n          cityName\n          cityEnglishName\n          countryId\n          countryEnglishName\n          mapLatitude\n          mapLongitude\n          mapZoomLevel\n          wlPreferredCityName\n          wlPreferredCountryName\n          cityId\n          cityCenterPolygon {\n            geoPoints {\n              lon\n              lat\n            }\n            touristAreaCenterPoint {\n              lon\n              lat\n            }\n          }\n        }\n      }\n      urgencyDetail {\n        urgencyScore\n      }\n      histogram {\n        bins {\n          numOfElements\n          upperBound {\n            perNightPerRoom\n            perPax\n          }\n        }\n      }\n      nhaProbability\n    }\n    properties(ContentSummaryRequest: $ContentSummaryRequest, PricingSummaryRequest: $PricingSummaryRequest, PriceStreamMetaLabRequest: $PriceStreamMetaLabRequest) {\n      propertyId\n      sponsoredDetail {\n        sponsoredType\n        trackingData\n        isShowSponsoredFlag\n      }\n      propertyResultType\n      content {\n        informationSummary {\n          hotelCharacter {\n            hotelTag {\n              name\n              symbol\n            }\n            hotelView {\n              name\n              symbol\n            }\n          }\n          propertyLinks {\n            propertyPage\n          }\n          atmospheres {\n            id\n            name\n          }\n          isSustainableTravel\n          localeName\n          defaultName\n          displayName\n          accommodationType\n          awardYear\n          hasHostExperience\n          nhaSummary {\n            hostPropertyCount\n          }\n          address {\n            countryCode\n            country {\n              id\n              name\n            }\n            city {\n              id\n              name\n            }\n            area {\n              id\n              name\n            }\n          }\n          propertyType\n          rating\n          agodaGuaranteeProgram\n          remarks {\n            renovationInfo {\n              renovationType\n              year\n            }\n          }\n          spokenLanguages {\n            id\n          }\n          geoInfo {\n            latitude\n            longitude\n          }\n        }\n        propertyEngagement {\n          lastBooking\n          peopleLooking\n        }\n        nonHotelAccommodation {\n          masterRooms {\n            noOfBathrooms\n            noOfBedrooms\n            noOfBeds\n            roomSizeSqm\n            highlightedFacilities\n          }\n          hostLevel {\n            id\n            name\n          }\n          supportedLongStay\n        }\n        facilities {\n          id\n        }\n        images {\n          hotelImages {\n            id\n            caption\n            providerId\n            urls {\n              key\n              value\n            }\n          }\n        }\n        reviews {\n          contentReview {\n            isDefault\n            providerId\n            demographics {\n              groups {\n                id\n                grades {\n                  id\n                  score\n                }\n              }\n            }\n            summaries {\n              recommendationScores {\n                recommendationScore\n              }\n              snippets {\n                countryId\n                countryCode\n                countryName\n                date\n                demographicId\n                demographicName\n                reviewer\n                reviewRating\n                snippet\n              }\n            }\n            cumulative {\n              reviewCount\n              score\n            }\n          }\n          cumulative {\n            reviewCount\n            score\n          }\n          cumulativeForHost {\n            hostAvgHotelReviewRating\n            hostHotelReviewTotalCount\n          }\n        }\n        familyFeatures {\n          hasChildrenFreePolicy\n          isFamilyRoom\n          hasMoreThanOneBedroom\n          isInterConnectingRoom\n          isInfantCottageAvailable\n          hasKidsPool\n          hasKidsClub\n        }\n        personalizedInformation {\n          childrenFreePolicy {\n            fromAge\n            toAge\n          }\n        }\n        localInformation {\n          landmarks {\n            transportation {\n              landmarkName\n              distanceInM\n            }\n            topLandmark {\n              landmarkName\n              distanceInM\n            }\n            beach {\n              landmarkName\n              distanceInM\n            }\n          }\n          hasAirportTransfer\n        }\n        highlight {\n          cityCenter {\n            distanceFromCityCenter\n          }\n          favoriteFeatures {\n            features {\n              id\n              title\n              category\n            }\n          }\n          hasNearbyPublicTransportation\n        }\n        rateCategories {\n          escapeRateCategories {\n            rateCategoryId\n            localizedRateCategoryName\n          }\n        }\n      }\n      soldOut {\n        soldOutPrice {\n          averagePrice\n        }\n      }\n      pricing {\n        pulseCampaignMetadata {\n          promotionTypeId\n          webCampaignId\n          campaignTypeId\n          campaignBadgeText\n          campaignBadgeDescText\n          dealExpiryTime\n          showPulseMerchandise\n        }\n        isAvailable\n        isReady\n        benefits\n        cheapestRoomOffer {\n          agodaCash {\n            showBadge\n            giftcardGuid\n            dayToEarn\n            earnId\n            percentage\n            expiryDay\n          }\n          cashback {\n            cashbackGuid\n            showPostCashbackPrice\n            cashbackVersion\n            percentage\n            earnId\n            dayToEarn\n            expiryDay\n            cashbackType\n            appliedCampaignName\n          }\n        }\n        isEasyCancel\n        isInsiderDeal\n        isMultiHotelEligible\n        suggestPriceType {\n          suggestPrice\n        }\n        roomBundle {\n          bundleId\n          bundleType\n          saveAmount {\n            perNight {\n              ...Fragcbdcjaehaghb2icb726h\n            }\n          }\n        }\n        pointmax {\n          channelId\n          point\n        }\n        priceChange {\n          changePercentage\n          searchDate\n        }\n        payment {\n          cancellation {\n            cancellationType\n            freeCancellationDate\n          }\n          payLater {\n            isEligible\n          }\n          payAtHotel {\n            isEligible\n          }\n          noCreditCard {\n            isEligible\n          }\n          taxReceipt {\n            isEligible\n          }\n        }\n        cheapestStayPackageRatePlans {\n          stayPackageType\n          ratePlanId\n        }\n        pricingMessages {\n          location\n          ids\n        }\n        suppliersSummaries {\n          id\n          supplierHotelId\n        }\n        supplierInfo {\n          id\n          name\n          isAgodaBand\n        }\n        childPolicy {\n          freeChildren\n        }\n        offers {\n          roomOffers {\n            room {\n              extraPriceInfo {\n                displayPriceWithSurchargesPRPN\n                corDisplayPriceWithSurchargesPRPN\n              }\n              availableRooms\n              isPromoEligible\n              promotions {\n                typeId\n                promotionDiscount {\n                  value\n                }\n                isRatePlanAsPromotion\n                cmsTypeId\n                description\n              }\n              bookingDuration {\n                unit\n                value\n              }\n              supplierId\n              corSummary {\n                hasCor\n                corType\n                isOriginal\n                hasOwnCOR\n                isBlacklistedCor\n              }\n              localVoucher {\n                currencyCode\n                amount\n              }\n              pricing {\n                currency\n                price {\n                  perNight {\n                    exclusive {\n                      display\n                      cashbackPrice\n                      displayAfterCashback\n                      originalPrice\n                    }\n                    inclusive {\n                      display\n                      cashbackPrice\n                      displayAfterCashback\n                      originalPrice\n                    }\n                  }\n                  perBook {\n                    exclusive {\n                      display\n                      cashbackPrice\n                      displayAfterCashback\n                      rebatePrice\n                      originalPrice\n                      autoAppliedPromoDiscount\n                    }\n                    inclusive {\n                      display\n                      cashbackPrice\n                      displayAfterCashback\n                      rebatePrice\n                      originalPrice\n                      autoAppliedPromoDiscount\n                    }\n                  }\n                  perRoomPerNight {\n                    exclusive {\n                      display\n                      crossedOutPrice\n                      cashbackPrice\n                      displayAfterCashback\n                      rebatePrice\n                      pseudoCouponPrice\n                      originalPrice\n                      loyaltyOfferSummary {\n                        basePrice {\n                          exclusive\n                          allInclusive\n                        }\n                        status\n                        offers {\n                          identifier\n                          status\n                          burn {\n                            points\n                            payableAmount\n                          }\n                          earn {\n                            points\n                          }\n                          offerType\n                          isSelected\n                        }\n                      }\n                    }\n                    inclusive {\n                      display\n                      crossedOutPrice\n                      cashbackPrice\n                      displayAfterCashback\n                      rebatePrice\n                      pseudoCouponPrice\n                      originalPrice\n                      loyaltyOfferSummary {\n                        basePrice {\n                          exclusive\n                          allInclusive\n                        }\n                        status\n                        offers {\n                          identifier\n                          status\n                          burn {\n                            points\n                            payableAmount\n                          }\n                          earn {\n                            points\n                          }\n                          offerType\n                          isSelected\n                        }\n                      }\n                    }\n                  }\n                  totalDiscount\n                  priceAfterAppliedAgodaCash {\n                    perBook {\n                      ...Fragf02ih49a8eh50d3c685i\n                    }\n                    perRoomPerNight {\n                      ...Fragf02ih49a8eh50d3c685i\n                    }\n                  }\n                }\n                apsPeek {\n                  perRoomPerNight {\n                    ...Fragcbdcjaehaghb2icb726h\n                  }\n                }\n                promotionPricePeek {\n                  display {\n                    perBook {\n                      ...Fragcbdcjaehaghb2icb726h\n                    }\n                    perRoomPerNight {\n                      ...Fragcbdcjaehaghb2icb726h\n                    }\n                    perNight {\n                      ...Fragcbdcjaehaghb2icb726h\n                    }\n                  }\n                  discountType\n                  promotionCodeType\n                  promotionCode\n                  promoAppliedOnFinalPrice\n                  childPromotions {\n                    campaignId\n                  }\n                  campaignName\n                }\n                channelDiscountSummary {\n                  channelDiscountBreakdown {\n                    display\n                    discountPercent\n                    channelId\n                  }\n                }\n                promotionsCumulative {\n                  promotionCumulativeType\n                  amountPercentage\n                  minNightsStay\n                }\n              }\n              uid\n              payment {\n                cancellation {\n                  cancellationType\n                }\n              }\n              discount {\n                deals\n                channelDiscount\n              }\n              saveUpTo {\n                perRoomPerNight\n              }\n              benefits {\n                id\n                targetType\n              }\n              channel {\n                id\n              }\n              mseRoomSummaries {\n                supplierId\n                subSupplierId\n                pricingSummaries {\n                  currency\n                  channelDiscountSummary {\n                    channelDiscountBreakdown {\n                      channelId\n                      discountPercent\n                      display\n                    }\n                  }\n                  price {\n                    perRoomPerNight {\n                      exclusive {\n                        display\n                      }\n                      inclusive {\n                        display\n                      }\n                    }\n                  }\n                }\n              }\n              cashback {\n                cashbackGuid\n                showPostCashbackPrice\n                cashbackVersion\n                percentage\n                earnId\n                dayToEarn\n                expiryDay\n                cashbackType\n                appliedCampaignName\n              }\n              agodaCash {\n                showBadge\n                giftcardGuid\n                dayToEarn\n                expiryDay\n                percentage\n              }\n              corInfo {\n                corBreakdown {\n                  taxExPN {\n                    ...Fragdifa6g6bbd21i738bi3g\n                  }\n                  taxInPN {\n                    ...Fragdifa6g6bbd21i738bi3g\n                  }\n                  taxExPRPN {\n                    ...Fragdifa6g6bbd21i738bi3g\n                  }\n                  taxInPRPN {\n                    ...Fragdifa6g6bbd21i738bi3g\n                  }\n                }\n                corInfo {\n                  corType\n                }\n              }\n              loyaltyDisplay {\n                items\n              }\n              capacity {\n                extraBedsAvailable\n              }\n              pricingMessages {\n                formatted {\n                  location\n                  texts {\n                    index\n                    text\n                  }\n                }\n              }\n              campaign {\n                selected {\n                  campaignId\n                  promotionId\n                  messages {\n                    campaignName\n                    title\n                    titleWithDiscount\n                    description\n                    linkOutText\n                    url\n                  }\n                }\n              }\n              stayPackageType\n            }\n          }\n        }\n      }\n      metaLab {\n        attributes {\n          attributeId\n          dataType\n          value\n          version\n        }\n      }\n      enrichment {\n        topSellingPoint {\n          tspType\n          value\n        }\n        pricingBadges {\n          badges\n        }\n        uniqueSellingPoint {\n          rank\n          segment\n          uspType\n          uspPropertyType\n        }\n        bookingHistory {\n          bookingCount {\n            count\n            timeFrame\n          }\n        }\n        showReviewSnippet\n        isPopular\n        roomInformation {\n          cheapestRoomSizeSqm\n          facilities {\n            id\n            propertyFacilityName\n            symbol\n          }\n        }\n      }\n    }\n    searchEnrichment {\n      suppliersInformation {\n        supplierId\n        supplierName\n        isAgodaBand\n      }\n    }\n    aggregation {\n      matrixGroupResults {\n        matrixGroup\n        matrixItemResults {\n          id\n          name\n          count\n          filterKey\n          filterRequestType\n          extraDataResults {\n            text\n            matrixExtraDataType\n          }\n        }\n      }\n    }\n  }\n}\n\nfragment Fragf02ih49a8eh50d3c685i on DisplayPrice {\n  exclusive\n  allInclusive\n}\n\nfragment Fragcbdcjaehaghb2icb726h on DFDisplayPrice {\n  exclusive\n  allInclusive\n}\n\nfragment Fragdifa6g6bbd21i738bi3g on DFCorBreakdownItem {\n  price\n  id\n}\n',
+}
+
+response = requests.post('https://www.agoda.com/graphql/search', cookies=cookies, headers=headers, json=json_data)
+
+# Note: json_data will not be serialized by requests
+# exactly as it was in the original request.
+#data = '{"operationName":"citySearch","variables":{"CitySearchRequest":{"cityId":5414,"searchRequest":{"searchCriteria":{"isAllowBookOnRequest":true,"bookingDate":"2024-03-22T06:23:33.640Z","checkInDate":"2024-03-30T17:00:00.000Z","localCheckInDate":"2024-03-31","los":1,"rooms":1,"adults":2,"children":0,"childAges":[],"ratePlans":[],"featureFlagRequest":{"fetchNamesForTealium":true,"fiveStarDealOfTheDay":true,"isAllowBookOnRequest":false,"showUnAvailable":true,"showRemainingProperties":true,"isMultiHotelSearch":false,"enableAgencySupplyForPackages":true,"flags":[{"feature":"FamilyChildFriendlyPopularFilter","enable":true},{"feature":"FamilyChildFriendlyPropertyTypeFilter","enable":true},{"feature":"FamilyMode","enable":false}],"enablePageToken":false,"enableDealsOfTheDayFilter":false,"isEnableSupplierFinancialInfo":false,"ignoreRequestedNumberOfRoomsForNha":false,"isFlexibleMultiRoomSearch":false},"isUserLoggedIn":true,"currency":"IDR","travellerType":"Couple","isAPSPeek":false,"enableOpaqueChannel":false,"isEnabledPartnerChannelSelection":null,"sorting":{"sortField":"Ranking","sortOrder":"Desc","sortParams":null},"requiredBasis":"PRPN","requiredPrice":"Exclusive","suggestionLimit":0,"synchronous":false,"supplierPullMetadataRequest":null,"isRoomSuggestionRequested":false,"isAPORequest":false,"hasAPOFilter":false},"searchContext":{"userId":"20b73fd5-66a8-4ca7-8e33-94e733534f12","memberId":428007548,"locale":"id-id","cid":-1,"origin":"ID","platform":1,"deviceTypeId":1,"experiments":{"forceByVariant":null,"forceByExperiment":[{"id":"UMRAH-B2B","variant":"B"},{"id":"UMRAH-B2C-REGIONAL","variant":"B"},{"id":"UMRAH-B2C","variant":"Z"},{"id":"JGCW-204","variant":"B"}]},"isRetry":false,"showCMS":false,"storeFrontId":3,"pageTypeId":103,"whiteLabelKey":null,"ipAddress":"139.255.221.98","endpointSearchType":"CitySearch","trackSteps":null,"searchId":"f0897a64-6fc4-4f56-8cf5-de30793267b1"},"matrix":null,"matrixGroup":[{"matrixGroup":"NumberOfBedrooms","size":100},{"matrixGroup":"LandmarkIds","size":10},{"matrixGroup":"GroupedBedTypes","size":100},{"matrixGroup":"RoomBenefits","size":100},{"matrixGroup":"AtmosphereIds","size":100},{"matrixGroup":"RoomAmenities","size":100},{"matrixGroup":"AffordableCategory","size":100},{"matrixGroup":"HotelFacilities","size":100},{"matrixGroup":"BeachAccessTypeIds","size":100},{"matrixGroup":"StarRating","size":20},{"matrixGroup":"AllGuestReviewBreakdown","size":100},{"matrixGroup":"MetroSubwayStationLandmarkIds","size":20},{"matrixGroup":"CityCenterDistance","size":100},{"matrixGroup":"ProductType","size":100},{"matrixGroup":"TripPurpose","size":5},{"matrixGroup":"BusStationLandmarkIds","size":20},{"matrixGroup":"IsSustainableTravel","size":2},{"matrixGroup":"ReviewLocationScore","size":3},{"matrixGroup":"LandmarkSubTypeCategoryIds","size":20},{"matrixGroup":"ReviewScore","size":100},{"matrixGroup":"AccommodationType","size":100},{"matrixGroup":"PaymentOptions","size":100},{"matrixGroup":"TrainStationLandmarkIds","size":20},{"matrixGroup":"HotelAreaId","size":100},{"matrixGroup":"HotelChainId","size":10},{"matrixGroup":"RecommendedByDestinationCity","size":10},{"matrixGroup":"Deals","size":100}],"filterRequest":{"idsFilters":[],"rangeFilters":[],"textFilters":[]},"page":{"pageSize":45,"pageNumber":1,"pageToken":""},"apoRequest":{"apoPageSize":10},"searchHistory":null,"searchDetailRequest":{"priceHistogramBins":50},"isTrimmedResponseRequested":false,"featuredAgodaHomesRequest":null,"featuredLuxuryHotelsRequest":null,"highlyRatedAgodaHomesRequest":{"numberOfAgodaHomes":30,"minimumReviewScore":7.5,"minimumReviewCount":3,"accommodationTypes":[28,29,30,102,103,106,107,108,109,110,114,115,120,131],"sortVersion":0},"extraAgodaHomesRequest":null,"extraHotels":{"extraHotelIds":[],"enableFiltersForExtraHotels":false},"packaging":null,"flexibleSearchRequest":{"fromDate":"2024-03-22","toDate":"2024-04-30","alternativeDateSize":4,"isFullFlexibleDateSearch":false},"rankingRequest":{"isNhaKeywordSearch":false},"rocketmilesRequestV2":null,"featuredPulsePropertiesRequest":{"numberOfPulseProperties":15}}},"ContentSummaryRequest":{"context":{"rawUserId":"20b73fd5-66a8-4ca7-8e33-94e733534f12","memberId":0,"userOrigin":"ID","locale":"id-id","forceExperimentsByIdNew":[{"key":"UMRAH-B2B","value":"B"},{"key":"UMRAH-B2C-REGIONAL","value":"B"},{"key":"UMRAH-B2C","value":"Z"},{"key":"JGCW-204","value":"B"}],"apo":false,"searchCriteria":{"cityId":5414},"platform":{"id":1},"storeFrontId":3,"cid":"-1","occupancy":{"numberOfAdults":2,"numberOfChildren":0,"travelerType":2,"checkIn":"2024-03-30T17:00:00.000Z"},"deviceTypeId":1,"whiteLabelKey":"","correlationId":""},"summary":{"highlightedFeaturesOrderPriority":null,"includeHotelCharacter":true},"reviews":{"commentary":null,"demographics":{"providerIds":null,"filter":{"defaultProviderOnly":true}},"summaries":{"providerIds":null,"apo":true,"limit":1,"travellerType":2},"cumulative":{"providerIds":null},"filters":null},"images":{"page":null,"maxWidth":0,"maxHeight":0,"imageSizes":null,"indexOffset":null},"rooms":{"images":null,"featureLimit":0,"filterCriteria":null,"includeMissing":false,"includeSoldOut":false,"includeDmcRoomId":false,"soldOutRoomCriteria":null,"showRoomSize":true,"showRoomFacilities":true,"showRoomName":false},"nonHotelAccommodation":true,"engagement":true,"highlights":{"maxNumberOfItems":0,"images":{"imageSizes":[{"key":"full","size":{"width":0,"height":0}}]}},"personalizedInformation":true,"localInformation":{"images":null},"features":null,"rateCategories":true,"contentRateCategories":{"escapeRateCategories":{}},"synopsis":true},"PricingSummaryRequest":{"cheapestOnly":true,"context":{"isAllowBookOnRequest":true,"abTests":[{"testId":9021,"abUser":"B"},{"testId":9023,"abUser":"B"},{"testId":9024,"abUser":"B"},{"testId":9025,"abUser":"B"},{"testId":9027,"abUser":"B"},{"testId":9029,"abUser":"B"}],"clientInfo":{"cid":-1,"languageId":26,"languageUse":1,"origin":"ID","platform":1,"searchId":"f0897a64-6fc4-4f56-8cf5-de30793267b1","storefront":3,"userId":"20b73fd5-66a8-4ca7-8e33-94e733534f12","ipAddress":"139.255.221.98"},"experiment":[{"name":"UMRAH-B2B","variant":"B"},{"name":"UMRAH-B2C-REGIONAL","variant":"B"},{"name":"UMRAH-B2C","variant":"Z"},{"name":"JGCW-204","variant":"B"}],"sessionInfo":{"isLogin":true,"memberId":428007548,"sessionId":1},"packaging":null},"isSSR":true,"pricing":{"bookingDate":"2024-03-22T06:23:33.631Z","checkIn":"2024-03-30T17:00:00.000Z","checkout":"2024-03-31T17:00:00.000Z","localCheckInDate":"2024-03-31","localCheckoutDate":"2024-04-01","currency":"IDR","details":{"cheapestPriceOnly":false,"itemBreakdown":false,"priceBreakdown":false},"featureFlag":["ClientDiscount","PriceHistory","VipPlatinum","RatePlanPromosCumulative","PromosCumulative","CouponSellEx","MixAndSave","StackChannelDiscount","AutoApplyPromos","EnableAgencySupplyForPackages","EnableCashback","CreditCardPromotionPeek","EnableCofundedCashback","DispatchGoLocalForInternational","EnableGoToTravelCampaign","EnablePriceTrend"],"features":{"crossOutRate":false,"isAPSPeek":false,"isAllOcc":false,"isApsEnabled":false,"isIncludeUsdAndLocalCurrency":false,"isMSE":true,"isRPM2Included":true,"maxSuggestions":0,"isEnableSupplierFinancialInfo":false,"isLoggingAuctionData":false,"newRateModel":false,"overrideOccupancy":false,"filterCheapestRoomEscapesPackage":false,"priusId":0,"synchronous":false,"enableRichContentOffer":true,"showCouponAmountInUserCurrency":false,"disableEscapesPackage":false,"enablePushDayUseRates":false,"enableDayUseCor":false},"filters":{"cheapestRoomFilters":[],"filterAPO":false,"ratePlans":[1],"secretDealOnly":false,"suppliers":[],"nosOfBedrooms":[]},"includedPriceInfo":false,"occupancy":{"adults":2,"children":0,"childAges":[],"rooms":1,"childrenTypes":[]},"supplierPullMetadata":{"requiredPrecheckAccuracyLevel":0},"mseHotelIds":[],"ppLandingHotelIds":[],"searchedHotelIds":[],"paymentId":-1,"externalLoyaltyRequest":null},"suggestedPrice":"Exclusive"},"PriceStreamMetaLabRequest":{"attributesId":[8,1,18,7,11,2,3]}},"query":"query citySearch($CitySearchRequest: CitySearchRequest!, $ContentSummaryRequest: ContentSummaryRequest!, $PricingSummaryRequest: PricingRequestParameters, $PriceStreamMetaLabRequest: PriceStreamMetaLabRequest) {\\n  citySearch(CitySearchRequest: $CitySearchRequest) {\\n    featuredPulseProperties(ContentSummaryRequest: $ContentSummaryRequest, PricingSummaryRequest: $PricingSummaryRequest) {\\n      propertyId\\n      propertyResultType\\n      pricing {\\n        pulseCampaignMetadata {\\n          promotionTypeId\\n          webCampaignId\\n          campaignTypeId\\n          campaignBadgeText\\n          campaignBadgeDescText\\n          dealExpiryTime\\n          showPulseMerchandise\\n        }\\n        isAvailable\\n        isReady\\n        offers {\\n          roomOffers {\\n            room {\\n              pricing {\\n                currency\\n                price {\\n                  perNight {\\n                    exclusive {\\n                      crossedOutPrice\\n                      display\\n                    }\\n                    inclusive {\\n                      crossedOutPrice\\n                      display\\n                    }\\n                  }\\n                  perRoomPerNight {\\n                    exclusive {\\n                      crossedOutPrice\\n                      display\\n                    }\\n                    inclusive {\\n                      crossedOutPrice\\n                      display\\n                    }\\n                  }\\n                }\\n              }\\n            }\\n          }\\n        }\\n      }\\n      content {\\n        reviews {\\n          contentReview {\\n            isDefault\\n            providerId\\n            cumulative {\\n              reviewCount\\n              score\\n            }\\n          }\\n          cumulative {\\n            reviewCount\\n            score\\n          }\\n        }\\n        images {\\n          hotelImages {\\n            urls {\\n              value\\n            }\\n          }\\n        }\\n        informationSummary {\\n          hasHostExperience\\n          displayName\\n          rating\\n          propertyLinks {\\n            propertyPage\\n          }\\n          address {\\n            country {\\n              id\\n            }\\n            area {\\n              name\\n            }\\n            city {\\n              name\\n            }\\n          }\\n          nhaSummary {\\n            hostType\\n          }\\n        }\\n      }\\n    }\\n    searchResult {\\n      sortMatrix {\\n        result {\\n          fieldId\\n          sorting {\\n            sortField\\n            sortOrder\\n            sortParams {\\n              id\\n            }\\n          }\\n          display {\\n            name\\n          }\\n          childMatrix {\\n            fieldId\\n            sorting {\\n              sortField\\n              sortOrder\\n              sortParams {\\n                id\\n              }\\n            }\\n            display {\\n              name\\n            }\\n            childMatrix {\\n              fieldId\\n              sorting {\\n                sortField\\n                sortOrder\\n                sortParams {\\n                  id\\n                }\\n              }\\n              display {\\n                name\\n              }\\n            }\\n          }\\n        }\\n      }\\n      searchInfo {\\n        flexibleSearch {\\n          currentDate {\\n            checkIn\\n            price\\n          }\\n          alternativeDates {\\n            checkIn\\n            price\\n          }\\n        }\\n        hasSecretDeal\\n        isComplete\\n        totalFilteredHotels\\n        hasEscapesPackage\\n        searchStatus {\\n          searchCriteria {\\n            checkIn\\n          }\\n          searchStatus\\n        }\\n        objectInfo {\\n          objectName\\n          cityName\\n          cityEnglishName\\n          countryId\\n          countryEnglishName\\n          mapLatitude\\n          mapLongitude\\n          mapZoomLevel\\n          wlPreferredCityName\\n          wlPreferredCountryName\\n          cityId\\n          cityCenterPolygon {\\n            geoPoints {\\n              lon\\n              lat\\n            }\\n            touristAreaCenterPoint {\\n              lon\\n              lat\\n            }\\n          }\\n        }\\n      }\\n      urgencyDetail {\\n        urgencyScore\\n      }\\n      histogram {\\n        bins {\\n          numOfElements\\n          upperBound {\\n            perNightPerRoom\\n            perPax\\n          }\\n        }\\n      }\\n      nhaProbability\\n    }\\n    properties(ContentSummaryRequest: $ContentSummaryRequest, PricingSummaryRequest: $PricingSummaryRequest, PriceStreamMetaLabRequest: $PriceStreamMetaLabRequest) {\\n      propertyId\\n      sponsoredDetail {\\n        sponsoredType\\n        trackingData\\n        isShowSponsoredFlag\\n      }\\n      propertyResultType\\n      content {\\n        informationSummary {\\n          hotelCharacter {\\n            hotelTag {\\n              name\\n              symbol\\n            }\\n            hotelView {\\n              name\\n              symbol\\n            }\\n          }\\n          propertyLinks {\\n            propertyPage\\n          }\\n          atmospheres {\\n            id\\n            name\\n          }\\n          isSustainableTravel\\n          localeName\\n          defaultName\\n          displayName\\n          accommodationType\\n          awardYear\\n          hasHostExperience\\n          nhaSummary {\\n            hostPropertyCount\\n          }\\n          address {\\n            countryCode\\n            country {\\n              id\\n              name\\n            }\\n            city {\\n              id\\n              name\\n            }\\n            area {\\n              id\\n              name\\n            }\\n          }\\n          propertyType\\n          rating\\n          agodaGuaranteeProgram\\n          remarks {\\n            renovationInfo {\\n              renovationType\\n              year\\n            }\\n          }\\n          spokenLanguages {\\n            id\\n          }\\n          geoInfo {\\n            latitude\\n            longitude\\n          }\\n        }\\n        propertyEngagement {\\n          lastBooking\\n          peopleLooking\\n        }\\n        nonHotelAccommodation {\\n          masterRooms {\\n            noOfBathrooms\\n            noOfBedrooms\\n            noOfBeds\\n            roomSizeSqm\\n            highlightedFacilities\\n          }\\n          hostLevel {\\n            id\\n            name\\n          }\\n          supportedLongStay\\n        }\\n        facilities {\\n          id\\n        }\\n        images {\\n          hotelImages {\\n            id\\n            caption\\n            providerId\\n            urls {\\n              key\\n              value\\n            }\\n          }\\n        }\\n        reviews {\\n          contentReview {\\n            isDefault\\n            providerId\\n            demographics {\\n              groups {\\n                id\\n                grades {\\n                  id\\n                  score\\n                }\\n              }\\n            }\\n            summaries {\\n              recommendationScores {\\n                recommendationScore\\n              }\\n              snippets {\\n                countryId\\n                countryCode\\n                countryName\\n                date\\n                demographicId\\n                demographicName\\n                reviewer\\n                reviewRating\\n                snippet\\n              }\\n            }\\n            cumulative {\\n              reviewCount\\n              score\\n            }\\n          }\\n          cumulative {\\n            reviewCount\\n            score\\n          }\\n          cumulativeForHost {\\n            hostAvgHotelReviewRating\\n            hostHotelReviewTotalCount\\n          }\\n        }\\n        familyFeatures {\\n          hasChildrenFreePolicy\\n          isFamilyRoom\\n          hasMoreThanOneBedroom\\n          isInterConnectingRoom\\n          isInfantCottageAvailable\\n          hasKidsPool\\n          hasKidsClub\\n        }\\n        personalizedInformation {\\n          childrenFreePolicy {\\n            fromAge\\n            toAge\\n          }\\n        }\\n        localInformation {\\n          landmarks {\\n            transportation {\\n              landmarkName\\n              distanceInM\\n            }\\n            topLandmark {\\n              landmarkName\\n              distanceInM\\n            }\\n            beach {\\n              landmarkName\\n              distanceInM\\n            }\\n          }\\n          hasAirportTransfer\\n        }\\n        highlight {\\n          cityCenter {\\n            distanceFromCityCenter\\n          }\\n          favoriteFeatures {\\n            features {\\n              id\\n              title\\n              category\\n            }\\n          }\\n          hasNearbyPublicTransportation\\n        }\\n        rateCategories {\\n          escapeRateCategories {\\n            rateCategoryId\\n            localizedRateCategoryName\\n          }\\n        }\\n      }\\n      soldOut {\\n        soldOutPrice {\\n          averagePrice\\n        }\\n      }\\n      pricing {\\n        pulseCampaignMetadata {\\n          promotionTypeId\\n          webCampaignId\\n          campaignTypeId\\n          campaignBadgeText\\n          campaignBadgeDescText\\n          dealExpiryTime\\n          showPulseMerchandise\\n        }\\n        isAvailable\\n        isReady\\n        benefits\\n        cheapestRoomOffer {\\n          agodaCash {\\n            showBadge\\n            giftcardGuid\\n            dayToEarn\\n            earnId\\n            percentage\\n            expiryDay\\n          }\\n          cashback {\\n            cashbackGuid\\n            showPostCashbackPrice\\n            cashbackVersion\\n            percentage\\n            earnId\\n            dayToEarn\\n            expiryDay\\n            cashbackType\\n            appliedCampaignName\\n          }\\n        }\\n        isEasyCancel\\n        isInsiderDeal\\n        isMultiHotelEligible\\n        suggestPriceType {\\n          suggestPrice\\n        }\\n        roomBundle {\\n          bundleId\\n          bundleType\\n          saveAmount {\\n            perNight {\\n              ...Fragcbdcjaehaghb2icb726h\\n            }\\n          }\\n        }\\n        pointmax {\\n          channelId\\n          point\\n        }\\n        priceChange {\\n          changePercentage\\n          searchDate\\n        }\\n        payment {\\n          cancellation {\\n            cancellationType\\n            freeCancellationDate\\n          }\\n          payLater {\\n            isEligible\\n          }\\n          payAtHotel {\\n            isEligible\\n          }\\n          noCreditCard {\\n            isEligible\\n          }\\n          taxReceipt {\\n            isEligible\\n          }\\n        }\\n        cheapestStayPackageRatePlans {\\n          stayPackageType\\n          ratePlanId\\n        }\\n        pricingMessages {\\n          location\\n          ids\\n        }\\n        suppliersSummaries {\\n          id\\n          supplierHotelId\\n        }\\n        supplierInfo {\\n          id\\n          name\\n          isAgodaBand\\n        }\\n        childPolicy {\\n          freeChildren\\n        }\\n        offers {\\n          roomOffers {\\n            room {\\n              extraPriceInfo {\\n                displayPriceWithSurchargesPRPN\\n                corDisplayPriceWithSurchargesPRPN\\n              }\\n              availableRooms\\n              isPromoEligible\\n              promotions {\\n                typeId\\n                promotionDiscount {\\n                  value\\n                }\\n                isRatePlanAsPromotion\\n                cmsTypeId\\n                description\\n              }\\n              bookingDuration {\\n                unit\\n                value\\n              }\\n              supplierId\\n              corSummary {\\n                hasCor\\n                corType\\n                isOriginal\\n                hasOwnCOR\\n                isBlacklistedCor\\n              }\\n              localVoucher {\\n                currencyCode\\n                amount\\n              }\\n              pricing {\\n                currency\\n                price {\\n                  perNight {\\n                    exclusive {\\n                      display\\n                      cashbackPrice\\n                      displayAfterCashback\\n                      originalPrice\\n                    }\\n                    inclusive {\\n                      display\\n                      cashbackPrice\\n                      displayAfterCashback\\n                      originalPrice\\n                    }\\n                  }\\n                  perBook {\\n                    exclusive {\\n                      display\\n                      cashbackPrice\\n                      displayAfterCashback\\n                      rebatePrice\\n                      originalPrice\\n                      autoAppliedPromoDiscount\\n                    }\\n                    inclusive {\\n                      display\\n                      cashbackPrice\\n                      displayAfterCashback\\n                      rebatePrice\\n                      originalPrice\\n                      autoAppliedPromoDiscount\\n                    }\\n                  }\\n                  perRoomPerNight {\\n                    exclusive {\\n                      display\\n                      crossedOutPrice\\n                      cashbackPrice\\n                      displayAfterCashback\\n                      rebatePrice\\n                      pseudoCouponPrice\\n                      originalPrice\\n                      loyaltyOfferSummary {\\n                        basePrice {\\n                          exclusive\\n                          allInclusive\\n                        }\\n                        status\\n                        offers {\\n                          identifier\\n                          status\\n                          burn {\\n                            points\\n                            payableAmount\\n                          }\\n                          earn {\\n                            points\\n                          }\\n                          offerType\\n                          isSelected\\n                        }\\n                      }\\n                    }\\n                    inclusive {\\n                      display\\n                      crossedOutPrice\\n                      cashbackPrice\\n                      displayAfterCashback\\n                      rebatePrice\\n                      pseudoCouponPrice\\n                      originalPrice\\n                      loyaltyOfferSummary {\\n                        basePrice {\\n                          exclusive\\n                          allInclusive\\n                        }\\n                        status\\n                        offers {\\n                          identifier\\n                          status\\n                          burn {\\n                            points\\n                            payableAmount\\n                          }\\n                          earn {\\n                            points\\n                          }\\n                          offerType\\n                          isSelected\\n                        }\\n                      }\\n                    }\\n                  }\\n                  totalDiscount\\n                  priceAfterAppliedAgodaCash {\\n                    perBook {\\n                      ...Fragf02ih49a8eh50d3c685i\\n                    }\\n                    perRoomPerNight {\\n                      ...Fragf02ih49a8eh50d3c685i\\n                    }\\n                  }\\n                }\\n                apsPeek {\\n                  perRoomPerNight {\\n                    ...Fragcbdcjaehaghb2icb726h\\n                  }\\n                }\\n                promotionPricePeek {\\n                  display {\\n                    perBook {\\n                      ...Fragcbdcjaehaghb2icb726h\\n                    }\\n                    perRoomPerNight {\\n                      ...Fragcbdcjaehaghb2icb726h\\n                    }\\n                    perNight {\\n                      ...Fragcbdcjaehaghb2icb726h\\n                    }\\n                  }\\n                  discountType\\n                  promotionCodeType\\n                  promotionCode\\n                  promoAppliedOnFinalPrice\\n                  childPromotions {\\n                    campaignId\\n                  }\\n                  campaignName\\n                }\\n                channelDiscountSummary {\\n                  channelDiscountBreakdown {\\n                    display\\n                    discountPercent\\n                    channelId\\n                  }\\n                }\\n                promotionsCumulative {\\n                  promotionCumulativeType\\n                  amountPercentage\\n                  minNightsStay\\n                }\\n              }\\n              uid\\n              payment {\\n                cancellation {\\n                  cancellationType\\n                }\\n              }\\n              discount {\\n                deals\\n                channelDiscount\\n              }\\n              saveUpTo {\\n                perRoomPerNight\\n              }\\n              benefits {\\n                id\\n                targetType\\n              }\\n              channel {\\n                id\\n              }\\n              mseRoomSummaries {\\n                supplierId\\n                subSupplierId\\n                pricingSummaries {\\n                  currency\\n                  channelDiscountSummary {\\n                    channelDiscountBreakdown {\\n                      channelId\\n                      discountPercent\\n                      display\\n                    }\\n                  }\\n                  price {\\n                    perRoomPerNight {\\n                      exclusive {\\n                        display\\n                      }\\n                      inclusive {\\n                        display\\n                      }\\n                    }\\n                  }\\n                }\\n              }\\n              cashback {\\n                cashbackGuid\\n                showPostCashbackPrice\\n                cashbackVersion\\n                percentage\\n                earnId\\n                dayToEarn\\n                expiryDay\\n                cashbackType\\n                appliedCampaignName\\n              }\\n              agodaCash {\\n                showBadge\\n                giftcardGuid\\n                dayToEarn\\n                expiryDay\\n                percentage\\n              }\\n              corInfo {\\n                corBreakdown {\\n                  taxExPN {\\n                    ...Fragdifa6g6bbd21i738bi3g\\n                  }\\n                  taxInPN {\\n                    ...Fragdifa6g6bbd21i738bi3g\\n                  }\\n                  taxExPRPN {\\n                    ...Fragdifa6g6bbd21i738bi3g\\n                  }\\n                  taxInPRPN {\\n                    ...Fragdifa6g6bbd21i738bi3g\\n                  }\\n                }\\n                corInfo {\\n                  corType\\n                }\\n              }\\n              loyaltyDisplay {\\n                items\\n              }\\n              capacity {\\n                extraBedsAvailable\\n              }\\n              pricingMessages {\\n                formatted {\\n                  location\\n                  texts {\\n                    index\\n                    text\\n                  }\\n                }\\n              }\\n              campaign {\\n                selected {\\n                  campaignId\\n                  promotionId\\n                  messages {\\n                    campaignName\\n                    title\\n                    titleWithDiscount\\n                    description\\n                    linkOutText\\n                    url\\n                  }\\n                }\\n              }\\n              stayPackageType\\n            }\\n          }\\n        }\\n      }\\n      metaLab {\\n        attributes {\\n          attributeId\\n          dataType\\n          value\\n          version\\n        }\\n      }\\n      enrichment {\\n        topSellingPoint {\\n          tspType\\n          value\\n        }\\n        pricingBadges {\\n          badges\\n        }\\n        uniqueSellingPoint {\\n          rank\\n          segment\\n          uspType\\n          uspPropertyType\\n        }\\n        bookingHistory {\\n          bookingCount {\\n            count\\n            timeFrame\\n          }\\n        }\\n        showReviewSnippet\\n        isPopular\\n        roomInformation {\\n          cheapestRoomSizeSqm\\n          facilities {\\n            id\\n            propertyFacilityName\\n            symbol\\n          }\\n        }\\n      }\\n    }\\n    searchEnrichment {\\n      suppliersInformation {\\n        supplierId\\n        supplierName\\n        isAgodaBand\\n      }\\n    }\\n    aggregation {\\n      matrixGroupResults {\\n        matrixGroup\\n        matrixItemResults {\\n          id\\n          name\\n          count\\n          filterKey\\n          filterRequestType\\n          extraDataResults {\\n            text\\n            matrixExtraDataType\\n          }\\n        }\\n      }\\n    }\\n  }\\n}\\n\\nfragment Fragf02ih49a8eh50d3c685i on DisplayPrice {\\n  exclusive\\n  allInclusive\\n}\\n\\nfragment Fragcbdcjaehaghb2icb726h on DFDisplayPrice {\\n  exclusive\\n  allInclusive\\n}\\n\\nfragment Fragdifa6g6bbd21i738bi3g on DFCorBreakdownItem {\\n  price\\n  id\\n}\\n"}'
+#response = requests.post('https://www.agoda.com/graphql/search', cookies=cookies, headers=headers, data=data)
+
