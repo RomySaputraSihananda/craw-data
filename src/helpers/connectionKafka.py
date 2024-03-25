@@ -6,12 +6,12 @@ from src.helpers import Decorator
 from src.config import logging
 
 class ConnectionKafka:
-    def __init__(self, topic: str, bootstrap_servers: str | list = None, type: str = 'producer') -> None:
+    def __init__(self, topic: str, bootstrap_servers: str | list = None, type: str = 'producer', **kwargs) -> None:
         self.__bootstrap_servers: str | list = bootstrap_servers.split(',')
         self.__topic = topic
 
         if(type == 'producer'):
-            self.__producer: KafkaProducer = KafkaProducer(bootstrap_servers=self.__bootstrap_servers, value_serializer=lambda x: dumps(x).encode('utf-8'))
+            self.__producer: KafkaProducer = KafkaProducer(bootstrap_servers=self.__bootstrap_servers, value_serializer=lambda x: dumps(x).encode('utf-8'), **kwargs)
         else:
             self.__consumer: KafkaConsumer = KafkaConsumer(self.__topic, bootstrap_servers=self.__bootstrap_servers)
 
@@ -30,4 +30,4 @@ class ConnectionKafka:
 
 if(__name__ == '__main__'):
     # ConnectionKafka('kafka01.production02.bt:9092')
-    ConnectionKafka('sc-raw-gosip-daily-006', 'kafka01.production02.bt:9092', 'consumer').consume()
+    ConnectionKafka('test', 'localhost:9092').send({'test':'ppk'})
