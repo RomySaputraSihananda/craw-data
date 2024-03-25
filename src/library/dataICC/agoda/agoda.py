@@ -70,12 +70,8 @@ class BaseAgoda:
             
             for review in reviews:
                 self.__process_data(property | property_detail, review, province_enum, log)
-                
-                # break
 
             i += 1
-
-            # break
 
         log['status'] = 'Done'
         Iostream.update_log(log, name=__name__, title=property_name)
@@ -167,7 +163,7 @@ class BaseAgoda:
         return (result['properties'], result['searchEnrichment']['pageToken'])
         
 
-    async def _get_detail_by_province_id(self, province_enum: ProvinceEnum) -> list:
+    async def _get_detail_by_province(self, province_enum: ProvinceEnum) -> list:
         response: Response = self.__requests.get('https://www.agoda.com/api/cronos/geo/NeighborHoods',
                                                 params={
                                                     'pageTypeId': 8,
@@ -179,6 +175,7 @@ class BaseAgoda:
             while(True):
                 for _ in range(5):
                     (properties, token) = self.__get_properties_by_city_id(city['hotelId'], page, 3, token)
+                    
                     if(properties): break
 
                 if(not properties): break
@@ -186,13 +183,10 @@ class BaseAgoda:
                 await asyncio.gather(*(self.__process_property(property, province_enum) for property in properties))
 
                 page += 1
-                # break
-            # break
     
-    def _get_all(self) -> None:
-        asyncio.run(self._get_detail_by_province_id(ProvinceEnum.JAWA_TIMUR))
-        # for province in ProvinceEnum:
-        #     self._get_detail_by_province_id(province)
+    def _get_all_detail(self) -> None:
+        for province in ProvinceEnum:
+            asyncio.run(self._get_detail_by_province(province))
 
 if(__name__ == "__main__"):
     BaseAgoda(
