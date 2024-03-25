@@ -4,6 +4,7 @@ from click import Context
 
 from src.interfaces import BaseGroupClick
 from .kafkaConsumer import KafkaConsumer
+from .checkproxy import CheckProxy
 
 class Other(BaseGroupClick):
     @click.group()
@@ -17,3 +18,8 @@ class Other(BaseGroupClick):
     def kafkaconsumer(**kwargs) -> None:
         """ Kafka Consumer """
         return KafkaConsumer(**kwargs)
+    
+    @main.command()
+    def checkProxy(**kwargs) -> None:
+        """ Check Proxy """
+        return CheckProxy(**kwargs)
