@@ -44,7 +44,7 @@ class EngineCrawler(BaseGroupClick):
     @click.option('--port', help='port of service', default=4444)
     @click.option('--local', is_flag=True, help='serve to local network')
     def serve(**kwargs):
-        return uvicorn.run(app, port=kwargs.get('port'), host=socket.gethostbyname(socket.gethostname()))
+        return uvicorn.run(app, port=kwargs.get('port'), host='0.0.0.0')
 
 from src.services.dataICC import DataICC
 if(__name__ == "__main__"):

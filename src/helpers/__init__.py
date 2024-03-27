@@ -5,5 +5,6 @@ from .connectionS3 import ConnectionS3
 from .connectionKafka import ConnectionKafka
 from .cryptography import Cryptography
 from .parser import Parser
+from .bodyResponse import BodyResponse
 
 from src.config import logging
