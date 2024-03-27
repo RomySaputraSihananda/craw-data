@@ -1,0 +1,94 @@
+
+        {
+            "agent_id": 278596,
+            "agent_name": "Raja Apartment",
+            "attributes": {
+                "agent_ratings_enabled": 0,
+                "approved": 1,
+                                "attribute_set_id": 1,
+                                "categories": JSON.parse("[25,32]"),
+                "indoor_features": ["Televisi","Kitchen Set","Pendingin ruangan (AC)"],
+                "is_agent": 1,
+                "listing_type": "Classifieds",
+                "other_features": [],
+                "outdoor_features": ["Keamanan 24 jam","Kolam renang","Balkon"],
+                "price_formatted": "Rp3.800.000",
+                "price_not_shown": false,
+                "seller_is_trusted": 1,
+                "show_listing_address": 1,
+                "show_mobile": 1,
+                "is_whatsapp": 1,
+                "is_viber": 0,
+                "is_facebook": 0,
+                "show_officephone": 1,
+                "top_position": 0,
+                "urlkey_details": "sewa-murah-apartemen-dua-kamar-tidur-dikota-bandun-170943101435.html"
+                                ,"bathrooms":1
+                ,"bedrooms":2
+                ,"building_size":33
+                
+                
+                ,"furnished":""
+                ,"furnished_id":0
+                
+                ,"rooms_total":3
+                
+                ,"agency_name": "Raja Apartment"
+                ,"alternate_sku": "88917824"
+                
+                ,"attribute_set_name": "Apartemen"
+                ,"currency_code": "IDR"
+                ,"listing_start": "2024-03-03 08:56:54"
+                ,"name": "Sewa\u0020Murah\u0020Apartemen\u0020dua\u0020kamar\u0020tidur\u0020dikota\u0020bandung\u0020jarrdin\u0020cocok\u0020untu"
+                ,"price": 3800000
+                ,"product_owner": 278596
+                ,"product_owner_name": "Raja Apartment"
+                ,"product_owner_url_key": "bipro-agn-10"
+                ,"root_category": 25
+                ,"sku": "AP65E3D8E660342ID"
+                ,"status": "active"
+                ,"status_supplier_config": "active"
+                ,"subcategory": "Apartemen"
+                ,"subcategory_id": 32
+                ,"offer_type_id": 1
+                ,"location_latitude": "-6.9548746"
+                ,"location_longitude": "107.6212817"
+                ,"listing_region": "Jawa Barat"
+                ,"listing_region_id": "77"
+                ,"offer_type": "Rent"
+                
+                
+                ,"listing_city": "Bandung"
+                ,"listing_city_id": "1359"
+                
+                
+                
+                
+                ,"image_url": "https://static-id.lamudi.com/static/media/bm9uZS9ub25l/2x2x5x880x396/c113f093be0715.jpg"
+                ,
+            },
+            "country": "id",
+            "description": {
+                "characters":801,
+                "text": "Harga Promos apartemen Jarrdin 2 kamar tidur bulanan. Perhatian Untuk Foto Iklan Ini Hanya Gambaran saja Hunian nyaman dengan fasilitas: - Kitchen - Televisi - AC - Bed - Kulkas Lokasi sangat strategis, dekat pusat wisata belanja Cihampelas, dekat rumah sakit Advent dan rumah sakit Hasan Sadikin, dekat STBA Yapari ABA, ITB, Unpad, Unpas dan universitas lain. Akses Mudah, dekat Bandara dan Stasiun Bandung, Aman dan bebas banjir. Turun harga untuk bulanan hanya 3.8 jt/bulan (Include IPL) MInimal sewa 3 bulan Raja Apartemen Property Management berdiri di Bandung sejak 2014 melayani sewa apartemen harian, mingguan, sewa bulanan sampai tahunan. Bagi pemilik apartemen, Raja Apartemen Property Management memberikan pelayanan penuh untuk membuat apartemen Anda menjadi aset yang menghasilkan.",
+                "words": 117
+            },
+            "device_agent": navigator.userAgent,
+                        "device_type": "desktop",
+            "desktop_leads_optional_phone": 1,
+                        "whatsapp_leads_optional_phone": 0,
+            "images": 13,
+            "language": "in",
+            "location": {
+                "area": "",
+                "city": "Bandung",
+                "region": "Jawa Barat"
+            },
+            "login_state": false,
+                        "number_of_product_attributes": 51,
+                                                "number_of_product_features": 6,
+            "sku": "AP65E3D8E660342ID",
+            "title": "Sewa Murah Apartemen dua kamar tidur dikota bandung jarrdin cocok untu",
+            "page_type": "product",
+        }
+    

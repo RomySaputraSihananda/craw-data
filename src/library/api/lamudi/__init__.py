@@ -1,0 +1,1 @@
+from .lamudi import BaseLamudi
