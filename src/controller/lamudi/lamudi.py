@@ -38,7 +38,7 @@ class LamudiController(BaseLamudi):
             
         if(not keyword): return JSONResponse(content=BodyResponse(HTTPStatus.BAD_REQUEST, None, message='keyword cannot be empty').__dict__, status_code=HTTPStatus.BAD_REQUEST)
         
-        return JSONResponse(content=BodyResponse(HTTPStatus.OK, await super()._get_location(keyword, level=level), message=f'data').__dict__, status_code=HTTPStatus.OK)
+        return JSONResponse(content=BodyResponse(HTTPStatus.OK, await super()._get_location(keyword, level=level, page=page, size=size), message=f'list location with keyword {keyword}', page=page, size=size).__dict__, status_code=HTTPStatus.OK)
     
     async def get_property(
         self, 

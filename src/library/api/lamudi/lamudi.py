@@ -22,7 +22,7 @@ class BaseLamudi:
     
     @staticmethod
     def query_builder(index: str, query: dict, **kwargs) -> str:
-        data: list = [
+        [index, query] = [
             {"index": index}, 
             {
                 "from": (kwargs.get('page', 1) - 1) * kwargs.get('size', 10),
@@ -32,8 +32,8 @@ class BaseLamudi:
             }
         ]
         return f"""
-{dumps(data[0])}
-{dumps(data[1])}
+{dumps(index)}
+{dumps(query)}
 """
 
     async def __proccess_property(self, property: dict) -> dict:
@@ -69,7 +69,6 @@ class BaseLamudi:
             location_slugs: list = [location['slug'] for location in await self._get_location(location_keyword, size=5)]
             
             if(location_slug := kwargs.get('location_slug')): location_slugs.append(location_slug)
-            print(location_slugs)
 
             add_query(
                 {
