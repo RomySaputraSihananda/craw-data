@@ -168,7 +168,9 @@ class BaseLamudi:
                                                     self.query_builder('lamudi-id-production-ads-id', query, **kwargs)
                                                 )
         properties: list = [property['_source'] for property in response.json()['responses'][0]['hits']['hits']]
-        return await asyncio.gather(*(self.__proccess_property(property) for property in properties))
+        properties_clean: list = await asyncio.gather(*(self.__proccess_property(property) for property in properties))
+        
+        return [property for property in properties_clean if property]
 
         
     async def _get_location(self, keyword: str, **kwargs) -> list: 
