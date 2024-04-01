@@ -1,7 +1,6 @@
 import uvicorn
 
 from fastapi import FastAPI
-from .test import Test
 from src.controller.lamudi import LamudiController
 
 app: FastAPI = FastAPI(
@@ -10,7 +9,6 @@ app: FastAPI = FastAPI(
     description='rest api untuk mengambil data ruko dan kos dari aplikasi [lamudi.co.id](https://lamudi.co.id)',
 )
 
-# app.include_router(Test().router, prefix="/api/v1/test", tags=["Google Search image"])
 app.include_router(LamudiController().router, prefix="/api/v1/lamudi", tags=["Lamudi"])
 
 if(__name__ == "__main__"):
