@@ -65,10 +65,10 @@ class BaseLamudi:
 
         add_query: function = lambda data: query['bool']['must'].append(data)
 
-        if(location_keyword := kwargs.get('location_keyword')):
+        if((location_keyword := kwargs.get('location_keyword')) and (location_slug := kwargs.get('location_slug'))):
             location_slugs: list = [location['slug'] for location in await self._get_location(location_keyword, size=5)]
             
-            if(location_slug := kwargs.get('location_slug')): location_slugs.append(location_slug)
+            if(location_slug): location_slugs.append(location_slug)
 
             add_query(
                 {
@@ -77,16 +77,17 @@ class BaseLamudi:
                     }
                 }
             )
-        
-        if(location_slug := kwargs.get('location_slug')):
 
+        if(location_slug := kwargs.get('location_slug')):
             add_query(
                 {
                     "terms": {
-                        "location.slug": location_slug
+                        "location.slug": [location_slug]
                     }
                 }
             )
+
+        
             
         if(frekuensi := kwargs.get('frekuensi')): 
             add_query(
