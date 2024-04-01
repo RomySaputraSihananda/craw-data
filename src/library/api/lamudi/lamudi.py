@@ -77,6 +77,16 @@ class BaseLamudi:
                     }
                 }
             )
+        
+        if(location_slug := kwargs.get('location_slug')):
+
+            add_query(
+                {
+                    "terms": {
+                        "location.slug": location_slugs
+                    }
+                }
+            )
             
         if(frekuensi := kwargs.get('frekuensi')): 
             add_query(

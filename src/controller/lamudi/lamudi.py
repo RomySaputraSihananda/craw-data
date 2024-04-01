@@ -42,7 +42,7 @@ class LamudiController(BaseLamudi):
     
     async def get_property(
         self, 
-        location_keyword: str = Query(example='Malang', default='Malang', description='search product by location keyword'),
+        location_keyword: str = Query(example='Malang', default=None, description='search product by location keyword'),
         location_slug: str = Query(default=None, description='search product by location slug'),
         penawaran_type: str = Query(default='DI_JUAL', enum=[penawaran.name for penawaran in PenawaranEnum], description='type dari penawaran'),
         frekuensi_sewa: str = Query(default=None, enum=[frekuensi.name for frekuensi in FrekuensiSewaEnum], description='type waktu sewa'),
