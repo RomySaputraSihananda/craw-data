@@ -83,7 +83,7 @@ class BaseLamudi:
             add_query(
                 {
                     "terms": {
-                        "location.slug": location_slugs
+                        "location.slug": location_slug
                     }
                 }
             )
