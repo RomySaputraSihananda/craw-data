@@ -8,7 +8,8 @@ from typing import Any, final
 
 from src.interfaces import BaseGroupClick
 from src.helpers import ConnectionS3, ConnectionKafka
-from src.controller import app
+from src.controller import Controllers
+
 from .__version__ import __version__, __title__  
 
 @final
@@ -41,10 +42,11 @@ class EngineCrawler(BaseGroupClick):
             raise click.BadParameter('--broker is bad value')
     
     @main.command()
+    @click.argument('web-app', metavar='WEB-APP', type=click.Choice(['lamudi']))
     @click.option('--port', help='port of service', default=4444)
     @click.option('--local', is_flag=True, help='serve to local network')
     def serve(**kwargs):
-        return uvicorn.run(app, port=kwargs.get('port'), host='0.0.0.0')
+        return Controllers(**kwargs)
 
 from src.services.dataICC import DataICC
 if(__name__ == "__main__"):
