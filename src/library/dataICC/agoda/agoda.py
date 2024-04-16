@@ -1,4 +1,5 @@
 import asyncio
+import requests
 
 from requests import Session, Response
 from aiohttp import ClientSession
@@ -20,7 +21,6 @@ class BaseAgoda:
             'accept-language': 'id-ID,id;q=0.9,id;q=0.8',
             'ag-debug-override-origin': 'ID',
             'ag-language-locale': 'id-id',
-            'cookie': 'agoda.version.03=CookieId=8e0681f8-949d-4173-8683-3327beded15b&TItems=2$-1$04-01-2024 12:23$05-01-2024 12:23$&DLang=en-us&CurLabel=IDR;FPLC=tk9k9hu%2B9v6FVPsczPhOcedl%2BIkTnA2IjrRy2MYzYOryjEyR4k4D%2FWJhCta1QxC9XopdCZ%2FZ6xP6Mk9vL9r%2BF0ms%2BR7senNhZEJPw%2FZTEag7w1ohqBOoLl8vX2yPKQ%3D%3D;agoda.l2=eyJhbGciOiJIUzM4NCIsInR5cCI6IkpXVCJ9.eyJ1aWQiOiIyMGI3M2ZkNS02NmE4LTRjYTctOGUzMy05NGU3MzM1MzRmMTIiLCJtaWQiOjQyODAwNzU0OCwibmJmIjoxNzExMDk2NTEyLCJleHAiOjE3MTEwOTgzMTIsImlhdCI6MTcxMTA5NjUxMn0.rcYJmIG2fnD81lREo7k1VxS3FBB0vfZGu_8evAIBxuzMacPM3SDnyuHVvbZPpF-s;agoda.user.03=UserId=20b73fd5-66a8-4ca7-8e33-94e733534f12;agoda.search.01=SHist=&H=8491|10$71934|9$71934$45582394|8$45582394|0$45582394$44506763;xsrf_token=CfDJ8Dkuqwv-0VhLoFfD8dw7lYzmefb0uoa3OGn2iFWiL0HkMBSYgiMAkeYKF-8x0WRqUbHpoVkTXIRZur6TO0uVUSr-3la8A4d0W25DYQxFSVLEGfp4Kc36nNwQmX-4pqtbUFRH9kcd1FiuqS2EyyZNsF4;agoda.landings=-1|||40bepcthftzsx34k0qt2wbid|2024-04-01T12:23:04|False|19-----1|||40bepcthftzsx34k0qt2wbid|2024-04-01T12:23:04|False|20-----1|||40bepcthftzsx34k0qt2wbid|2024-04-01T12:23:04|False|99;agoda.lastclicks=-1||||2024-04-01T12:23:04||40bepcthftzsx34k0qt2wbid||{"IsPaid":false,"gclid":"","Type":""};_amb=7BB744795D86D6FBE7E1351E214591F4CD00D76C4BFBEF989CC6419B5C47E804059DB94D2C27222A4FDCC7F86C9C861A;agoda.analytics=Id=-338220279402192710&Signature=4836133818910981660&Expiry=1711954448787;agoda.attr.03=ATItems=-1$04-01-2024 12:23$;agoda.consent=ID||2024-04-01 05:54:09Z;agoda.familyMode=Mode=0;agoda.firstclicks=-1||||2024-04-01T12:23:04||40bepcthftzsx34k0qt2wbid||{"IsPaid":false,"gclid":"","Type":""};agoda.price.01=PriceView=1&ApplyGC=1&DefaultApplyGC=1;ASP.NET_SessionId=40bepcthftzsx34k0qt2wbid;FPID=FPID2.2.omnqUA3A6%2BSBVaBbEpOrr9%2B8tETaxysQQM9V9kykrRo%3D.1711087147;token=eyJhbGciOiJFUzI1NiJ9.eyJtIjo0MjgwMDc1NDgsInIiOltdLCJlIjoiSUJDOFU0WEBTVG1aSDg4VW1lZ2VJKilcXDdIWExuZWtmJWFLTjpAWTFVJD5ZbyhKVVBQRXMmOiVfUilkPyVKYDwxUS9dUDZEcXQ6a0Nubzk_Iiwic3JjIjoic3JjIiwic3ViIjoiM1ltWm94ZjFUZlNvQ2cwMFFONlI2dyIsImp0aSI6Il8yVVhacjhUUU1HZ1djd0liZDZlLXciLCJpYXQiOjE3MTEwODg2MTEsImV4cCI6MTcxODg2NDYxMSwid2x0IjoiZjFhNTkwNWYtOTYyMC00NWU1LTlkOTEtZDI1MWMwN2UwYjQyIiwicyI6Nn0.eBR_hHW1SmKoVqP3Kr0khCUkJsQgNi8Y4utsWNnuspIP-cSQBH-ZhJlR-0qTVmErbGv5JtHYSxCnwA9b7fD_sA',
             'user-agent': 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/123.0.0.0 Safari/537.36',
         }
 
@@ -145,7 +145,6 @@ class BaseAgoda:
                                    ) as response:
                 
                 response_json: dict = await response.json()
-                self.__requests.headers.update(response.headers)
 
                 return response_json['data']['propertyDetailsSearch']['propertyDetails'][0]
 
@@ -163,8 +162,9 @@ class BaseAgoda:
         return response.json()['ViewModelList'][0]['ObjectId']
 
     def __get_properties_by_city_id(self, city_id: int, page: int, size: int, token: str = '') -> tuple:
-        response: Response = self.__requests.post('https://www.agoda.com/graphql/search', 
-                                                  json=ParamsBuilder.cityParams(city_id, page, size, token))
+        response: Response = requests.post('https://www.agoda.com/graphql/search', 
+                                           headers=self.__headers,
+                                            json=ParamsBuilder.cityParams(city_id, page, size, token))
 
         result: dict = response.json()['data']['citySearch']
 
@@ -182,15 +182,18 @@ class BaseAgoda:
             (properties, token, page) = (None, '', 1) 
             while(True):
                 for _ in range(5):
-                    (properties, token) = self.__get_properties_by_city_id(city['hotelId'], page, 3, token)
+                    (properties, token) = self.__get_properties_by_city_id(city['hotelId'], page, 5, token)
                     
                     if(properties): break
+
+                    sleep(5)
 
                 if(not properties): break
 
                 await asyncio.gather(*(self.__process_property(property, province_enum) for property in properties))
-
+                sleep(15)
                 page += 1
+                break
     
     def _get_all_detail(self) -> None:
         for province in ProvinceEnum:
