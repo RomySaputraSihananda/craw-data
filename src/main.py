@@ -1,6 +1,4 @@
 import click
-import uvicorn
-import socket
 
 from json import dumps
 from click.core import Context

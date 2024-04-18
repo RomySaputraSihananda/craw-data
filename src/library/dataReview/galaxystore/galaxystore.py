@@ -129,18 +129,12 @@ class BaseGalaxystore:
             'path_data_raw': 'S3://ai-pipeline-statistics/data/data_raw/data_review/galaxystore_samsung/${title}/json/detail.json',
             'path_data_clean': 'S3://ai-pipeline-statistics/data/data_clean/data_review/galaxystore_samsung/${title}/json/detail.json',
         }
-
-        while(True):
-            reviews: list | None = self.__get_reviews_by_start(detail_main['contentId'], 1)
-
+        
+        start: int = 1
+        while(reviews := self.__get_reviews_by_start(detail_main['contentId'], start)):
             if(not reviews): break
             log['total_data'] += len(reviews)
-
-            
-
-        
-
-
+            start += 15
 
     def __get_by_body(self, body: str) -> None:
         response: Response = self.__requests.post('https://galaxystore.samsung.com/storeserver/ods.as?id=normalCategoryList', data=body)

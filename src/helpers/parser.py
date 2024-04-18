@@ -26,9 +26,9 @@ class Parser(BeautifulSoup):
     
     def select(self, *args) -> Array:
         return Array(super().select(*args))
-
-    def select_one(self, *args) -> Tag | None:
-         return super().select_one(*args)
+    
+    def select_one(self, *args, index: int = 0) -> Array:
+        return self.select(*args).map(lambda e: e)[index]
     
 if(__name__ == '__main__'):
     # soup = getSoup(
