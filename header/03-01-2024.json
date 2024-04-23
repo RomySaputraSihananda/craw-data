@@ -1,0 +1,57 @@
+{
+    "link": "https://pusiknas.polri.go.id/laka_lantas",
+    "domain": "pusiknas.polri.go.id",
+    "tag": [
+        "pusiknas.polri.go.id",
+        "laka_lantas"
+    ],
+    "crawling_time": "2024-04-23 02:56:38",
+    "crawling_time_epoch": 1713815798,
+    "date": "03/01/2024",
+    "data": {
+        "Tipe Laka Lantas New": {
+            "Di simpang, tabrakan dengan Kendaraan B yang datang dari arah kiri": 10,
+            "Kendaraan Out of Control keluar ke kanan jalan": 13,
+            "Tabrak kendaraan belok kanan dengan kendaraan yang jalan lurus": 13,
+            "Tabrakan kendaraan belok kanan dengan kendaraan yang datang dari arah berlawanan": 15,
+            "Tabrakan saat menyalip dari kanan": 21,
+            "Di ruas jalan, pejalan kaki menyeberang dari kiri ke kanan": 22,
+            "Tabrakan saat menyalip": 22,
+            "Tabrakan depan - depan": 49,
+            "Tabrakan depan - belakang": 58,
+            "Kendaraan Out of Control keluar ke kiri jalan": 60
+        },
+        "Tipe Laka Lantas Polda New": {
+            "POLDA SUMATERA BARAT": 4,
+            "POLDA SUMATERA UTARA": 8,
+            "POLDA ACEH": 12,
+            "POLDA DAERAH ISTIMEWA YOGYAKARTA": 22,
+            "POLDA BALI": 26,
+            "POLDA SULAWESI SELATAN": 28,
+            "Polda Jawa Barat": 30,
+            "POLDA METRO JAYA": 41,
+            "POLDA JAWA TIMUR": 74,
+            "POLDA JAWA TENGAH": 95
+        },
+        "Jumlah Laka Lantas New": 414,
+        "Jumlah Kerugian Material": 700010001,
+        "tipe korban": {
+            "Luka Berat": 46,
+            "Luka Ringan": 493,
+            "Meninggal Dunia": 41,
+            "total": 580
+        },
+        "penyebab": {
+            "Jalan": 1,
+            "Alam (kabut,banjir,dll)": 3,
+            "Kendaraan": 13,
+            "Manusia": 397
+        },
+        "cuaca": {
+            "Hujan disertai Angin Kencang": 1,
+            "Berawan/ Mendung": 3,
+            "Hujan/ Grimis": 14,
+            "Cerah": 396
+        }
+    }
+}

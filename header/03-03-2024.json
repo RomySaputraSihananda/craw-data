@@ -1,0 +1,58 @@
+{
+    "link": "https://pusiknas.polri.go.id/laka_lantas",
+    "domain": "pusiknas.polri.go.id",
+    "tag": [
+        "pusiknas.polri.go.id",
+        "laka_lantas"
+    ],
+    "crawling_time": "2024-04-23 03:21:08",
+    "crawling_time_epoch": 1713817268,
+    "date": "03/03/2024",
+    "data": {
+        "Tipe Laka Lantas New": {
+            "Tabrakan kendaraan belok kanan dengan kendaraan yang datang dari arah berlawanan": 10,
+            "Tabrak kendaraan belok kanan dengan kendaraan yang jalan lurus": 11,
+            "Di simpang, tabrakan dengan Kendaraan B yang datang dari arah kiri": 12,
+            "Tabrakan saat menyalip dari kanan": 15,
+            "Di ruas jalan, pejalan kaki menyeberang dari kiri ke kanan": 17,
+            "Kendaraan Out of Control keluar ke kanan jalan": 20,
+            "Tabrakan saat menyalip": 25,
+            "Tabrakan depan - depan": 45,
+            "Tabrakan depan - belakang": 51,
+            "Kendaraan Out of Control keluar ke kiri jalan": 61
+        },
+        "Tipe Laka Lantas Polda New": {
+            "POLDA SUMATERA BARAT": 9,
+            "POLDA SUMATERA UTARA": 10,
+            "POLDA ACEH": 17,
+            "POLDA SULAWESI SELATAN": 21,
+            "POLDA DAERAH ISTIMEWA YOGYAKARTA": 23,
+            "Polda Jawa Barat": 24,
+            "POLDA BALI": 26,
+            "POLDA METRO JAYA": 48,
+            "POLDA JAWA TENGAH": 73,
+            "POLDA JAWA TIMUR": 84
+        },
+        "Jumlah Laka Lantas New": 408,
+        "Jumlah Kerugian Material": 748000751,
+        "tipe korban": {
+            "Luka Berat": 53,
+            "Luka Ringan": 527,
+            "Meninggal Dunia": 53,
+            "total": 633
+        },
+        "penyebab": {
+            "Alam (kabut,banjir,dll)": 2,
+            "Jalan": 2,
+            "Kendaraan": 25,
+            "Manusia": 379
+        },
+        "cuaca": {
+            "Berkabut/ Berasap": 1,
+            "Hujan disertai Angin Kencang": 2,
+            "Berawan/ Mendung": 7,
+            "Hujan/ Grimis": 14,
+            "Cerah": 384
+        }
+    }
+}

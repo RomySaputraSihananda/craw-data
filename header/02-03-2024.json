@@ -1,0 +1,55 @@
+{
+    "link": "https://pusiknas.polri.go.id/laka_lantas",
+    "domain": "pusiknas.polri.go.id",
+    "tag": [
+        "pusiknas.polri.go.id",
+        "laka_lantas"
+    ],
+    "crawling_time": "2024-04-23 03:21:00",
+    "crawling_time_epoch": 1713817260,
+    "date": "02/03/2024",
+    "data": {
+        "Tipe Laka Lantas New": {
+            "Tabrak kendaraan belok kanan dengan kendaraan yang jalan lurus": 8,
+            "Kendaraan Out of Control keluar ke kanan jalan": 11,
+            "Tabrakan saat menyalip dari kanan": 14,
+            "Di simpang, tabrakan dengan Kendaraan B yang datang dari arah kiri": 15,
+            "Tabrakan kendaraan belok kanan dengan kendaraan yang datang dari arah berlawanan": 18,
+            "Di ruas jalan, pejalan kaki menyeberang dari kiri ke kanan": 22,
+            "Tabrakan saat menyalip": 26,
+            "Tabrakan depan - depan": 38,
+            "Kendaraan Out of Control keluar ke kiri jalan": 42,
+            "Tabrakan depan - belakang": 50
+        },
+        "Tipe Laka Lantas Polda New": {
+            "POLDA SUMATERA BARAT": 1,
+            "POLDA ACEH": 7,
+            "POLDA DAERAH ISTIMEWA YOGYAKARTA": 19,
+            "POLDA BALI": 20,
+            "POLDA SULAWESI SELATAN": 21,
+            "POLDA SUMATERA UTARA": 22,
+            "POLDA METRO JAYA": 25,
+            "Polda Jawa Barat": 28,
+            "POLDA JAWA TIMUR": 60,
+            "POLDA JAWA TENGAH": 76
+        },
+        "Jumlah Laka Lantas New": 346,
+        "Jumlah Kerugian Material": 678550501,
+        "tipe korban": {
+            "Luka Berat": 39,
+            "Luka Ringan": 450,
+            "Meninggal Dunia": 41,
+            "total": 530
+        },
+        "penyebab": {
+            "Jalan": 2,
+            "Kendaraan": 12,
+            "Manusia": 332
+        },
+        "cuaca": {
+            "Berawan/ Mendung": 8,
+            "Hujan/ Grimis": 17,
+            "Cerah": 321
+        }
+    }
+}
