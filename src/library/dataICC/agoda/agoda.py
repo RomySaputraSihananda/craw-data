@@ -25,8 +25,8 @@ class BaseAgoda:
         }
 
         self.__proxy: dict = {
-            'http':  'socks5://127.0.0.1:9050',
-            'https': 'socks5://127.0.0.1:9050'
+            'http':  'socks5://192.168.29.154:9050',
+            'https': 'socks5://192.168.29.154:9050'
         }
 
         self.__requests: Session = Session()
