@@ -14,7 +14,15 @@ class Datetime:
                 return datetime.fromtimestamp(text).strftime("%Y-%m-%d %H:%M:%S")
             except Exception as e:
                 raise e
+    def excel_serial_date(text: str, format: str = "%Y-%m-%d") -> str:
+        delta: datetime = datetime.strptime(text, format) - datetime(1899, 12, 30)
+        excel_serial_date = delta.days + delta.seconds / (24 * 60 * 60)  
+        return str(int(excel_serial_date))
         
+    def excel_serial_date_now(format: str = "%Y-%m-%d") -> tuple:
+        tz = pytz.timezone("Asia/Jakarta")
+        return (Datetime.excel_serial_date(date := datetime.now(tz).strftime(format)), date)
+
     def utc(text: str) -> str:
         if(re.search('\.\d+Z$', text)):
             return datetime.strptime(text[:-2], "%Y-%m-%dT%H:%M:%S.%f").strftime("%Y-%m-%d %H:%M:%S")

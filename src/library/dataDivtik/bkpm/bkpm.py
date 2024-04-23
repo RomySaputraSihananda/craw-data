@@ -14,16 +14,17 @@ from selenium.webdriver.support import expected_conditions as EC
 
 from src.helpers import Iostream, Datetime, ConnectionS3
 
-class Bkpm:
+class BaseBkpm:
     def __init__(self, **kwargs) -> None:
         self.__s3: bool = kwargs.get('s3')
         self.__kafka: bool = kwargs.get('kafka')
         self.__clean: bool = kwargs.get('clean')
+        self.__type: str = kwargs.get('type')
 
     @staticmethod
     def options(output: str = '', **kwargs) -> Options:
         options: Options = Options()
-        # if(kwargs.get('headless')): options.add_argument('--headless') 
+        if(kwargs.get('headless')): options.add_argument('--headless') 
         options.add_argument("--kiosk-printing")
         options.add_argument("--disable-popup-blocking")
         options.add_argument("--disable-notifications")
@@ -80,15 +81,17 @@ class Bkpm:
         sleep(3) 
 
 
-    def start(self) -> None:
-        self.__driver: Chrome = Chrome(options=self.options('/data/pma/bpkm/csv', headless=True))
+    def _start(self, **kwargs) -> None:
+        self.__driver: Chrome = Chrome(options=self.options('/data/pma/bpkm/csv', **kwargs))
 
         link: str = 'https://nswi.bkpm.go.id/tableau/show_eis?app_name=InvestasiPer Kabupaten/Kota&content_url=2018_12_DB-Desktop-Apps/DB-per-KABKOT'
         link_split: list = link.split('/')
         
         self.__driver.get(link)
-        # self.__driver.get('https://dashboard.bkpm.go.id/views/2018_12_DB-Desktop-Apps/DB-per-KABKOT/9977ec7c-858b-405a-951c-86a7ed74512c/2952c081-9824-4ee5-8951-e35d13a65bb4?%3Adisplay_count=n&%3AshowVizHome=n&%3Aorigin=viz_share_link&%3Aembed=y#1')
-        self.__driver.get('https://dashboard.bkpm.go.id/views/2018_12_DB-Desktop-Apps/DB-per-KABKOT/6d4fdf07-c8c2-45a0-97af-1b5d1171ba78/20232024?iframeSizedToWindow=true&:embed=y&:display_spinner=no&:showAppBanner=false&:embed_code_version=3&:loadOrderID=0&:display_count=n&:showVizHome=n&:origin=viz_share_link')
+        if(self.__type == 'PMA'):
+            self.__driver.get('https://dashboard.bkpm.go.id/views/2018_12_DB-Desktop-Apps/DB-per-KABKOT/6d4fdf07-c8c2-45a0-97af-1b5d1171ba78/20232024?iframeSizedToWindow=true&:embed=y&:display_spinner=no&:showAppBanner=false&:embed_code_version=3&:loadOrderID=0&:display_count=n&:showVizHome=n&:origin=viz_share_link')
+        if(self.__type == 'PMDN'):
+            self.__driver.get('https://dashboard.bkpm.go.id/views/2018_12_DB-Desktop-Apps/DB-per-KABKOT/9977ec7c-858b-405a-951c-86a7ed74512c/2952c081-9824-4ee5-8951-e35d13a65bb4?%3Adisplay_count=n&%3AshowVizHome=n&%3Aorigin=viz_share_link&%3Aembed=y#1')
         
         for i in range(len(self.__get_provs())):
             try:
@@ -124,8 +127,8 @@ class Bkpm:
                             ],
                             # 'page_info': page_info, 
                             # 'detail_data': detail_data,
-                            'path_data_raw': f'S3://ai-pipeline-statistics/data/data_raw/Divtik/bkpm/PMA/{provinsi_name}/json/{kabupaten_name}.json', 
-                            'path_data_clean': f'S3://ai-pipeline-statistics/data/data_clean/Divtik/bkpm/PMA/{provinsi_name}/json/{kabupaten_name}.json',   
+                            'path_data_raw': f'S3://ai-pipeline-statistics/data/data_raw/Divtik/bkpm/{self.__type}/{provinsi_name}/json/{kabupaten_name}.json', 
+                            'path_data_clean': f'S3://ai-pipeline-statistics/data/data_clean/Divtik/bkpm/{self.__type}/{provinsi_name}/json/{kabupaten_name}.json',   
                         }
                         paths: list = [path.replace('S3://ai-pipeline-statistics/', '') for path in [data["path_data_raw"]]] 
                         
@@ -155,6 +158,6 @@ class Bkpm:
         self.__driver.close()
 
 if(__name__ == '__main__'):
-    Bkpm(**{
+    BaseBkpm(**{
         # 's3': True
     }).start()

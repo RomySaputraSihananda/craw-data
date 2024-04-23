@@ -4,7 +4,11 @@ from click import Context
 from typing import Any
 
 from src.interfaces import BaseGroupClick
+
 from .cekbpom import Cekbpom
+from .companiesmarketcap import CompaniesMarketCap
+from .bkpm import Bkpm
+from .bnn import Bnn
 
 class DataDivtik(BaseGroupClick):
     @click.group()
@@ -21,3 +25,23 @@ class DataDivtik(BaseGroupClick):
     def cekbpom(ctx: Context, **kwargs):
         """ Cek BPOM Product Engine"""
         return Cekbpom(**DataDivtik.merge(ctx, **kwargs))
+    
+    @main.command()
+    @click.pass_context
+    def companiesmarketcap(ctx: Context, **kwargs):
+        """ Companies Market Cap Engine"""
+        return CompaniesMarketCap(**DataDivtik.merge(ctx, **kwargs))
+    
+    @main.command()
+    @click.pass_context
+    @click.argument('type', metavar='TYPE', type=click.Choice(['PMDN', 'PMA']))
+    @click.option('--headless', is_flag=True, help='headless browser')
+    def bkpm(ctx: Context, **kwargs):
+        """ Bkpm Engine"""
+        return Bkpm(**DataDivtik.merge(ctx, **kwargs))
+    
+    @main.command()
+    @click.pass_context
+    def bnn(ctx: Context, **kwargs):
+        """ Bnn Engine"""
+        return Bnn(**DataDivtik.merge(ctx, **kwargs))

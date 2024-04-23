@@ -64,8 +64,7 @@ class BaseAgoda:
                 reviews: list = self.__get_reviews(property['propertyId'], i, 50)
                 if(reviews): break
 
-                sleep(2)
-                
+                sleep(1)
 
             if(not reviews): break
 
@@ -162,7 +161,7 @@ class BaseAgoda:
         return response.json()['ViewModelList'][0]['ObjectId']
 
     def __get_properties_by_city_id(self, city_id: int, page: int, size: int, token: str = '') -> tuple:
-        response: Response = requests.post('https://www.agoda.com/graphql/search', 
+        response: Response = self.__requests.post('https://www.agoda.com/graphql/search', 
                                            headers=self.__headers,
                                             json=ParamsBuilder.cityParams(city_id, page, size, token))
 
@@ -182,22 +181,26 @@ class BaseAgoda:
             (properties, token, page) = (None, '', 1) 
             while(True):
                 for _ in range(5):
-                    (properties, token) = self.__get_properties_by_city_id(city['hotelId'], page, 5, token)
-                    
-                    if(properties): break
+                    (properties, token) = self.__get_properties_by_city_id(city['hotelId'], page, 3, token)
 
-                    sleep(5)
+                    if(properties): break
 
                 if(not properties): break
 
                 await asyncio.gather(*(self.__process_property(property, province_enum) for property in properties))
-                sleep(15)
+
                 page += 1
-                break
-    
+
     def _get_all_detail(self) -> None:
         for province in ProvinceEnum:
             asyncio.run(self._get_detail_by_province(province))
+    
+    def test(self) -> None:
+        with open('src/library/dataICC/agoda/test.json', 'r') as file:
+            from json import loads
+            data = loads(file.read())
+        
+        asyncio.run(self.__process_property(data, ProvinceEnum.JAWA_TIMUR))
 
 if(__name__ == "__main__"):
     BaseAgoda(
@@ -206,6 +209,6 @@ if(__name__ == "__main__"):
         #     'bootstrap': 'localhost:9092',
         #     'kafka': True
         # }
-    )._get_all()
+    ).test()
 
 # 'test', 'localhost:9092'
