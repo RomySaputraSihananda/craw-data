@@ -9,7 +9,7 @@ from .cekbpom import Cekbpom
 from .companiesmarketcap import CompaniesMarketCap
 from .bkpm import Bkpm
 from .bnn import Bnn
-
+from src.library.dataDivtik.pusiknaspolri.pusiknaspolri import ok
 class DataDivtik(BaseGroupClick):
     @click.group()
     @click.pass_context
@@ -45,3 +45,13 @@ class DataDivtik(BaseGroupClick):
     def bnn(ctx: Context, **kwargs):
         """ Bnn Engine"""
         return Bnn(**DataDivtik.merge(ctx, **kwargs))
+    
+    @main.command()
+    def polri():
+        return ok(**{
+        'start_date': '1/1/2022',
+        'end_date': '4/24/2024',
+        'kafka': True,
+        'bootstrap': 'kafka01.research.ai,kafka02.research.ai,kafka03.research.ai',
+        'topic': 'data-knowledge-repo-general_10'
+    })
