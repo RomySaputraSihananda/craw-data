@@ -1,0 +1,59 @@
+{
+    "link": "https://pusiknas.polri.go.id/laka_lantas",
+    "domain": "pusiknas.polri.go.id",
+    "tag": [
+        "pusiknas.polri.go.id",
+        "laka_lantas"
+    ],
+    "crawling_time": "2024-04-24 10:45:25",
+    "crawling_time_epoch": 1713930325,
+    "date": "02/22/2022",
+    "data": {
+        "Tipe Laka Lantas New": {
+            "Tabrak kendaraan belok kanan dengan kendaraan yang jalan lurus": 7,
+            "Di simpang, tabrakan dengan Kendaraan B yang datang dari arah kiri": 10,
+            "Kendaraan Out of Control keluar ke kanan jalan": 11,
+            "Tabrakan saat menyalip": 13,
+            "Di ruas jalan, pejalan kaki menyeberang dari kiri ke kanan": 15,
+            "Tabrakan kendaraan belok kanan dengan kendaraan yang datang dari arah berlawanan": 15,
+            "Tabrakan saat menyalip dari kanan": 17,
+            "Tabrakan depan - belakang": 27,
+            "Kendaraan Out of Control keluar ke kiri jalan": 29,
+            "Tabrakan depan - depan": 37
+        },
+        "Tipe Laka Lantas Polda New": {
+            "POLDA SUMATERA BARAT": 5,
+            "POLDA BALI": 6,
+            "POLDA SULAWESI SELATAN": 11,
+            "POLDA DAERAH ISTIMEWA YOGYAKARTA": 13,
+            "POLDA SUMATERA UTARA": 13,
+            "POLDA ACEH": 14,
+            "Polda Jawa Barat": 24,
+            "POLDA METRO JAYA": 24,
+            "POLDA JAWA TIMUR": 53,
+            "POLDA JAWA TENGAH": 59
+        },
+        "Jumlah Laka Lantas New": 286,
+        "Jumlah Kerugian Material": 307300000,
+        "tipe korban": {
+            "Luka Berat": 28,
+            "Luka Ringan": 319,
+            "Meninggal Dunia": 55,
+            "total": 402
+        },
+        "penyebab": {
+            "Alam (kabut,banjir,dll)": 2,
+            "Jalan": 5,
+            "Kendaraan": 8,
+            "Tidak Diketahui": 23,
+            "Manusia": 248
+        },
+        "cuaca": {
+            "Berkabut/ Berasap": 1,
+            "Berawan/ Mendung": 5,
+            "Tidak Diketahui": 5,
+            "Hujan/ Grimis": 11,
+            "Cerah": 264
+        }
+    }
+}

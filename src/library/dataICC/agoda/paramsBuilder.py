@@ -1,3 +1,5 @@
+from src.helpers import Datetime
+
 class ParamsBuilder:
     @staticmethod
     def reviewParams(property_id: str, page: int, size: int) -> dict:
@@ -19,6 +21,40 @@ class ParamsBuilder:
             },
             'searchKeyword': '',
             'searchFilters': [],
+        }
+    
+    @staticmethod
+    def secondaryDataParams(property_id: str) ->  dict:
+        return {
+            'finalPriceView': '1',
+            'isShowMobileAppPrice': 'false',
+            'cid': '1891439',
+            'numberOfBedrooms': '',
+            'familyMode': 'false',
+            'adults': '1',
+            'children': '0',
+            'rooms': '1',
+            'maxRooms': '0',
+            'checkIn': Datetime.now().split(' ')[0],
+            'isCalendarCallout': 'false',
+            'childAges': '',
+            'numberOfGuest': '0',
+            'missingChildAges': 'false',
+            'travellerType': '0',
+            'showReviewSubmissionEntry': 'false',
+            'currencyCode': 'IDR',
+            'isFreeOccSearch': 'false',
+            'tag': '6e5f2487-ae1c-9a3b-b74c-123ff8102854',
+            'isCityHaveAsq': 'false',
+            'tspTypes': '16',
+            'los': '1',
+            'searchrequestid': '308af1e8-8144-4bef-bb0d-d191764637ea',
+            'ds': 'mmXBDZsfFR4NBhF7',
+            'hotel_id': property_id,
+            'all': 'false',
+            'price_view': '1',
+            'sessionid': 'njgzrcmf0kfp0xnldxkom2vo',
+            'pagetypeid': '7',
         }
     
     @staticmethod

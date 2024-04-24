@@ -1,0 +1,1173 @@
+{
+	"propertyId": 26210260,
+	"sponsoredDetail": {
+		"sponsoredType": "NoSponsored",
+		"trackingData": null,
+		"isShowSponsoredFlag": false
+	},
+	"propertyResultType": "NormalProperty",
+	"content": {
+		"informationSummary": {
+			"hotelCharacter": {
+				"hotelTag": {
+					"name": "Highly Reviewed by Families",
+					"symbol": "fill/symbol/family"
+				},
+				"hotelView": null
+			},
+			"propertyLinks": {
+				"propertyPage": "/grand-mercure-malang/hotel/malang-id.html"
+			},
+			"atmospheres": [
+				{
+					"id": 4,
+					"name": "sightseeing"
+				},
+				{
+					"id": 101,
+					"name": "parks and nature"
+				}
+			],
+			"isSustainableTravel": false,
+			"localeName": "Grand Mercure Malang",
+			"defaultName": "Grand Mercure Malang",
+			"displayName": "Grand Mercure Malang",
+			"accommodationType": 34,
+			"awardYear": "2023",
+			"hasHostExperience": false,
+			"nhaSummary": {
+				"hostPropertyCount": 0
+			},
+			"address": {
+				"countryCode": "ID",
+				"country": {
+					"id": 192,
+					"name": "Indonesia"
+				},
+				"city": {
+					"id": 5414,
+					"name": "Malang"
+				},
+				"area": {
+					"id": 94021,
+					"name": "Malang Center"
+				}
+			},
+			"propertyType": "Hotel",
+			"rating": 4,
+			"agodaGuaranteeProgram": false,
+			"remarks": null,
+			"spokenLanguages": [
+				{
+					"id": 1
+				},
+				{
+					"id": 26
+				},
+				{
+					"id": 20
+				}
+			],
+			"geoInfo": {
+				"latitude": -7.942229,
+				"longitude": 112.64853
+			}
+		},
+		"propertyEngagement": {
+			"lastBooking": "2024-04-23T22:39:43.367+07:00",
+			"peopleLooking": 0
+		},
+		"nonHotelAccommodation": {
+			"masterRooms": [],
+			"hostLevel": null,
+			"supportedLongStay": null
+		},
+		"facilities": [],
+		"images": {
+			"hotelImages": [
+				{
+					"id": 112665202,
+					"caption": "Swimming pool",
+					"providerId": 332,
+					"urls": [
+						{
+							"key": "original",
+							"value": "//pix8.agoda.net/hotelImages/25751118/0/97e2f04db5dc9842c8f86967cae5a615.jpg?ca=29&ce=0"
+						}
+					]
+				},
+				{
+					"id": 104213678,
+					"caption": "Bed",
+					"providerId": 332,
+					"urls": [
+						{
+							"key": "original",
+							"value": "//pix8.agoda.net/hotelImages/26210260/-1/4f69660835d3d7e6b68dfdd141f5c861.jpg?ca=20&ce=0"
+						}
+					]
+				},
+				{
+					"id": 276968906,
+					"caption": "Exterior view",
+					"providerId": 3038,
+					"urls": [
+						{
+							"key": "original",
+							"value": "//q-xx.bstatic.com/xdata/images/hotel/max500/353646137.jpg?k=38625dba75b6bb4edeba8d9b3cfacc7d9ccb2f3d095d5891cf34a9022dfcd688&o="
+						}
+					]
+				},
+				{
+					"id": 112361330,
+					"caption": "Restaurant",
+					"providerId": 332,
+					"urls": [
+						{
+							"key": "original",
+							"value": "//pix8.agoda.net/hotelImages/25843469/0/7baf12e3c391e8d45ea03749b72c6723.jpg?ca=29&ce=0"
+						}
+					]
+				},
+				{
+					"id": 104213503,
+					"caption": "Reception",
+					"providerId": 332,
+					"urls": [
+						{
+							"key": "original",
+							"value": "//pix8.agoda.net/hotelImages/26210260/-1/6213eb6c3014655ad1935fec767a4288.jpg?ca=20&ce=0"
+						}
+					]
+				},
+				{
+					"id": 112665207,
+					"caption": "Exterior view",
+					"providerId": 332,
+					"urls": [
+						{
+							"key": "original",
+							"value": "//pix8.agoda.net/hotelImages/25751118/0/2f253cb2ad47d35a7fce2edb7fc9f67b.jpg?ca=29&ce=0"
+						}
+					]
+				},
+				{
+					"id": 112492690,
+					"caption": "Playground",
+					"providerId": 332,
+					"urls": [
+						{
+							"key": "original",
+							"value": "//pix8.agoda.net/hotelImages/26210260/-1/0eb62aa503936ead421dcad4fb20aa77.jpg?ca=29&ce=0"
+						}
+					]
+				},
+				{
+					"id": 112665198,
+					"caption": "Guestroom",
+					"providerId": 332,
+					"urls": [
+						{
+							"key": "original",
+							"value": "//pix8.agoda.net/hotelImages/25751118/513466271/08efb094fd0f7fd32b7d3bf051fd3b1c.jpg?ca=29&ce=0"
+						}
+					]
+				},
+				{
+					"id": 123602383,
+					"caption": "",
+					"providerId": 332,
+					"urls": [
+						{
+							"key": "original",
+							"value": "//pix8.agoda.net/hotelImages/25843469/0/3827de2b302f07841a43942c2280a3a2.jpg?ce=0"
+						}
+					]
+				},
+				{
+					"id": 391414560,
+					"caption": "View",
+					"providerId": 3038,
+					"urls": [
+						{
+							"key": "original",
+							"value": "//q-xx.bstatic.com/xdata/images/hotel/max500/421786633.jpg?k=cb9ff33ec448d05fc4c76e1e2168beaff21ea775aa5f4c37494e2ffcfecf0d94&o="
+						}
+					]
+				}
+			]
+		},
+		"reviews": {
+			"contentReview": [
+				{
+					"isDefault": true,
+					"providerId": 332,
+					"demographics": {
+						"groups": [
+							{
+								"id": 0,
+								"grades": [
+									{
+										"id": "overall",
+										"score": 9.3
+									},
+									{
+										"id": "cleanliness",
+										"score": 9.7
+									},
+									{
+										"id": "facilities",
+										"score": 9.5
+									},
+									{
+										"id": "location",
+										"score": 9.3
+									},
+									{
+										"id": "staffPerformance",
+										"score": 9.5
+									},
+									{
+										"id": "valueForMoney",
+										"score": 9.3
+									}
+								]
+							},
+							{
+								"id": 1,
+								"grades": [
+									{
+										"id": "overall",
+										"score": 9.3
+									},
+									{
+										"id": "cleanliness",
+										"score": 9.7
+									},
+									{
+										"id": "facilities",
+										"score": 9.3
+									},
+									{
+										"id": "location",
+										"score": 9.1
+									},
+									{
+										"id": "staffPerformance",
+										"score": 9.4
+									},
+									{
+										"id": "valueForMoney",
+										"score": 9.1
+									}
+								]
+							},
+							{
+								"id": 2,
+								"grades": [
+									{
+										"id": "overall",
+										"score": 9.5
+									},
+									{
+										"id": "cleanliness",
+										"score": 9.7
+									},
+									{
+										"id": "facilities",
+										"score": 9.5
+									},
+									{
+										"id": "location",
+										"score": 9.3
+									},
+									{
+										"id": "staffPerformance",
+										"score": 9.6
+									},
+									{
+										"id": "valueForMoney",
+										"score": 9.4
+									}
+								]
+							},
+							{
+								"id": 3,
+								"grades": [
+									{
+										"id": "overall",
+										"score": 9.5
+									},
+									{
+										"id": "cleanliness",
+										"score": 9.8
+									},
+									{
+										"id": "facilities",
+										"score": 9.7
+									},
+									{
+										"id": "location",
+										"score": 9.3
+									},
+									{
+										"id": "staffPerformance",
+										"score": 9.6
+									},
+									{
+										"id": "valueForMoney",
+										"score": 9.4
+									}
+								]
+							},
+							{
+								"id": 4,
+								"grades": [
+									{
+										"id": "overall",
+										"score": 9.5
+									},
+									{
+										"id": "cleanliness",
+										"score": 9.7
+									},
+									{
+										"id": "facilities",
+										"score": 9.5
+									},
+									{
+										"id": "location",
+										"score": 9.3
+									},
+									{
+										"id": "staffPerformance",
+										"score": 9.5
+									},
+									{
+										"id": "valueForMoney",
+										"score": 9.3
+									}
+								]
+							},
+							{
+								"id": 5,
+								"grades": [
+									{
+										"id": "overall",
+										"score": 9.4
+									},
+									{
+										"id": "cleanliness",
+										"score": 9.6
+									},
+									{
+										"id": "facilities",
+										"score": 9.4
+									},
+									{
+										"id": "location",
+										"score": 9.2
+									},
+									{
+										"id": "staffPerformance",
+										"score": 9.5
+									},
+									{
+										"id": "valueForMoney",
+										"score": 9.3
+									}
+								]
+							},
+							{
+								"id": 6,
+								"grades": [
+									{
+										"id": "overall",
+										"score": 9.3
+									},
+									{
+										"id": "cleanliness",
+										"score": 9.5
+									},
+									{
+										"id": "facilities",
+										"score": 9.3
+									},
+									{
+										"id": "location",
+										"score": 9.2
+									},
+									{
+										"id": "staffPerformance",
+										"score": 9.4
+									},
+									{
+										"id": "valueForMoney",
+										"score": 9.1
+									}
+								]
+							}
+						]
+					},
+					"summaries": {
+						"recommendationScores": [
+							{
+								"recommendationScore": 96
+							}
+						],
+						"snippets": [
+							{
+								"countryId": 192,
+								"countryCode": "ID",
+								"countryName": "Indonesia",
+								"date": "2022-11-28T11:15:00.000+07:00",
+								"demographicId": 4,
+								"demographicName": "Family with young children",
+								"reviewer": "Dian",
+								"reviewRating": 9.6,
+								"snippet": "Superbbbbb hotel n everything about this hotel is superbbbb"
+							},
+							{
+								"countryId": 192,
+								"countryCode": "ID",
+								"countryName": "Indonesia",
+								"date": "2022-09-27T19:11:00.000+07:00",
+								"demographicId": 4,
+								"demographicName": "Family with young children",
+								"reviewer": "Oktoryanto",
+								"reviewRating": 10,
+								"snippet": "Highly recommended if you want to vacation in Malang"
+							},
+							{
+								"countryId": 192,
+								"countryCode": "ID",
+								"countryName": "Indonesia",
+								"date": "2021-12-20T20:07:00.000+07:00",
+								"demographicId": 4,
+								"demographicName": "Family with young children",
+								"reviewer": "Yulie",
+								"reviewRating": 10,
+								"snippet": "Very good service, new hotel clean, nice room,good facility"
+							},
+							{
+								"countryId": 192,
+								"countryCode": "ID",
+								"countryName": "Indonesia",
+								"date": "2023-01-21T09:29:00.000+07:00",
+								"demographicId": 5,
+								"demographicName": "Family with older children",
+								"reviewer": "RIZAL",
+								"reviewRating": 9.6,
+								"snippet": "Pool was big & have water slides for children"
+							},
+							{
+								"countryId": 192,
+								"countryCode": "ID",
+								"countryName": "Indonesia",
+								"date": "2022-05-02T04:27:00.000+07:00",
+								"demographicId": 4,
+								"demographicName": "Family with young children",
+								"reviewer": "Cindy",
+								"reviewRating": 10,
+								"snippet": "ebisu resto has tasteful foods"
+							},
+							{
+								"countryId": 198,
+								"countryCode": "MY",
+								"countryName": "Malaysia",
+								"date": "2022-09-23T19:55:00.000+07:00",
+								"demographicId": 2,
+								"demographicName": "Couple",
+								"reviewer": "eliya",
+								"reviewRating": 10,
+								"snippet": "Perfect choice for vacation"
+							},
+							{
+								"countryId": 114,
+								"countryCode": "SG",
+								"countryName": "Singapore",
+								"date": "2022-10-26T11:55:00.000+07:00",
+								"demographicId": 6,
+								"demographicName": "Group",
+								"reviewer": "Immanuel",
+								"reviewRating": 10,
+								"snippet": "Stay for 4 days in this hotel and it was truly amazing"
+							},
+							{
+								"countryId": 192,
+								"countryCode": "ID",
+								"countryName": "Indonesia",
+								"date": "2022-01-15T21:28:00.000+07:00",
+								"demographicId": 4,
+								"demographicName": "Family with young children",
+								"reviewer": "winda",
+								"reviewRating": 10,
+								"snippet": "The breakfast menus are varied and all delicious."
+							},
+							{
+								"countryId": 192,
+								"countryCode": "ID",
+								"countryName": "Indonesia",
+								"date": "2022-09-03T18:28:00.000+07:00",
+								"demographicId": 4,
+								"demographicName": "Family with young children",
+								"reviewer": "Nia",
+								"reviewRating": 10,
+								"snippet": "Great hospitality from hotel staff"
+							},
+							{
+								"countryId": 192,
+								"countryCode": "ID",
+								"countryName": "Indonesia",
+								"date": "2022-06-05T10:17:00.000+07:00",
+								"demographicId": 4,
+								"demographicName": "Family with young children",
+								"reviewer": "Cindy",
+								"reviewRating": 10,
+								"snippet": "Best hotel in Malang"
+							},
+							{
+								"countryId": 192,
+								"countryCode": "ID",
+								"countryName": "Indonesia",
+								"date": "2022-01-23T17:03:00.000+07:00",
+								"demographicId": 4,
+								"demographicName": "Family with young children",
+								"reviewer": "Kayen",
+								"reviewRating": 10,
+								"snippet": "My kid is very happy with swimming pool"
+							},
+							{
+								"countryId": 192,
+								"countryCode": "ID",
+								"countryName": "Indonesia",
+								"date": "2022-11-02T11:21:00.000+07:00",
+								"demographicId": 3,
+								"demographicName": "Solo traveler",
+								"reviewer": "Putri",
+								"reviewRating": 10,
+								"snippet": "REALLY LOVED MY STAY!"
+							},
+							{
+								"countryId": 192,
+								"countryCode": "ID",
+								"countryName": "Indonesia",
+								"date": "2023-01-06T19:06:00.000+07:00",
+								"demographicId": 4,
+								"demographicName": "Family with young children",
+								"reviewer": "Shindi",
+								"reviewRating": 10,
+								"snippet": "The room is very nice and big"
+							},
+							{
+								"countryId": 192,
+								"countryCode": "ID",
+								"countryName": "Indonesia",
+								"date": "2022-12-30T08:57:00.000+07:00",
+								"demographicId": 4,
+								"demographicName": "Family with young children",
+								"reviewer": "anonymous",
+								"reviewRating": 10,
+								"snippet": "kamar bersih"
+							},
+							{
+								"countryId": 192,
+								"countryCode": "ID",
+								"countryName": "Indonesia",
+								"date": "2022-11-02T11:21:00.000+07:00",
+								"demographicId": 3,
+								"demographicName": "Solo traveler",
+								"reviewer": "Putri",
+								"reviewRating": 10,
+								"snippet": "One of the best hotel i have stayed in!"
+							},
+							{
+								"countryId": 114,
+								"countryCode": "SG",
+								"countryName": "Singapore",
+								"date": "2022-10-26T11:55:00.000+07:00",
+								"demographicId": 6,
+								"demographicName": "Group",
+								"reviewer": "Immanuel",
+								"reviewRating": 10,
+								"snippet": "The cleanliness, the breakfast spread was superb"
+							},
+							{
+								"countryId": 192,
+								"countryCode": "ID",
+								"countryName": "Indonesia",
+								"date": "2022-01-15T21:28:00.000+07:00",
+								"demographicId": 4,
+								"demographicName": "Family with young children",
+								"reviewer": "winda",
+								"reviewRating": 10,
+								"snippet": "The staffs are very friendly and detailed."
+							},
+							{
+								"countryId": 192,
+								"countryCode": "ID",
+								"countryName": "Indonesia",
+								"date": "2022-09-27T19:11:00.000+07:00",
+								"demographicId": 4,
+								"demographicName": "Family with young children",
+								"reviewer": "Oktoryanto",
+								"reviewRating": 10,
+								"snippet": "The food is complete and delicious"
+							},
+							{
+								"countryId": 192,
+								"countryCode": "ID",
+								"countryName": "Indonesia",
+								"date": "2022-01-15T21:28:00.000+07:00",
+								"demographicId": 4,
+								"demographicName": "Family with young children",
+								"reviewer": "winda",
+								"reviewRating": 10,
+								"snippet": "Best experience!"
+							},
+							{
+								"countryId": 198,
+								"countryCode": "MY",
+								"countryName": "Malaysia",
+								"date": "2022-09-23T19:55:00.000+07:00",
+								"demographicId": 2,
+								"demographicName": "Couple",
+								"reviewer": "eliya",
+								"reviewRating": 10,
+								"snippet": "Grand Mecure Hotel Malang Highly recommended"
+							}
+						]
+					},
+					"cumulative": {
+						"reviewCount": 1873,
+						"score": 9.3
+					}
+				},
+				{
+					"isDefault": false,
+					"providerId": 3038,
+					"demographics": null,
+					"summaries": null,
+					"cumulative": {
+						"reviewCount": 301,
+						"score": 8.8
+					}
+				},
+				{
+					"isDefault": false,
+					"providerId": 29100,
+					"demographics": null,
+					"summaries": null,
+					"cumulative": {
+						"reviewCount": 71,
+						"score": 9.6
+					}
+				}
+			],
+			"cumulative": {
+				"reviewCount": 1873,
+				"score": 9.3
+			},
+			"cumulativeForHost": null
+		},
+		"familyFeatures": {
+			"hasChildrenFreePolicy": true,
+			"isFamilyRoom": true,
+			"hasMoreThanOneBedroom": true,
+			"isInterConnectingRoom": true,
+			"isInfantCottageAvailable": true,
+			"hasKidsPool": true,
+			"hasKidsClub": true
+		},
+		"personalizedInformation": {
+			"childrenFreePolicy": {
+				"fromAge": 0,
+				"toAge": 5
+			}
+		},
+		"localInformation": {
+			"landmarks": {
+				"transportation": [
+					{
+						"landmarkName": "Train Station Belimbing",
+						"distanceInM": 399.7
+					},
+					{
+						"landmarkName": "Train Station Malang",
+						"distanceInM": 4235.45
+					}
+				],
+				"topLandmark": [
+					{
+						"landmarkName": "Hawai Waterpark",
+						"distanceInM": 2309.52
+					},
+					{
+						"landmarkName": "Malang City Hall Monument",
+						"distanceInM": 4300.71
+					},
+					{
+						"landmarkName": "Museum Malang Tempo Doeloe",
+						"distanceInM": 4343.71
+					},
+					{
+						"landmarkName": "Jodipan Colorful Village",
+						"distanceInM": 4695.68
+					},
+					{
+						"landmarkName": "Malang City Square",
+						"distanceInM": 4735.45
+					}
+				],
+				"beach": []
+			},
+			"hasAirportTransfer": false
+		},
+		"highlight": {
+			"cityCenter": {
+				"distanceFromCityCenter": 2894.3314403769423
+			},
+			"favoriteFeatures": {
+				"features": [
+					{
+						"id": 17,
+						"title": "Airport transfer",
+						"category": "property-facility"
+					},
+					{
+						"id": 109,
+						"title": "Free Wi-Fi in all rooms!",
+						"category": "property-facility"
+					},
+					{
+						"id": 73555,
+						"title": "Close to public transportation",
+						"category": "transportation"
+					},
+					{
+						"id": 1516499,
+						"title": "Jodipan Colorful Village",
+						"category": "landmark"
+					}
+				]
+			},
+			"hasNearbyPublicTransportation": true
+		},
+		"rateCategories": {
+			"escapeRateCategories": null
+		}
+	},
+	"soldOut": null,
+	"pricing": {
+		"pulseCampaignMetadata": null,
+		"isAvailable": true,
+		"isReady": true,
+		"benefits": [
+			1
+		],
+		"cheapestRoomOffer": {
+			"agodaCash": {
+				"showBadge": false,
+				"giftcardGuid": "",
+				"dayToEarn": 0,
+				"earnId": 0,
+				"percentage": null,
+				"expiryDay": 0
+			},
+			"cashback": null
+		},
+		"isEasyCancel": false,
+		"isInsiderDeal": false,
+		"isMultiHotelEligible": true,
+		"suggestPriceType": {
+			"suggestPrice": "Exclusive"
+		},
+		"roomBundle": null,
+		"pointmax": null,
+		"priceChange": null,
+		"payment": {
+			"cancellation": {
+				"cancellationType": "FreeCancellation",
+				"freeCancellationDate": "2024-05-02T00:00:00.000+07:00"
+			},
+			"payLater": {
+				"isEligible": true
+			},
+			"payAtHotel": {
+				"isEligible": true
+			},
+			"noCreditCard": {
+				"isEligible": false
+			},
+			"taxReceipt": {
+				"isEligible": false
+			}
+		},
+		"cheapestStayPackageRatePlans": [
+			{
+				"stayPackageType": 0,
+				"ratePlanId": 0
+			}
+		],
+		"pricingMessages": [
+			{
+				"location": 2,
+				"ids": [
+					103007
+				]
+			}
+		],
+		"suppliersSummaries": [
+			{
+				"id": 3038,
+				"supplierHotelId": "7519260"
+			}
+		],
+		"supplierInfo": null,
+		"childPolicy": {
+			"freeChildren": 0
+		},
+		"offers": [
+			{
+				"roomOffers": [
+					{
+						"room": {
+							"extraPriceInfo": {
+								"displayPriceWithSurchargesPRPN": null,
+								"corDisplayPriceWithSurchargesPRPN": null
+							},
+							"availableRooms": 7,
+							"isPromoEligible": false,
+							"promotions": null,
+							"bookingDuration": null,
+							"supplierId": 3038,
+							"corSummary": {
+								"hasCor": true,
+								"corType": "MaxRoomNightValueCOR",
+								"isOriginal": false,
+								"hasOwnCOR": false,
+								"isBlacklistedCor": false
+							},
+							"localVoucher": null,
+							"pricing": [
+								{
+									"currency": "IDR",
+									"price": {
+										"perNight": {
+											"exclusive": {
+												"display": 1059918,
+												"cashbackPrice": null,
+												"displayAfterCashback": null,
+												"originalPrice": 1059918
+											},
+											"inclusive": {
+												"display": 1282501,
+												"cashbackPrice": null,
+												"displayAfterCashback": null,
+												"originalPrice": 1282501
+											}
+										},
+										"perBook": {
+											"exclusive": {
+												"display": 1059918,
+												"cashbackPrice": null,
+												"displayAfterCashback": null,
+												"rebatePrice": 0,
+												"originalPrice": 1059918,
+												"autoAppliedPromoDiscount": null
+											},
+											"inclusive": {
+												"display": 1282501,
+												"cashbackPrice": null,
+												"displayAfterCashback": null,
+												"rebatePrice": 0,
+												"originalPrice": 1282501,
+												"autoAppliedPromoDiscount": null
+											}
+										},
+										"perRoomPerNight": {
+											"exclusive": {
+												"display": 1059918,
+												"crossedOutPrice": 3404163,
+												"cashbackPrice": null,
+												"displayAfterCashback": null,
+												"rebatePrice": 0,
+												"pseudoCouponPrice": 0,
+												"originalPrice": 1059918,
+												"loyaltyOfferSummary": {
+													"basePrice": {
+														"exclusive": 1059918,
+														"allInclusive": 1282501
+													},
+													"status": null,
+													"offers": [
+														{
+															"identifier": "-1",
+															"status": null,
+															"burn": null,
+															"earn": null,
+															"offerType": "EXTLOYALTY",
+															"isSelected": false
+														}
+													]
+												}
+											},
+											"inclusive": {
+												"display": 1282501,
+												"crossedOutPrice": 4084996,
+												"cashbackPrice": null,
+												"displayAfterCashback": null,
+												"rebatePrice": 0,
+												"pseudoCouponPrice": 0,
+												"originalPrice": 1282501,
+												"loyaltyOfferSummary": {
+													"basePrice": {
+														"exclusive": 1059918,
+														"allInclusive": 1282501
+													},
+													"status": null,
+													"offers": [
+														{
+															"identifier": "-1",
+															"status": null,
+															"burn": null,
+															"earn": null,
+															"offerType": "EXTLOYALTY",
+															"isSelected": false
+														}
+													]
+												}
+											}
+										},
+										"totalDiscount": 69,
+										"priceAfterAppliedAgodaCash": null
+									},
+									"apsPeek": null,
+									"promotionPricePeek": null,
+									"channelDiscountSummary": {
+										"channelDiscountBreakdown": []
+									},
+									"promotionsCumulative": []
+								}
+							],
+							"uid": "CpIBCOie49oCEAggAjAESgszNjVEODNQXzgzUFC8L3p0U29tZSg3NTE5MjYwKXwzNjM2MjAyNzZ8MXw3NTE5MjYwMDVfMzMxNzE3ODI1XzJfNDJfMF8wfDJ8MTR8TGlzdCgpfDM2NUQ4M1BfODNQfFNvbWUoZmFsc2V8MzY1RDgzUF84M1B8MnwxfHRydWV8dHJ1ZSkSAggBGgQYASgE",
+							"payment": {
+								"cancellation": {
+									"cancellationType": "SpecialConditions"
+								}
+							},
+							"discount": {
+								"deals": [],
+								"channelDiscount": "Retail"
+							},
+							"saveUpTo": {
+								"perRoomPerNight": 0
+							},
+							"benefits": [],
+							"channel": {
+								"id": 1
+							},
+							"mseRoomSummaries": [
+								{
+									"supplierId": 3038,
+									"subSupplierId": 3038,
+									"pricingSummaries": [
+										{
+											"currency": "IDR",
+											"channelDiscountSummary": {
+												"channelDiscountBreakdown": []
+											},
+											"price": {
+												"perRoomPerNight": {
+													"exclusive": {
+														"display": 1059918
+													},
+													"inclusive": {
+														"display": 1282501
+													}
+												}
+											}
+										}
+									]
+								}
+							],
+							"cashback": null,
+							"agodaCash": {
+								"showBadge": false,
+								"giftcardGuid": "",
+								"dayToEarn": 0,
+								"expiryDay": 0,
+								"percentage": null
+							},
+							"corInfo": {
+								"corBreakdown": {
+									"taxExPN": [
+										{
+											"price": 3404163,
+											"id": 0
+										},
+										{
+											"price": 1059918,
+											"id": 1
+										}
+									],
+									"taxInPN": [
+										{
+											"price": 4084996,
+											"id": 0
+										},
+										{
+											"price": 1282501,
+											"id": 1
+										}
+									],
+									"taxExPRPN": [
+										{
+											"price": 3404163,
+											"id": 0
+										},
+										{
+											"price": 1059918,
+											"id": 1
+										}
+									],
+									"taxInPRPN": [
+										{
+											"price": 4084996,
+											"id": 0
+										},
+										{
+											"price": 1282501,
+											"id": 1
+										}
+									]
+								},
+								"corInfo": {
+									"corType": "MaxRoomNightValueCOR"
+								}
+							},
+							"loyaltyDisplay": null,
+							"capacity": {
+								"extraBedsAvailable": false
+							},
+							"pricingMessages": {
+								"formatted": [
+									{
+										"location": 2,
+										"texts": [
+											{
+												"index": 0,
+												"text": "Send Mix and Save to the SSR"
+											}
+										]
+									}
+								]
+							},
+							"campaign": null,
+							"stayPackageType": 0
+						}
+					}
+				]
+			}
+		]
+	},
+	"metaLab": {
+		"attributes": [
+			{
+				"attributeId": 8,
+				"dataType": "BOOLEAN",
+				"value": "false",
+				"version": "V1"
+			},
+			{
+				"attributeId": 2,
+				"dataType": "BOOLEAN",
+				"value": "false",
+				"version": "V1"
+			},
+			{
+				"attributeId": 1,
+				"dataType": "BOOLEAN",
+				"value": "true",
+				"version": "V1"
+			},
+			{
+				"attributeId": 7,
+				"dataType": "BOOLEAN",
+				"value": "true",
+				"version": "V1"
+			},
+			{
+				"attributeId": 18,
+				"dataType": "BOOLEAN",
+				"value": "true",
+				"version": "V1"
+			},
+			{
+				"attributeId": 11,
+				"dataType": "BOOLEAN",
+				"value": "true",
+				"version": "V2"
+			}
+		]
+	},
+	"enrichment": {
+		"topSellingPoint": [
+			{
+				"tspType": "BestLocationForSoloTraveller",
+				"value": 9.3
+			},
+			{
+				"tspType": "BestSeller",
+				"value": null
+			}
+		],
+		"pricingBadges": {
+			"badges": [
+				"SuperSaver"
+			]
+		},
+		"uniqueSellingPoint": [
+			{
+				"rank": 3,
+				"segment": "Solo",
+				"uspType": "ReviewScore",
+				"uspPropertyType": null
+			},
+			{
+				"rank": 1,
+				"segment": null,
+				"uspType": "BestGuestRate",
+				"uspPropertyType": "Hotel4Stars"
+			}
+		],
+		"bookingHistory": null,
+		"showReviewSnippet": true,
+		"isPopular": false,
+		"roomInformation": {
+			"cheapestRoomSizeSqm": 33,
+			"facilities": [
+				{
+					"id": 75,
+					"propertyFacilityName": "Wi-Fi [free]",
+					"symbol": "wifi"
+				},
+				{
+					"id": 43,
+					"propertyFacilityName": "Balcony/terrace",
+					"symbol": "balcony-terrace"
+				},
+				{
+					"id": 29,
+					"propertyFacilityName": "Desk",
+					"symbol": "desk"
+				},
+				{
+					"id": 50,
+					"propertyFacilityName": "Private pool",
+					"symbol": "private-pool"
+				}
+			]
+		}
+	}
+}

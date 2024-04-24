@@ -6,14 +6,20 @@ from requests import Response, Session
 from json import dumps, loads
 from time import time
 
-from src.helpers import Iostream, Decorator, Datetime
+from src.helpers import Iostream, ConnectionKafka, Datetime, logging
 
 class PusiknasPolri():
-    def __init__(self) -> None: 
+    def __init__(self, **kwargs) -> None: 
+        self.__s3: bool = kwargs.get('s3')
+        self.__kafka: bool = kwargs.get('kafka')
         self.__requests: Session = Session()
         self.__requests.headers.update({
             'User-Agent': 'Mozilla/5.0 (X11; Linux x86_64; rv:124.0) Gecko/20100101 Firefox/124.0',
         })
+
+        # if(self.__kafka): 
+        #     self.__bootstrap: str = kwargs.get('bootstrap')
+        #     self.__connectionKafka: ConnectionKafka = ConnectionKafka(kwargs.get('topic'), kwargs.get('bootstrap'))
 
         (self.__session, self.__response) = self.__get_session()
         self.__keys: list = (data_columns := (data_segments := self.__response["secondaryInfo"]["presModelMap"]["dataDictionary"]["presModelHolder"]["genDataDictionaryPresModel"]["dataSegments"])[list(data_segments.keys())[0]]["dataColumns"])[1]["dataValues"]
@@ -79,7 +85,6 @@ class PusiknasPolri():
 
     def __get_ticket(self) -> str: 
         try:
-            print('get ticket')
             response: Response = requests.get('https://pusiknas.polri.go.id/ticket', timeout=10)
 
             return response.json()['key']
@@ -88,7 +93,6 @@ class PusiknasPolri():
 
     def __get_session(self) -> tuple:
         response: Response = self.__requests.get(f'https://pusiknas.polri.go.id/tableau/trusted/{self.__get_ticket()}/views/LakaLantas_16920924926570/STATISTIKALAKALANTAS?:iid=5&:embed=y&:showVizHome=n&:tabs=n&:toolbar=n&:apiID=host0#navType=1&navSrc=Parse')
-        print('get session')
         response: Response = self.__requests.post(f'https://pusiknas.polri.go.id/vizql/w/LakaLantas_16920924926570/v/STATISTIKALAKALANTAS/bootstrapSession/sessions/{response.headers["X-Session-Id"]}',
                                                  params={
                                                     "worksheetPortSize":"{\"w\":938,\"h\":650}",
@@ -118,8 +122,6 @@ class PusiknasPolri():
         return (response.headers["X-Session-Id"], loads("{" + re.split(r'}\d+;{', response.text)[-1]))
 
     def _get_by_range(self, **kwargs) -> None:
-        print('get range')
-
         self.__requests.headers.update({
             'Content-Type': 'multipart/form-data; boundary=5qqwMSDC'
         })
@@ -156,7 +158,7 @@ class PusiknasPolri():
         
         link_split: list = (link := 'https://pusiknas.polri.go.id/laka_lantas').split('/')
 
-        Iostream.write_json({
+        data: dict = {
             "link": link,
             "domain": link_split[2],
             "tag": link_split[2:],
@@ -164,7 +166,11 @@ class PusiknasPolri():
             "crawling_time_epoch": int(time()),
             "date": start_date,
             "data": self.__process_data(response.json())
-        }, f"header/{start_date.replace('/', '-')}.json", indent=4)
+        }
+
+        # if(self.__kafka):
+        #     self.__connectionKafka.send(data, name=self.__bootstrap)
+        return data
 
     def _get_by_date(self, date: str) -> None:
         return self._get_by_range(**{
@@ -173,24 +179,28 @@ class PusiknasPolri():
         })
     
 def ok(**kwargs):
-    for date in pandas.date_range(kwargs.get('start_date'), kwargs.get('end_date')).strftime('%d/%m/%Y'):
-        for _ in range(5):
+    connectionKafka: ConnectionKafka = ConnectionKafka(kwargs.get('topic'), bootstrap := kwargs.get('bootstrap'))
+
+    for date in pandas.date_range(kwargs.get('start_date'), kwargs.get('end_date')).strftime('%m/%d/%Y'):
+        for _ in range(3):
             try:
-                PusiknasPolri()._get_by_date(date)
-                break
-            except:
-                PusiknasPolri()._get_by_date(date)
+                data = PusiknasPolri(**kwargs)._get_by_date(date)
+
+                if(kwargs.get('kafka')):
+                    connectionKafka.send(data, name=bootstrap)
+                    
+                logging.info(f'success on date {date}')
+            except KeyboardInterrupt: quit()
+            except: logging.error(f'error on date {date}')
             
 
 if(__name__ == '__main__'):
-    # PusiknasPolri()._get_by_range(**{
-    #     'start_date': '21/4/2024' ,
-    #     'end_date': '21/4/2024'
-    # })
-
-    # PusiknasPolri()._get_by_date('4/4/2024')
+    # PusiknasPolri()._get_by_date('1/13/2022')
     
     ok(**{
-        'start_date': '3/1/2024' ,
-        'end_date': '4/1/2024'
+        'start_date': '1/1/2022',
+        'end_date': '1/7/2022',
+        'kafka': True,
+        'bootstrap': 'localhost:9092',
+        'topic': 'test'
     })

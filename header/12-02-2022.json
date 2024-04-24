@@ -1,0 +1,58 @@
+{
+    "link": "https://pusiknas.polri.go.id/laka_lantas",
+    "domain": "pusiknas.polri.go.id",
+    "tag": [
+        "pusiknas.polri.go.id",
+        "laka_lantas"
+    ],
+    "crawling_time": "2024-04-24 10:41:12",
+    "crawling_time_epoch": 1713930072,
+    "date": "12/02/2022",
+    "data": {
+        "Tipe Laka Lantas New": {
+            "Kendaraan Out of Control keluar ke kanan jalan": 11,
+            "Tabrakan kendaraan belok kanan dengan kendaraan yang datang dari arah berlawanan": 14,
+            "Tabrakan saat menyalip dari kanan": 15,
+            "Tabrak kendaraan belok kanan dengan kendaraan yang jalan lurus": 17,
+            "Di simpang, tabrakan dengan Kendaraan B yang datang dari arah kiri": 19,
+            "Di ruas jalan, pejalan kaki menyeberang dari kiri ke kanan": 29,
+            "Tabrakan saat menyalip": 37,
+            "Kendaraan Out of Control keluar ke kiri jalan": 44,
+            "Tabrakan depan - belakang": 44,
+            "Tabrakan depan - depan": 45
+        },
+        "Tipe Laka Lantas Polda New": {
+            "POLDA ACEH": 7,
+            "POLDA SUMATERA BARAT": 7,
+            "POLDA BALI": 10,
+            "POLDA DAERAH ISTIMEWA YOGYAKARTA": 21,
+            "POLDA SULAWESI SELATAN": 21,
+            "POLDA SUMATERA UTARA": 24,
+            "POLDA METRO JAYA": 30,
+            "Polda Jawa Barat": 35,
+            "POLDA JAWA TENGAH": 83,
+            "POLDA JAWA TIMUR": 83
+        },
+        "Jumlah Laka Lantas New": 407,
+        "Jumlah Kerugian Material": 658171300,
+        "tipe korban": {
+            "Luka Berat": 37,
+            "Luka Ringan": 489,
+            "Meninggal Dunia": 82,
+            "total": 608
+        },
+        "penyebab": {
+            "Jalan": 3,
+            "Kendaraan": 5,
+            "Manusia": 132,
+            "Tidak Diketahui": 267
+        },
+        "cuaca": {
+            "Berkabut/ Berasap": 1,
+            "Berawan/ Mendung": 8,
+            "Tidak Diketahui": 17,
+            "Hujan/ Grimis": 18,
+            "Cerah": 363
+        }
+    }
+}

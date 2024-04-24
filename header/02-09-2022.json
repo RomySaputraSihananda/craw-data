@@ -1,0 +1,57 @@
+{
+    "link": "https://pusiknas.polri.go.id/laka_lantas",
+    "domain": "pusiknas.polri.go.id",
+    "tag": [
+        "pusiknas.polri.go.id",
+        "laka_lantas"
+    ],
+    "crawling_time": "2024-04-24 10:44:59",
+    "crawling_time_epoch": 1713930299,
+    "date": "02/09/2022",
+    "data": {
+        "Tipe Laka Lantas New": {
+            "Di simpang, tabrakan dengan Kendaraan B yang datang dari arah kiri": 8,
+            "Tabrak kendaraan belok kanan dengan kendaraan yang jalan lurus": 8,
+            "Tabrakan kendaraan belok kanan dengan kendaraan yang datang dari arah berlawanan": 10,
+            "Kendaraan Out of Control keluar ke kanan jalan": 11,
+            "Tabrakan saat menyalip": 16,
+            "Tabrakan saat menyalip dari kanan": 18,
+            "Di ruas jalan, pejalan kaki menyeberang dari kiri ke kanan": 24,
+            "Kendaraan Out of Control keluar ke kiri jalan": 24,
+            "Tabrakan depan - depan": 40,
+            "Tabrakan depan - belakang": 48
+        },
+        "Tipe Laka Lantas Polda New": {
+            "POLDA ACEH": 6,
+            "POLDA BALI": 6,
+            "POLDA SUMATERA BARAT": 6,
+            "POLDA SULAWESI SELATAN": 9,
+            "POLDA METRO JAYA": 15,
+            "POLDA SUMATERA UTARA": 17,
+            "Polda Jawa Barat": 21,
+            "POLDA DAERAH ISTIMEWA YOGYAKARTA": 23,
+            "POLDA JAWA TIMUR": 75,
+            "POLDA JAWA TENGAH": 80
+        },
+        "Jumlah Laka Lantas New": 316,
+        "Jumlah Kerugian Material": 404800000,
+        "tipe korban": {
+            "Luka Berat": 26,
+            "Luka Ringan": 339,
+            "Meninggal Dunia": 68,
+            "total": 433
+        },
+        "penyebab": {
+            "Jalan": 2,
+            "Kendaraan": 4,
+            "Tidak Diketahui": 14,
+            "Manusia": 296
+        },
+        "cuaca": {
+            "Tidak Diketahui": 10,
+            "Berawan/ Mendung": 12,
+            "Hujan/ Grimis": 12,
+            "Cerah": 282
+        }
+    }
+}

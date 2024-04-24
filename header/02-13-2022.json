@@ -1,0 +1,57 @@
+{
+    "link": "https://pusiknas.polri.go.id/laka_lantas",
+    "domain": "pusiknas.polri.go.id",
+    "tag": [
+        "pusiknas.polri.go.id",
+        "laka_lantas"
+    ],
+    "crawling_time": "2024-04-24 10:45:08",
+    "crawling_time_epoch": 1713930308,
+    "date": "02/13/2022",
+    "data": {
+        "Tipe Laka Lantas New": {
+            "Tabrak kendaraan belok kanan dengan kendaraan yang jalan lurus": 4,
+            "Di simpang, tabrakan dengan Kendaraan B yang datang dari arah kiri": 9,
+            "Tabrakan kendaraan belok kanan dengan kendaraan yang datang dari arah berlawanan": 12,
+            "Di ruas jalan, pejalan kaki menyeberang dari kiri ke kanan": 14,
+            "Tabrakan saat menyalip dari kanan": 14,
+            "Kendaraan Out of Control keluar ke kanan jalan": 18,
+            "Tabrakan saat menyalip": 25,
+            "Kendaraan Out of Control keluar ke kiri jalan": 36,
+            "Tabrakan depan - depan": 37,
+            "Tabrakan depan - belakang": 38
+        },
+        "Tipe Laka Lantas Polda New": {
+            "POLDA BALI": 6,
+            "POLDA ACEH": 8,
+            "POLDA SUMATERA BARAT": 9,
+            "Polda Jawa Barat": 15,
+            "POLDA SULAWESI SELATAN": 16,
+            "POLDA SUMATERA UTARA": 19,
+            "POLDA DAERAH ISTIMEWA YOGYAKARTA": 20,
+            "POLDA METRO JAYA": 21,
+            "POLDA JAWA TENGAH": 51,
+            "POLDA JAWA TIMUR": 78
+        },
+        "Jumlah Laka Lantas New": 308,
+        "Jumlah Kerugian Material": 361300000,
+        "tipe korban": {
+            "Luka Berat": 33,
+            "Luka Ringan": 345,
+            "Meninggal Dunia": 70,
+            "total": 448
+        },
+        "penyebab": {
+            "Kendaraan": 4,
+            "Jalan": 5,
+            "Tidak Diketahui": 17,
+            "Manusia": 282
+        },
+        "cuaca": {
+            "Berawan/ Mendung": 8,
+            "Tidak Diketahui": 8,
+            "Hujan/ Grimis": 23,
+            "Cerah": 269
+        }
+    }
+}

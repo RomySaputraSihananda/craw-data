@@ -31,7 +31,7 @@ class BaseAgoda:
 
         self.__requests: Session = Session()
         self.__requests.headers.update(self.__headers)
-        self.__requests.proxies.update(self.__proxy)
+        # self.__requests.proxies.update(self.__proxy)
 
         if(self.__kafka): 
             self.__bootstrap: str = kwargs.get('bootstrap')
@@ -60,6 +60,7 @@ class BaseAgoda:
         Iostream.write_log(log, indent=2, name=__name__)
         all_reviews: list = []
         while True:
+            print(i)
             for _ in range(5):
                 reviews: list = self.__get_reviews(property['propertyId'], i, 50)
                 if(reviews): break
@@ -95,6 +96,7 @@ class BaseAgoda:
                 "crawling_time": Datetime.now(),
                 "crawling_time_epoch": int(time()),
                 'property_detail': property_detail,
+                'rooms': self.__get_secondary_data(property_detail["propertyId"]),
                 'reviews': reviews,
                 "path_data_raw": f'S3://ai-pipeline-statistics/data/data_raw/agoda/{province_enum.name.title()}/json/{link_split[3]}.json',
                 "path_data_clean": f'S3://ai-pipeline-statistics/data/data_clean/agoda/{province_enum.name.title()}/json/{link_split[3]}.json',
@@ -135,6 +137,15 @@ class BaseAgoda:
                                         'objectId': 192
                                     }).json()
 
+    def __get_secondary_data(self, property_id: str) -> tuple:
+        response: Response = self.__requests.get('https://www.agoda.com/api/cronos/property/BelowFoldParams/GetSecondaryData',
+            params=ParamsBuilder.secondaryDataParams(property_id)
+        ).json()
+
+        return {
+            'soldOutRooms': response["soldOutRooms"], 
+            'readyRooms': response["roomGridData"]["masterRooms"]
+        }
     
     async def __get_property_detail(self, property_id: int) -> dict:
         async with ClientSession() as session:
@@ -144,6 +155,9 @@ class BaseAgoda:
                                    ) as response:
                 
                 response_json: dict = await response.json()
+
+                print(property_id)
+
 
                 return response_json['data']['propertyDetailsSearch']['propertyDetails'][0]
 
@@ -212,3 +226,6 @@ if(__name__ == "__main__"):
     ).test()
 
 # 'test', 'localhost:9092'
+# Hotel Tugu Malang
+# The Shalimar Boutique Hotel
+# grand mercure malang

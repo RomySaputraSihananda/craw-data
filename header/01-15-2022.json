@@ -1,0 +1,57 @@
+{
+    "link": "https://pusiknas.polri.go.id/laka_lantas",
+    "domain": "pusiknas.polri.go.id",
+    "tag": [
+        "pusiknas.polri.go.id",
+        "laka_lantas"
+    ],
+    "crawling_time": "2024-04-24 10:44:10",
+    "crawling_time_epoch": 1713930250,
+    "date": "01/15/2022",
+    "data": {
+        "Tipe Laka Lantas New": {
+            "Di ruas jalan, pejalan kaki menyeberang dari kiri ke kanan": 9,
+            "Tabrakan saat menyalip dari kanan": 10,
+            "Kendaraan Out of Control keluar ke kanan jalan": 14,
+            "Tabrakan kendaraan belok kanan dengan kendaraan yang datang dari arah berlawanan": 14,
+            "Tabrak kendaraan belok kanan dengan kendaraan yang jalan lurus": 15,
+            "Di simpang, tabrakan dengan Kendaraan B yang datang dari arah kiri": 17,
+            "Tabrakan saat menyalip": 22,
+            "Kendaraan Out of Control keluar ke kiri jalan": 38,
+            "Tabrakan depan - belakang": 42,
+            "Tabrakan depan - depan": 46
+        },
+        "Tipe Laka Lantas Polda New": {
+            "POLDA BALI": 5,
+            "POLDA ACEH": 7,
+            "POLDA SUMATERA BARAT": 9,
+            "POLDA DAERAH ISTIMEWA YOGYAKARTA": 17,
+            "Polda Jawa Barat": 17,
+            "POLDA SULAWESI SELATAN": 17,
+            "POLDA SUMATERA UTARA": 17,
+            "POLDA METRO JAYA": 24,
+            "POLDA JAWA TIMUR": 70,
+            "POLDA JAWA TENGAH": 76
+        },
+        "Jumlah Laka Lantas New": 346,
+        "Jumlah Kerugian Material": 627150000,
+        "tipe korban": {
+            "Luka Berat": 30,
+            "Luka Ringan": 382,
+            "Meninggal Dunia": 72,
+            "total": 484
+        },
+        "penyebab": {
+            "Jalan": 6,
+            "Kendaraan": 8,
+            "Tidak Diketahui": 16,
+            "Manusia": 316
+        },
+        "cuaca": {
+            "Tidak Diketahui": 11,
+            "Berawan/ Mendung": 12,
+            "Hujan/ Grimis": 13,
+            "Cerah": 310
+        }
+    }
+}

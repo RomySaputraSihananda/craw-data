@@ -39,4 +39,4 @@ class Datetime:
         return date
     
 if(__name__ == '__main__'):
-    print(Datetime.utc('2012-08-16T00:03:43.2882034Z'))
+    print(Datetime.now().split(' ')[0])

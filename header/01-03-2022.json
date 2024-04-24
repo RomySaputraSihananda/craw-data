@@ -1,0 +1,59 @@
+{
+    "link": "https://pusiknas.polri.go.id/laka_lantas",
+    "domain": "pusiknas.polri.go.id",
+    "tag": [
+        "pusiknas.polri.go.id",
+        "laka_lantas"
+    ],
+    "crawling_time": "2024-04-24 10:52:09",
+    "crawling_time_epoch": 1713930729,
+    "date": "01/03/2022",
+    "data": {
+        "Tipe Laka Lantas New": {
+            "Di simpang, tabrakan dengan Kendaraan B yang datang dari arah kiri": 10,
+            "Tabrakan kendaraan belok kanan dengan kendaraan yang datang dari arah berlawanan": 19,
+            "Kendaraan Out of Control keluar ke kanan jalan": 24,
+            "Tabrak kendaraan belok kanan dengan kendaraan yang jalan lurus": 24,
+            "Tabrakan saat menyalip": 25,
+            "Tabrakan saat menyalip dari kanan": 29,
+            "Di ruas jalan, pejalan kaki menyeberang dari kiri ke kanan": 31,
+            "Kendaraan Out of Control keluar ke kiri jalan": 48,
+            "Tabrakan depan - belakang": 51,
+            "Tabrakan depan - depan": 51
+        },
+        "Tipe Laka Lantas Polda New": {
+            "POLDA BALI": 9,
+            "POLDA SUMATERA BARAT": 15,
+            "POLDA ACEH": 16,
+            "POLDA SUMATERA UTARA": 19,
+            "POLDA SULAWESI SELATAN": 20,
+            "POLDA METRO JAYA": 26,
+            "POLDA DAERAH ISTIMEWA YOGYAKARTA": 28,
+            "Polda Jawa Barat": 40,
+            "POLDA JAWA TIMUR": 81,
+            "POLDA JAWA TENGAH": 109
+        },
+        "Jumlah Laka Lantas New": 449,
+        "Jumlah Kerugian Material": 688400000,
+        "tipe korban": {
+            "Luka Berat": 47,
+            "Luka Ringan": 533,
+            "Meninggal Dunia": 88,
+            "total": 668
+        },
+        "penyebab": {
+            "Kendaraan": 6,
+            "Jalan": 7,
+            "Tidak Diketahui": 24,
+            "Manusia": 412
+        },
+        "cuaca": {
+            "Berkabut/ Berasap": 1,
+            "Hujan es": 1,
+            "Hujan/ Grimis": 6,
+            "Berawan/ Mendung": 10,
+            "Tidak Diketahui": 12,
+            "Cerah": 419
+        }
+    }
+}
