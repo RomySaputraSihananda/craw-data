@@ -3,13 +3,15 @@ import click
 from click import Context
 from typing import Any
 
-from src.interfaces import BaseGroupClick
-
 from .cekbpom import Cekbpom
 from .companiesmarketcap import CompaniesMarketCap
 from .bkpm import Bkpm
 from .bnn import Bnn
+from .pusiknaspolri import PusiknasPolri
+
+from src.interfaces import BaseGroupClick
 from src.library.dataDivtik.pusiknaspolri.pusiknaspolri import ok
+
 class DataDivtik(BaseGroupClick):
     @click.group()
     @click.pass_context
@@ -47,11 +49,8 @@ class DataDivtik(BaseGroupClick):
         return Bnn(**DataDivtik.merge(ctx, **kwargs))
     
     @main.command()
-    def polri():
-        return ok(**{
-        'start_date': '1/1/2022',
-        'end_date': '4/24/2024',
-        'kafka': True,
-        'bootstrap': 'kafka01.research.ai,kafka02.research.ai,kafka03.research.ai',
-        'topic': 'data-knowledge-repo-general_10'
-    })
+    @click.argument('method', metavar='METHOD', type=click.Choice(['yesterday', 'by_range', 'by_date']))
+    @click.pass_context
+    def pusiknaspolri(ctx: Context, **kwargs):
+        """ Pusiknas Polri Engine """
+        return PusiknasPolri(**DataDivtik.merge(ctx, **kwargs))

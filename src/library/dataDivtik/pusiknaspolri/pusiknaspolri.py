@@ -8,7 +8,10 @@ from time import time
 
 from src.helpers import Iostream, ConnectionKafka, Datetime, logging
 
-class PusiknasPolri():
+from datetime import date
+from datetime import timedelta
+ 
+class BasePusiknasPolri():
     def __init__(self, **kwargs) -> None: 
         self.__s3: bool = kwargs.get('s3')
         self.__kafka: bool = kwargs.get('kafka')
@@ -17,9 +20,9 @@ class PusiknasPolri():
             'User-Agent': 'Mozilla/5.0 (X11; Linux x86_64; rv:124.0) Gecko/20100101 Firefox/124.0',
         })
 
-        # if(self.__kafka): 
-        #     self.__bootstrap: str = kwargs.get('bootstrap')
-        #     self.__connectionKafka: ConnectionKafka = ConnectionKafka(kwargs.get('topic'), kwargs.get('bootstrap'))
+        if(self.__kafka): 
+            self.__bootstrap: str = kwargs.get('bootstrap')
+            self.__connectionKafka: ConnectionKafka = ConnectionKafka(kwargs.get('topic'), kwargs.get('bootstrap'))
 
         (self.__session, self.__response) = self.__get_session()
         self.__keys: list = (data_columns := (data_segments := self.__response["secondaryInfo"]["presModelMap"]["dataDictionary"]["presModelHolder"]["genDataDictionaryPresModel"]["dataSegments"])[list(data_segments.keys())[0]]["dataColumns"])[1]["dataValues"]
@@ -125,6 +128,7 @@ class PusiknasPolri():
         self.__requests.headers.update({
             'Content-Type': 'multipart/form-data; boundary=5qqwMSDC'
         })
+
         
         response = self.__requests.post(f'https://pusiknas.polri.go.id/vizql/w/LakaLantas_16920924926570/v/STATISTIKALAKALANTAS/sessions/{self.__session}/commands/tabdoc/range-filter',
                                         data="\r\n".join([
@@ -147,7 +151,7 @@ class PusiknasPolri():
                                             "--5qqwMSDC",
                                             "Content-Disposition: form-data; name=\"filterRangeMax\"",
                                             "",
-                                            Datetime.excel_serial_date(end_date, format='%m/%d/%Y') if (end_date := kwargs.get('end_date', None)) else (end_date_now := Datetime.excel_serial_date_now(format='%m/%d/%Y'))[0],
+                                            Datetime.excel_serial_date(end_date, format='%m/%d/%Y') if (end_date := kwargs.get('end_date', None)) else (Datetime.excel_serial_date_now(format='%m/%d/%Y'))[0],
                                             "--5qqwMSDC",
                                             "Content-Disposition: form-data; name=\"included\"",
                                             "",
@@ -168,8 +172,8 @@ class PusiknasPolri():
             "data": self.__process_data(response.json())
         }
 
-        # if(self.__kafka):
-        #     self.__connectionKafka.send(data, name=self.__bootstrap)
+        if(self.__kafka):
+            self.__connectionKafka.send(data, name=self.__bootstrap)
         return data
 
     def _get_by_date(self, date: str) -> None:
@@ -178,13 +182,16 @@ class PusiknasPolri():
             'end_date': date
         })
     
+    def _get_yesterday(self) -> None:
+        return self._get_by_date((date.today() - timedelta(days = 1)).strftime('%m/%d/%Y'))
+    
 def ok(**kwargs):
     connectionKafka: ConnectionKafka = ConnectionKafka(kwargs.get('topic'), bootstrap := kwargs.get('bootstrap'))
 
     for date in pandas.date_range(kwargs.get('start_date'), kwargs.get('end_date')).strftime('%m/%d/%Y'):
         for _ in range(3):
             try:
-                data = PusiknasPolri(**kwargs)._get_by_date(date)
+                data = BasePusiknasPolri(**kwargs)._get_by_date(date)
 
                 if(kwargs.get('kafka')):
                     connectionKafka.send(data, name=bootstrap)
@@ -195,12 +202,17 @@ def ok(**kwargs):
             
 
 if(__name__ == '__main__'):
-    # PusiknasPolri()._get_by_date('1/13/2022')
+    print(
+        dumps(
+            BasePusiknasPolri()._streaming(),
+            indent=4
+        )
+    )
     
-    ok(**{
-        'start_date': '1/1/2022',
-        'end_date': '4/24/2024',
-        'kafka': True,
-        'bootstrap': 'kafka01.research.ai,kafka02.research.ai,kafka03.research.ai',
-        'topic': 'data-knowledge-repo-general_10'
-    })
+    # ok(**{
+    #     'start_date': '1/1/2022',
+    #     'end_date': '4/24/2024',
+    #     'kafka': True,
+    #     'bootstrap': 'kafka01.research.ai,kafka02.research.ai,kafka03.research.ai',
+    #     'topic': 'data-knowledge-repo-general_10'
+    # })
