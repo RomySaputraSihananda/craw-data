@@ -1,7 +1,7 @@
 import pytz
 import re
 
-from datetime import datetime
+from datetime import datetime, timedelta
 from typing import final
 
 @final
@@ -38,5 +38,15 @@ class Datetime:
         date = datetime.now(tz).strftime("%Y-%m-%d %H:%M:%S")
         return date
     
+    def tomorrow() -> str:
+        tz = pytz.timezone("Asia/Jakarta")
+        date = datetime.now(tz)
+        return (date + timedelta(1)).strftime("%Y-%m-%d %H:%M:%S")
+    
+    def yesterday() -> str:
+        tz = pytz.timezone("Asia/Jakarta")
+        date = datetime.now(tz)
+        return (date - timedelta(1)).strftime("%Y-%m-%d %H:%M:%S")
+    
 if(__name__ == '__main__'):
-    print(Datetime.now().split(' ')[0])
+    print(Datetime.yesterday())

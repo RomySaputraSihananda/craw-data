@@ -222,9 +222,9 @@ class ParamsBuilder:
                     'searchRequest': {
                         'searchCriteria': {
                             'isAllowBookOnRequest': True,
-                            'bookingDate': '2024-03-22T08:55:26.034Z',
-                            'checkInDate': '2024-03-30T17:00:00.000Z',
-                            'localCheckInDate': '2024-03-31',
+                            'bookingDate': f'{(now := Datetime.now().split(" ")[0])}T07:00:00.000Z',
+                            'checkInDate': f'{now}T17:00:00.000Z',
+                            'localCheckInDate': now,
                             'los': 1,
                             'rooms': 1,
                             'adults': 2,
@@ -486,8 +486,8 @@ class ParamsBuilder:
                         },
                         'packaging': None,
                         'flexibleSearchRequest': {
-                            'fromDate': '2024-03-22',
-                            'toDate': '2024-04-30',
+                            'fromDate': now,
+                            'toDate': (tomorrow := Datetime.tomorrow().split(' ')[0]),
                             'alternativeDateSize': 4,
                             'isFullFlexibleDateSearch': False,
                         },
@@ -680,11 +680,11 @@ class ParamsBuilder:
                     },
                     'isSSR': True,
                     'pricing': {
-                        'bookingDate': '2024-03-22T08:55:26.025Z',
-                        'checkIn': '2024-03-30T17:00:00.000Z',
-                        'checkout': '2024-03-31T17:00:00.000Z',
-                        'localCheckInDate': '2024-03-31',
-                        'localCheckoutDate': '2024-04-01',
+                        'bookingDate': f'{now}T08:55:26.025Z',
+                        'checkIn': f'{now}T17:00:00.000Z',
+                        'checkout': f'{tomorrow}T17:00:00.000Z',
+                        'localCheckInDate': now,
+                        'localCheckoutDate': tomorrow,
                         'currency': 'IDR',
                         'details': {
                             'cheapestPriceOnly': False,
