@@ -191,7 +191,7 @@ class BaseAgoda:
             (properties, token, page) = (None, '', 1) 
             while(True):
                 for _ in range(5):
-                    (properties, token) = self.__get_properties_by_city_id(city['hotelId'], page, 3, token)
+                    (properties, token) = self.__get_properties_by_city_id(city['hotelId'], page, 2, token)
 
                     if(properties): break
 
