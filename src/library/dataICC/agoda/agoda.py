@@ -64,7 +64,7 @@ class BaseAgoda:
                 reviews: list = self.__get_reviews(property['propertyId'], i, 50)
                 if(reviews): break
 
-                sleep(5)
+                await asyncio.sleep(5)
 
             if(not reviews): break
 
@@ -197,7 +197,7 @@ class BaseAgoda:
 
                 if(not properties): break
 
-                sleep(10)
+                await asyncio.sleep(10)
 
                 await asyncio.gather(*(self.__process_property(property, province_enum) for property in properties))
 
