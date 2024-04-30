@@ -64,7 +64,7 @@ class BaseAgoda:
                 reviews: list = self.__get_reviews(property['propertyId'], i, 50)
                 if(reviews): break
 
-                sleep(1)
+                sleep(5)
 
             if(not reviews): break
 
@@ -191,7 +191,7 @@ class BaseAgoda:
             (properties, token, page) = (None, '', 1) 
             while(True):
                 for _ in range(5):
-                    (properties, token) = self.__get_properties_by_city_id(city['hotelId'], page, 2, token)
+                    (properties, token) = self.__get_properties_by_city_id(city['hotelId'], page, 1, token)
 
                     if(properties): break
 
