@@ -197,6 +197,8 @@ class BaseAgoda:
 
                 if(not properties): break
 
+                sleep(10)
+
                 await asyncio.gather(*(self.__process_property(property, province_enum) for property in properties))
 
                 page += 1
