@@ -32,7 +32,7 @@ class Decorator:
                     path = args[1]
                 except:
                     path = args[0]
-                logging.info(f'[ {name} ] :: {path} {kwargs.get("name") if kwargs.get("name") else ""}')
+                logging.info(f'[ {name} ] :: {path}')
                 
                 return func(*args, **kwargs)
             return wrapper
