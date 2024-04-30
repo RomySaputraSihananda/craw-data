@@ -60,7 +60,6 @@ class BaseAgoda:
         Iostream.write_log(log, indent=2, name=__name__)
         all_reviews: list = []
         while True:
-            print(i)
             for _ in range(5):
                 reviews: list = self.__get_reviews(property['propertyId'], i, 50)
                 if(reviews): break
@@ -102,7 +101,6 @@ class BaseAgoda:
                 "path_data_clean": f'S3://ai-pipeline-statistics/data/data_clean/agoda/{province_enum.name.title()}/json/{link_split[3]}.json',
             }
 
-
             paths: list = [path.replace('S3://ai-pipeline-statistics/', '') for path in [data["path_data_raw"]]] 
 
             if(self.__clean):
@@ -115,6 +113,7 @@ class BaseAgoda:
             
             if(self.__kafka):
                 self.__connectionKafka.send(data, name=self.__bootstrap)
+
             else:
                 with ThreadPoolExecutor() as executor:
                     try:
@@ -143,7 +142,7 @@ class BaseAgoda:
         ).json()
 
         return {
-            'soldOutRooms': response["soldOutRooms"], 
+            'soldOutRooms': response["soldOutRooms"] if "soldOutRooms" in response else [], 
             'readyRooms': response["roomGridData"]["masterRooms"]
         }
     
@@ -155,9 +154,6 @@ class BaseAgoda:
                                    ) as response:
                 
                 response_json: dict = await response.json()
-
-                print(property_id)
-
 
                 return response_json['data']['propertyDetailsSearch']['propertyDetails'][0]
 
@@ -223,7 +219,7 @@ if(__name__ == "__main__"):
         #     'bootstrap': 'localhost:9092',
         #     'kafka': True
         # }
-    ).test()
+    )._get_all_detail()
 
 # 'test', 'localhost:9092'
 # Hotel Tugu Malang
