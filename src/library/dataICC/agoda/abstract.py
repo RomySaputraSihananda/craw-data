@@ -9,11 +9,15 @@ class AbstractAgoda(ABC, BaseAgoda):
 
     @abstractmethod
     def get_detail_by_province(self, *args, **kwargs) ->  None:
-        return asyncio.run(self._get_detail_by_province(*args, kwargs.get('province')))
+        return self._get_detail_by_province(*args, kwargs.get('province'))
 
     @abstractmethod
     def get_all_detail(self, *args, **kwargs) -> None: 
         return self._get_all_detail(*args, **kwargs )
+    
+    @abstractmethod
+    def watch_beanstalk(self):
+        return super()._watch_beanstalk()
 
 if(__name__ == "__main__"):
     BaseAgoda()._get_all_detail()

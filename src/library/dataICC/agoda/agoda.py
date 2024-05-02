@@ -3,12 +3,13 @@ import requests
 
 from requests import Session, Response
 from aiohttp import ClientSession
+from json import dumps, loads
+from concurrent.futures import ThreadPoolExecutor
+from time import sleep, time
+from greenstalk import Client
+
 from .paramsBuilder import ParamsBuilder
 from .provinceEnum import ProvinceEnum
-from json import dumps
-from concurrent.futures import ThreadPoolExecutor
-
-from time import sleep, time
 from src.helpers import ConnectionKafka, Iostream, ConnectionS3, Datetime
 
 class BaseAgoda:
@@ -29,16 +30,19 @@ class BaseAgoda:
             'https': 'socks5://192.168.29.154:9050'
         }
 
+        self.__beanstalk_use: Client = Client(('192.168.150.21', 11300), use='dev-target-hotel')
+        self.__beanstalk_watch: Client = Client(('192.168.150.21', 11300), watch='dev-target-hotel')
+
         self.__requests: Session = Session()
         self.__requests.headers.update(self.__headers)
-        # self.__requests.proxies.update(self.__proxy)
+        self.__requests.proxies.update(self.__proxy)
 
         if(self.__kafka): 
             self.__bootstrap: str = kwargs.get('bootstrap')
             self.__connectionKafka: ConnectionKafka = ConnectionKafka(kwargs.get('topic'), kwargs.get('bootstrap'))
         
-    async def __process_property(self, property: dict, province_enum: ProvinceEnum):
-        property_detail: dict = await self.__get_property_detail(property_id := property['propertyId'])
+    def __process_property(self, property: dict, province_name: str):
+        property_detail: dict = self.__get_property_detail(property_id := property['propertyId'])
         property_name: str = property['content']['informationSummary']['localeName']
 
         i: int = 1
@@ -64,8 +68,6 @@ class BaseAgoda:
                 reviews: list = self.__get_reviews(property['propertyId'], i, 50)
                 if(reviews): break
 
-                await asyncio.sleep(5)
-
             if(not reviews): break
 
             all_reviews.extend(reviews)
@@ -75,7 +77,7 @@ class BaseAgoda:
         log['total_data'] += len(all_reviews)
         Iostream.update_log(log, name=__name__, title=property_name)
             
-        self.__process_data(property | property_detail, all_reviews, province_enum, log)
+        self.__process_data(property | property_detail, all_reviews, province_name, log)
 
         log['status'] = 'Done'
         log['total_success'] += len(all_reviews)
@@ -83,7 +85,7 @@ class BaseAgoda:
         Iostream.update_log(log, name=__name__, title=property_name)
 
 
-    def __process_data(self, property_detail: dict, reviews: dict, province_enum: ProvinceEnum, log: dict):
+    def __process_data(self, property_detail: dict, reviews: dict, province_name: str, log: dict):
         try:
             link: str = f"https://www.agoda.com{property_detail['content']['informationSummary']['propertyLinks']['propertyPage']}"
             link_split: list = link.split('/')
@@ -91,14 +93,14 @@ class BaseAgoda:
             data: dict = {
                 "link": link,
                 "domain": link_split[2],
-                "tag": [*link_split[2:], province_enum.name.title()],
+                "tag": [*link_split[2:], province_name.title()],
                 "crawling_time": Datetime.now(),
                 "crawling_time_epoch": int(time()),
                 'property_detail': property_detail,
                 'rooms': self.__get_secondary_data(property_detail["propertyId"]),
                 'reviews': reviews,
-                "path_data_raw": f'S3://ai-pipeline-statistics/data/data_raw/agoda/{province_enum.name.title()}/json/{link_split[3]}.json',
-                "path_data_clean": f'S3://ai-pipeline-statistics/data/data_clean/agoda/{province_enum.name.title()}/json/{link_split[3]}.json',
+                "path_data_raw": f'S3://ai-pipeline-statistics/data/data_raw/agoda/{province_name.title()}/json/{link_split[3]}.json',
+                "path_data_clean": f'S3://ai-pipeline-statistics/data/data_clean/agoda/{province_name.title()}/json/{link_split[3]}.json',
             }
 
             paths: list = [path.replace('S3://ai-pipeline-statistics/', '') for path in [data["path_data_raw"]]] 
@@ -146,16 +148,13 @@ class BaseAgoda:
             'readyRooms': response["roomGridData"]["masterRooms"]
         }
     
-    async def __get_property_detail(self, property_id: int) -> dict:
-        async with ClientSession() as session:
-            async with session.post('https://www.agoda.com/graphql/property', 
-                                   headers=self.__requests.headers,
+    def __get_property_detail(self, property_id: int) -> dict:
+        response: Response = self.__requests.post('https://www.agoda.com/graphql/property', 
                                    json=ParamsBuilder.detailParams(property_id),
-                                   ) as response:
+                                   ) 
                 
-                response_json: dict = await response.json()
 
-                return response_json['data']['propertyDetailsSearch']['propertyDetails'][0]
+        return response.json()['data']['propertyDetailsSearch']['propertyDetails'][0]
 
     def __get_reviews(self, property_id: int, page: int, size: int) -> list: 
         return self.__requests.post('https://www.agoda.com/api/cronos/property/review/ReviewComments',                       
@@ -171,16 +170,22 @@ class BaseAgoda:
         return response.json()['ViewModelList'][0]['ObjectId']
 
     def __get_properties_by_city_id(self, city_id: int, page: int, size: int, token: str = '') -> tuple:
-        response: Response = self.__requests.post('https://www.agoda.com/graphql/search', 
-                                           headers=self.__headers,
-                                            json=ParamsBuilder.cityParams(city_id, page, size, token))
+        print(page)
+        response = None
+        try:
+            response: Response = self.__requests.post('https://www.agoda.com/graphql/search', 
+                                            headers=self.__headers,
+                                                json=ParamsBuilder.cityParams(city_id, page, size, token))
 
-        result: dict = response.json()['data']['citySearch']
+            result: dict = response.json()['data']['citySearch']
 
-        return (result['properties'], result['searchEnrichment']['pageToken'])
+            return (result['properties'], result['searchEnrichment']['pageToken'])
+        except:
+            print('retry', response)
+            return self.__get_properties_by_city_id(city_id, page, size, token)
         
 
-    async def _get_detail_by_province(self, province_enum: ProvinceEnum) -> list:
+    def _get_detail_by_province(self, province_enum: ProvinceEnum) -> list:
         response: Response = self.__requests.get('https://www.agoda.com/api/cronos/geo/NeighborHoods',
                                                 params={
                                                     'pageTypeId': 8,
@@ -188,20 +193,34 @@ class BaseAgoda:
                                                 })
         
         for city in response.json():
+            print(city)
             (properties, token, page) = (None, '', 1) 
             while(True):
                 for _ in range(5):
-                    (properties, token) = self.__get_properties_by_city_id(city['hotelId'], page, 1, token)
+                    (properties, token) = self.__get_properties_by_city_id(city['hotelId'], page, 45)
 
                     if(properties): break
 
-                if(not properties): break
+                if(not len(properties)): break
 
-                await asyncio.sleep(15)
 
-                await asyncio.gather(*(self.__process_property(property, province_enum) for property in properties))
+                for property in properties:
+                    # self.__process_property(property, province_enum) 
+                    self.__beanstalk_use.put(dumps({'property': property, 'province_name': province_enum.name})) 
 
                 page += 1
+    
+    def _watch_beanstalk(self):
+        while(job := self.__beanstalk_watch.reserve()):
+            def process():
+                data: dict = loads(job.body)
+                self.__process_property(data['property'], data['province_name'])
+                self.__beanstalk_watch.delete(job)
+                
+            try:
+                process()
+            except:
+                process()
 
     def _get_all_detail(self) -> None:
         for province in ProvinceEnum:

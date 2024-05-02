@@ -22,6 +22,8 @@ class Agoda(AbstractAgoda):
                 # if(start not in ProvinceEnum.__members__ and start): raise click.BadParameter("start location not found !!")
         
                 self.get_all_detail()
+            case 'watch_beanstalk':
+                self.watch_beanstalk()
             case _:
                 logging.error('Wait.............')
     
@@ -32,3 +34,7 @@ class Agoda(AbstractAgoda):
     @Decorator.counter_time
     def get_all_detail(self, *args, **kwargs) -> None:
         return super().get_all_detail(*args, **kwargs)
+    
+    @Decorator.counter_time
+    def watch_beanstalk(self):
+        return super()._watch_beanstalk()

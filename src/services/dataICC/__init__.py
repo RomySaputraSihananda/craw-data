@@ -25,7 +25,7 @@ class DataICC(BaseGroupClick):
                 return TravelokaEvent(**DataICC.merge(ctx, **kwargs))
         
         @main.command()
-        @click.argument('method', metavar='METHOD', type=click.Choice(['by_province', 'all_detail']))
+        @click.argument('method', metavar='METHOD', type=click.Choice(['by_province', 'all_detail', 'watch_beanstalk']))
         @click.option('--province', default=None, help='Province name')
         @click.pass_context
         def agoda(ctx: Context, **kwargs: Any):
