@@ -174,16 +174,23 @@ class BasePusiknasPolri():
 
         if(self.__kafka):
             self.__connectionKafka.send(data, name=self.__bootstrap)
+
         return data
 
     def _get_by_date(self, date: str) -> None:
-        return self._get_by_range(**{
-            'start_date': date,
-            'end_date': date
-        })
-    
+        try:
+            return self._get_by_range(**{
+                'start_date': date,
+                'end_date': date
+            })
+        except:
+            print(date)
+            self._get_by_date(date)
     def _get_yesterday(self) -> None:
-        return self._get_by_date((date.today() - timedelta(days = 1)).strftime('%m/%d/%Y'))
+        try:
+            return self._get_by_date((date.today() - timedelta(days = 1)).strftime('%m/%d/%Y'))
+        except:
+            return self._get_yesterday()
     
 def ok(**kwargs):
     connectionKafka: ConnectionKafka = ConnectionKafka(kwargs.get('topic'), bootstrap := kwargs.get('bootstrap'))

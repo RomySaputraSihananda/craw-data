@@ -50,6 +50,7 @@ class DataDivtik(BaseGroupClick):
     
     @main.command()
     @click.argument('method', metavar='METHOD', type=click.Choice(['yesterday', 'by_range', 'by_date']))
+    @click.option('--date', help='headless browser')
     @click.pass_context
     def pusiknaspolri(ctx: Context, **kwargs):
         """ Pusiknas Polri Engine """

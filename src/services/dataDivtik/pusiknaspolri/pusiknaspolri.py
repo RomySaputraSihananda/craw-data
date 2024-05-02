@@ -8,6 +8,8 @@ class PusiknasPolri(AbstractPusiknasPolri):
         match(kwargs.get('method')):
             case 'yesterday':
                 print(self.get_yesterday())
+            case 'by_date':
+                self.get_by_date(kwargs.get('date'))
             case _ :
                 logging.error('Wait.............')
     
