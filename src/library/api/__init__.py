@@ -1,1 +1,1 @@
-# from lamudi
+from .dephubgoid import dephubgoid

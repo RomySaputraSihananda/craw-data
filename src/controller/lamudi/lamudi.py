@@ -6,8 +6,8 @@ from fastapi.responses import JSONResponse
 from typing import List, Annotated
 
 from src.library.api.lamudi import BaseLamudi
-from src.helpers import BodyResponse
 from src.library.api.lamudi.categoryEnum import PenawaranEnum, FrekuensiSewaEnum, PropertyEnum
+from src.helpers import BodyResponse
 
 class LamudiController(BaseLamudi):
     def __init__(self, *args, **kwargs) -> None:
