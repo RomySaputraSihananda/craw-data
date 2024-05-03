@@ -35,7 +35,9 @@ class BaseAgoda:
 
         self.__requests: Session = Session()
         self.__requests.headers.update(self.__headers)
-        self.__requests.proxies.update(self.__proxy)
+        
+        if(kwargs.get('proxy')):
+            self.__requests.proxies.update(self.__proxy)
 
         if(self.__kafka): 
             self.__bootstrap: str = kwargs.get('bootstrap')
@@ -150,7 +152,7 @@ class BaseAgoda:
     
     def __get_property_detail(self, property_id: int) -> dict:
         response: Response = self.__requests.post('https://www.agoda.com/graphql/property', 
-                                   json=ParamsBuilder.detailParams(property_id),
+                                    json=ParamsBuilder.detailParams(property_id),
                                    ) 
                 
 

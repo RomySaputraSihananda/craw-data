@@ -27,6 +27,7 @@ class DataICC(BaseGroupClick):
         @main.command()
         @click.argument('method', metavar='METHOD', type=click.Choice(['by_province', 'all_detail', 'watch_beanstalk']))
         @click.option('--province', default=None, help='Province name')
+        @click.option('--proxy', is_flag=True, help='Use proxy')
         @click.pass_context
         def agoda(ctx: Context, **kwargs: Any):
                 """ Agoda Engine """
