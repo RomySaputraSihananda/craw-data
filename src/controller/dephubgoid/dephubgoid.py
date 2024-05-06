@@ -2,10 +2,10 @@ from http import HTTPStatus
 from fastapi import APIRouter, Query
 from fastapi.responses import JSONResponse
 
-from src.library.api.dephubgoid import BaseDephubgoid
+from src.library.api.dephubgoid import AbstractDephubgoid 
 from src.helpers import BodyResponse
 
-class DephubgoidController(BaseDephubgoid):
+class DephubgoidController(AbstractDephubgoid):
     def __init__(self, *args, **kwargs) -> None:
         super().__init__(*args, **kwargs)
 

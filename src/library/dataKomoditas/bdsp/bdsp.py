@@ -21,6 +21,7 @@ class BaseBdsp():
     @staticmethod
     @Decorator.check_path
     async def write_data_frame(data_frame: DataFrame, path: str, info: dict, **kwargs) -> tuple:
+        rill_path = path.replace('S3://ai-pipeline-statistics/', '')
         await asyncio.to_thread(data_frame.to_excel,  (rill_path := path.replace('S3://ai-pipeline-statistics/', '')), index=False)
         print(rill_path)
         ConnectionS3.upload_content(rill_path, rill_path)
@@ -53,6 +54,7 @@ class BaseBdsp():
 
                 # Iostream.write_json(data, json_path.replace('S3://ai-pipeline-statistics/', ''), indent=4)
                 ConnectionS3.upload(data, json_path.replace('S3://ai-pipeline-statistics/', ''))
+            except IndexError: ...
             except Exception as e:
                 raise e
         return wrapper
@@ -75,15 +77,15 @@ class BaseBdsp():
                                     'subsektorcd': kwargs.get('subsector').value
                                 }) as response:
                     return await asyncio.gather(*(self.__get_indikator(komoditas=komoditas, **kwargs) for komoditas in loads(await response.text())))
-        except IndexError as e:
-            raise e
+        
+        except IndexError: ...
         except Exception as e:
-            print('komoditas')
+            print('komoditas', type(e))
             await asyncio.sleep(5)
-            return await self.__get_komoditas(**kwargs)
+            # return await self.__get_komoditas(**kwargs)
     
     
-    async def __get_indikator(self, **kwargs) -> list:
+    async def __get_indikator(self, **kwargs):
         try:
             async with ClientSession() as session:
                 async with session.post('https://bdsp2.pertanian.go.id/bdsp/id/indikator/getIndiByKomSubsek',
@@ -91,14 +93,12 @@ class BaseBdsp():
                                             'subsektorcd': kwargs.get('subsector').value,
                                             'komcd': kwargs.get('komoditas')["fkomcd"]
                                         }) as response:
-            
+
                     return await asyncio.gather(*(self.__get_satuan(indikator=indikator, **kwargs) for indikator in loads(await response.text())))
-        except IndexError as e:
-            raise e
+        except IndexError: ...
         except Exception as e:
-            print('indikator')
             await asyncio.sleep(7)
-            return await self.__get_indikator(**kwargs)
+            # return await self.__get_indikator(**kwargs)
     
     @send_metadata
     async def __get_satuan(self, **kwargs) -> list:
@@ -113,10 +113,9 @@ class BaseBdsp():
                                         }) as response:
             
                     return await asyncio.gather(*(self.__get_result(satuan=satuan, **kwargs) for satuan in loads(await response.text())))
-        except IndexError as e:
-            raise e
+        except IndexError: ...
         except Exception as e:
-            print('satuan')
+            print('satuan', type(e))
             await asyncio.sleep(8)
             return await self.__get_satuan(**kwargs)
 
@@ -165,8 +164,9 @@ class BaseBdsp():
 
                     return await self.write_data_frame(data_frame, path, info, **kwargs)
 
+        except IndexError: ...
         except Exception as e:
-            print('result')
+            print('result', type(e))
             await asyncio.sleep(10)
             await self.__get_result(**kwargs)
 
@@ -175,15 +175,15 @@ class BaseBdsp():
         return await self.__get_komoditas(subsector=subsector, provinsi=provinsi)
     
     async def _get_all(self) -> None:
-        for provinsi in self.__get_provinces():
-            print(provinsi)
-        # for subsector in Subsector:
-        #     print(subsector)
+        # for provinsi in self.__get_provinces():
+        #     print(provinsi)
+        for subsector in Subsector:
+            await self.__get_komoditas(subsector=subsector, provinsi={'fkode_prop': '11', 'nama_prop': 'Aceh'})
 
 
 if(__name__ == '__main__'):
-    asyncio.run(BaseBdsp()._get_by_subsector(Subsector.HORTIKULTURA, {'fkode_prop': '11', 'nama_prop': 'Aceh'}))
-    # asyncio.run(BaseBdsp()._get_all())
+    # asyncio.run(BaseBdsp()._get_by_subsector(Subsector.HORTIKULTURA, {'fkode_prop': '11', 'nama_prop': 'Aceh'}))
+    asyncio.run(BaseBdsp()._get_all())
 
     # import requests
 

@@ -1,15 +1,13 @@
 import re
 
 from http import HTTPStatus
-from fastapi import APIRouter, Response, Query, Depends, Path
+from fastapi import APIRouter, Query
 from fastapi.responses import JSONResponse
-from typing import List, Annotated
 
-from src.library.api.lamudi import BaseLamudi
-from src.library.api.lamudi.categoryEnum import PenawaranEnum, FrekuensiSewaEnum, PropertyEnum
+from src.library.api.lamudi import AbstractLamudi, PenawaranEnum, FrekuensiSewaEnum, PropertyEnum
 from src.helpers import BodyResponse
 
-class LamudiController(BaseLamudi):
+class LamudiController(AbstractLamudi):
     def __init__(self, *args, **kwargs) -> None:
         super().__init__(*args, **kwargs)
 
