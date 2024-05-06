@@ -117,7 +117,7 @@ class BaseBdsp():
         except Exception as e:
             print('satuan', type(e))
             await asyncio.sleep(8)
-            return await self.__get_satuan(**kwargs)
+            # return await self.__get_satuan(**kwargs)
 
     async def __get_result(self, **kwargs) -> str:
         try:
@@ -175,10 +175,9 @@ class BaseBdsp():
         return await self.__get_komoditas(subsector=subsector, provinsi=provinsi)
     
     async def _get_all(self) -> None:
-        # for provinsi in self.__get_provinces():
-        #     print(provinsi)
-        for subsector in Subsector:
-            await self.__get_komoditas(subsector=subsector, provinsi={'fkode_prop': '11', 'nama_prop': 'Aceh'})
+        for provinsi in self.__get_provinces():
+            for subsector in Subsector:
+                await self.__get_komoditas(subsector=subsector, provinsi=provinsi)
 
 
 if(__name__ == '__main__'):
