@@ -17,6 +17,7 @@ class BaseAgoda:
         self.__s3: bool = kwargs.get('s3')
         self.__kafka: bool = kwargs.get('kafka')
         self.__clean: bool = kwargs.get('clean')
+        self.__timeout: int= kwargs.get('timeout')
         self.__headers: dict = {
             'accept': '*/*',
             'accept-language': 'id-ID,id;q=0.9,id;q=0.8',
@@ -213,7 +214,7 @@ class BaseAgoda:
                 page += 1
     
     def _watch_beanstalk(self):
-        while(job := self.__beanstalk_watch.reserve()):
+        while(job := self.__beanstalk_watch.reserve(timeout=self.__timeout)):
             def process():
                 data: dict = loads(job.body)
                 self.__process_property(data['property'], data['province_name'])
