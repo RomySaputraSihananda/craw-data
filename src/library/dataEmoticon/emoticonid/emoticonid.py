@@ -36,7 +36,7 @@ class BaseEmoticonId(Spider):
 
         while((job := self.__beanstalk_watch.reserve())):
             response = Request(job.body, cb_kwargs={'job': job}, headers={'User-Agent': 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/123.0.0.0 Safari/537.36'}, dont_filter=True)
-            sleep(5)
+            # sleep(5)
             yield response
 
     def parse(self, response: Response, **kwargs: Any) -> Any:
@@ -86,7 +86,7 @@ class BaseEmoticonId(Spider):
 
         ConnectionS3.upload(data, data['path_data_raw'][0].replace('S3://ai-pipeline-statistics/', ''))
 
-        # self.__beanstalk_watch.delete(job)
+        self.__beanstalk_watch.delete(job)
 
     def __handle_error(self, failure: Response):
         request = failure.request
