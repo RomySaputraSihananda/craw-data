@@ -31,17 +31,17 @@ class BaseEmoticonId(Spider):
         self.__beanstalk_watch: Client = Client(('192.168.150.21', 11300), watch='dev-target-emoji')
     
     def start_requests(self) -> Iterable[Request]:
-        for url in self.start_urls:
-            yield Request(url, headers={'User-Agent': 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/123.0.0.0 Safari/537.36'}, dont_filter=True)
+        # for url in self.start_urls:
+        #     yield Request(url, headers={'User-Agent': 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/123.0.0.0 Safari/537.36'}, dont_filter=True)
 
-        # while((job := self.__beanstalk_watch.reserve())):
-        #     response = Request(job.body, cb_kwargs={'job': job}, headers={'User-Agent': 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/123.0.0.0 Safari/537.36'}, dont_filter=True)
-        #     # sleep(5)
-        #     yield response
+        while((job := self.__beanstalk_watch.reserve())):
+            response = Request(job.body, cb_kwargs={'job': job}, headers={'User-Agent': 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/123.0.0.0 Safari/537.36'}, dont_filter=True)
+            sleep(5)
+            yield response
 
-    # def parse(self, response: Response, **kwargs: Any) -> Any:
-    #     job = kwargs.get('job')
-    def __process_emoticon(self, response: Response, **kwargs: Any) -> Any:
+    def parse(self, response: Response, **kwargs: Any) -> Any:
+        job = kwargs.get('job')
+    # def __process_emoticon(self, response: Response, **kwargs: Any) -> Any:
         container = response.css('div.pakb-article-content')
         description: list = [p.css('::text').get() for p in response.css('div.pakb-article-content > p')[:2]]
         # keys: list = [h2.css('::text').get() for h2 in container.css('h2')]
@@ -78,11 +78,11 @@ class BaseEmoticonId(Spider):
         } 
 
 
-        # for platform, url in data['data']['Versi platform'].items():
-        #     data['path_data_raw'].append(
-        #         (png_path := f'S3://ai-pipeline-statistics/data/data_raw/Emoticon/emoticonid/{category}/{title}/png/{platform}.png')
-        #     )
-        #     ConnectionS3.upload_content(requests.get(url, headers={'User-Agent': 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/123.0.0.0 Safari/537.36'}).content, png_path.replace('S3://ai-pipeline-statistics/', ''))
+        for platform, url in data['data']['Versi platform'].items():
+            data['path_data_raw'].append(
+                (png_path := f'S3://ai-pipeline-statistics/data/data_raw/Emoticon/emoticonid/{category}/{title}/png/{platform}.png')
+            )
+            ConnectionS3.upload_content(requests.get(url, headers={'User-Agent': 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/123.0.0.0 Safari/537.36'}).content, png_path.replace('S3://ai-pipeline-statistics/', ''))
 
         ConnectionS3.upload(data, data['path_data_raw'][0].replace('S3://ai-pipeline-statistics/', ''))
 
@@ -94,9 +94,9 @@ class BaseEmoticonId(Spider):
             self.logger.error(f"Request failed: {request.url}, retrying...")
             yield request.replace(dont_filter=True)
 
-    def parse(self, response: Response, **kwargs: Any) -> Any: 
-        for link in (li.css('::attr(href)').get() for li in response.css('.uk-margin-large-top.uk-list.uk-list-large.pakb-list.pakb-primary-color.link-icon-right li a')):
-            self.__beanstalk_use.put(link)
+    # def parse(self, response: Response, **kwargs: Any) -> Any: 
+    #     for link in (li.css('::attr(href)').get() for li in response.css('.uk-margin-large-top.uk-list.uk-list-large.pakb-list.pakb-primary-color.link-icon-right li a')):
+    #         self.__beanstalk_use.put(link)
             # yield response.follow(link, headers={'User-Agent': 'Mozilla/5.0 (X11; Linux x86_64; rv:124.0) Gecko/20100101 Firefox/124.0'}, callback=self.__process_emoticon, errback=self.__handle_error) 
 
     def start(self, *args, **kwargs) -> None:
