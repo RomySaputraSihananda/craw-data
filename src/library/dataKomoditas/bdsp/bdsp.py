@@ -44,7 +44,7 @@ class BaseBdsp():
                         kwargs.get('indikator')['findinm'],
                         kwargs.get('komoditas')['fkomnm'],
                         kwargs.get('subsector').name,
-                        kwargs.get('provinsi')['nama_prop']
+                        # kwargs.get('provinsi')['nama_prop']
                     ],
                     "data": info,
                     "crawling_time": Datetime.now(),
@@ -56,6 +56,7 @@ class BaseBdsp():
                 ConnectionS3.upload(data, json_path.replace('S3://ai-pipeline-statistics/', ''))
             except IndexError: ...
             except Exception as e:
+                print(e)
                 raise e
         return wrapper
 
@@ -124,17 +125,24 @@ class BaseBdsp():
             async with ClientSession() as session:
                 async with session.post('https://bdsp2.pertanian.go.id/bdsp/id/lokasi/result',
                                         headers=self.__requests.headers,
-                                        data={
+                                        data=(data := {
                                             'subsektorcd': (subsector := kwargs.get('subsector')).value,
+                                            
+                                            'subsektor': (subsector := kwargs.get('subsector')).value,
+
                                             'subsektornm': (subsector_name := subsector.name).replace('_', ' ').title(),
                                             'komoditas': (komoditas := kwargs.get('komoditas'))["fkomcd"],
                                             'komoditasnm': (komoditas_name := komoditas["fkomnm"]),
                                             'indikator': (indikator := kwargs.get('indikator'))["findicd"],
                                             'indikatornm': (indikator_name := indikator["findinm"]),
-                                            'level': '03',
-                                            'levelnm': 'Kabupaten',
-                                            'prov': (provinsi := kwargs.get('provinsi'))['fkode_prop'],
-                                            'provnm': (provinsi_name := provinsi["nama_prop"]),
+                                            # 'level': '03',
+                                            'level': '02',
+                                            # 'levelnm': 'Kabupaten',
+                                            'levelnm': 'Provinsi',
+                                            # 'prov': (provinsi := kwargs.get('provinsi'))['fkode_prop'],
+                                            'prov': "00",
+                                            # 'provnm': (provinsi_name := provinsi["nama_prop"]),
+                                            'provnm': "--- Pilih Provinsi ---",
                                             'sts_angka': '6',
                                             'sts_angkanm': 'Angka Tetap',
                                             'sumb_data': '00',
@@ -143,15 +151,14 @@ class BaseBdsp():
                                             'tahunAkhir': '2024',
                                             'satuan': (satuan := kwargs.get('satuan'))["fkeyid"],
                                             'satuannm': (satuan_name := satuan["fsatuan"]),
-                                            'judul': 'lokasi',
-                                        }
+                                            # 'judul': 'lokasi',
+                                        })
                                     ) as response:
             
-                    soup: Parser = Parser(await response.text())
+                    soup: Parser = Parser(res := await response.text())
                     header: list = Array((table := soup.select_one('table')).select('thead tr td')).map(lambda e: e.get_text())
                     values: list = Array(table.select('tbody tr')).map(lambda e: [f.get_text() for f in e.select('td')])
                     footer: list = Array(table.select('tfoot tr td')).map(lambda e: e.get_text())
-
 
                     info: dict = {
                         key: soup.select('.col-md-4').map(lambda x: x.get_text().replace(':', '').strip())[i]
@@ -159,8 +166,8 @@ class BaseBdsp():
                     }
 
                     data_frame: DataFrame = DataFrame(columns=header, data=[*values, [len(values) + 1, *footer]])
-
-                    path: str = f'S3://ai-pipeline-statistics/data/data_raw/bdsp/{provinsi_name.replace("/", " or ")}/{subsector_name.replace("/", " or ")}/{(komoditas_name := komoditas_name.replace("/", " or "))}/{(indikator_name := indikator_name.replace("/", " or "))}/xlsx/{komoditas_name}_{indikator_name}_{satuan_name.replace("/", " or ")}.xlsx'
+                    # path: str = f'S3://ai-pipeline-statistics/data/data_raw/bdsp/{provinsi_name.replace("/", " or ")}/{subsector_name.replace("/", " or ")}/{(komoditas_name := komoditas_name.replace("/", " or "))}/{(indikator_name := indikator_name.replace("/", " or "))}/xlsx/{komoditas_name}_{indikator_name}_{satuan_name.replace("/", " or ")}.xlsx'
+                    path: str = f'S3://ai-pipeline-statistics/data/data_raw/bdsp/provinsi/{subsector_name.replace("/", " or ")}/{(komoditas_name := komoditas_name.replace("/", " or "))}/{(indikator_name := indikator_name.replace("/", " or "))}/xlsx/{komoditas_name}_{indikator_name}_{satuan_name.replace("/", " or ")}.xlsx'
 
                     return await self.write_data_frame(data_frame, path, info, **kwargs)
 
@@ -175,9 +182,9 @@ class BaseBdsp():
         return await self.__get_komoditas(subsector=subsector, provinsi=provinsi)
     
     async def _get_all(self) -> None:
-        for provinsi in self.__get_provinces():
-            for subsector in Subsector:
-                await self.__get_komoditas(subsector=subsector, provinsi=provinsi)
+        # for provinsi in self.__get_provinces():
+        for subsector in Subsector:
+            await self.__get_komoditas(subsector=subsector, provinsi=None)
 
 
 if(__name__ == '__main__'):
