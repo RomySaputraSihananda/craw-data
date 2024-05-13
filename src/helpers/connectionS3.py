@@ -50,11 +50,11 @@ class ConnectionS3:
     def get_content(key: str, bucket: str = 'ai-pipeline-statistics') -> str:
         return loads(s3.get_object(Bucket=bucket, Key = key)['Body'].read())
 
-    @staticmethod
-    @Decorator.logging_path(style('SEND S3 CONTENT', fg='bright_red'))
-    def upload_content(content: bytes, key: str, bucket: str = 'ai-pipeline-statistics') -> None:
-        response:  Any = s3.put_object(Bucket=bucket, Key=key, Body=content)
-        if(response['ResponseMetadata']['HTTPStatusCode'] != 200): raise Exception('failed send s3')
+    # @staticmethod
+    # @Decorator.logging_path(style('SEND S3 CONTENT', fg='bright_red'))
+    # def upload_content(content: bytes, key: str, bucket: str = 'ai-pipeline-statistics') -> None:
+    #     response:  Any = s3.put_object(Bucket=bucket, Key=key, Body=content)
+    #     if(response['ResponseMetadata']['HTTPStatusCode'] != 200): raise Exception('failed send s3')
 
 if(__name__ == '__main__'):
     # data = ConnectionS3.get_all_prefix('data/data_raw/wikipedia/data teritorial/json/')
