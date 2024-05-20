@@ -79,7 +79,7 @@ class Iostream:
                     try:
                         data[key] = loads(value)
                     except Exception:
-                        data[key] = re.sub('<.*?>', ' ', value)
+                        data[key] = re.sub('<.*?>', ' ', value).strip()
         return data
     
     @staticmethod

@@ -132,4 +132,4 @@ class BaseBISekda:
          await self._get_by_provinsi(provinsi)
 
 if(__name__ == '__main__'): 
-   asyncio.run(BaseBISekda()._get_all())
+   asyncio.run(BaseBISekda()._get_by_provinsi(ProvinceEnum.PAPUA_BARAT))

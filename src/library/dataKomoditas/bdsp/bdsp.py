@@ -23,8 +23,8 @@ class BaseBdsp():
     async def write_data_frame(data_frame: DataFrame, path: str, info: dict, **kwargs) -> tuple:
         rill_path = path.replace('S3://ai-pipeline-statistics/', '')
         await asyncio.to_thread(data_frame.to_excel,  (rill_path := path.replace('S3://ai-pipeline-statistics/', '')), index=False)
-        print(rill_path)
-        ConnectionS3.upload_content(rill_path, rill_path)
+        # print(rill_path)
+        # ConnectionS3.upload_content(rill_path, rill_path)
         return path, info
     
     @staticmethod
@@ -52,8 +52,8 @@ class BaseBdsp():
                     "path_data_raw": [path, (json_path := (path_split := path.split('xlsx/'))[0] + f"json/{path_split[-1].replace('.xlsx', '')}.json")],
                 }
 
-                # Iostream.write_json(data, json_path.replace('S3://ai-pipeline-statistics/', ''), indent=4)
-                ConnectionS3.upload(data, json_path.replace('S3://ai-pipeline-statistics/', ''))
+                Iostream.write_json(data, json_path.replace('S3://ai-pipeline-statistics/', ''), indent=4)
+                # ConnectionS3.upload(data, json_path.replace('S3://ai-pipeline-statistics/', ''))
             except IndexError: ...
             except Exception as e:
                 print(e)
@@ -189,20 +189,13 @@ class BaseBdsp():
 
 if(__name__ == '__main__'):
     # asyncio.run(BaseBdsp()._get_by_subsector(Subsector.HORTIKULTURA, {'fkode_prop': '11', 'nama_prop': 'Aceh'}))
-    asyncio.run(BaseBdsp()._get_all())
+    # asyncio.run(BaseBdsp()._get_by_subsector(Subsector.HORTIKULTURA, None))
+    import glob, os
+    path = '/home/romy/Desktop/dasor-皇/craw-data/data/data_raw/bdsp/provinsi/'
+    def send(pattren):
+        for filename in glob.iglob(path + pattren, recursive = True): 
+            file_name = filename.replace('/home/romy/Desktop/dasor-皇/craw-data/', '')
+            ConnectionS3.upload_content(file_name, file_name)
 
-    # import requests
-
-    # headers = 
-
-    # data = 
-
-    # response = requests.post(
-    #     'https://bdsp2.pertanian.go.id/bdsp/id/site/writeexcel/resultToExcel',
-    #     headers=headers,
-    #     data=data,
-    # )
-
-    # with open('test.xls', 'wb') as file:
-    #         file.write(response.content)
-
+    for pattren in ('**/*.json', '**/*.xlsx'):
+        send(pattren)
