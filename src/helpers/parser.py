@@ -11,6 +11,8 @@ class Array:
 
     def map(self, function: Callable[..., Any]) -> list:
         return list(map(function, self.__list))
+    def to_list(self):
+        return self.__list
 
 
 # def getSoup(url, method = 'get', **kwargs):
@@ -27,7 +29,7 @@ class Parser(BeautifulSoup):
     def select(self, *args) -> Array:
         return Array(super().select(*args))
     
-    def select_one(self, *args, index: int = 0) -> Array:
+    def select_one(self, *args, index: int = 0) -> PageElement:
         return self.select(*args).map(lambda e: e)[index]
     
 if(__name__ == '__main__'):
