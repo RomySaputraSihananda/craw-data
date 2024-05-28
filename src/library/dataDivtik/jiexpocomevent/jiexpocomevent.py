@@ -8,7 +8,7 @@ from json import loads, dumps
 from time import time
 from calendar import month_name
 
-from src.helpers import torrequests, Parser, Datetime, Iostream
+from src.helpers import torrequests, Parser, Datetime, Iostream, ConnectionS3
 
 from .filterEnum import FilterEnum
 
@@ -20,8 +20,11 @@ class BaseJiexpocomEvent:
         async with ClientSession() as session:
             async with session.get(link) as response:
                 soup: Parser = Parser(await response.text())
-                del data['@type']
-                del data['@context']
+                try:
+                    del data['@type']
+                    del data['@context']
+                except: ...
+
                 def parse(e):
                     key: str = e.pop('@type')
                     return data | { key: e }
@@ -32,32 +35,50 @@ class BaseJiexpocomEvent:
 
     async def __get_all_detail(self, content: str) -> list:
         def get_other_detail(e, f):
-            return {
-                e[0].select_one('h3').get_text(): e[0].select_one('p').get_text(),
-                e[1].select_one('h3').get_text() + '_format': e[1].select_one('p').get_text(),
-                e[2].select_one('h3').get_text(): e[2].select_one('p span').get_text(),
-                'link_calendar': {a.get_text(): a['href'] if ('https:' in a['href']) else 'https:' + a['href'] for a in e[3].select('p a')},
-            } | {
-                    'time': {em['class'][0]: em.get_text() for em in f.select('.desc_trig_outter .evo_start em')} | {'evcal_time': f.select_one('.desc_trig_outter .evcal_time').get_text()},
-                    'event_type': f.select_one('em[data-filter="event_type"]').get_text()
-                }
+            try:
+                return {
+                    e[0].select_one('h3').get_text(): e[0].select_one('p').get_text(),
+                    e[1].select_one('h3').get_text(): e[1].select_one('p').get_text(),
+                    e[2].select_one('h3').get_text(): e[2].select_one('p span').get_text(),
+                    'link_calendar': {a.get_text(): a['href'] if ('https:' in a['href']) else 'https:' + a['href'] for a in e[-1].select('p a')},
+                } | {
+                        'time': {em['class'][0]: em.get_text() for em in f.select('.desc_trig_outter .evo_start em')} | {'evcal_time': f.select_one('.desc_trig_outter .evcal_time').get_text()},
+                        'event_type': f.select_one('em[data-filter="event_type"]').get_text()
+                    }
+            except:
+                return {
+                    e[0].select_one('h3').get_text(): e[0].select_one('p').get_text(),
+                    e[1].select_one('h3').get_text(): e[1].select_one('p').get_text(),
+                    'link_calendar': {a.get_text(): a['href'] if ('https:' in a['href']) else 'https:' + a['href'] for a in e[-1].select('p a')},
+                } | {
+                        'time': {em['class'][0]: em.get_text() for em in f.select('.desc_trig_outter .evo_start em')} | {'evcal_time': f.select_one('.desc_trig_outter .evcal_time').get_text()},
+                        'event_type': f.select_one('em[data-filter="event_type"]').get_text()
+                    }
         
         soup: Parser = Parser(content)
         links = soup.select('div > a').map(lambda e: e['href'])
-        data: list = soup.select('script[type="application/ld+json"]').map(lambda e: loads(re.sub(r',\s*}', '}', e.string)))
+
+        # data: list = soup.select('script[type="application/ld+json"]').map(lambda e: loads(re.sub(r',\s*}', '}', e.string)))
+        def regex(e):
+            try:
+                return loads(re.sub(r',\s*}', '}', e.string))
+            except:
+                return {}
+
+        data: list = soup.select('script[type="application/ld+json"]').map(lambda e: regex(e))
 
         other_details: list = soup.select('.eventon_list_event.evo_eventtop').map(lambda e: get_other_detail(e.select('.evcal_evdata_cell'), e))
         
         return await asyncio.gather(*(self.__get_detail(link, data[i] | other_details[i]) for i, link in enumerate(links)))
 
-    async def _get_event_by_date(self, month: int, year: int, filter: FilterEnum) -> list:
+    async def _get_event_by_date(self, month: int, year: int, filter: FilterEnum = None) -> list:
         data = {
             'action': 'the_ajax_hook',
             'direction': 'none',
             'sort_by': 'sort_date',
             'filters[0][filter_type]': 'tax',
             'filters[0][filter_name]': 'event_type',
-            'filters[0][filter_val]': '94,71,69,84,70,87,114,',
+            'filters[0][filter_val]': '94,71,69,84,70,87,114,' if not filter else filter.name,
             'shortcode[hide_past]': 'no',
             'shortcode[show_et_ft_img]': 'no',
             'shortcode[event_order]': 'ASC',
@@ -106,6 +127,7 @@ class BaseJiexpocomEvent:
         }
         
         response: dict = requests.post('https://exhibition.jiexpo.com/wp-admin/admin-ajax.php', data=data).json()
+
         del response['status']
         
         event_list: list = response.pop('eventList')
@@ -116,7 +138,7 @@ class BaseJiexpocomEvent:
     async def _get_event_by_date_write(self, month, year) -> None:
         events, response = await self._get_event_by_date(month, year)
 
-        for i, event in enumerate(events):
+        for event in events:
             data: dict = {
                 "link": (link := event['link']),
                 "domain": (link_split := link.split('/')[:-1])[2],
@@ -128,13 +150,19 @@ class BaseJiexpocomEvent:
                 "path_data_raw": f'S3://ai-pipeline-raw-data/data/data_descriptive/jiexpocom/data_event/{response["year"]}/{month_name[response["month"]].lower()}/json/{event["event_id"]}.json',
             }
             
-            Iostream.write_json(data, data['path_data_raw'].replace('S3://ai-pipeline-raw-data/', ''), indent=4)
+            # Iostream.write_json(data, data['path_data_raw'].replace('S3://ai-pipeline-raw-data/', ''), indent=4)
+            ConnectionS3.upload(data, data['path_data_raw'].replace('S3://ai-pipeline-raw-data/', ''), 'ai-pipeline-raw-data')
+
+    async def _get_event_by_year_write(self, year) -> None:
+        await asyncio.gather(*(self._get_event_by_date_write(i, year) for i in range(1, 12 + 1)))
 
 if(__name__ == '__main__'): 
-    data = asyncio.run(BaseJiexpocomEvent()._get_event_by_date_write(6, 2024))
-    print(
-        dumps(
-            data,
-            indent=4
-        )
-    )
+    jiexpocomEvent: BaseException = BaseJiexpocomEvent()
+    for year in range(2023, 2025 + 1):
+        asyncio.run(jiexpocomEvent._get_event_by_year_write(year))
+
+    # print(
+    #     # dumps(
+    #         data[]
+    #     # )
+    # )

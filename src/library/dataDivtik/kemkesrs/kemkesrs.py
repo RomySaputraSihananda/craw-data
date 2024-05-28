@@ -9,6 +9,8 @@ from functools import reduce
 from time import time
 from greenstalk import Client
 
+from concurrent.futures import ThreadPoolExecutor
+
 from src.helpers import Parser, Datetime, Iostream, ConnectionS3
 from src.helpers.parser import Array
 
@@ -128,6 +130,16 @@ class KemkesRS:
             try:
                 await process()
             except: ...
+    
+    # async def _watch_beanstalk_thread(self):
+    #     with ThreadPoolExecutor(max_workers=10) as executor:
+    #         loop = asyncio.get_event_loop()
+    #         while True:
+    #             job = self.__beanstalk_watch.reserve(timeout=60)
+
+    #             await loop.run_in_executor(executor, self.__get_detail_rs, loads(job.body))
+
+    #             self.__beanstalk_watch.delete(job)
 
     async def __get_detail_rs(self, rs: dict = None): 
         async with ClientSession() as session:
@@ -146,7 +158,7 @@ class KemkesRS:
                 }
                 return data
 
-if(__name__ == '__main__'): asyncio.run(KemkesRS()._watch_beanstalk())
+if(__name__ == '__main__'): asyncio.run(KemkesRS()._get_all())
 
 
 # {

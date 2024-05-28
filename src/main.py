@@ -40,7 +40,7 @@ class EngineCrawler(BaseGroupClick):
             raise click.BadParameter('--broker is bad value')
     
     @main.command()
-    @click.argument('web-app', metavar='WEB-APP', type=click.Choice(['lamudi', 'dephubgoid', 'jiexpocomevent']))
+    @click.argument('web-app', metavar='WEB-APP', type=click.Choice(['lamudi', 'dephubgoid', 'jiexpocomevent', 'uiacidevent']))
     @click.option('--port', help='port of service', default=4444)
     @click.option('--local', is_flag=True, help='serve to local network')
     def serve(**kwargs):
