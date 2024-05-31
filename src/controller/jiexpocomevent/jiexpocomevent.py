@@ -60,7 +60,8 @@ class JiexpocomEventController(AbstractJiexpocomEvent):
                     }  for event in events
                 ], 
                 message=f'list of events in {response["cal_month_title"]}', 
-                **response
+                **response,
+                **headers
             ).__dict__, 
             status_code=HTTPStatus.OK
         )
