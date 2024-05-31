@@ -2,8 +2,9 @@ from http import HTTPStatus
 from datetime import datetime
 from fastapi import APIRouter, Query
 from fastapi.responses import JSONResponse
+from time import time
 
-from src.helpers import BodyResponse
+from src.helpers import BodyResponse, Datetime
 from src.library.dataDivtik import AbstractJiexpocomEvent, FilterEnum
 
 class JiexpocomEventController(AbstractJiexpocomEvent): 
@@ -29,11 +30,35 @@ class JiexpocomEventController(AbstractJiexpocomEvent):
             ).__dict__, 
             status_code=HTTPStatus.NOT_FOUND
         )
+        
+        headers: dict = {
+            "source": (link := "https://exhibition.jiexpo.com/event-directory"),
+            "domain": (link_split := link.split('/'))[2],
+            "data_name": "data_event",
+            "tag": [*link_split[2:], 'data_event'],
+            "crawling_time": Datetime.now(),
+            "crawling_time_epoch": int(time())
+        } 
 
         return JSONResponse(
             content=BodyResponse(
                 HTTPStatus.OK, 
-                events, 
+                [
+                    {
+                        "link_source": (url := event["link"]),
+                        "event_name": event["name"],
+                        "event_organizer": event["Organizer"],
+                        "category": 'event',
+                        "start_date": (start_date_split := event["startDate"].split('T'))[0],
+                        "end_date": (end_date_split := event["endDate"].split('T'))[0],
+                        "start_time": '.'.join(start_date_split[1].split('-')[1:][:2]),
+                        "end_time": '.'.join(end_date_split[1].split('-')[1:][:2]),
+                        "event_tag": [*headers['tag'], *url.split('/')[:-1][2:]],
+                        "event_description": event["description"],
+                        "social_media": None,
+                        "link_image": event["ImageObject"]["url"]
+                    }  for event in events
+                ], 
                 message=f'list of events in {response["cal_month_title"]}', 
                 **response
             ).__dict__, 

@@ -21,14 +21,6 @@ class UiacidEventController(AbstractUiacidEvent):
     ) -> JSONResponse:
         events= await super()._get_event_by_date(year, month)
 
-        headers: dict = {
-            "source": (link := "https://www.ui.ac.id/events/list"),
-            "domain": (link_split := link.split('/')[:-1])[2],
-            "data_name": "data_event",
-            "tag": [*link_split[2:], 'data_event'],
-            "crawling_time": Datetime.now(),
-            "crawling_time_epoch": int(time())
-        } 
         if(not events): return JSONResponse(
             content=BodyResponse(
                 HTTPStatus.NOT_FOUND, 
@@ -38,6 +30,14 @@ class UiacidEventController(AbstractUiacidEvent):
             status_code=HTTPStatus.NOT_FOUND
         )
 
+        headers: dict = {
+            "source": (link := "https://www.ui.ac.id/events/list"),
+            "domain": (link_split := link.split('/'))[2],
+            "data_name": "data_event",
+            "tag": [*link_split[2:], 'data_event'],
+            "crawling_time": Datetime.now(),
+            "crawling_time_epoch": int(time())
+        } 
         return JSONResponse(
             content=BodyResponse(
                 HTTPStatus.OK, 

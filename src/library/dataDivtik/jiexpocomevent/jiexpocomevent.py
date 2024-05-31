@@ -21,16 +21,16 @@ class BaseJiexpocomEvent:
             async with session.get(link) as response:
                 soup: Parser = Parser(await response.text())
                 try:
-                    del data['@type']
-                    del data['@context']
+                    del data['type']
+                    del data['context']
                 except: ...
 
                 def parse(e):
-                    key: str = e.pop('@type')
+                    key: str = e.pop('type')
                     return data | { key: e }
                 
                 return {'link': str(response.url)} | reduce(lambda a, b: dict(a, **b), [
-                    parse(e) for e in loads(soup.select_one('script[type="application/ld+json"]').string)['@graph']
+                    parse(e) for e in loads(soup.select_one('script[type="application/ld+json"]').string.replace('@', ''))['graph']
                 ])
 
     async def __get_all_detail(self, content: str) -> list:
@@ -61,7 +61,7 @@ class BaseJiexpocomEvent:
         # data: list = soup.select('script[type="application/ld+json"]').map(lambda e: loads(re.sub(r',\s*}', '}', e.string)))
         def regex(e):
             try:
-                return loads(re.sub(r',\s*}', '}', e.string))
+                return loads(re.sub(r',\s*}', '}', e.string.replace('@', '')))
             except:
                 return {}
 
