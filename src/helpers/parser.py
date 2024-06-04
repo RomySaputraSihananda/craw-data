@@ -30,7 +30,9 @@ class Parser(BeautifulSoup):
         return Array(super().select(*args))
     
     def select_one(self, *args, index: int = 0) -> PageElement:
-        return self.select(*args).map(lambda e: e)[index]
+        try:
+            return self.select(*args).map(lambda e: e)[index]
+        except: ...
     
 if(__name__ == '__main__'):
     # soup = getSoup(
