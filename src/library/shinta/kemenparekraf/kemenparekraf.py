@@ -32,13 +32,14 @@ class BaseKemenparekraf:
     async def __download_files(self, data: dict, **kwargs) -> list:
         if(kwargs.get('enum').__class__ == StatistikEnum):
             return await asyncio.gather(*(self.__download_file(file, **kwargs) for file in [*data['files'], data['featured_image']] if file))
-        return await asyncio.gather(*(self.__download_file(self.build_dict(file), **kwargs) for file in [re.findall(r'https?://.*?.pdf', data['content'])[0], data['image_url'], data['cover']] if file))
+
+        return await asyncio.gather(*(self.__download_file(self.build_dict(file), **kwargs) for file in [*(re.findall(r'https?://.*?\.(?:pdf|png|jpg|xlsx|csv|xls)', data['content'])), data['image_url'], data['cover']] if file))
 
     async def __download_file(self, data: dict, **kwargs) -> str:
         try:
             type = 'data_descriptive'
             match(extension := data['extension'].lower()):
-                case 'xlsx' | 'csv':
+                case 'xlsx' | 'csv' | 'xls':
                     type = 'data_statistics'
                 case 'png' | 'jpg' | 'jpeg':
                     type = 'data_gambar'
