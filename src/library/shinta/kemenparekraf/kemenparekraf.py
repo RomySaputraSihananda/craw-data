@@ -7,7 +7,7 @@ from time import time
 from aiohttp import ClientSession
 from aiofiles import open
 
-from .statisticEnum import StatistikEnum
+from .enums import ProfilEnum, StatistikEnum
 
 from src.helpers import Parser, Datetime, Iostream, ConnectionS3
 
@@ -35,8 +35,8 @@ class BaseKemenparekraf:
                     ConnectionS3.upload_content(await response.read(), (path := f'S3://ai-pipeline-raw-data/data/{type}/kemenparekraf/statistik/{kwargs.get("statistik").value["slug"].replace("-", "_").lower()}/{extension}/{data["file_name"].replace(" ", "_").lower()}').replace('S3://ai-pipeline-raw-data/', ''), 'ai-pipeline-raw-data')
                     return path
         except Exception as e:
+            print(e)
             print(data)
-            exit()
 
     async def _get_statistic(self, statistik: StatistikEnum, **kwargs) -> list:
         response: Response = self.__requests.get('https://api2.kemenparekraf.go.id/api/v1/statistics/posts',
