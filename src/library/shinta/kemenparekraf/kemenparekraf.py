@@ -22,8 +22,7 @@ class BaseKemenparekraf:
     @staticmethod
     def build_dict(url: str) -> dict:
         if(isinstance(url, dict)): return url
-
-        _, extension  = (file_name := url.split('/')[-1]).split('.')
+        extension  = (file_name := url.split('/')[-1]).split('.', )[-1]
         return {
             'path': url,
             'extension': extension,
@@ -145,7 +144,7 @@ class BaseKemenparekraf:
         
         return datas
     
-    async def _get_by_profil(self, profile: ProfilEnum, **kwargs) -> list:
+    async def _get_by_profile(self, profile: ProfilEnum, **kwargs) -> list:
         (datas, i) = ([], 1) 
         while(True):
             data: list = await self._get_profiles(profile=profile, page=i, **kwargs) 
@@ -155,7 +154,7 @@ class BaseKemenparekraf:
         return datas
     
     async def _get_all_profiles(self, **kwargs):
-        return [await self._get_by_statistic(profile=profile, **kwargs) for profile in ProfilEnum]
+        return [await self._get_by_profile(profile=profile, **kwargs) for profile in ProfilEnum]
 
 if(__name__ == '__main__'):
 
