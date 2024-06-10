@@ -17,11 +17,11 @@ class BasePeraturanBpk:
     
     async def __download_file(self, url: str, **kwargs) -> str:
         try:
-            async with ClientSession() as session:
-                async with session.get(url, headers=self.__requests.headers) as response:
-                    ConnectionS3.upload_content(await response.read(), (path := f'S3://ai-pipeline-raw-data/data/data_descriptive/bpk/data_rencana_pembangunan_jangka_menengah/pdf/{unquote(url).split("/")[-1].replace(" ", "_").lower()}').replace('S3://ai-pipeline-raw-data/', ''), 'ai-pipeline-raw-data')
+            # async with ClientSession() as session:
+            #     async with session.get(url, headers=self.__requests.headers) as response:
+                    # ConnectionS3.upload_content(await response.read(), (path := f'S3://ai-pipeline-raw-data/data/data_descriptive/bpk/data_rencana_pembangunan_jangka_menengah/pdf/{unquote(url).split("/")[-1].replace(" ", "_").lower()}').replace('S3://ai-pipeline-raw-data/', ''), 'ai-pipeline-raw-data')
                     
-                    return path
+                    return f'S3://ai-pipeline-raw-data/data/data_descriptive/bpk/data_rencana_pembangunan_jangka_menengah/pdf/{unquote(url).split("/")[-1].replace(" ", "_").lower()}'
                 
         except Exception as e:
             print(e)
@@ -91,9 +91,27 @@ class BasePeraturanBpk:
             data: list = await self._get_peraturan(page=page, **kwargs)
             if(not data): break
             datas.extend(data)
+            for d in data:
+                print(d)
             page += 1
-            sleep(5)
+            # sleep(1)
         return datas
 
 
-if(__name__ == '__main__'): asyncio.run(BasePeraturanBpk()._get_all(write=True))
+if(__name__ == '__main__'):
+    # import s3fs
+    # import os
+    from json import dumps
+
+    # load_dotenv()
+
+    # s3 = s3fs.S3FileSystem(
+    #     endpoint_url=os.getenv('S3_ENDPOINT_URL'), 
+    #     secret=os.getenv('S3_SECRET_ACCESS_KEY'), 
+    #     key=os.getenv('S3_ACCESS_KEY_ID')
+    # )
+
+    # pdf = s3.listdir('s3://ai-pipeline-raw-data/data/data_descriptive/bpk/data_rencana_pembangunan_jangka_menengah/json/')
+    # print(pdf)
+    data = asyncio.run(BasePeraturanBpk()._get_all(write=False))
+    print(dumps(data, indent=4))

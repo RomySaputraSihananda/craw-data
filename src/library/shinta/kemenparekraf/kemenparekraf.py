@@ -8,7 +8,7 @@ from time import time
 from aiohttp import ClientSession
 from aiofiles import open
 
-from .enums import ProfilEnum, StatistikEnum
+from .enums import ProfilEnum, StatistikEnum, SubsektorEkonomiKreatifEnum
 
 from src.helpers import Parser, Datetime, Iostream, ConnectionS3
 
@@ -53,9 +53,9 @@ class BaseKemenparekraf:
             print(e)
             print(data)
 
-    async def __get_detail_profile(self, data: dict):
+    async def __get_detail_card(self, data: dict, **kwargs):
         async with ClientSession() as session:
-                async with session.get(join('https://api2.kemenparekraf.go.id/api/v1/articles', data['slug'])) as response:
+                async with session.get(join(f'https://api2.kemenparekraf.go.id/api/v1/', kwargs.get('type', 'articles'), data['slug'])) as response:
                     return (await response.json())['data'] | data
         
     async def _get_statistics(self, statistik: StatistikEnum, **kwargs) -> list:
@@ -122,8 +122,7 @@ class BaseKemenparekraf:
         
         if not (datas := response.json()['data']): return
 
-        datas: list = await asyncio.gather(*(self.__get_detail_profile(data) for data in datas))
-        
+        datas: list = await asyncio.gather(*(self.__get_detail_card(data) for data in datas))
         
         if(kwargs.get('write')):
             for data in datas:
@@ -156,10 +155,67 @@ class BaseKemenparekraf:
     
     async def _get_all_profiles(self, **kwargs):
         return [await self._get_by_profile(profile=profile, **kwargs) for profile in ProfilEnum]
+    
+    async def _get_subsectors(self, subsektor: dict, **kwargs):
+        response: Response = self.__requests.get('https://api2.kemenparekraf.go.id/api/v1/articles',
+            params={
+                'pageSize': kwargs.get('size', 10),
+                'query': '',
+                'filterData': dumps({"creative_category_id": [subsektor['id']]}),
+                'order_by': 'published_at',
+                'order_dir': 'desc',
+                'pageIndex': kwargs.get('page', 1) - 1,
+            },
+        )
+        def process_data(data):
+            data['content'] = Parser(data['content']).get_text().strip()
+            return data
+        
+        if not (datas := response.json()['data']): return
+
+        datas: list = [process_data(data) for data in await asyncio.gather(*(self.__get_detail_card(data) for data in datas))]
+
+        
+        if(kwargs.get('write')):
+            for data in datas:
+                del data["relatedArticles"]
+                result: dict = {
+                    "link": (link := join('https://www.kemenparekraf.go.id', 'destinasi-super-prioritas', name := data['slug'])),
+                    "domain": (link_split := link.split('/'))[2],
+                    "tag": [*link_split[2:], filter := subsektor['slug']],
+                    **data,
+                    'subsektor': subsektor,
+                    "crawling_time": Datetime.now(),
+                    "crawling_time_epoch": int(time()),
+                    "path_data_raw": f'S3://ai-pipeline-raw-data/data/data_descriptive/kemenparekraf/subsektor_ekonomi_kreatif/{filter.replace("-", "_").lower()}/json/{name.replace("-", "_").lower()}.json'
+                }
+
+                ConnectionS3.upload(result, result['path_data_raw'].replace('S3://ai-pipeline-raw-data/', ''), 'ai-pipeline-raw-data')
+                # print(dumps(result, indent=4))
+        
+        return datas
+
+    async def _get_subsektor_ekonomi_kreatif(self, subsektor_ekonomi_kreatif: SubsektorEkonomiKreatifEnum, **kwargs) -> list:
+        subsektor: dict = await self.__get_detail_card(subsektor_ekonomi_kreatif.value, type='creative-categories')
+        (datas, i) = ([], 1) 
+        while(True):
+            data: list = await self._get_subsectors(subsektor, page=i, **kwargs) 
+            if(not data): break
+            datas.extend(data)
+            i += 1
+            from time import sleep
+            # exit()
+        return datas
+    
+    async def _get_all_subsektor_ekonomi_kreatif(self, **kwargs):
+        return [await self._get_subsektor_ekonomi_kreatif(subsektor, **kwargs) for subsektor in SubsektorEkonomiKreatifEnum]
+
+    
 
 if(__name__ == '__main__'):
 
     baseKemenparekraf: BaseKemenparekraf = BaseKemenparekraf()
     # data = asyncio.run(baseKemenparekraf._get_all_statistics(write=True))
-    data = asyncio.run(baseKemenparekraf._get_all_profiles(write=True))
+    # data = asyncio.run(baseKemenparekraf._get_all_profiles(write=True))
+    data = asyncio.run(baseKemenparekraf._get_all_subsektor_ekonomi_kreatif(write=True))
     print([len(d) for d in data])
