@@ -204,7 +204,7 @@ class BaseKemenparekraf:
             datas.extend(data)
             i += 1
             from time import sleep
-            # exit()
+            sleep(5)
         return datas
     
     async def _get_all_subsektor_ekonomi_kreatif(self, **kwargs):
