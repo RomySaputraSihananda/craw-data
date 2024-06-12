@@ -13,7 +13,9 @@ class Array:
         return list(map(function, self.__list))
     def to_list(self):
         return self.__list
-
+    @property
+    def list(self):
+        return self.__list
 
 # def getSoup(url, method = 'get', **kwargs):
 #     res = requests.request(method, url, **kwargs)
