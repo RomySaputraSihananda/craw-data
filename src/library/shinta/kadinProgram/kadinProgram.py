@@ -129,7 +129,6 @@ class KadinProgram:
                     return (th.get_text().strip(), td.get_text().strip())
                 
                 soup: Parser = Parser(await response.text())
-                print(url)
                 return {
                     'link': url,
                     'title': soup.select_one('h1').get_text().strip(),
@@ -243,22 +242,24 @@ class KadinProgram:
     
     async def _watch_regulasi_bisnis(self, **kwargs):
         while(job := self.__beanstalk_watch.reserve(timeout=60)):
-            for data in await asyncio.gather(*(self._get_detail_regulasi_bisnis(link) for link in loads(job.body)['links'])):
-                result: dict = {
-                    "domain": (link_split := data['link'].split('/'))[2],
-                    "tag": link_split[2:],
-                    "crawling_time": Datetime.now(),
-                    **data,
-                    "crawling_time_epoch": int(time()),
-                    "path_data_raw": [
-                        f'S3://ai-pipeline-raw-data/data/data_descriptive/kadin/regulasi_bisnis/json/{link_split[-1].lower().replace("-", "_").replace("/", " or ").replace(" ", "_")}.json',
-                        *await self.__download_files(data["Dokumen Peraturan"], enum_identity=RegulasiBisnisEnum.REGULASI_BISNIS.identity)
-                    ]
-                }
-                # Iostream.write_json(result, result['path_data_raw'][0].replace('S3://ai-pipeline-raw-data/', ''), indent=4)
-                ConnectionS3.upload(result, result['path_data_raw'][0].replace('S3://ai-pipeline-raw-data/', ''), 'ai-pipeline-raw-data')
+            try:
+                for data in await asyncio.gather(*(self._get_detail_regulasi_bisnis(link) for link in loads(job.body)['links'])):
+                    result: dict = {
+                        "domain": (link_split := data['link'].split('/'))[2],
+                        "tag": link_split[2:],
+                        "crawling_time": Datetime.now(),
+                        **data,
+                        "crawling_time_epoch": int(time()),
+                        "path_data_raw": [
+                            f'S3://ai-pipeline-raw-data/data/data_descriptive/kadin/regulasi_bisnis/json/{link_split[-1].lower().replace("-", "_").replace("/", " or ").replace(" ", "_")}.json',
+                            *await self.__download_files(data["Dokumen Peraturan"], enum_identity=RegulasiBisnisEnum.REGULASI_BISNIS.identity)
+                        ]
+                    }
+                    # Iostream.write_json(result, result['path_data_raw'][0].replace('S3://ai-pipeline-raw-data/', ''), indent=4)
+                    ConnectionS3.upload(result, result['path_data_raw'][0].replace('S3://ai-pipeline-raw-data/', ''), 'ai-pipeline-raw-data')
 
-            self.__beanstalk_watch.delete(job)
+                self.__beanstalk_watch.delete(job)
+            except: ...
 
     def _get_all_data_dan_statistik(self, **kwargs) -> Generator:
         for data_dan_statistik in DataDanStatistikEnum:
