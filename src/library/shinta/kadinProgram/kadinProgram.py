@@ -1,13 +1,12 @@
 import asyncio
 
 from aiohttp import ClientSession
-from json import dumps
+from json import dumps, loads
 from enum import Enum
 from requests import Session, Response
 from typing import Callable, Any, final, Generator
 from functools import wraps
 from time import time
-from os.path import join
 from greenstalk import Client
 
 from src.helpers import Parser, Datetime, Iostream, Decorator, ConnectionS3
@@ -74,8 +73,9 @@ class KadinProgram:
                 async with session.get(url, headers=self.__requests.headers) as response:
                     _, format = (file_name := url.rsplit('/', 1)[-1]).rsplit('.', 1)
 
-                    ConnectionS3.upload_content(await response.read(), (path := f'S3://ai-pipeline-raw-data/data/data_gambar/kadin/{kwargs.get("enum_identity")}/{format}/{file_name}').replace('S3://ai-pipeline-raw-data/', ''), 'ai-pipeline-raw-data')
-                    # (path := f'S3://ai-pipeline-raw-data/data/{"data_descriptive" if format == "pdf" else  "data_gambar"}/kadin/{kwargs.get("enum_identity")}/{format}/{file_name}')
+                    # ConnectionS3.upload_content(await response.read(), (path := f'S3://ai-pipeline-raw-data/data/data_gambar/kadin/{kwargs.get("enum_identity")}/{format}/{file_name}').replace('S3://ai-pipeline-raw-data/', ''), 'ai-pipeline-raw-data')
+                    ConnectionS3.upload_content(await response.read(), (path := f'S3://ai-pipeline-raw-data/data/{"data_descriptive" if format == "pdf" else  "data_gambar"}/kadin/{kwargs.get("enum_identity")}/{format}/{file_name}').replace('S3://ai-pipeline-raw-data/', ''), 'ai-pipeline-raw-data')
+                    
                     return path
 
     def _get_data_by_enum(self, enum: Enum):
@@ -129,11 +129,11 @@ class KadinProgram:
                     return (th.get_text().strip(), td.get_text().strip())
                 
                 soup: Parser = Parser(await response.text())
-                print(dumps({
-                    'url': url,
+                return {
+                    'link': url,
                     'title': soup.select_one('h1').get_text().strip(),
                     **{key: value for key, value in [*soup.select('#w2 tr').map(filter_data), *soup.select('#reviews .card').map((lambda e: (e.select_one('h6').get_text().strip(), [li.get_text().strip() for li in e.select('ul li')])))]},
-                }, indent=4))
+                }
         
     @parse_result('data_statistics')
     def _get_data_dan_statistik(self, data_dan_statistik: DataDanStatistikEnum, **kwargs) -> dict:
@@ -239,6 +239,25 @@ class KadinProgram:
             print('send.... page %d' % page)
             if(len(links) < 10): break
             page += 1
+    
+    async def _watch_regulasi_bisnis(self, **kwargs):
+        while(job := self.__beanstalk_watch.reserve(timeout=60)):
+            for data in await asyncio.gather(*(self._get_detail_regulasi_bisnis(link) for link in loads(job.body)['links'])):
+                result: dict = {
+                    "domain": (link_split := data['link'].split('/'))[2],
+                    "tag": link_split[2:],
+                    "crawling_time": Datetime.now(),
+                    **data,
+                    "crawling_time_epoch": int(time()),
+                    "path_data_raw": [
+                        f'S3://ai-pipeline-raw-data/data/data_descriptive/kadin/regulasi_bisnis/json/{link_split[-1].lower().replace("-", "_").replace("/", " or ").replace(" ", "_")}.json',
+                        *await self.__download_files(data["Dokumen Peraturan"], enum_identity=RegulasiBisnisEnum.REGULASI_BISNIS.identity)
+                    ]
+                }
+                # Iostream.write_json(result, result['path_data_raw'][0].replace('S3://ai-pipeline-raw-data/', ''), indent=4)
+                ConnectionS3.upload(result, result['path_data_raw'][0].replace('S3://ai-pipeline-raw-data/', ''), 'ai-pipeline-raw-data')
+
+            self.__beanstalk_watch.delete(job)
 
     def _get_all_data_dan_statistik(self, **kwargs) -> Generator:
         for data_dan_statistik in DataDanStatistikEnum:
@@ -276,7 +295,7 @@ class KadinProgram:
 
 if(__name__ == '__main__'):
     kadinProgram: KadinProgram = KadinProgram()
-    asyncio.run(kadinProgram._get_all_regulasi_bisnis(write=True))
+    asyncio.run(kadinProgram._watch_regulasi_bisnis(write=True))
     # print(list(kadinProgram._get_regulasi_bisnis(write=True)))
 
     # for enum in  [AcaraKadinEnum, DataDanStatistikEnum, MediaEnum, PengumumanEnum, ProgramEnum, RegulasiBisnisEnum, SolusiBisnisEnum, TentangKadinEnum]:
