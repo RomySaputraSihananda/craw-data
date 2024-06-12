@@ -18,7 +18,7 @@ class KadinProgram:
     def __init__(self) -> None: 
         self.__beanstalk_use: Client = Client(('192.168.150.21', 11300), use='dev-target-kadin-regulasi')
         self.__beanstalk_watch: Client = Client(('192.168.150.21', 11300), watch='dev-target-kadin-regulasi')
-        self.__requests: Session = Session()
+        self.__requests: Session = Session();
         self.__requests.headers.update({
             'User-Agent': 'Mozilla/5.0 (X11; Linux x86_64; rv:124.0) Gecko/20100101 Firefox/124.0'
         })
