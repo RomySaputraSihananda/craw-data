@@ -129,6 +129,7 @@ class KadinProgram:
                     return (th.get_text().strip(), td.get_text().strip())
                 
                 soup: Parser = Parser(await response.text())
+                print(url)
                 return {
                     'link': url,
                     'title': soup.select_one('h1').get_text().strip(),
