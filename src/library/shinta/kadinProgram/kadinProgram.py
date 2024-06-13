@@ -309,7 +309,7 @@ class KadinProgram:
 
 if(__name__ == '__main__'):
     kadinProgram: KadinProgram = KadinProgram()
-    asyncio.run(kadinProgram._watch_regulasi_bisnis_thread(max_workers=10))
+    asyncio.run(kadinProgram._watch_regulasi_bisnis_thread(max_workers=3))
 
     # print(list(kadinProgram._get_regulasi_bisnis(write=True)))
 
