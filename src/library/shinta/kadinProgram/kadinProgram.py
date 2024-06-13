@@ -242,6 +242,7 @@ class KadinProgram:
             page += 1
     
     async def _watch_regulasi_bisnis(self, **kwargs):
+        print('running...')
         while(job := self.__beanstalk_watch.reserve(timeout=60)):
             try:
                 for data in await asyncio.gather(*(self._get_detail_regulasi_bisnis(link) for link in loads(job.body)['links'])):
@@ -260,12 +261,13 @@ class KadinProgram:
                     ConnectionS3.upload(result, result['path_data_raw'][0].replace('S3://ai-pipeline-raw-data/', ''), 'ai-pipeline-raw-data')
 
                 self.__beanstalk_watch.delete(job)
+            except KeyboardInterrupt:
+                exit() 
             except: 
                 self.__beanstalk_watch.bury(job)
 
     async def _watch_regulasi_bisnis_thread(self, **kwargs):
         def wrapper(func):
-            print('------------run......')
             return asyncio.run(func)
         
         with ThreadPoolExecutor(max_workers=(max_workers := kwargs.get('max_workers'))) as executor:
@@ -307,7 +309,7 @@ class KadinProgram:
 
 if(__name__ == '__main__'):
     kadinProgram: KadinProgram = KadinProgram()
-    asyncio.run(kadinProgram._watch_regulasi_bisnis_thread(max_workers=5))
+    asyncio.run(kadinProgram._watch_regulasi_bisnis_thread(max_workers=10))
 
     # print(list(kadinProgram._get_regulasi_bisnis(write=True)))
 
