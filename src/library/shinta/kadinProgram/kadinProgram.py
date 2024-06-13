@@ -8,6 +8,7 @@ from typing import Callable, Any, final, Generator
 from functools import wraps
 from time import time
 from greenstalk import Client
+from concurrent.futures import ThreadPoolExecutor, wait
 
 from src.helpers import Parser, Datetime, Iostream, Decorator, ConnectionS3
 
@@ -69,14 +70,14 @@ class KadinProgram:
         return await asyncio.gather(*(self.__download_file(url, **kwargs) for url in urls))
 
     async def __download_file(self, url: str, **kwargs) -> str:
-            async with ClientSession() as session:
-                async with session.get(url, headers=self.__requests.headers) as response:
-                    _, format = (file_name := url.rsplit('/', 1)[-1]).rsplit('.', 1)
+        async with ClientSession() as session:
+            async with session.get(url, headers=self.__requests.headers) as response:
+                _, format = (file_name := url.rsplit('/', 1)[-1]).rsplit('.', 1)
 
-                    # ConnectionS3.upload_content(await response.read(), (path := f'S3://ai-pipeline-raw-data/data/data_gambar/kadin/{kwargs.get("enum_identity")}/{format}/{file_name}').replace('S3://ai-pipeline-raw-data/', ''), 'ai-pipeline-raw-data')
-                    ConnectionS3.upload_content(await response.read(), (path := f'S3://ai-pipeline-raw-data/data/{"data_descriptive" if format == "pdf" else  "data_gambar"}/kadin/{kwargs.get("enum_identity")}/{format}/{file_name}').replace('S3://ai-pipeline-raw-data/', ''), 'ai-pipeline-raw-data')
-                    
-                    return path
+                # ConnectionS3.upload_content(await response.read(), (path := f'S3://ai-pipeline-raw-data/data/data_gambar/kadin/{kwargs.get("enum_identity")}/{format}/{file_name}').replace('S3://ai-pipeline-raw-data/', ''), 'ai-pipeline-raw-data')
+                ConnectionS3.upload_content(await response.read(), (path := f'S3://ai-pipeline-raw-data/data/{"data_descriptive" if format == "pdf" else  "data_gambar"}/kadin/{kwargs.get("enum_identity")}/{format}/{file_name}').replace('S3://ai-pipeline-raw-data/', ''), 'ai-pipeline-raw-data')
+                
+                return path
 
     def _get_data_by_enum(self, enum: Enum):
         if(enum == AcaraKadinEnum): return self._get_all_acara()
@@ -262,6 +263,14 @@ class KadinProgram:
             except: 
                 self.__beanstalk_watch.bury(job)
 
+    async def _watch_regulasi_bisnis_thread(self, **kwargs):
+        def wrapper(func):
+            print('------------run......')
+            return asyncio.run(func)
+        
+        with ThreadPoolExecutor(max_workers=(max_workers := kwargs.get('max_workers'))) as executor:
+            executor.map(wrapper, (self._watch_regulasi_bisnis() for _ in range(max_workers)))
+
     def _get_all_data_dan_statistik(self, **kwargs) -> Generator:
         for data_dan_statistik in DataDanStatistikEnum:
             yield self._get_data_dan_statistik(data_dan_statistik, **kwargs)
@@ -298,7 +307,7 @@ class KadinProgram:
 
 if(__name__ == '__main__'):
     kadinProgram: KadinProgram = KadinProgram()
-    asyncio.run(kadinProgram._watch_regulasi_bisnis(write=True))
+    asyncio.run(kadinProgram._watch_regulasi_bisnis_thread(max_workers=5))
 
     # print(list(kadinProgram._get_regulasi_bisnis(write=True)))
 
