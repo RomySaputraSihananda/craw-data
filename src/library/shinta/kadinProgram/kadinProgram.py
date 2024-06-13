@@ -259,7 +259,8 @@ class KadinProgram:
                     ConnectionS3.upload(result, result['path_data_raw'][0].replace('S3://ai-pipeline-raw-data/', ''), 'ai-pipeline-raw-data')
 
                 self.__beanstalk_watch.delete(job)
-            except: ...
+            except: 
+                self.__beanstalk_watch.bury(job)
 
     def _get_all_data_dan_statistik(self, **kwargs) -> Generator:
         for data_dan_statistik in DataDanStatistikEnum:
@@ -298,6 +299,7 @@ class KadinProgram:
 if(__name__ == '__main__'):
     kadinProgram: KadinProgram = KadinProgram()
     asyncio.run(kadinProgram._watch_regulasi_bisnis(write=True))
+
     # print(list(kadinProgram._get_regulasi_bisnis(write=True)))
 
     # for enum in  [AcaraKadinEnum, DataDanStatistikEnum, MediaEnum, PengumumanEnum, ProgramEnum, RegulasiBisnisEnum, SolusiBisnisEnum, TentangKadinEnum]:
