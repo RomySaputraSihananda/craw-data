@@ -51,7 +51,7 @@ class SolusiBisnisEnum(BaseEnum):
         return 'solusi_bisnis'
 
 class MediaEnum(BaseEnum):
-    KABAR_KADIN  = 'https://kadin.id/kabar-kadin'
+    BERITA  = 'https://kadin.id/kabar-kadin'
     INFO_ADVOKASI_MEDIA  = 'https://kadin.id/info-advokasi-media'
     PRESS_RELEASE  = 'https://kadin.id/media/press-release'
     KADIN_NEWSLETTER  = 'https://kadin.id/media/kadin-newsletter'
@@ -99,3 +99,24 @@ class AcaraKadinEnum(BaseEnum):
     @property
     def identity(self) -> str:
         return 'acara'
+    
+
+# class KeanggotaanEnum(BaseEnum):
+#     ASOSIASI_ASOSIASI_INDUSTRI_PERTANIAN_DAN_KEHUTANAN = "Asosiasi-Asosiasi Industri Pertanian dan Kehutanan"
+#     ASOSIASI_ASOSIASI_PETERNAKAN_PERIKANAN_DAN_PENGOLAHAN_MAKANAN = "Asosiasi-Asosiasi Peternakan Perikanan dan Pengolahan Makanan"
+#     ASOSIASI_ASOSIASI_INDUSTRI_PERTAMBANGAN_DAN_ENERGI_ = "Asosiasi-Asosiasi Industri Pertambangan dan Energi "
+#     ASOSIASI_ASOSIASI_INDUSTRI_PENGOLAHAN_KIMIA = "Asosiasi-Asosiasi Industri Pengolahan Kimia"
+#     ASOSIASI_ASOSIASI_INDUSTRI_PENGOLAHAN_LOGAM_DAN_MESIN = "Asosiasi-Asosiasi Industri Pengolahan Logam dan Mesin"
+#     ASOSIASI_ASOSIASI_INDUSTRI_PENGOLAHAN_LAIN_LAINNYA = "Asosiasi-Asosiasi Industri Pengolahan Lain-Lainnya"
+#     ASOSIASI_ASOSIASI_JASA_PERDAGANGAN_DAN_JASA_EXPOR_IMPOR = "Asosiasi-Asosiasi Jasa Perdagangan dan Jasa Expor-Impor"
+#     ASOSIASI_ASOSIASI_JASA_KONSTRUKSI_DAN_PROPERTI = "Asosiasi-Asosiasi Jasa Konstruksi dan Properti"
+#     ASOSIASI_ASOSIASI_JASA_KEUANGAN_DAN_JASA_PROFESI = "Asosiasi-Asosiasi Jasa Keuangan dan Jasa Profesi"
+#     ASOSIASI_ASOSIASI_JASA_PERHUBUNGAN_DAN_LOGISTIK = "Asosiasi-Asosiasi Jasa Perhubungan Dan Logistik"
+#     ASOSIASI__ASOSIASI_,PERPOSAN,_MEDIA_MASSA,_TEKNOLOGI_KOMUNIKASI_DAN_INFORMASI = "Asosiasi - Asosiasi ,Perposan, Media Massa, Teknologi Komunikasi dan Informasi"
+#     ASOSIASI_ASOSIASI_PARIWISATA_HOTEL_RESTORAN,_MICE = "Asosiasi-Asosiasi Pariwisata, Hotel &Restoran, MICE"
+#     ASOSIASI_ASOSIASI_PENYEDIA_JASA__TENAGA_KERJA = "Asosiasi-Asosiasi Penyedia Jasa  Tenaga Kerja"
+#     ASOSIASI_ASOSIASI_PENYEDIA_JASA_LAINNYA = "Asosiasi-Asosiasi Penyedia Jasa Lainnya"
+#     HIMPUNAN_DAN_DEWAN_BISNIS = "Himpunan dan Dewan Bisnis"
+#     @property
+#     def identity(self) -> str:
+#         return 'keanggotaan'

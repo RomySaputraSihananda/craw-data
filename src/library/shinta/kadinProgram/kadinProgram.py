@@ -105,8 +105,99 @@ class KadinProgram:
         return asyncio.run(self.__get_detail(self.__get_id(solusi_bisnis)))
 
     @parse_result()
-    def _get_media(self, media: MediaEnum, **kwargs) -> dict:
-        return asyncio.run(self.__get_detail(self.__get_id(media)))
+    def _get_detail_berita(self, **kwargs) -> dict: ...
+
+    async def _get_berita(self, **kwargs) -> dict:
+        response: Response = self.__requests.post(
+            'https://kadin.id/kabar-kadin/',
+            params={
+                'nocache': '1718272618',
+            },
+            data={
+                "action": "jet_engine_ajax",
+                "addedPostCSS[]": [
+                    "46",
+                    "4727",
+                    "46",
+                    "40"
+                ],
+                "handler": "listing_load_more",
+                "isEditMode": "false",
+                "listing_type": "false",
+                "page_settings[element_id]": "false",
+                "page_settings[page]": kwargs.get('page', 1),
+                "page_settings[post_id]": "false",
+                "page_settings[queried_id]": "false",
+                "query[query_id]": "75",
+                "widget_settings[_element_id]": "",
+                "widget_settings[arrow_icon]": "fa fa-angle-left",
+                "widget_settings[arrows]": "true",
+                "widget_settings[autoplay]": "true",
+                "widget_settings[autoplay_speed]": "5000",
+                "widget_settings[carousel_enabled]": "",
+                "widget_settings[center_mode]": "",
+                "widget_settings[columns]": "4",
+                "widget_settings[columns_mobile]": "1",
+                "widget_settings[columns_tablet]": "4",
+                "widget_settings[custom_query]": "yes",
+                "widget_settings[custom_query_id]": "75",
+                "widget_settings[dots]": "",
+                "widget_settings[effect]": "slide",
+                "widget_settings[equal_columns_height]": "",
+                "widget_settings[hide_widget_if]": "",
+                "widget_settings[infinite]": "true",
+                "widget_settings[inject_alternative_items]": "",
+                "widget_settings[is_archive_template]": "",
+                "widget_settings[is_masonry]": "false",
+                "widget_settings[lisitng_id]": "40",
+                "widget_settings[load_more_id]": "loader-kabar",
+                "widget_settings[load_more_type]": "click",
+                "widget_settings[max_posts_num]": "9",
+                "widget_settings[not_found_message]": "No data was found",
+                "widget_settings[post_status][]": "publish",
+                "widget_settings[posts_num]": "8",
+                "widget_settings[scroll_slider_enabled]": "",
+                "widget_settings[scroll_slider_on][]": [
+                    "desktop",
+                    "tablet",
+                    "mobile"
+                ],
+                "widget_settings[slides_to_scroll]": "1",
+                "widget_settings[speed]": "500",
+                "widget_settings[use_custom_post_types]": "",
+                "widget_settings[use_load_more]": "yes",
+                "widget_settings[use_random_posts_num]": ""
+            }
+        )
+        return await asyncio.gather(*(self.__get_detail(id, type='kabar') for id in Parser(response.json()['data']['html']).select('div.jet-listing-grid__item').map(lambda e: e['data-post-id'])))
+        
+    def _get_all_berita(self, **kwargs) -> Generator:
+        # for 
+        #     page: int = 1
+        while(True):
+            datas: dict = asyncio.run(self._get_berita(page=page, **{'post_id': 4807, 'element_id': "b917422"}, **kwargs))
+            if(not datas): break
+            print([data['link'] for data in datas])
+            # for data in datas:
+            #     if(kwargs.get('write')):
+            #         result: dict = {
+            #             "link": (link := data['link']),
+            #             "domain": (link_split := link.split('/')[:-1])[2],
+            #             "tag": link_split[2:],
+            #             **data,
+            #             "crawling_time": Datetime.now(),
+            #             "crawling_time_epoch": int(time()),
+            #             "path_data_raw": #[
+            #                 f'S3://ai-pipeline-raw-data/data/data_descriptive/kadin/acara/json/{link_split[-1].lower().replace("-", "_")}.json',
+            #                 # *asyncio.run(self.__download_files([*(content := data["content"])["images"], *content["pdf"]], enum_identity=enum.identity))
+            #             # ]
+            #         }
+                    # Iostream.write_json(result, result['path_data_raw'].replace('S3://ai-pipeline-raw-data/', ''), indent=4)
+                    # ConnectionS3.upload(result, result['path_data_raw'].replace('S3://ai-pipeline-raw-data/', ''), 'ai-pipeline-raw-data')
+
+            # yield data
+            page += 1
+
 
     @parse_result()
     def _get_pengumuman(self, pengumuman: PengumumanEnum, **kwargs) -> dict:
@@ -306,10 +397,14 @@ class KadinProgram:
         for program in ProgramEnum:
             yield self._get_program(program, **kwargs)
 
-
+(('KABAR_KETUA_UMUM', 71),
+('KABAR_KADIN_INDONESIA', 72),
+('KABAR_KADIN_DAERAH', 73),
+('KABAR_PROGRAM', 74),
+('KABAR_SOLUSI_BISNIS', 71))
 if(__name__ == '__main__'):
     kadinProgram: KadinProgram = KadinProgram()
-    asyncio.run(kadinProgram._watch_regulasi_bisnis(max_workers=3))
+    asyncio.run(kadinProgram._get_all_berita())
 
     # print(list(kadinProgram._get_regulasi_bisnis(write=True)))
 

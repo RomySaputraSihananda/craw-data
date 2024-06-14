@@ -1,18 +1,19 @@
-from typing import Any, MutableMapping
-from requests.models import Response
-from requests.sessions import PreparedRequest
-from stem import CircStatus, Signal
-from stem.control import Controller
-from requests import Session, Response, Request
+import sys 
+import time
+
 from time import sleep
 from halo import Halo
 from random import choice
-from requests.utils import resolve_proxies
-import sys 
-import time
 from datetime import timedelta
+from stem import Signal
+from typing import Any, MutableMapping
+from requests import Session, Response, Request
+
+from stem.control import Controller
 from requests.hooks import dispatch_hook
 from requests.cookies import extract_cookies_to_jar
+from requests.sessions import PreparedRequest
+from requests.models import Response
 
 if sys.platform == "win32":
     preferred_clock = time.perf_counter
