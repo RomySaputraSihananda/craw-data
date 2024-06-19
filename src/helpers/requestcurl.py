@@ -37,6 +37,7 @@ class RequestsCurl:
             command.append(f'{urlencode(self.data)}')
         
         completed_process = run(command, capture_output=True)
+        print(completed_process)
         return completed_process.stdout.decode().strip().split('\r\n\r\n', 1)
 
 class requests:

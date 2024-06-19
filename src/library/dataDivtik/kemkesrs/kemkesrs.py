@@ -20,7 +20,8 @@ class KemkesRS:
         self.__beanstalk_watch: Client = Client(('192.168.150.21', 11300), watch='dev-target-rs')
 
         self.__charts_nasional: dict = asyncio.run(self.get_charts())
-        jumlah_rumah_sakit, rs_tikor = asyncio.run(self.__get_coordinate())
+        # jumlah_rumah_sakit, rs_tikor = asyncio.run(self.__get_coordinate())
+        jumlah_rumah_sakit, rs_tikor = (None, [])
         self.__jumlah_rumah_sakit: list = jumlah_rumah_sakit
         
         data: dict = requests.get('https://sirs.kemkes.go.id/fo/home/rekap_rs_all?id=0').json()['data']
@@ -122,14 +123,12 @@ class KemkesRS:
 
     async def _watch_beanstalk(self):
         while(job := self.__beanstalk_watch.reserve(timeout=60)):
-            async def process():
+            try:
                 data: dict = await self.__get_detail_rs(loads(job.body))
                 ConnectionS3.upload(data, data['path_data_raw'].replace('S3://ai-pipeline-raw-data/', ''), 'ai-pipeline-raw-data')
                 self.__beanstalk_watch.delete(job)
-                
-            try:
-                await process()
-            except: ...
+            except: 
+                self.__beanstalk_watch.bury(job)
     
     # async def _watch_beanstalk_thread(self):
     #     with ThreadPoolExecutor(max_workers=10) as executor:
@@ -158,7 +157,7 @@ class KemkesRS:
                 }
                 return data
 
-if(__name__ == '__main__'): asyncio.run(KemkesRS()._get_all())
+if(__name__ == '__main__'): asyncio.run(KemkesRS()._watch_beanstalk())
 
 
 # {
