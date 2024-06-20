@@ -128,7 +128,9 @@ class KemkesRS:
                 print(data)
                 ConnectionS3.upload(data, data['path_data_raw'].replace('S3://ai-pipeline-raw-data/', ''), 'ai-pipeline-raw-data')
                 self.__beanstalk_watch.delete(job)
-            except: 
+            except:
+                from time import sleep
+                sleep(5)
                 self.__beanstalk_watch.bury(job)
     
     # async def _watch_beanstalk_thread(self):
@@ -143,7 +145,7 @@ class KemkesRS:
 
     async def __get_detail_rs(self, rs: dict = None): 
         async with ClientSession() as session:
-            async with session.get('https://sirs.kemkes.go.id/fo/home/profile_rs/%s' % rs['kode']) as response:
+            async with session.get('https://sirs.kemkes.go.id/fo/home/profile_rs/%s' % rs['kode'], timeout=30) as response:
                 data = {
                     "link": (link := str(response.url)),
                     "domain": (link_split := link.split('/'))[2],
