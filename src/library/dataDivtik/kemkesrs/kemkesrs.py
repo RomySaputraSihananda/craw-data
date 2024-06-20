@@ -125,8 +125,11 @@ class KemkesRS:
         while(job := self.__beanstalk_watch.reserve(timeout=60)):
             try:
                 data: dict = await self.__get_detail_rs(loads(job.body))
+                print(data)
                 ConnectionS3.upload(data, data['path_data_raw'].replace('S3://ai-pipeline-raw-data/', ''), 'ai-pipeline-raw-data')
                 self.__beanstalk_watch.delete(job)
+            except KeyboardInterrupt:
+                exit() 
             except: 
                 self.__beanstalk_watch.bury(job)
     
@@ -157,7 +160,8 @@ class KemkesRS:
                 }
                 return data
 
-if(__name__ == '__main__'): asyncio.run(KemkesRS()._watch_beanstalk())
+if(__name__ == '__main__'): 
+    asyncio.run(KemkesRS()._watch_beanstalk())
 
 
 # {
