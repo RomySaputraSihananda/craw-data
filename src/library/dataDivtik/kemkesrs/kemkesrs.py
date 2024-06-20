@@ -128,8 +128,6 @@ class KemkesRS:
                 print(data)
                 ConnectionS3.upload(data, data['path_data_raw'].replace('S3://ai-pipeline-raw-data/', ''), 'ai-pipeline-raw-data')
                 self.__beanstalk_watch.delete(job)
-            except KeyboardInterrupt:
-                exit() 
             except: 
                 self.__beanstalk_watch.bury(job)
     
