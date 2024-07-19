@@ -1,0 +1,63 @@
+kind: Service
+apiVersion: v1
+metadata:
+  name: api-lamudi
+spec:
+  selector:
+    app: smart-crawler
+    kind: api-lamudi
+  ports:
+  - protocol: TCP
+    port: 4444
+    targetPort: 4444
+    nodePort: 32444
+    name: api
+  type: NodePort
+---
+kind: Service
+apiVersion: v1
+metadata:
+  name: api-dephubgoid
+spec:
+  selector:
+    app: smart-crawler
+    kind: api-dephubgoid
+  ports:
+  - protocol: TCP
+    port: 4445
+    targetPort: 4445
+    nodePort: 32445
+    name: api
+  type: NodePort
+---
+kind: Service
+apiVersion: v1
+metadata:
+  name: api-jiexpocomevent
+spec:
+  selector:
+    app: smart-crawler
+    kind: api-jiexpocomevent
+  ports:
+  - protocol: TCP
+    port: 4446
+    targetPort: 4446
+    nodePort: 32446
+    name: api
+  type: NodePort
+---
+kind: Service
+apiVersion: v1
+metadata:
+  name: api-uiacidevent
+spec:
+  selector:
+    app: smart-crawler
+    kind: api-uiacidevent
+  ports:
+  - protocol: TCP
+    port: 4447
+    targetPort: 4447
+    nodePort: 32447
+    name: api
+  type: NodePort

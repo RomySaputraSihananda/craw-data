@@ -1,0 +1,155 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: smart-crawler
+    kind: api-lamudi
+  name: api-lamudi
+spec:
+  replicas: 0
+  selector:
+    matchLabels:
+      app: smart-crawler
+      kind: api-lamudi
+  template:
+    metadata:
+      labels:
+        app: smart-crawler
+        kind: api-lamudi
+      spec:
+        containers:
+          - name: api-lamudi
+            image: 192.168.202.50/crawler/smart-crawler/engine-romy:4.1.8
+            command:
+              - /bin/sh
+              - -c
+              - engine_romy serve lamudi --port 4444 --local
+            imagePullPolicy: Always
+            livenessProbe:
+              initialDelaySeconds: 30
+              periodSeconds: 60
+              tcpSocket:
+                port: 4444
+              timeoutSeconds: 5
+            ports:
+              - containerPort: 4444
+                name: api
+        nodeSelector:
+          crawler: "true"
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: smart-crawler
+    kind: api-dephubgoid
+  name: api-dephubgoid
+spec:
+  replicas: 0
+  selector:
+    matchLabels:
+      app: smart-crawler
+      kind: api-dephubgoid
+  template:
+    metadata:
+      labels:
+        app: smart-crawler
+        kind: api-dephubgoid
+    spec:
+      containers:
+        - name: api-dephubgoid
+          image: 192.168.202.50/crawler/smart-crawler/engine-romy:4.1.8
+          command:
+            - /bin/sh
+            - -c
+            - engine_romy serve dephubgoid --port 4445 --local
+          imagePullPolicy: Always
+          livenessProbe:
+            initialDelaySeconds: 30
+            periodSeconds: 60
+            tcpSocket:
+              port: 4445
+            timeoutSeconds: 5
+          ports:
+            - containerPort: 4445
+              name: api
+      nodeSelector:
+        crawler: "true"
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: smart-crawler
+    kind: api-jiexpocomevent
+  name: api-jiexpocomevent
+spec:
+  replicas: 0
+  selector:
+    matchLabels:
+      app: smart-crawler
+      kind: api-jiexpocomevent
+  template:
+    metadata:
+      labels:
+        app: smart-crawler
+        kind: api-jiexpocomevent
+    spec:
+      containers:
+        - name: api-jiexpocomevent
+          image: 192.168.202.50/crawler/smart-crawler/engine-romy:4.1.8
+          command:
+            - /bin/sh
+            - -c
+            - engine_romy serve jiexpocomevent --port 4446 --local
+          imagePullPolicy: Always
+          livenessProbe:
+            initialDelaySeconds: 30
+            periodSeconds: 60
+            tcpSocket:
+              port: 4446
+            timeoutSeconds: 5
+          ports:
+            - containerPort: 4446
+              name: api
+      nodeSelector:
+        crawler: "true"
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: smart-crawler
+    kind: api-uiacidevent
+  name: api-uiacidevent
+spec:
+  replicas: 0
+  selector:
+    matchLabels:
+      app: smart-crawler
+      kind: api-uiacidevent
+  template:
+    metadata:
+      labels:
+        app: smart-crawler
+        kind: api-uiacidevent
+    spec:
+      containers:
+        - name: api-uiacidevent
+          image: 192.168.202.50/crawler/smart-crawler/engine-romy:4.1.8
+          command:
+            - /bin/sh
+            - -c
+            - engine_romy serve uiacidevent --port 4447 --local
+          imagePullPolicy: Always
+          livenessProbe:
+            initialDelaySeconds: 30
+            periodSeconds: 60
+            tcpSocket:
+              port: 4447
+            timeoutSeconds: 5
+          ports:
+            - containerPort: 4447
+              name: api
+      nodeSelector:
+        crawler: "true"

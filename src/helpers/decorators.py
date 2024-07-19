@@ -44,7 +44,7 @@ class Decorator:
         @wraps(func)
         def wrapper(*args: Any, **kwargs: Any) -> None:
             directory: str = os.path.dirname(path if (path := args[1]).find(payload := 'S3://ai-pipeline-statistics/') < 0 else path.replace(payload, ''))
-
+            print(directory)
             if not os.path.isdir(directory) and bool(directory):
                 os.makedirs(directory)
             

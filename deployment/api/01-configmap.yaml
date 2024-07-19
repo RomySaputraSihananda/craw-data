@@ -1,0 +1,52 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: config-api-
+data:
+  config.ini: |
+    [beanstalk]
+    host = 192.168.20.175
+    port = 11300
+    
+    [etc]
+    max_keyword_days = 180
+    
+    [service]
+    fb_token = http://192.168.29.65:31528/
+    yt_token = http://192.168.29.65:31865/
+    lk_token = http://192.168.29.65:31866/
+    ig_account = http://192.168.99.69:8600/
+    tw_account = http://192.168.29.65:31900
+    tt_account = http://192.168.29.65:31864/
+    signature = http://192.168.29.65:31867/signature
+    
+    [linkedin]
+    csrf_token=ajax:9071887544720185819
+    
+    [youtube]
+    api_key = AIzaSyD4W29cX7FttxZD8J8BRF4Zt2CYAe9e5j4
+    access_token =
+    
+    [log]
+    path = /tmp/log
+    sectionable = 0
+    
+    [max_days]
+    days = 2
+    
+    [treshold]
+    comment = 99
+    post = 100
+    expired_time = 120
+    
+    [twitter]
+    max_followers = 400
+    max_following = 400
+    
+    [redis]
+    host = 192.168.20.175
+    port = 6379
+    db = 11
+    
+    [instagram]
+    cookies_type = atrbpn

@@ -90,7 +90,7 @@ class BaseBdsp():
         try:
             async with ClientSession() as session:
                 async with session.post('https://bdsp2.pertanian.go.id/bdsp/id/indikator/getIndiByKomSubsek',
-                                        data={
+                                        data={  
                                             'subsektorcd': kwargs.get('subsector').value,
                                             'komcd': kwargs.get('komoditas')["fkomcd"]
                                         }) as response:
