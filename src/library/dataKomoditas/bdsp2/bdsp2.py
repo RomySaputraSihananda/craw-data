@@ -133,7 +133,7 @@ class BaseBdsp2:
             try:
                 data = loads(job.body)
                 await self._get_result(data)
-                self.__beanstalk_watch.delete()
+                self.__beanstalk_watch.delete(job)
             except:
                 from time import sleep
                 sleep(5)
