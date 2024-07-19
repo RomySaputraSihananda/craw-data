@@ -134,7 +134,8 @@ class BaseBdsp2:
                 data = loads(job.body)
                 await self._get_result(data)
                 self.__beanstalk_watch.delete(job)
-            except:
+            except Exception as e:
+                print(e.__class__)
                 from time import sleep
                 sleep(5)
                 self.__beanstalk_watch.bury(job)
