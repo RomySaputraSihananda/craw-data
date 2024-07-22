@@ -19,7 +19,7 @@ class BaseBdsp2:
     def __init__(self) -> None:
         self.__aseesion: AsyncClient = AsyncClient()
         self.__aseesion.headers.update({
-            'Cookie': 'ci_session=a%3A4%3A%7Bs%3A10%3A%22session_id%22%3Bs%3A32%3A%22ee8bb89899370a96b0c875be93db2439%22%3Bs%3A10%3A%22ip_address%22%3Bs%3A11%3A%2210.24.11.10%22%3Bs%3A10%3A%22user_agent%22%3Bs%3A50%3A%22Mozilla%2F5.0%20%28Windows%20NT%2010.0%3B%20Win64%3B%20x64%3B%20rv%3A109.0%22%3Bs%3A13%3A%22last_activity%22%3Bi%3A1721377186%3B%7Dd3a363a6cd107d7c0aead196820b173c; twk_uuid_62a2ed2eb0d10b6f3e76a00a=%7B%22uuid%22%3A%221.WrwvJkdCf4895cH1cwC9JCzHoOY9yf7r7kQoenb4xpaKouPaznzqTBIjA72qiQkPfgBbNGrlaBEFAn4MqXv0t0VJ4Avb0o4nECEHPqXxWu0Em53qYVPdSCLRo%22%2C%22version%22%3A3%2C%22domain%22%3A%22pertanian.go.id%22%2C%22ts%22%3A1721375781295%7D; cf_clearance=OykT2oS1NKBVBqwE_RCdIBKJo4XcCR7a.2TuwASBrQg-1721377630-1.0.1.1-a246Qw2R5ZVFHkxNdcVeoYnE4W1LZfSwRwibesYjeYeGsVuA1doPeErPmJkcETtmmj_7Z7zwzcGFjg1N6vVlYA',
+            # 'Cookie': 'ci _session=a%3A4%3A%7Bs%3A10%3A%22session_id%22%3Bs%3A32%3A%22ee8bb89899370a96b0c875be93db2439%22%3Bs%3A10%3A%22ip_address%22%3Bs%3A11%3A%2210.24.11.10%22%3Bs%3A10%3A%22user_agent%22%3Bs%3A50%3A%22Mozilla%2F5.0%20%28Windows%20NT%2010.0%3B%20Win64%3B%20x64%3B%20rv%3A109.0%22%3Bs%3A13%3A%22last_activity%22%3Bi%3A1721377186%3B%7Dd3a363a6cd107d7c0aead196820b173c; twk_uuid_62a2ed2eb0d10b6f3e76a00a=%7B%22uuid%22%3A%221.WrwvJkdCf4895cH1cwC9JCzHoOY9yf7r7kQoenb4xpaKouPaznzqTBIjA72qiQkPfgBbNGrlaBEFAn4MqXv0t0VJ4Avb0o4nECEHPqXxWu0Em53qYVPdSCLRo%22%2C%22version%22%3A3%2C%22domain%22%3A%22pertanian.go.id%22%2C%22ts%22%3A1721375781295%7D; cf_clearance=OykT2oS1NKBVBqwE_RCdIBKJo4XcCR7a.2TuwASBrQg-1721377630-1.0.1.1-a246Qw2R5ZVFHkxNdcVeoYnE4W1LZfSwRwibesYjeYeGsVuA1doPeErPmJkcETtmmj_7Z7zwzcGFjg1N6vVlYA',
             'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:109.0) Gecko/20100101 Firefox/115.0'
         })
 
@@ -135,7 +135,12 @@ class BaseBdsp2:
                 data = loads(job.body)
                 await self._get_result(data)
                 self.__beanstalk_watch.delete(job)
+            except AttributeError:
+                self.__beanstalk_watch.delete(job)
+            except FileExistsError:
+                self.__beanstalk_watch.delete(job)
             except Exception as e:
+                raise e
                 print(e.__class__)
                 from time import sleep
                 sleep(5)
