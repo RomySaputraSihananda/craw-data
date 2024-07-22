@@ -35,7 +35,7 @@ class BaseBdsp2:
         data_frame.to_excel(rill_path, index=False)
 
         ConnectionS3.upload_content(rill_path, rill_path, 'ai-pipeline-raw-data')
-        # os.remove(rill_path)
+        os.remove(rill_path)
 
         return path           
     
@@ -95,7 +95,8 @@ class BaseBdsp2:
     async def _get_result(self, data):
         response: Response = await self.__aseesion.post(
             'https://bdsp2.pertanian.go.id/bdsp/id/komoditas/result',
-            data=data
+            data=data,
+            timeout=99999
         )
 
         soup: Parser = Parser(response.text)
