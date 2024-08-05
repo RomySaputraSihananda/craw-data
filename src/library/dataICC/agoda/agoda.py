@@ -31,8 +31,8 @@ class BaseAgoda:
             'https': 'socks5://192.168.29.154:9050'
         }
 
-        self.__beanstalk_use: Client = Client(('192.168.150.21', 11300), use='dev-target-hotel')
-        self.__beanstalk_watch: Client = Client(('192.168.150.21', 11300), watch='dev-target-hotel')
+        self.__beanstalk_use: Client = Client(('192.168.150.21', 11300), use='dev-target-hotel-agoda')
+        self.__beanstalk_watch: Client = Client(('192.168.150.21', 11300), watch='dev-target-hotel-agoda')
 
         self.__requests: Session = Session()
         self.__requests.headers.update(self.__headers)
@@ -188,7 +188,7 @@ class BaseAgoda:
             return self.__get_properties_by_city_id(city_id, page, size, token)
         
 
-    def _get_detail_by_province(self, province_enum: ProvinceEnum) -> list:
+    def         _get_detail_by_province(self, province_enum: ProvinceEnum) -> list:
         response: Response = self.__requests.get('https://www.agoda.com/api/cronos/geo/NeighborHoods',
                                                 params={
                                                     'pageTypeId': 8,
@@ -198,20 +198,20 @@ class BaseAgoda:
         for city in response.json():
             print(city)
             (properties, token, page) = (None, '', 1) 
-            while(True):
-                for _ in range(5):
-                    (properties, token) = self.__get_properties_by_city_id(city['hotelId'], page, 45)
+            # while(True):
+            for _ in range(5):
+                (properties, token) = self.__get_properties_by_city_id(city['hotelId'], page, 45)
 
-                    if(properties): break
+                if(properties): break
 
-                if(not len(properties)): break
+            if(not len(properties)): break
 
 
-                for property in properties:
-                    # self.__process_property(property, province_enum) 
-                    self.__beanstalk_use.put(dumps({'property': property, 'province_name': province_enum.name})) 
+            for property in properties:
+                # self.__process_property(property, province_enum) 
+                self.__beanstalk_use.put(dumps({'property': property, 'province_name': province_enum.name})) 
 
-                page += 1
+            page += 1
     
     def _watch_beanstalk(self):
         while(job := self.__beanstalk_watch.reserve(timeout=self.__timeout)):
@@ -224,6 +224,7 @@ class BaseAgoda:
                 process()
             except:
                 process()
+                sleep(10)
 
     def _get_all_detail(self) -> None:
         for province in ProvinceEnum:

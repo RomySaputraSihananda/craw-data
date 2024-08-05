@@ -51,7 +51,7 @@ spec:
           command:
             - /bin/sh
             - -c
-            - engine_romy pusiknaspolri yesterday --bootstrap='kafka01.production02.bt,kafka02.production02.bt,kafka03.production02.bt,kafka04.production02.bt,kafka05.production02.bt' --topic=sc-raw-gosip-daily-005
+            - engine_romy --kafka --bootstrap='kafka01.production02.bt,kafka02.production02.bt,kafka03.production02.bt,kafka04.production02.bt,kafroduction02.bt,kafka03.production02.bt,kafka04.production02.bt,kafka05.production02.bt' --topic=sc-raw-gosip-daily-005 data_divtik pusiknaspolri yesterdayka05.production02.bt' --topic=sc-raw-gosip-daily-005 data_divtik pusiknaspolri yesterday
           imagePullPolicy: Always
       nodeSelector:
         crawler: "true"

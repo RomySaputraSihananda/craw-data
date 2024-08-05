@@ -1,4 +1,4 @@
-apiVersion: batch/v1beta1 
+apiVersion: batch/v1beta1
 kind: CronJob
 metadata:
   name: sc-geostrategic-pusiknaspolri-laka-lantas-daily
@@ -51,6 +51,6 @@ spec:
               command:
                 - /bin/sh
                 - -c
-                - engine_romy pusiknaspolri yesterday --bootstrap='kafka01.production02.bt,kafka02.production02.bt,kafka03.production02.bt,kafka04.production02.bt,kafka05.production02.bt' --topic=sc-raw-gosip-daily-005
+                - "engine_romy --kafka --bootstrap='kafka01.production02.bt,kafka02.production02.bt,kafka03.production02.bt,kafka04.production02.bt,kafka05.production02.bt' --topic=sc-raw-gosip-daily-005 pusiknaspolri yesterday"
               imagePullPolicy: Always
           restartPolicy: Never
