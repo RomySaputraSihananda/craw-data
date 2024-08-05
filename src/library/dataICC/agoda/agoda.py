@@ -200,7 +200,7 @@ class BaseAgoda:
             (properties, token, page) = (None, '', 1) 
             # while(True):
             for _ in range(5):
-                (properties, token) = self.__get_properties_by_city_id(city['hotelId'], page, 20)
+                (properties, token) = self.__get_properties_by_city_id(city['hotelId'], page, 10)
 
                 if(properties): break
 
@@ -223,6 +223,7 @@ class BaseAgoda:
             try:
                 process()
             except:
+                print('error')
                 self.__beanstalk_watch.delete(job)
                 sleep(10)
 
