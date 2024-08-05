@@ -154,7 +154,7 @@ class BaseAgoda:
     def __get_property_detail(self, property_id: int) -> dict:
         response: Response = self.__requests.post('https://www.agoda.com/graphql/property', 
                                     json=ParamsBuilder.detailParams(property_id),
-                                   ) 
+                                   )                        
                 
 
         return response.json()['data']['propertyDetailsSearch']['propertyDetails'][0]
@@ -188,7 +188,7 @@ class BaseAgoda:
             return self.__get_properties_by_city_id(city_id, page, size, token)
         
 
-    def         _get_detail_by_province(self, province_enum: ProvinceEnum) -> list:
+    def _get_detail_by_province(self, province_enum: ProvinceEnum) -> list:
         response: Response = self.__requests.get('https://www.agoda.com/api/cronos/geo/NeighborHoods',
                                                 params={
                                                     'pageTypeId': 8,
@@ -223,7 +223,7 @@ class BaseAgoda:
             try:
                 process()
             except:
-                process()
+                self.__beanstalk_watch.delete(job)
                 sleep(10)
 
     def _get_all_detail(self) -> None:
