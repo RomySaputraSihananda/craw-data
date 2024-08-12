@@ -1,0 +1,1026 @@
+{
+    "propertyId": 35136634,
+    "propertyMetaInfo": null,
+    "contentDetail": {
+        "propertyId": 35136634,
+        "contentImages": {
+            "hotelImages": [
+                {
+                    "caption": "Tampilan eksterior",
+                    "groupEntityId": null,
+                    "groupId": "property",
+                    "id": 131203258,
+                    "providerId": 332,
+                    "typeId": 6,
+                    "uploadedDate": "2023-11-22T14:46:00.000+07:00",
+                    "highResolutionSizes": [
+                        "main"
+                    ],
+                    "urls": [
+                        {
+                            "key": "main",
+                            "value": "//pix8.agoda.net/hotelImages/35136634/-1/aa20fc1fe8e711663630cf4429f32dca.jpg?ce=0&s=1024x768"
+                        },
+                        {
+                            "key": "gallery_preview",
+                            "value": "//pix8.agoda.net/hotelImages/35136634/-1/aa20fc1fe8e711663630cf4429f32dca.jpg?ce=0&s=450x450"
+                        },
+                        {
+                            "key": "thumbnail",
+                            "value": "//pix8.agoda.net/hotelImages/35136634/-1/aa20fc1fe8e711663630cf4429f32dca.jpg?ce=0&s=80x60"
+                        },
+                        {
+                            "key": "thumbnail-2x",
+                            "value": "//pix8.agoda.net/hotelImages/35136634/-1/aa20fc1fe8e711663630cf4429f32dca.jpg?ce=0&s=160x120"
+                        }
+                    ]
+                },
+                {
+                    "caption": "Lobi",
+                    "groupEntityId": null,
+                    "groupId": "property",
+                    "id": 131203255,
+                    "providerId": 332,
+                    "typeId": 5,
+                    "uploadedDate": "2023-11-22T14:46:00.000+07:00",
+                    "highResolutionSizes": [
+                        "main"
+                    ],
+                    "urls": [
+                        {
+                            "key": "main",
+                            "value": "//pix8.agoda.net/hotelImages/35136634/-1/62d4fe3ccc66a1006ba2d6fb62671d75.jpg?ce=0&s=1024x768"
+                        },
+                        {
+                            "key": "gallery_preview",
+                            "value": "//pix8.agoda.net/hotelImages/35136634/-1/62d4fe3ccc66a1006ba2d6fb62671d75.jpg?ce=0&s=450x450"
+                        },
+                        {
+                            "key": "thumbnail",
+                            "value": "//pix8.agoda.net/hotelImages/35136634/-1/62d4fe3ccc66a1006ba2d6fb62671d75.jpg?ce=0&s=80x60"
+                        },
+                        {
+                            "key": "thumbnail-2x",
+                            "value": "//pix8.agoda.net/hotelImages/35136634/-1/62d4fe3ccc66a1006ba2d6fb62671d75.jpg?ce=0&s=160x120"
+                        }
+                    ]
+                },
+                {
+                    "caption": "Tampilan eksterior",
+                    "groupEntityId": null,
+                    "groupId": "property",
+                    "id": 131203252,
+                    "providerId": 332,
+                    "typeId": 5,
+                    "uploadedDate": "2023-11-22T14:46:00.000+07:00",
+                    "highResolutionSizes": [
+                        "main"
+                    ],
+                    "urls": [
+                        {
+                            "key": "main",
+                            "value": "//pix8.agoda.net/hotelImages/35136634/-1/dbcc081a1b65b161263afa1c4ef16f78.jpg?ce=0&s=1024x768"
+                        },
+                        {
+                            "key": "gallery_preview",
+                            "value": "//pix8.agoda.net/hotelImages/35136634/-1/dbcc081a1b65b161263afa1c4ef16f78.jpg?ce=0&s=450x450"
+                        },
+                        {
+                            "key": "thumbnail",
+                            "value": "//pix8.agoda.net/hotelImages/35136634/-1/dbcc081a1b65b161263afa1c4ef16f78.jpg?ce=0&s=80x60"
+                        },
+                        {
+                            "key": "thumbnail-2x",
+                            "value": "//pix8.agoda.net/hotelImages/35136634/-1/dbcc081a1b65b161263afa1c4ef16f78.jpg?ce=0&s=160x120"
+                        }
+                    ]
+                },
+                {
+                    "caption": "Tampilan interior",
+                    "groupEntityId": null,
+                    "groupId": "property",
+                    "id": 131203254,
+                    "providerId": 332,
+                    "typeId": 5,
+                    "uploadedDate": "2023-11-22T14:46:00.000+07:00",
+                    "highResolutionSizes": [
+                        "main"
+                    ],
+                    "urls": [
+                        {
+                            "key": "main",
+                            "value": "//pix8.agoda.net/hotelImages/35136634/-1/d72463d6da91b8904dabae067cf39c94.jpg?ce=0&s=1024x768"
+                        },
+                        {
+                            "key": "gallery_preview",
+                            "value": "//pix8.agoda.net/hotelImages/35136634/-1/d72463d6da91b8904dabae067cf39c94.jpg?ce=0&s=450x450"
+                        },
+                        {
+                            "key": "thumbnail",
+                            "value": "//pix8.agoda.net/hotelImages/35136634/-1/d72463d6da91b8904dabae067cf39c94.jpg?ce=0&s=80x60"
+                        },
+                        {
+                            "key": "thumbnail-2x",
+                            "value": "//pix8.agoda.net/hotelImages/35136634/-1/d72463d6da91b8904dabae067cf39c94.jpg?ce=0&s=160x120"
+                        }
+                    ]
+                },
+                {
+                    "caption": "Tampilan interior",
+                    "groupEntityId": null,
+                    "groupId": "property",
+                    "id": 131203253,
+                    "providerId": 332,
+                    "typeId": 5,
+                    "uploadedDate": "2023-11-22T14:46:00.000+07:00",
+                    "highResolutionSizes": [
+                        "main"
+                    ],
+                    "urls": [
+                        {
+                            "key": "main",
+                            "value": "//pix8.agoda.net/hotelImages/35136634/-1/6cbbfdbb024a0e84067c52f82aaad415.jpg?ce=0&s=1024x768"
+                        },
+                        {
+                            "key": "gallery_preview",
+                            "value": "//pix8.agoda.net/hotelImages/35136634/-1/6cbbfdbb024a0e84067c52f82aaad415.jpg?ce=0&s=450x450"
+                        },
+                        {
+                            "key": "thumbnail",
+                            "value": "//pix8.agoda.net/hotelImages/35136634/-1/6cbbfdbb024a0e84067c52f82aaad415.jpg?ce=0&s=80x60"
+                        },
+                        {
+                            "key": "thumbnail-2x",
+                            "value": "//pix8.agoda.net/hotelImages/35136634/-1/6cbbfdbb024a0e84067c52f82aaad415.jpg?ce=0&s=160x120"
+                        }
+                    ]
+                },
+                {
+                    "caption": "Kamar Premier Deluxe - Kamar Tidur",
+                    "groupEntityId": null,
+                    "groupId": "room",
+                    "id": 131203249,
+                    "providerId": 332,
+                    "typeId": 7,
+                    "uploadedDate": "2023-11-22T14:46:00.000+07:00",
+                    "highResolutionSizes": [
+                        "main"
+                    ],
+                    "urls": [
+                        {
+                            "key": "main",
+                            "value": "//pix8.agoda.net/hotelImages/35136634/-1/e25e79c55488acd2a43e9f971a5f132b.jpg?ce=0&s=1024x768"
+                        },
+                        {
+                            "key": "gallery_preview",
+                            "value": "//pix8.agoda.net/hotelImages/35136634/-1/e25e79c55488acd2a43e9f971a5f132b.jpg?ce=0&s=450x450"
+                        },
+                        {
+                            "key": "thumbnail",
+                            "value": "//pix8.agoda.net/hotelImages/35136634/-1/e25e79c55488acd2a43e9f971a5f132b.jpg?ce=0&s=80x60"
+                        },
+                        {
+                            "key": "thumbnail-2x",
+                            "value": "//pix8.agoda.net/hotelImages/35136634/-1/e25e79c55488acd2a43e9f971a5f132b.jpg?ce=0&s=160x120"
+                        }
+                    ]
+                },
+                {
+                    "caption": "Kamar Suite Deluxe - Kamar Tidur",
+                    "groupEntityId": null,
+                    "groupId": "room",
+                    "id": 131203247,
+                    "providerId": 332,
+                    "typeId": 7,
+                    "uploadedDate": "2023-11-22T14:46:00.000+07:00",
+                    "highResolutionSizes": [
+                        "main"
+                    ],
+                    "urls": [
+                        {
+                            "key": "main",
+                            "value": "//pix8.agoda.net/hotelImages/35136634/-1/0d37aade92b8f96582ea58eca8f8463d.jpg?ce=0&s=1024x768"
+                        },
+                        {
+                            "key": "gallery_preview",
+                            "value": "//pix8.agoda.net/hotelImages/35136634/-1/0d37aade92b8f96582ea58eca8f8463d.jpg?ce=0&s=450x450"
+                        },
+                        {
+                            "key": "thumbnail",
+                            "value": "//pix8.agoda.net/hotelImages/35136634/-1/0d37aade92b8f96582ea58eca8f8463d.jpg?ce=0&s=80x60"
+                        },
+                        {
+                            "key": "thumbnail-2x",
+                            "value": "//pix8.agoda.net/hotelImages/35136634/-1/0d37aade92b8f96582ea58eca8f8463d.jpg?ce=0&s=160x120"
+                        }
+                    ]
+                },
+                {
+                    "caption": "Kamar Deluxe King - Kamar Tidur",
+                    "groupEntityId": null,
+                    "groupId": "room",
+                    "id": 131203248,
+                    "providerId": 332,
+                    "typeId": 7,
+                    "uploadedDate": "2023-11-22T14:46:00.000+07:00",
+                    "highResolutionSizes": [
+                        "main"
+                    ],
+                    "urls": [
+                        {
+                            "key": "main",
+                            "value": "//pix8.agoda.net/hotelImages/35136634/-1/f158c835cf2df3b0ae6b73bf351bca58.jpg?ce=0&s=1024x768"
+                        },
+                        {
+                            "key": "gallery_preview",
+                            "value": "//pix8.agoda.net/hotelImages/35136634/-1/f158c835cf2df3b0ae6b73bf351bca58.jpg?ce=0&s=450x450"
+                        },
+                        {
+                            "key": "thumbnail",
+                            "value": "//pix8.agoda.net/hotelImages/35136634/-1/f158c835cf2df3b0ae6b73bf351bca58.jpg?ce=0&s=80x60"
+                        },
+                        {
+                            "key": "thumbnail-2x",
+                            "value": "//pix8.agoda.net/hotelImages/35136634/-1/f158c835cf2df3b0ae6b73bf351bca58.jpg?ce=0&s=160x120"
+                        }
+                    ]
+                },
+                {
+                    "caption": "Kamar VIP - Kamar Tidur",
+                    "groupEntityId": null,
+                    "groupId": "room",
+                    "id": 131203260,
+                    "providerId": 332,
+                    "typeId": 7,
+                    "uploadedDate": "2023-11-22T14:46:00.000+07:00",
+                    "highResolutionSizes": [
+                        "main"
+                    ],
+                    "urls": [
+                        {
+                            "key": "main",
+                            "value": "//pix8.agoda.net/hotelImages/35136634/-1/1535792d4c44979890c07dffd26a7698.jpg?ce=0&s=1024x768"
+                        },
+                        {
+                            "key": "gallery_preview",
+                            "value": "//pix8.agoda.net/hotelImages/35136634/-1/1535792d4c44979890c07dffd26a7698.jpg?ce=0&s=450x450"
+                        },
+                        {
+                            "key": "thumbnail",
+                            "value": "//pix8.agoda.net/hotelImages/35136634/-1/1535792d4c44979890c07dffd26a7698.jpg?ce=0&s=80x60"
+                        },
+                        {
+                            "key": "thumbnail-2x",
+                            "value": "//pix8.agoda.net/hotelImages/35136634/-1/1535792d4c44979890c07dffd26a7698.jpg?ce=0&s=160x120"
+                        }
+                    ]
+                },
+                {
+                    "caption": "Kamar Premier Deluxe - Kamar Tidur",
+                    "groupEntityId": null,
+                    "groupId": "room",
+                    "id": 131203250,
+                    "providerId": 332,
+                    "typeId": 7,
+                    "uploadedDate": "2023-11-22T14:46:00.000+07:00",
+                    "highResolutionSizes": [
+                        "main"
+                    ],
+                    "urls": [
+                        {
+                            "key": "main",
+                            "value": "//pix8.agoda.net/hotelImages/35136634/-1/7bdbf36ca011405fc464f752354c15c5.jpg?ce=0&s=1024x768"
+                        },
+                        {
+                            "key": "gallery_preview",
+                            "value": "//pix8.agoda.net/hotelImages/35136634/-1/7bdbf36ca011405fc464f752354c15c5.jpg?ce=0&s=450x450"
+                        },
+                        {
+                            "key": "thumbnail",
+                            "value": "//pix8.agoda.net/hotelImages/35136634/-1/7bdbf36ca011405fc464f752354c15c5.jpg?ce=0&s=80x60"
+                        },
+                        {
+                            "key": "thumbnail-2x",
+                            "value": "//pix8.agoda.net/hotelImages/35136634/-1/7bdbf36ca011405fc464f752354c15c5.jpg?ce=0&s=160x120"
+                        }
+                    ]
+                },
+                {
+                    "caption": "Kamar VIP - Kamar Tidur",
+                    "groupEntityId": null,
+                    "groupId": "room",
+                    "id": 131203257,
+                    "providerId": 332,
+                    "typeId": 7,
+                    "uploadedDate": "2023-11-22T14:46:00.000+07:00",
+                    "highResolutionSizes": [
+                        "main"
+                    ],
+                    "urls": [
+                        {
+                            "key": "main",
+                            "value": "//pix8.agoda.net/hotelImages/35136634/-1/65f3b0da19449e1f03a3bc3ddd1d3bb4.jpg?ce=0&s=1024x768"
+                        },
+                        {
+                            "key": "gallery_preview",
+                            "value": "//pix8.agoda.net/hotelImages/35136634/-1/65f3b0da19449e1f03a3bc3ddd1d3bb4.jpg?ce=0&s=450x450"
+                        },
+                        {
+                            "key": "thumbnail",
+                            "value": "//pix8.agoda.net/hotelImages/35136634/-1/65f3b0da19449e1f03a3bc3ddd1d3bb4.jpg?ce=0&s=80x60"
+                        },
+                        {
+                            "key": "thumbnail-2x",
+                            "value": "//pix8.agoda.net/hotelImages/35136634/-1/65f3b0da19449e1f03a3bc3ddd1d3bb4.jpg?ce=0&s=160x120"
+                        }
+                    ]
+                },
+                {
+                    "caption": "Balkon/teras",
+                    "groupEntityId": null,
+                    "groupId": "room",
+                    "id": 778112164,
+                    "providerId": 28088,
+                    "typeId": 7,
+                    "uploadedDate": "2024-07-18T13:55:46.080+07:00",
+                    "highResolutionSizes": [],
+                    "urls": [
+                        {
+                            "key": "main",
+                            "value": "//pix8.agoda.net/property/36221842/659510740/e7baa9eddd50153b2679c7352544d39b.jpeg?ce=0&s=1024x768"
+                        },
+                        {
+                            "key": "gallery_preview",
+                            "value": "//pix8.agoda.net/property/36221842/659510740/e7baa9eddd50153b2679c7352544d39b.jpeg?ce=0&s=450x450"
+                        },
+                        {
+                            "key": "thumbnail",
+                            "value": "//pix8.agoda.net/property/36221842/659510740/e7baa9eddd50153b2679c7352544d39b.jpeg?ce=0&s=80x60"
+                        },
+                        {
+                            "key": "thumbnail-2x",
+                            "value": "//pix8.agoda.net/property/36221842/659510740/e7baa9eddd50153b2679c7352544d39b.jpeg?ce=0&s=160x120"
+                        }
+                    ]
+                }
+            ],
+            "videos": [],
+            "matterports": []
+        },
+        "contentReviewSummaries": {
+            "snippets": [
+                {
+                    "snippetId": 366850248136377622,
+                    "countryCode": "ID",
+                    "countryId": 192,
+                    "countryName": "Indonesia",
+                    "date": "2022-12-31T13:24:00.000+07:00",
+                    "demographicId": 5,
+                    "demographicName": "Family with older children",
+                    "reviewer": "Ahmad",
+                    "reviewRating": 9.6,
+                    "snippet": "dan menginap di Charaka Residen sangat recommended",
+                    "topics": null
+                }
+            ],
+            "recommendationScores": {
+                "frequentTravellerRecommendationScore": 72,
+                "recommendationScore": 98
+            },
+            "positiveMentions": {
+                "categories": [],
+                "facilityClassesSentiment": [
+                    {
+                        "facilityIds": [
+                            351,
+                            352,
+                            353
+                        ],
+                        "id": 2,
+                        "name": "Sarapan",
+                        "noOfPositiveMentioned": 0
+                    }
+                ],
+                "facilityClasses": []
+            }
+        },
+        "contentReviewScore": {
+            "combinedReviewScore": {
+                "cumulative": {
+                    "maxScore": 10,
+                    "reviewCount": 92,
+                    "score": 9.1
+                },
+                "cumulativeForHost": {
+                    "reviewCount": 0
+                }
+            },
+            "providerReviewScore": [
+                {
+                    "isDefault": true,
+                    "providerId": 332,
+                    "trendingScore": {
+                        "past14DaysUplift": 0.0,
+                        "past30DaysUplift": 0.0
+                    },
+                    "cumulative": {
+                        "maxScore": 10,
+                        "reviewCount": 92,
+                        "score": 9.1
+                    },
+                    "demographics": {
+                        "allGuest": {
+                            "id": 0,
+                            "scoreDistribution": [
+                                {
+                                    "id": "exceptional",
+                                    "reviewCount": 57
+                                },
+                                {
+                                    "id": "excellent",
+                                    "reviewCount": 19
+                                },
+                                {
+                                    "id": "very_good",
+                                    "reviewCount": 5
+                                },
+                                {
+                                    "id": "good",
+                                    "reviewCount": 4
+                                },
+                                {
+                                    "id": "below_expectation",
+                                    "reviewCount": 2
+                                }
+                            ],
+                            "reviewCount": 92,
+                            "grades": [
+                                {
+                                    "id": "overall",
+                                    "score": 9.1,
+                                    "cityAverage": null,
+                                    "subGrades": null
+                                },
+                                {
+                                    "id": "cleanliness",
+                                    "score": 9.1,
+                                    "cityAverage": null,
+                                    "subGrades": null
+                                },
+                                {
+                                    "id": "facilities",
+                                    "score": 8.7,
+                                    "cityAverage": null,
+                                    "subGrades": null
+                                },
+                                {
+                                    "id": "location",
+                                    "score": 9.4,
+                                    "cityAverage": null,
+                                    "subGrades": null
+                                },
+                                {
+                                    "id": "staffPerformance",
+                                    "score": 9.3,
+                                    "cityAverage": null,
+                                    "subGrades": null
+                                },
+                                {
+                                    "id": "valueForMoney",
+                                    "score": 9.2,
+                                    "cityAverage": null,
+                                    "subGrades": null
+                                }
+                            ]
+                        }
+                    }
+                }
+            ],
+            "thirdPartyReviewScore": null
+        },
+        "contentSummary": {
+            "propertyId": 35136634,
+            "displayName": "Charaka Grande",
+            "defaultName": "Charaka Grande",
+            "localeName": "Charaka Grande",
+            "accommodation": {
+                "accommodationType": 34,
+                "accommodationName": "Hotel"
+            },
+            "propertyType": "Hotel",
+            "address": {
+                "address1": "Jl. Telaga Warna",
+                "address2": "",
+                "countryCode": "ID",
+                "area": {
+                    "id": 583553,
+                    "name": "Dieng Kulong"
+                },
+                "city": {
+                    "id": 728076,
+                    "name": "Dieng Kulong"
+                },
+                "country": {
+                    "id": 192,
+                    "name": "Indonesia"
+                },
+                "postalCode": "56354",
+                "stateInfo": {
+                    "id": 3168
+                },
+                "ann_location": "Jl. Telaga Warna, Dieng Kulong, Dieng Kulong, Indonesia, 56354"
+            },
+            "awardsAndAccolades": {
+                "goldCircleAward": null,
+                "advanceGuaranteeProgram": null
+            },
+            "remarks": null,
+            "hasHostExperience": false,
+            "geoInfo": {
+                "latitude": -7.209874399999999,
+                "longitude": 109.9120239
+            },
+            "rating": 3.0,
+            "asqType": null,
+            "asqInfos": []
+        },
+        "contentEngagement": {
+            "peopleLooking": "",
+            "todayBooking": "Dipesan 2 kali hari ini"
+        },
+        "contentHighlights": {
+            "favoriteFeatures": [
+                {
+                    "category": "property-facility",
+                    "id": 109,
+                    "images": [],
+                    "name": "WiFi gratis di semua kamar",
+                    "symbol": "free-wifi-in-all-rooms",
+                    "tooltip": null
+                },
+                {
+                    "category": "property-facility",
+                    "id": 240,
+                    "images": [],
+                    "name": "Layanan kebersihan harian",
+                    "symbol": "daily-housekeeping",
+                    "tooltip": null
+                }
+            ],
+            "locationHighlightMessage": null,
+            "locationHighlights": [],
+            "locations": [],
+            "atfPropertyHighlights": [
+                {
+                    "id": -1,
+                    "name": "Pilihan Terbaik",
+                    "symbol": "medal.svg",
+                    "icon": null,
+                    "category": "review-scores",
+                    "images": null,
+                    "tooltip": "Tamu memberikan nilai 9.2/10 untuk harga berbanding mutu"
+                },
+                {
+                    "id": -1,
+                    "name": "Bersih higienis",
+                    "symbol": "spray.svg",
+                    "icon": null,
+                    "category": "review-scores",
+                    "images": null,
+                    "tooltip": "Tamu memberi nilai properti ini 9.1/10 untuk kebersihannya"
+                },
+                {
+                    "id": -1,
+                    "name": "Pilihan favorit pasangan",
+                    "symbol": "family-love-1.svg",
+                    "icon": null,
+                    "category": "highly-rated",
+                    "images": null,
+                    "tooltip": "Pasangan menyukai properti ini"
+                },
+                {
+                    "id": 116,
+                    "name": "Resepsionis 24 jam",
+                    "symbol": "door.svg",
+                    "icon": null,
+                    "category": "property-facility",
+                    "images": null,
+                    "tooltip": null
+                },
+                {
+                    "id": 109,
+                    "name": "WiFi gratis di semua kamar",
+                    "symbol": "like.svg",
+                    "icon": "WifiElectricsFill",
+                    "category": "property-facility",
+                    "images": null,
+                    "tooltip": null
+                }
+            ]
+        },
+        "contentLocalInformation": {
+            "walkablePlaces": null,
+            "nearbyProperties": [],
+            "cuisines": null,
+            "locationSubscore": {
+                "airportScore": 0.0,
+                "poiScore": 3.8,
+                "transportationScore": 0.0
+            },
+            "nearbyPlaces": [
+                {
+                    "abbr": null,
+                    "distanceInKm": 0.45,
+                    "duration": null,
+                    "durationIcon": null,
+                    "geoInfo": {
+                        "latitude": -7.213774,
+                        "longitude": 109.910789,
+                        "obfuscatedLat": 0.0,
+                        "obfuscatedLong": 0.0
+                    },
+                    "images": null,
+                    "landmarkId": 131306,
+                    "name": "Candi Bima",
+                    "typeId": 13,
+                    "typeName": "Monumen dan Landmark",
+                    "landMarkGroup": {
+                        "name": "Cultural",
+                        "sortOrder": 2
+                    }
+                },
+                {
+                    "abbr": null,
+                    "distanceInKm": 0.58,
+                    "duration": null,
+                    "durationIcon": null,
+                    "geoInfo": {
+                        "latitude": -7.21428,
+                        "longitude": 109.914917,
+                        "obfuscatedLat": 0.0,
+                        "obfuscatedLong": 0.0
+                    },
+                    "images": null,
+                    "landmarkId": 281076,
+                    "name": "Telaga warna",
+                    "typeId": 4,
+                    "typeName": "Obyek Wisata",
+                    "landMarkGroup": {
+                        "name": "Cultural",
+                        "sortOrder": 2
+                    }
+                },
+                {
+                    "abbr": null,
+                    "distanceInKm": 0.67,
+                    "duration": null,
+                    "durationIcon": null,
+                    "geoInfo": {
+                        "latitude": -7.208239,
+                        "longitude": 109.906154,
+                        "obfuscatedLat": 0.0,
+                        "obfuscatedLong": 0.0
+                    },
+                    "images": null,
+                    "landmarkId": 131305,
+                    "name": "Candi Gatot Kaca",
+                    "typeId": 13,
+                    "typeName": "Monumen dan Landmark",
+                    "landMarkGroup": {
+                        "name": "Cultural",
+                        "sortOrder": 2
+                    }
+                },
+                {
+                    "abbr": null,
+                    "distanceInKm": 0.72,
+                    "duration": null,
+                    "durationIcon": null,
+                    "geoInfo": {
+                        "latitude": -7.204492,
+                        "longitude": 109.908342,
+                        "obfuscatedLat": 0.0,
+                        "obfuscatedLong": 0.0
+                    },
+                    "images": null,
+                    "landmarkId": 131304,
+                    "name": "Candi Arjuna",
+                    "typeId": 13,
+                    "typeName": "Monumen dan Landmark",
+                    "landMarkGroup": {
+                        "name": "Cultural",
+                        "sortOrder": 2
+                    }
+                },
+                {
+                    "abbr": null,
+                    "distanceInKm": 0.76,
+                    "duration": null,
+                    "durationIcon": null,
+                    "geoInfo": {
+                        "latitude": -7.208455,
+                        "longitude": 109.905288,
+                        "obfuscatedLat": 0.0,
+                        "obfuscatedLong": 0.0
+                    },
+                    "images": null,
+                    "landmarkId": 281082,
+                    "name": "Museum Dieng Kaliasa",
+                    "typeId": 14,
+                    "typeName": "Museum dan Galeri Seni",
+                    "landMarkGroup": {
+                        "name": "Cultural",
+                        "sortOrder": 2
+                    }
+                },
+                {
+                    "abbr": null,
+                    "distanceInKm": 0.95,
+                    "duration": null,
+                    "durationIcon": null,
+                    "geoInfo": {
+                        "latitude": -7.204723,
+                        "longitude": 109.905173,
+                        "obfuscatedLat": 0.0,
+                        "obfuscatedLong": 0.0
+                    },
+                    "images": null,
+                    "landmarkId": 281084,
+                    "name": "Candi Setyaki",
+                    "typeId": 4,
+                    "typeName": "Obyek Wisata",
+                    "landMarkGroup": {
+                        "name": "Cultural",
+                        "sortOrder": 2
+                    }
+                },
+                {
+                    "abbr": null,
+                    "distanceInKm": 1.37,
+                    "duration": null,
+                    "durationIcon": null,
+                    "geoInfo": {
+                        "latitude": -7.197619,
+                        "longitude": 109.910857,
+                        "obfuscatedLat": 0.0,
+                        "obfuscatedLong": 0.0
+                    },
+                    "images": null,
+                    "landmarkId": 281083,
+                    "name": "Candi Dwarawati",
+                    "typeId": 4,
+                    "typeName": "Obyek Wisata",
+                    "landMarkGroup": {
+                        "name": "Cultural",
+                        "sortOrder": 2
+                    }
+                },
+                {
+                    "abbr": null,
+                    "distanceInKm": 1.37,
+                    "duration": null,
+                    "durationIcon": null,
+                    "geoInfo": {
+                        "latitude": -7.220004,
+                        "longitude": 109.904933,
+                        "obfuscatedLat": 0.0,
+                        "obfuscatedLong": 0.0
+                    },
+                    "images": null,
+                    "landmarkId": 281081,
+                    "name": "Kawah Sikidang",
+                    "typeId": 4,
+                    "typeName": "Obyek Wisata",
+                    "landMarkGroup": {
+                        "name": "Cultural",
+                        "sortOrder": 2
+                    }
+                },
+                {
+                    "abbr": null,
+                    "distanceInKm": 1.41,
+                    "duration": null,
+                    "durationIcon": null,
+                    "geoInfo": {
+                        "latitude": -7.2,
+                        "longitude": 109.92,
+                        "obfuscatedLat": 0.0,
+                        "obfuscatedLong": 0.0
+                    },
+                    "images": null,
+                    "landmarkId": 2735135,
+                    "name": "Dieng Volcanic Complex",
+                    "typeId": 134,
+                    "typeName": "Mountains, Hills and Caves",
+                    "landMarkGroup": {
+                        "name": "Outdoors",
+                        "sortOrder": 4
+                    }
+                },
+                {
+                    "abbr": null,
+                    "distanceInKm": 1.5,
+                    "duration": null,
+                    "durationIcon": null,
+                    "geoInfo": {
+                        "latitude": -7.214901,
+                        "longitude": 109.899438,
+                        "obfuscatedLat": 0.0,
+                        "obfuscatedLong": 0.0
+                    },
+                    "images": null,
+                    "landmarkId": 281070,
+                    "name": "Dieng Plateau",
+                    "typeId": 12,
+                    "typeName": "Gedung Bersejarah",
+                    "landMarkGroup": {
+                        "name": "Cultural",
+                        "sortOrder": 2
+                    }
+                }
+            ],
+            "nearbyShops": [],
+            "popularLandmarkNumber": 9,
+            "topPlaces": []
+        },
+        "contentInformation": {
+            "usefulInfoGroups": [
+                {
+                    "id": 1,
+                    "usefulInfo": [
+                        {
+                            "id": 8,
+                            "description": "14:00"
+                        },
+                        {
+                            "id": 45,
+                            "description": "23:00"
+                        },
+                        {
+                            "id": 9,
+                            "description": "12:00"
+                        }
+                    ]
+                },
+                {
+                    "id": 4,
+                    "usefulInfo": [
+                        {
+                            "id": 28,
+                            "description": "1"
+                        }
+                    ]
+                }
+            ],
+            "certificate": null,
+            "staffVaccinationInfo": null,
+            "messaging": {
+                "responsiveRate": 1.0,
+                "isAllowedPreBooking": true
+            },
+            "description": {
+                "short": "Awali liburan Anda dengan luar biasa dengan menginap di properti ini, yang menawarkan Wi-Fi gratis di semua kamar. Terletak strategis di Dieng Kulong yang merupakan bagian Dieng Kulong, properti ini menempatkan Anda dekat dengan atraksi dan opsi restoran menarik. Properti bintang-3 ini dilengkapi dengan berbagai fasilitas untuk menunjang kualitas dan kenyamanan selama Anda menginap."
+            },
+            "notes": {
+                "criticalNotes": []
+            },
+            "sustainabilityInfo": {
+                "isSustainableTravel": false,
+                "practiceCategories": []
+            }
+        },
+        "contentFeatures": {
+            "featureGroups": [
+                {
+                    "features": [
+                        {
+                            "available": true,
+                            "featureName": "Internet",
+                            "featureNameLocalizationList": null,
+                            "id": 90,
+                            "order": 0,
+                            "symbol": "internet",
+                            "images": []
+                        },
+                        {
+                            "available": true,
+                            "featureName": "WiFi gratis di semua kamar",
+                            "featureNameLocalizationList": null,
+                            "id": 109,
+                            "order": 38,
+                            "symbol": "free-wifi-in-all-rooms",
+                            "images": []
+                        }
+                    ],
+                    "id": 41,
+                    "name": "Akses internet",
+                    "order": 1,
+                    "symbol": "wifi"
+                },
+                {
+                    "features": [
+                        {
+                            "available": true,
+                            "featureName": "Layanan kebersihan harian",
+                            "featureNameLocalizationList": null,
+                            "id": 240,
+                            "order": 105,
+                            "symbol": "daily-housekeeping",
+                            "images": []
+                        }
+                    ],
+                    "id": 38,
+                    "name": "Layanan dan fasilitas",
+                    "order": 2,
+                    "symbol": "room-service"
+                },
+                {
+                    "features": [
+                        {
+                            "available": true,
+                            "featureName": "Resepsionis 24 jam",
+                            "featureNameLocalizationList": null,
+                            "id": 116,
+                            "order": 119,
+                            "symbol": "24hour-frontdesk",
+                            "images": []
+                        }
+                    ],
+                    "id": 37,
+                    "name": "Akses",
+                    "order": 3,
+                    "symbol": "number-of-rooms"
+                }
+            ],
+            "hotelFacilities": [
+                {
+                    "id": 90,
+                    "name": null
+                },
+                {
+                    "id": 109,
+                    "name": null
+                },
+                {
+                    "id": 116,
+                    "name": null
+                },
+                {
+                    "id": 240,
+                    "name": null
+                }
+            ],
+            "summary": {
+                "chineseFriendly": false,
+                "staycationFacilityIds": null,
+                "hygienePlusFacilities": null
+            },
+            "facilityHighlights": [
+                {
+                    "facilityId": 109,
+                    "facilityName": "WiFi gratis di semua kamar",
+                    "images": []
+                },
+                {
+                    "facilityId": 116,
+                    "facilityName": "Resepsionis 24 jam",
+                    "images": []
+                },
+                {
+                    "facilityId": 240,
+                    "facilityName": "Layanan kebersihan harian",
+                    "images": []
+                }
+            ]
+        },
+        "hostProfile": null
+    },
+    "metaLab": {
+        "propertyAttributes": [
+            {
+                "attributeId": 2,
+                "dataType": "BOOLEAN",
+                "value": "false",
+                "version": "V1"
+            },
+            {
+                "attributeId": 7,
+                "dataType": "BOOLEAN",
+                "value": "false",
+                "version": "V1"
+            },
+            {
+                "attributeId": 18,
+                "dataType": "BOOLEAN",
+                "value": "true",
+                "version": "V1"
+            },
+            {
+                "attributeId": 8,
+                "dataType": "BOOLEAN",
+                "value": "false",
+                "version": "V1"
+            }
+        ]
+    }
+}

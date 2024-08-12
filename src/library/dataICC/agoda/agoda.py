@@ -45,7 +45,7 @@ class BaseAgoda:
             self.__connectionKafka: ConnectionKafka = ConnectionKafka(kwargs.get('topic'), kwargs.get('bootstrap'))
         
     def __process_property(self, property: dict, province_name: str):
-        property_detail: dict = self.__get_property_detail(property_id := property['propertyId'])
+        property_detail: dict = self._get_property_detail(property_id := property['propertyId'])
         property_name: str = property['content']['informationSummary']['localeName']
 
         i: int = 1
@@ -99,6 +99,7 @@ class BaseAgoda:
                 "tag": [*link_split[2:], province_name.title()],
                 "crawling_time": Datetime.now(),
                 "crawling_time_epoch": int(time()),
+                'name_property': f"{log['sub_source_name']} {property_detail['contentDetail']['contentSummary']['address']['area']['name']}",
                 'property_detail': property_detail,
                 'rooms': self.__get_secondary_data(property_detail["propertyId"]),
                 'reviews': reviews,
@@ -151,13 +152,25 @@ class BaseAgoda:
             'readyRooms': response["roomGridData"]["masterRooms"]
         }
     
-    def __get_property_detail(self, property_id: int) -> dict:
+    def _get_property_detail(self, property_id: int) -> dict:
         response: Response = self.__requests.post('https://www.agoda.com/graphql/property', 
                                     json=ParamsBuilder.detailParams(property_id),
                                    )                        
-                
 
-        return response.json()['data']['propertyDetailsSearch']['propertyDetails'][0]
+        data = response.json()['data']['propertyDetailsSearch']['propertyDetails'][0]
+        addr = data['contentDetail']['contentSummary']['address']
+        joined = [
+            addr['address1'],
+            addr['area']['name'],
+            addr['city']['name'],
+            addr['country']['name'],
+            addr['postalCode']
+        ]
+        if not addr['postalCode']:
+            joined.pop(-1)
+        data['contentDetail']['contentSummary']['address']['ann_location'] = ', '.join(joined)
+        print(data['contentDetail']['contentSummary']['address'])
+        return data
 
     def __get_reviews(self, property_id: int, page: int, size: int) -> list: 
         return self.__requests.post('https://www.agoda.com/api/cronos/property/review/ReviewComments',                       
@@ -239,14 +252,14 @@ class BaseAgoda:
         asyncio.run(self.__process_property(data, ProvinceEnum.JAWA_TIMUR))
 
 if(__name__ == "__main__"):
-    BaseAgoda(
+    data = BaseAgoda(
         # **{
         #     'topic': 'test', 
         #     'bootstrap': 'localhost:9092',
         #     'kafka': True
         # }
-    )._get_all_detail()
-
+    )._watch_beanstalk()
+    # with open('data.json', 'w') as f: f.write(dumps(data, indent=4))
 # 'test', 'localhost:9092'
 # Hotel Tugu Malang
 # The Shalimar Boutique Hotel
