@@ -20,7 +20,7 @@ class BinaPemdes:
         self.__get_cookies()
 
         self.__redis: Redis = Redis(
-            # '192.168.20.175',
+            '192.168.20.175',
             db=2,
             decode_responses=True
         )
