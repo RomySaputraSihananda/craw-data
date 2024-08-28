@@ -123,7 +123,7 @@ class BinaPemdes:
                 size
             )
 
-        page = 5585     
+        page = 1
         size = 15       
 
         while(True):
