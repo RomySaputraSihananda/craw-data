@@ -102,7 +102,7 @@ class BinaPemdes:
         #         indent=4
         #     )
 
-    def _get_table(self, obj):
+    def _get_table(self, obj, page = 1, size = 15):
         response = self.__session.get(
             obj["url"]
         )
@@ -127,10 +127,7 @@ class BinaPemdes:
                     a,'html.parser'   
                 ), 
                 size
-            )
-
-        page = 1
-        size = 15       
+            )     
 
         while(True):
             try:
@@ -165,6 +162,9 @@ class BinaPemdes:
             self.__beanstalk_use.put(json.dumps(url))
 
 if(__name__ == '__main__'):
-    BinaPemdes()._get_tables()
+    BinaPemdes()._get_table({
+        "category": "Administratif",
+        "sub_category": "Pendidikan Aparat",
+        "url": "https://prodeskel.binapemdes.kemendagri.go.id/pmsektor/pmsektor_form_php.php?sc_item_menu=item_208&sc_apl_menu=glbgpemerintah_pddk&sc_apl_link=%2F&sc_usa_grupo="
+    }, page=3983)
     # BinaPemdes.parse_table(open('/home/sc-rommy/Desktop/dasor-皇/craw-data/test.html', 'r').read())
-
