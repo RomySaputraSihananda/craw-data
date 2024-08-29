@@ -9,16 +9,16 @@ urls = [
   #   "sub_category": "Pokja Prodeskel",
   #   "url": "https://prodeskel.binapemdes.kemendagri.go.id/pmsektor/pmsektor_form_php.php?sc_item_menu=item_191&sc_apl_menu=gpokja_kec&sc_apl_link=%2F&sc_usa_grupo="
   # },
-  {
-    "category": "Administratif",
-    "sub_category": "Desa/Kelurahan",
-    "url": "https://prodeskel.binapemdes.kemendagri.go.id/pmsektor/pmsektor_form_php.php?sc_item_menu=item_142&sc_apl_menu=grid_mdesa_peta&sc_apl_link=%2F&sc_usa_grupo="
-  },
-  {
-    "category": "Administratif",
-    "sub_category": "Pendidikan Aparat",
-    "url": "https://prodeskel.binapemdes.kemendagri.go.id/pmsektor/pmsektor_form_php.php?sc_item_menu=item_208&sc_apl_menu=glbgpemerintah_pddk&sc_apl_link=%2F&sc_usa_grupo="
-  },
+  # {
+  #   "category": "Administratif",
+  #   "sub_category": "Desa/Kelurahan",
+  #   "url": "https://prodeskel.binapemdes.kemendagri.go.id/pmsektor/pmsektor_form_php.php?sc_item_menu=item_142&sc_apl_menu=grid_mdesa_peta&sc_apl_link=%2F&sc_usa_grupo="
+  # },
+  # {
+  #   "category": "Administratif",
+  #   "sub_category": "Pendidikan Aparat",
+  #   "url": "https://prodeskel.binapemdes.kemendagri.go.id/pmsektor/pmsektor_form_php.php?sc_item_menu=item_208&sc_apl_menu=glbgpemerintah_pddk&sc_apl_link=%2F&sc_usa_grupo="
+  # },
   {
     "category": "Administratif",
     "sub_category": "APBDesa",

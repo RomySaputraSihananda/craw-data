@@ -6,11 +6,17 @@ from bs4 import BeautifulSoup
 from urllib.parse import urljoin
 from redis import Redis
 from time import time
+from greenstalk import Client
+
+from src.helpers import Datetime, Iostream
 
 from .urls import urls
-from src.helpers import Datetime, Iostream
+
 class BinaPemdes:
     def __init__(self) -> None:
+        self.__beanstalk_use: Client = Client(('192.168.150.21', 11300), use='dev-target-rs')
+        self.__beanstalk_watch: Client = Client(('192.168.150.21', 11300), watch='dev-target-rs')
+
         self.__session: Session = Session()
         self.__session.headers.update({
             # 'Cookie': 'PHPSESSID=;',
@@ -146,8 +152,17 @@ class BinaPemdes:
             page += 1
 
     def _get_tables(self):
+        while(job := self.__beanstalk_watch.reserve()):
+            try:
+                self._get_table(json.loads(job.body))
+                self.__beanstalk_watch.delete(job)
+            except:
+                self.__beanstalk_watch.bury(job)
+
+    def _send_target(self):
         for url in urls:
-            self._get_table(url)
+            print(url)
+            self.__beanstalk_use.put(json.dumps(url))
 
 if(__name__ == '__main__'):
     BinaPemdes()._get_tables()
