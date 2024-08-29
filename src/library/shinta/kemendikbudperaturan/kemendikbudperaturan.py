@@ -53,8 +53,8 @@ class KemendikbudPeraturan:
 
         ConnectionS3.upload(result, result["path_data_raw"][0].replace('s3://ai-pipeline-raw-data/', ''), 'ai-pipeline-raw-data')
     
-    async def _get_all_detail(self, ids):
-        while(job := self.__beanstalk_watch()):
+    async def _get_all_detail(self):
+        while(job := self.__beanstalk_watch.reserve()):
             try:
                 await asyncio.gather(*(self._get_detail(id) for id in json.loads(job.body)))
                 self.__beanstalk_watch.delete(job)
@@ -80,17 +80,18 @@ class KemendikbudPeraturan:
 if(__name__ == '__main__'):
     asyncio.run(
         KemendikbudPeraturan()\
+            ._get_all_detail()
             # ._get_detail("3414")
-            ._get_all_detail([
-                "3429",
-                "3430",
-                "3428", 
-                "3426",
-                "3427",
-                "3416",
-                "3414",
-                "3421",
-                "3413",
-                "3423"
-            ])
+            # ._get_all_detail([
+            #     "3429",
+            #     "3430",
+            #     "3428", 
+            #     "3426",
+            #     "3427",
+            #     "3416",
+            #     "3414",
+            #     "3421",
+            #     "3413",
+            #     "3423"
+            # ])
     )
