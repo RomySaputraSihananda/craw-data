@@ -20,7 +20,7 @@ class ConnectionS3:
     @Decorator.logging_path(style('SEND S3', fg='bright_red'))
     def upload(body: dict, key: str, bucket: str = 'ai-pipeline-statistics') -> None:
         response:  Any = s3.put_object(Bucket=bucket, Key=key, Body=dumps(body, indent=4, ensure_ascii=False))
-        if(response['ResponseMetadata']['HTTPStatusCode'] != 200): raise Exception('failed send s3')
+        if(response['ResponseMetadata']['HTTPStatusCode'] != 200): raise Exception('failed send s   3')
 
     @staticmethod
     @Decorator.logging_path(style('SEND S3 FILE', fg='bright_red'))
