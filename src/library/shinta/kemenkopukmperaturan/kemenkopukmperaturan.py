@@ -100,14 +100,15 @@ class KemenkopukmPeraturan  :
 
     async def _perform(self):
         # await self._get_detail('https://jdih.kemenkopukm.go.id/doc/detail/doc-1130-v_peraturan')
-        while(job := self.__beanstalk_watch.reserve()):
+        while(job := self.__beanstalk_watch.peek_buried()):
             try:
-                for url in json.loads(job.body):
-                    await self._get_detail(url)
-                self.__beanstalk_watch.delete(job)
+                print(job)
+                # for url in json.loads(job.body):
+                #     await self._get_detail(url)
+                # self.__beanstalk_watch.delete(job)
             except Exception as e:
-                # raise e
-                self.__beanstalk_watch.bury(job)
+                raise e
+                # self.__beanstalk_watch.bury(job)
 
 if(__name__ == '__main__'):
     asyncio.run(

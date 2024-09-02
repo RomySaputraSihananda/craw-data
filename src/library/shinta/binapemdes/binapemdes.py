@@ -26,7 +26,7 @@ class BinaPemdes:
         self.__get_cookies()
 
         self.__redis: Redis = Redis(
-            '192.168.20.175',
+            # '192.168.20.175',
             db=2,
             decode_responses=True
         )
@@ -106,9 +106,12 @@ class BinaPemdes:
         response = self.__session.get(
             obj["url"]
         )
+
+        print(response)
+        print(response.text)
         soup = BeautifulSoup(response.text, 'html.parser')
 
-        form = soup.find('form')
+        form = soup.find('form')    
         url = urljoin("https://prodeskel.binapemdes.kemendagri.go.id", form.get('action'))
         a = self.__session.post(
             url, 
@@ -123,7 +126,6 @@ class BinaPemdes:
                 url, 
                 page, 
                 BeautifulSoup(
-
                     a,'html.parser'   
                 ), 
                 size
@@ -162,9 +164,5 @@ class BinaPemdes:
             self.__beanstalk_use.put(json.dumps(url))
 
 if(__name__ == '__main__'):
-    BinaPemdes()._get_table({
-        "category": "Administratif",
-        "sub_category": "Pendidikan Aparat",
-        "url": "https://prodeskel.binapemdes.kemendagri.go.id/pmsektor/pmsektor_form_php.php?sc_item_menu=item_208&sc_apl_menu=glbgpemerintah_pddk&sc_apl_link=%2F&sc_usa_grupo="
-    }, page=3983)
+    BinaPemdes()._get_tables()
     # BinaPemdes.parse_table(open('/home/sc-rommy/Desktop/dasor-皇/craw-data/test.html', 'r').read())
