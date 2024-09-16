@@ -190,8 +190,8 @@ class BinaPemdes:
                         for i in range(1, data["page"] + 1):
                             executor.submit(self._get_table, data, i)
                     self.__beanstalk_watch.delete(job)
-                except: ...
-                    # self.__beanstalk_watch.bury(job)
+                except: 
+                    self.__beanstalk_watch.bury(job)
 
     def _send_target(self):
         def send(data):
