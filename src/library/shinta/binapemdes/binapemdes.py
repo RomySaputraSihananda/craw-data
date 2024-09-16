@@ -184,14 +184,14 @@ class BinaPemdes:
 
             # break
             while(job := self.__beanstalk_watch.reserve()):
-                    try:
-                        data = json.loads(job.body)
-                        with ThreadPoolExecutor(max_workers=20) as executor:
-                            for i in range(1, data["page"] + 1):
-                                executor.submit(self._get_table, data, i)
-                        self.__beanstalk_watch.delete(job)
-                    except:
-                        self.__beanstalk_watch.bury(job)
+                try:
+                    data = json.loads(job.body)
+                    with ThreadPoolExecutor(max_workers=20) as executor:
+                        for i in range(1, data["page"] + 1):
+                            executor.submit(self._get_table, data, i)
+                    self.__beanstalk_watch.delete(job)
+                except: ...
+                    # self.__beanstalk_watch.bury(job)
 
     def _send_target(self):
         def send(data):
