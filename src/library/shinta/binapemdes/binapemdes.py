@@ -104,7 +104,9 @@ class BinaPemdes:
         #     )
 
     def _get_table(self, obj, page = 1, size = 15):
-        print('start', page, size)
+        clean = lambda x: x.lower().replace(' ', '_').replace('-', '_').replace('/', '_')
+        db = clean('db:binapemdes:%s:%s' % ((category:= obj["category"]), (sub_category := obj["sub_category"]))) 
+        print('start ', db,  page, size)
         response = self.__session.get(
             obj["url"]
         )
@@ -137,8 +139,6 @@ class BinaPemdes:
             self.__get_cookies()
             data = get_data(page, size)
             
-        clean = lambda x: x.lower().replace(' ', '_').replace('-', '_').replace('/', '_')
-        db = clean('db:binapemdes:%s:%s' % ((category:= obj["category"]), (sub_category := obj["sub_category"]))) 
 
         for d in data:
             self.__redis.rpush(db, json.dumps(d))
@@ -186,7 +186,7 @@ class BinaPemdes:
             while(job := self.__beanstalk_watch.reserve()):
                 try:
                     data = json.loads(job.body)
-                    with ThreadPoolExecutor(max_workers=10) as executor:
+                    with ThreadPoolExecutor(max_workers=5) as executor:
                         for i in range(1, data["page"] + 1):
                             executor.submit(self._get_table, data, i)
                     self.__beanstalk_watch.delete(job)
