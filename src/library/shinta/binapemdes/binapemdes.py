@@ -7,15 +7,16 @@ from urllib.parse import urljoin
 from redis import Redis
 from time import time
 from greenstalk import Client
+from concurrent.futures import ThreadPoolExecutor
 
-from src.helpers import Datetime, Iostream
+from src.helpers import Datetime, Iostream, ConnectionS3
 
-from .urls import urls
+from .urls import urls, datas
 
 class BinaPemdes:
     def __init__(self) -> None:
-        self.__beanstalk_use: Client = Client(('192.168.150.21', 11300), use='dev-target-rs')
-        self.__beanstalk_watch: Client = Client(('192.168.150.21', 11300), watch='dev-target-rs')
+        self.__beanstalk_use: Client = Client(('192.168.150.21', 11300), use='dev-target-binapemdes')
+        self.__beanstalk_watch: Client = Client(('192.168.150.21', 11300), watch='dev-target-binapemdes')
 
         self.__session: Session = Session()
         self.__session.headers.update({
@@ -26,7 +27,7 @@ class BinaPemdes:
         self.__get_cookies()
 
         self.__redis: Redis = Redis(
-            '192.168.20.175',
+            '192.168.20.175',           
             db=2,
             decode_responses=True
         )
@@ -103,12 +104,10 @@ class BinaPemdes:
         #     )
 
     def _get_table(self, obj, page = 1, size = 15):
+        print('start', page, size)
         response = self.__session.get(
             obj["url"]
         )
-
-        print(response)
-        print(response.text)
         soup = BeautifulSoup(response.text, 'html.parser')
 
         form = soup.find('form')    
@@ -131,38 +130,79 @@ class BinaPemdes:
                 size
             )     
 
-        while(True):
-            try:
-                data = get_data(page, size)
-            except:
-                self.__get_cookies()
-                data = get_data(page, size)
+        # while(True):
+        try:
+            data = get_data(page, size)
+        except:
+            self.__get_cookies()
+            data = get_data(page, size)
             
-            clean = lambda x: x.lower().replace(' ', '_').replace('-', '_').replace('/', '_')
-            db = clean('db:binapemdes:%s:%s' % ((category:= obj["category"]), (sub_category := obj["sub_category"]))) 
+        clean = lambda x: x.lower().replace(' ', '_').replace('-', '_').replace('/', '_')
+        db = clean('db:binapemdes:%s:%s' % ((category:= obj["category"]), (sub_category := obj["sub_category"]))) 
 
-            for d in data:
-                self.__redis.rpush(db, json.dumps(d))
+        for d in data:
+            self.__redis.rpush(db, json.dumps(d))
 
-            print(f'[{page}]', db, len(data))
+        print(f'[{page}]', db, len(data))
 
-            if(len(data) < size): break
+            # if(len(data) < size): break
             
-            page += 1
+            # page += 1
 
     def _get_tables(self):
-        while(job := self.__beanstalk_watch.reserve()):
-            try:
-                self._get_table(json.loads(job.body))
-                self.__beanstalk_watch.delete(job)
-            except:
-                self.__beanstalk_watch.bury(job)
+        # for i in ['db:binapemdes:administratif:apbdesa', 'db:binapemdes:prasarana_wilayah:kantor_desa_kelurahan', 'db:binapemdes:prasarana_wilayah:air_bersih', 'db:binapemdes:prasarana_wilayah:sumber_energi', 'db:binapemdes:prasarana_wilayah:pendidikan', 'db:binapemdes:prasarana_wilayah:transportasi', 'db:binapemdes:prasarana_wilayah:sampah', 'db:binapemdes:administratif:desa_kelurahan', 'db:binapemdes:administratif:batas_wilayah', 'db:binapemdes:administratif:pendidikan_aparat', 'db:binapemdes:prasarana_wilayah:kesehatan']:
+        #     _, _, cat, subcat = i.split(':')
+        #     data = {
+        #         "link": "https://prodeskel.binapemdes.kemendagri.go.id/mpublik",
+        #         "tags": ["kemendagri", "prodeskel_binapemdes", cat, subcat],
+        #         "source": 'prodeskel.binapemdes.kemendagri.go.id',
+        #         "title": "KEMENTERIAN DALAM NEGERI DIREKTORAT JENDERAL PEMBERDAYAAN MASYARAKAT DAN DESA",
+        #         "sub_title": None,
+        #         "range_data": None,
+        #         "create_date": None,
+        #         "update_date": None,
+        #         "desc": None,
+        #         "category": cat,
+        #         "data": list({tuple(d.items()): d for d in json.loads(open(f'data/{i}.json', 'r').read())}.values()),
+        #         "sub_category": subcat,
+        #         "path_data_raw": f's3://ai-pipeline-raw-data/data/data_statistics/kemendagri/prodeskel_binapemdes/nasional/{cat}/json/{subcat}.json',
+        #         "crawling_time": Datetime.now(),
+        #         "crawling_time_epoch": int(time()),  
+        #         "table_name": subcat,
+        #         "country_name": "Indonesia",
+        #         "level": "provinsi, kab/kota, kecamatan, kelurahan/desa",
+        #         "stage": "Crawling data",
+        #         "update_schedule": None
+        #     }
+            
+            # Iostream.write_json(
+            #     data,
+            #     f'data/__{i}.json',
+            #     indent=4
+            # )
+            # ConnectionS3.upload(data, data['path_data_raw'].replace('s3://ai-pipeline-raw-data/', ''), 'ai-pipeline-raw-data')
+
+            # break
+            while(job := self.__beanstalk_watch.reserve()):
+                    try:
+                        data = json.loads(job.body)
+                        with ThreadPoolExecutor(max_workers=20) as executor:
+                            for i in range(1, data["page"] + 1):
+                                executor.submit(self._get_table, data, i)
+                        self.__beanstalk_watch.delete(job)
+                    except:
+                        self.__beanstalk_watch.bury(job)
 
     def _send_target(self):
-        for url in urls:
-            print(url)
-            self.__beanstalk_use.put(json.dumps(url))
+        def send(data):
+            if(isinstance(data["page"], str)): return   
+                # data2 = self._get_table(data, page)
+            # print(data["page"]) 
+            print(self.__beanstalk_use.put(json.dumps(data), ttr=999999999))
+        with ThreadPoolExecutor(max_workers=10) as executor:
+            for data in datas:  
+                executor.submit(send, data)    
 
 if(__name__ == '__main__'):
     BinaPemdes()._get_tables()
-    # BinaPemdes.parse_table(open('/home/sc-rommy/Desktop/dasor-皇/craw-data/test.html', 'r').read())
+    # BinaPemdes.(open('/home/sc-rommy/Desktop/dasor-皇/craw-data/test.html', 'r').read())

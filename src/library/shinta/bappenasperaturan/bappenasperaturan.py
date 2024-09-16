@@ -7,6 +7,7 @@ from time import time
 from httpx import AsyncClient
 from bs4 import BeautifulSoup
 from greenstalk import Client 
+from concurrent.futures import ThreadPoolExecutor       
 
 from .urls import urls
 
@@ -21,7 +22,6 @@ class BappenasPeraturan:
     async def __download(self, file, root, judul):
         type, url = file
         response = await self.__asession.get(url)
-        print(response)
         ConnectionS3.upload_content(response.content, (path := f'{root}pdf/{judul}_{type}.pdf').replace('s3://ai-pipeline-raw-data/', ''), 'ai-pipeline-raw-data')
         return path
 
@@ -85,10 +85,9 @@ class BappenasPeraturan:
 
         ConnectionS3.upload(result, result["path_data_raw"][0].replace('s3://ai-pipeline-raw-data/', ''), 'ai-pipeline-raw-data')
 
-
     async def _get_all_detail(self):
-        while(job := self.__beanstalk_watch.reserve()):
-            try:
+        while(job := self.__beanstalk_watch.peek_buried()):
+            try:            
                 await self._get_detail(**json.loads(job.body))
                 self.__beanstalk_watch.delete(job)
             except BaseException as e:
@@ -105,5 +104,5 @@ if(__name__ == '__main__'):
             #         "link": "https://jdih.bappenas.go.id/peraturan/detailperaturan/1267/undang-undang-dasar-1945-nomor--tahun-2020"
             #     }
             # )
-    )
+)
 

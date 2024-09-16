@@ -1,6 +1,6 @@
 
 from aiohttp import ClientSession
-from src.helpers import Parser, ConnectionS3, Datetime
+from src.helpers import Parser, ConnectionS3, Datetime, Iostream
 
 from time import time
 
@@ -15,35 +15,45 @@ async def process_card(card):
     async with ClientSession() as session:
         async with session.get(link) as response:
             soup: Parser = Parser(await response.text())
-            
+
             data = {
-                'link': link,
-                'domain': (link_split := link.split('/')[:-1])[2],
+                "link": link,
+                "source": (link_split := link.split('/')[:-1])[2],
+                'tag': link_split[2:],
+                "title": (title := soup.select_one('.content .row .col p:first-child').get_text().strip()),
+                "sub_title": None,
+                "range_data": None,
+                "create_date": None,
+                "update_date": None,
+                "desc": soup.select_one('.content .col').get_text().strip().split('( Author )')[-1].strip(),
+                "category": "publikasi",
+                "sub_category": None,
                 'crawling_time': Datetime.now(),
                 'crawling_time_epoch': int(time()),
-                'title': (title := soup.select_one('.content .row .col p:first-child').get_text().strip()),
-                'tag': [*link_split[2:], title],
-                'file': (file := soup.select_one('.content .btn.btn-info.btn-sm.rounded')['href']),
-                **dict(soup.select('.row.text-center > .col').map(get_detail)),
-                'description': soup.select_one('.content .col').get_text().strip().split('( Author )')[-1].strip(),
+                "table_name": None,
+                "country_name": "Indonesia",
+                "level": "Nasional",
+                "stage": "Crawling data",
+                "update_schedule": "every three months and yearly",
+                'data': {
+                    'file': (file := soup.select_one('.content .btn.btn-info.btn-sm.rounded')['href']),
+                    **dict(soup.select('.row.text-center > .col').map(get_detail))
+                },
                 'path_data_raw': [
-                    f'S3://ai-pipeline-statistics/data/data_raw/data statistic/satu data kementrian pertanian/publikasi/json/{title}.json',
-                    f'S3://ai-pipeline-statistics/data/data_raw/data statistic/satu data kementrian pertanian/publikasi/pdf/{(file_name := file.split("/")[-1])}'
-                ],
-                'path_data_clean': [
-                    f'S3://ai-pipeline-statistics/data/data_clean/data statistic/satu data kementrian pertanian/publikasi/json/{title}.json',
-                    f'S3://ai-pipeline-statistics/data/data_clean/data statistic/satu data kementrian pertanian/publikasi/pdf/{file_name}'
-                ],   
-            } 
+                    f's3://ai-pipeline-raw-data/data/data_statistics/satu_data_kementrian_pertanian/publikasi/json/{title.strip().lower().replace("/", " or ").replace(" ", "_")}.json',
+                    f's3://ai-pipeline-raw-data/data/data_statistics/satu_data_kementrian_pertanian/publikasi/pdf/{(file_name := file.split("/")[-1]).lower().replace(" ", "_")}'
+                ]
+            }   
 
-            ConnectionS3.upload(data, data['path_data_raw'][0].replace('S3://ai-pipeline-statistics/', ''))
-        async with session.get(file) as response:
-            ConnectionS3.upload_content(await response.read(), data['path_data_raw'][1].replace('S3://ai-pipeline-statistics/', ''))
+            ConnectionS3.upload(data, data['path_data_raw'][0].replace('s3://ai-pipeline-raw-data/', ''), 'ai-pipeline-raw-data')
+            async with session.get(file) as response:
+                ConnectionS3.upload_content(await response.read(), data['path_data_raw'][1].replace('s3://ai-pipeline-raw-data/', ''), 'ai-pipeline-raw-data')
+
 
 if(__name__ == '__main__'):
     import asyncio
     async def main():
-        i = 0
+        i = 150     
         while(True):
             response = requests.get(f'https://satudata.pertanian.go.id/datasets/publikasi/{i}')
             print(i)
