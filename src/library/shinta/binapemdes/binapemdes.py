@@ -186,7 +186,7 @@ class BinaPemdes:
             while(job := self.__beanstalk_watch.reserve()):
                 try:
                     data = json.loads(job.body)
-                    with ThreadPoolExecutor(max_workers=20) as executor:
+                    with ThreadPoolExecutor(max_workers=10) as executor:
                         for i in range(1, data["page"] + 1):
                             executor.submit(self._get_table, data, i)
                     self.__beanstalk_watch.delete(job)
