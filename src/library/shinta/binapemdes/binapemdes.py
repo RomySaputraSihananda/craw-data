@@ -17,7 +17,6 @@ class BinaPemdes:
     def __init__(self) -> None:
         self.__beanstalk_use: Client = Client(('192.168.150.21', 11300), use='dev-target-binapemdes')
         self.__beanstalk_watch: Client = Client(('192.168.150.21', 11300), watch='dev-target-binapemdes')
-
         self.__session: Session = Session()
         self.__session.headers.update({
             # 'Cookie': 'PHPSESSID=;',
@@ -187,10 +186,15 @@ class BinaPemdes:
                 try:
                     data = json.loads(job.body)
                     with ThreadPoolExecutor(max_workers=5) as executor:
+                        futures = []
                         for i in range(1, data["page"] + 1):
-                            executor.submit(self._get_table, data, i)
+                            futures.append(executor.submit(self._get_table, data, i))
+                        for future in futures:
+                            future.result() 
                     self.__beanstalk_watch.delete(job)
-                except: 
+                except KeyboardInterrupt:
+                    exit(0)
+                except BaseException:
                     self.__beanstalk_watch.bury(job)
 
     def _send_target(self):
