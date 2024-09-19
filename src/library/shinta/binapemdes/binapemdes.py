@@ -7,7 +7,7 @@ from urllib.parse import urljoin
 from redis import Redis
 from time import time
 from greenstalk import Client
-from concurrent.futures import ThreadPoolExecutor, as_completed
+from concurrent.futures import ThreadPoolExecutor, as_completed     
 from loguru import logger
 from .urls import urls, datas
 
@@ -50,7 +50,7 @@ class BinaPemdes:
         except: return data
 
     def __get_cookies(self):
-        self.__session.get('https://202.92.200.53/default/?nm_run_menu=1&nm_apl_menu=mpublik&script_case_init=1&script_case_session=')
+        self.__session.get('https://prodeskel.binapemdes.kemendagri.go.id/default/?nm_run_menu=1&nm_apl_menu=mpublik&script_case_init=1&script_case_session=')
 
     def _get_table_paging(self, url, page, soup, size = 50):
         response = self.__session.post(
@@ -82,7 +82,7 @@ class BinaPemdes:
             soup = BeautifulSoup(response.text, 'html.parser')
 
             form = soup.find('form')    
-            url = urljoin("https://202.92.200.53", form.get('action'))
+            url = urljoin("https://prodeskel.binapemdes.kemendagri.go.id", form.get('action'))
             a = self.__session.post(
                 url, 
                 data={
