@@ -138,9 +138,9 @@ class DukcapilProdukHukum:
             self.beanstalk.watch.bury(job)
 
     def start(self):
-        with ThreadPoolExecutor(max_workers=5) as w:
+        # with ThreadPoolExecutor(max_workers=2) as w:
             while(job := self.beanstalk.watch.reserve()):
-                w.submit(self._process_data, job)
+                self._process_data(job)
             
 if(__name__ == '__main__'):
     DukcapilProdukHukum().start()
