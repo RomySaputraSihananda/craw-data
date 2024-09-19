@@ -116,7 +116,7 @@ class BinaPemdes:
             while(job := self.__beanstalk_watch.reserve()):
                 try:
                     data = json.loads(job.body)
-                    with ThreadPoolExecutor(max_workers=25) as executor:
+                    with ThreadPoolExecutor(max_workers=10) as executor:
                         futures = []
                         for i in range(1, data["page"] + 1):
                             futures.append(executor.submit(self._get_table, data, i))
