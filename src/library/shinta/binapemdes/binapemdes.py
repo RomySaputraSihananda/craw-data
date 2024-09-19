@@ -9,6 +9,8 @@ from time import time
 from greenstalk import Client
 from concurrent.futures import ThreadPoolExecutor
 from loguru import logger
+from .urls import urls, datas
+
 class BinaPemdes:
     def __init__(self) -> None:
         self.__beanstalk_use: Client = Client(('192.168.150.21', 11300), use='dev-target-binapemdes-test')
@@ -113,28 +115,29 @@ class BinaPemdes:
             logger.error(f'{db, page, e}')
 
     def _get_tables(self):
-            while(job := self.__beanstalk_watch.reserve()):
-                try:
-                    data = json.loads(job.body)
-                    with ThreadPoolExecutor(max_workers=10  ) as executor:
-                        futures = []
-                        for i in range(1, data["page"] + 1):
-                            futures.append(executor.submit(self._get_table, data, i))
-                        for future in futures:
-                            future.result()
-                    self.__beanstalk_watch.delete(job)
-                except KeyboardInterrupt:
-                    exit(0)
-                except BaseException: 
-                    self.__beanstalk_watch.bury(job)
+        while(job := self.__beanstalk_watch.reserve()):
+            try:
+                data = json.loads(job.body)
+                with ThreadPoolExecutor(max_workers=10  ) as executor:
+                    futures = []
+                    for i in range(1, data["page"] + 1):
+                        futures.append(executor.submit(self._get_table, data, i))
+                    for future in futures:
+                        future.result()
+                self.__beanstalk_watch.delete(job)
+            except KeyboardInterrupt:
+                exit(0)
+            except BaseException: 
+                self.__beanstalk_watch.bury(job)
 
-    # def _send_target(self):
-    #     def send(data):
-    #         if(isinstance(data["page"], str)): return
-    #         print(self.__beanstalk_use.put(json.dumps(data), ttr=999999999, priority=1))
-    #     with ThreadPoolExecutor(max_workers=20) as executor:
-    #         for data in datas:  
-    #             executor.submit(send, data)
+    def _send_target(self):
+        def send(data):     
+            if(isinstance(data["page"], str)): return
+            for i in range(data["page"]):
+                print(self.__beanstalk_use.put(json.dumps({**data, 'page': i}), ttr=999999999, priority=1))
+        with ThreadPoolExecutor(max_workers=20) as executor:
+            for data in datas:
+                executor.submit(send, data)
 
 if(__name__ == '__main__'):
-    BinaPemdes()._get_tables()  
+    BinaPemdes()._send_target()  

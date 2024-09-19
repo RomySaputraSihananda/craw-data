@@ -389,19 +389,19 @@ datas =[
       'category': 'Produksi',
       'sub_category': 'Peternakan',
       'url': 'https://prodeskel.binapemdes.kemendagri.go.id/pmsektor/pmsektor_form_php.php?sc_item_menu=item_33&sc_apl_menu=ghslternak_detil&sc_apl_link=%2F&sc_usa_grupo=',
-      'page': ''
+      'page': 5634
     },
     {
       'category': 'Produksi',
       'sub_category': 'Hasil Hutan',
       'url': 'https://prodeskel.binapemdes.kemendagri.go.id/pmsektor/pmsektor_form_php.php?sc_item_menu=item_26&sc_apl_menu=ghslhutan_detil&sc_apl_link=%2F&sc_usa_grupo=',
-      'page': ''
+      'page': 2092
     },
     {
       'category': 'Produksi',
       'sub_category': 'Bahan Galian',
       'url': 'https://prodeskel.binapemdes.kemendagri.go.id/pmsektor/pmsektor_form_php.php?sc_item_menu=item_163&sc_apl_menu=gprodgalian_detil&sc_apl_link=%2F&sc_usa_grupo=',
-      'page': ''
+      'page': 16262
     },
     # {
     #   'category': 'Kelembagaan',
@@ -479,6 +479,6 @@ datas =[
       'category': 'PolSosBudPar',
       'sub_category': 'Pariwisata',
       'url': 'https://prodeskel.binapemdes.kemendagri.go.id/pmsektor/pmsektor_form_php.php?sc_item_menu=item_19&sc_apl_menu=gpariwisata_detil&sc_apl_link=%2F&sc_usa_grupo=',             
-      'page':   '             '
+      'page': 2782
     } 
 ]
