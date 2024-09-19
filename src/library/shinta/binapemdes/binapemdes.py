@@ -73,7 +73,7 @@ class BinaPemdes:
         try:
             clean = lambda x: x.lower().replace(' ', '_').replace('-', '_').replace('/', '_')
             db = clean('db:binapemdes:%s:%s' % ((category:= obj["category"]), (sub_category := obj["sub_category"]))) 
-            logger.info('start ', db,  page, size)
+            logger.info(f'start {db,  page, size}')
             response = self.__session.get(
                 obj["url"]
             )
@@ -108,9 +108,9 @@ class BinaPemdes:
             for d in data:
                 self.__redis.rpush(db, json.dumps(d))
 
-            logger.success(db, len(data))
+            logger.success(f'{db, len(data)}')
         except:
-            logger.error('%s page ' % page, db)
+            logger.error(f'{page, db}')
 
     def _get_tables(self):
             while(job := self.__beanstalk_watch.reserve()):
@@ -137,4 +137,4 @@ class BinaPemdes:
     #             executor.submit(send, data)
 
 if(__name__ == '__main__'):
-    BinaPemdes()._get_tables()
+    BinaPemdes()._get_tables()  
