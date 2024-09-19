@@ -149,53 +149,74 @@ class BinaPemdes:
             # page += 1
 
     def _get_tables(self):
-        # for i in ['db:binapemdes:administratif:apbdesa', 'db:binapemdes:prasarana_wilayah:kantor_desa_kelurahan', 'db:binapemdes:prasarana_wilayah:air_bersih', 'db:binapemdes:prasarana_wilayah:sumber_energi', 'db:binapemdes:prasarana_wilayah:pendidikan', 'db:binapemdes:prasarana_wilayah:transportasi', 'db:binapemdes:prasarana_wilayah:sampah', 'db:binapemdes:administratif:desa_kelurahan', 'db:binapemdes:administratif:batas_wilayah', 'db:binapemdes:administratif:pendidikan_aparat', 'db:binapemdes:prasarana_wilayah:kesehatan']:
-        #     _, _, cat, subcat = i.split(':')
-        #     data = {
-        #         "link": "https://prodeskel.binapemdes.kemendagri.go.id/mpublik",
-        #         "tags": ["kemendagri", "prodeskel_binapemdes", cat, subcat],
-        #         "source": 'prodeskel.binapemdes.kemendagri.go.id',
-        #         "title": "KEMENTERIAN DALAM NEGERI DIREKTORAT JENDERAL PEMBERDAYAAN MASYARAKAT DAN DESA",
-        #         "sub_title": None,
-        #         "range_data": None,
-        #         "create_date": None,
-        #         "update_date": None,
-        #         "desc": None,
-        #         "category": cat,
-        #         "data": list({tuple(d.items()): d for d in json.loads(open(f'data/{i}.json', 'r').read())}.values()),
-        #         "sub_category": subcat,
-        #         "path_data_raw": f's3://ai-pipeline-raw-data/data/data_statistics/kemendagri/prodeskel_binapemdes/nasional/{cat}/json/{subcat}.json',
-        #         "crawling_time": Datetime.now(),
-        #         "crawling_time_epoch": int(time()),  
-        #         "table_name": subcat,
-        #         "country_name": "Indonesia",
-        #         "level": "provinsi, kab/kota, kecamatan, kelurahan/desa",
-        #         "stage": "Crawling data",
-        #         "update_schedule": None
-        #     }
+        for i, j in [
+            # ('db:binapemdes:administratif:apbdesa', 'KEMENTERIAN DALAM NEGERI DIREKTORAT JENDERAL PEMBERDAYAAN MASYARAKAT DAN DESA ANGGARAN PENDAPATAN DAN BELANJA DESA'),
+            # ('db:binapemdes:prasarana_wilayah:kantor_desa_kelurahan', 'KEMENTERIAN DALAM NEGERI DIREKTORAT JENDERAL PEMBERDAYAAN MASYARAKAT DAN DESA SARANA/PRASARANA KANTOR DESA/KELURAHAN'), 
+            # ('db:binapemdes:prasarana_wilayah:air_bersih', 'KEMENTERIAN DALAM NEGERI DIREKTORAT JENDERAL PEMBERDAYAAN MASYARAKAT DAN DESA SARANA/PRASARANA AIR BERSIH'), 
+            # ('db:binapemdes:prasarana_wilayah:sumber_energi', 'KEMENTERIAN DALAM NEGERI DIREKTORAT JENDERAL PEMBERDAYAAN MASYARAKAT DAN DESA SUMBER ENERGI PENERANGAN KELUARGA'), 
+            # ('db:binapemdes:prasarana_wilayah:pendidikan', 'KEMENTERIAN DALAM NEGERI DIREKTORAT JENDERAL PEMBERDAYAAN MASYARAKAT DAN DESA SARANA/PRASARANA PENDIDIKAN'), 
+            # ('db:binapemdes:prasarana_wilayah:transportasi', 'KEMENTERIAN DALAM NEGERI DIREKTORAT JENDERAL PEMBERDAYAAN MASYARAKAT DAN DESA SARANA/PRASARANA TRANSPORTASI'),     
+            # ('db:binapemdes:prasarana_wilayah:sampah', 'KEMENTERIAN DALAM NEGERI DIREKTORAT JENDERAL PEMBERDAYAAN MASYARAKAT DAN DESA PRASARANA SANITASI'), 
+            # ('db:binapemdes:administratif:desa_kelurahan', 'KEMENTERIAN DALAM NEGERI DIREKTORAT JENDERAL PEMBERDAYAAN MASYARAKAT DAN DESA Daftar - Daftar Desa/Kelurahan'), 
+            # ('db:binapemdes:administratif:batas_wilayah', 'KEMENTERIAN DALAM NEGERI DIREKTORAT JENDERAL PEMBERDAYAAN MASYARAKAT DAN DESA BATAS WILAYAH'), 
+            # ('db:binapemdes:administratif:pendidikan_aparat', 'KEMENTERIAN DALAM NEGERI DIREKTORAT JENDERAL PEMBERDAYAAN MASYARAKAT DAN DESA PENDIDIKAN PEJABAT DESA/KELURAHAN'), 
+            # ('db:binapemdes:prasarana_wilayah:kesehatan', 'KEMENTERIAN DALAM NEGERI DIREKTORAT JENDERAL PEMBERDAYAAN MASYARAKAT DAN DESA PRASARANA KESEHATAN'),
+            ("db:binapemdes:prasarana_lembaga:lkmd_lpm", "KEMENTERIAN DALAM NEGERI DIREKTORAT JENDERAL PEMBERDAYAAN MASYARAKAT DAN DESA LEMBAGA KETAHAHANAN MASYARAKAT DESA / LPM"),
+            ("db:binapemdes:prasarana_lembaga:karang_taruna", "KEMENTERIAN DALAM NEGERI DIREKTORAT JENDERAL PEMBERDAYAAN MASYARAKAT DAN DESA KARANG TARUNA"),
+            ("db:binapemdes:prasarana_lembaga:bumdes", "KEMENTERIAN DALAM NEGERI DIREKTORAT JENDERAL PEMBERDAYAAN MASYARAKAT DAN DESA BADAN USAHA MILIK DESA (BUMDES)"),
+            ("db:binapemdes:produksi:apotik_hidup", "KEMENTERIAN DALAM NEGERI DIREKTORAT JENDERAL PEMBERDAYAAN MASYARAKAT DAN DESA PRODUKSI TANAMAN APOTIK HIDUP"),
+            ("db:binapemdes:prasarana_wilayah:saluran_irigasi", "KEMENTERIAN DALAM NEGERI DIREKTORAT JENDERAL PEMBERDAYAAN MASYARAKAT DAN DESA KONDISI SALURAN IRIGASI"),
+            ("db:binapemdes:prasarana_lembaga:bpd", "KEMENTERIAN DALAM NEGERI DIREKTORAT JENDERAL PEMBERDAYAAN MASYARAKAT DAN DESA PRASARANA BADAN PERWAKILAN DESA"),
+            ("db:binapemdes:prasarana_lembaga:lkd_lkk", "KEMENTERIAN DALAM NEGERI DIREKTORAT JENDERAL PEMBERDAYAAN MASYARAKAT DAN DESA LEMBAGA KEMASYARAKATAN DESA/LEMBAGA KEMASYARATAN KELURAHAN"),
+            ("db:binapemdes:prasarana_lembaga:pkk", "KEMENTERIAN DALAM NEGERI DIREKTORAT JENDERAL PEMBERDAYAAN MASYARAKAT DAN DESA PEMBERDAYAAN DAN KESEJAHTERAAN KELUARGA"),
+            ("db:binapemdes:produksi:buah_buahan", "KEMENTERIAN DALAM NEGERI DIREKTORAT JENDERAL PEMBERDAYAAN MASYARAKAT DAN DESA PRODUKSI BUAH-BUAHAN"),
+        ]:
+            _, _, cat, subcat = i.split(':')    
+            data = {
+                "link": "https://prodeskel.binapemdes.kemendagri.go.id/mpublik",
+                "tags": ["kemendagri", "prodeskel_binapemdes", cat, subcat],
+                "source": 'prodeskel.binapemdes.kemendagri.go.id',
+                "title": "KEMENTERIAN DALAM NEGERI DIREKTORAT JENDERAL PEMBERDAYAAN MASYARAKAT DAN DESA",
+                "sub_title": j,
+                "range_data": None,
+                "create_date": None,
+                "update_date": None,
+                "desc": None,
+                "category": cat,
+                "data": list({tuple(d.items()): d for d in [json.loads(isi) for isi in self.__redis.lrange(i, 0, -1)]}.values()),
+                "sub_category": subcat,
+                "path_data_raw": f's3://ai-pipeline-raw-data/data/data_statistics/kemendagri/prodeskel_binapemdes/nasional/{cat}/json/{subcat}.json',
+                "crawling_time": Datetime.now(),
+                "crawling_time_epoch": int(time()),  
+                "table_name": subcat,
+                "country_name": "Indonesia",        
+                "level": "provinsi, kab/kota, kecamatan, kelurahan/desa",
+                "stage": "Crawling data",
+                "update_schedule": None
+            }
             
-            # Iostream.write_json(
-            #     data,
-            #     f'data/__{i}.json',
-            #     indent=4
-            # )
-            # ConnectionS3.upload(data, data['path_data_raw'].replace('s3://ai-pipeline-raw-data/', ''), 'ai-pipeline-raw-data')
+            Iostream.write_json(
+                data,
+                f'data/__{i}.json',
+                indent=4
+            )
+            ConnectionS3.upload(data, data['path_data_raw'].replace('s3://ai-pipeline-raw-data/', ''), 'ai-pipeline-raw-data')
 
             # break
-            while(job := self.__beanstalk_watch.reserve()):
-                try:
-                    data = json.loads(job.body)
-                    with ThreadPoolExecutor(max_workers=5) as executor:
-                        futures = []
-                        for i in range(1, data["page"] + 1):
-                            futures.append(executor.submit(self._get_table, data, i))
-                        for future in futures:
-                            future.result() 
-                    self.__beanstalk_watch.delete(job)
-                except KeyboardInterrupt:
-                    exit(0)
-                except BaseException:
-                    self.__beanstalk_watch.bury(job)
+            # while(job := self.__beanstalk_watch.reserve()):
+            #     try:
+            #         data = json.loads(job.body)
+            #         with ThreadPoolExecutor(max_workers=5) as executor:
+            #             futures = []
+            #             for i in range(1, data["page"] + 1):
+            #                 futures.append(executor.submit(self._get_table, data, i))
+            #             for future in futures:
+            #                 future.result() 
+            #         self.__beanstalk_watch.delete(job)
+            #     except KeyboardInterrupt:
+            #         exit(0)
+            #     except BaseException: 
+            #         self.__beanstalk_watch.bury(job)
 
     def _send_target(self):
         def send(data):

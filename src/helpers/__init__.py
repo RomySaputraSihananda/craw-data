@@ -9,3 +9,4 @@ from .bodyResponse import BodyResponse
 from .requestcurl import RequestsCurl, requests
 from .torrequests import TorSession
 from src.config import logging
+from .beanstalk import BeanStalk
