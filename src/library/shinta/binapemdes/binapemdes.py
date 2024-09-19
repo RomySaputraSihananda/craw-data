@@ -27,7 +27,7 @@ class BinaPemdes:
             db=2,   
             decode_responses=True
         )
-    @staticmethod
+    @staticmethod   
     def fill_missing_data(data):
         for i, d in enumerate(data):
             for key in d:
@@ -71,7 +71,7 @@ class BinaPemdes:
         
         return self.parse_table(value)
 
-    def _get_table(self, obj, page = 1, size = 15):
+    def _get_table(self, obj, page = 1, size = 15, job=None):
         try:
             clean = lambda x: x.lower().replace(' ', '_').replace('-', '_').replace('/', '_')
             db = clean('db:binapemdes:%s:%s' % ((category:= obj["category"]), (sub_category := obj["sub_category"]))) 
@@ -111,33 +111,26 @@ class BinaPemdes:
                 self.__redis.rpush(db, json.dumps(d))
 
             logger.success(f'{db, page}')
+            self.__beanstalk_watch.delete(job)
         except BaseException as e:
             logger.error(f'{db, page, e}')
+            self.__beanstalk_watch.bury(job)
 
     def _get_tables(self):
-        with ThreadPoolExecutor(max_workers=10) as executor:
+        with ThreadPoolExecutor(max_workers=5) as executor:
             while(job := self.__beanstalk_watch.reserve()):
-                futures = []
-                data = json.loads(job.body)
-                try:        
-                    for i in range(1, data["page"] + 1):
-                        futures.append(executor.submit(self._get_table, data, i))
-                    for future in futures:
-                        future.result()
-                    self.__beanstalk_watch.delete(job)
-                except KeyboardInterrupt:
-                    exit(0)
-                except BaseException:
-                    self.__beanstalk_watch.bury(job)
+                data = json.loads(job.body)        
+                executor.submit(self._get_table, data, data["page"], 15, job)
+                    
 
     def _send_target(self):
         def send(data):     
             if(isinstance(data["page"], str)): return
-            for i in range(data["page"]):
+            for i in range(i, data["page"] + 1):
                 print(self.__beanstalk_use.put(json.dumps({**data, 'page': i}), ttr=999999999, priority=1))
-        with ThreadPoolExecutor(max_workers=100) as executor:          
+        with ThreadPoolExecutor(max_workers=25) as executor:          
             for data in datas:
                 executor.submit(send, data)
 
 if(__name__ == '__main__'):
-    BinaPemdes()._send_target()  
+    BinaPemdes()._get_tables()
