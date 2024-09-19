@@ -13,8 +13,8 @@ from .urls import urls, datas
 
 class BinaPemdes:
     def __init__(self) -> None:
-        self.__beanstalk_use: Client = Client(('192.168.150.21', 11300), use='dev-target-binapemdes-test')
-        self.__beanstalk_watch: Client = Client(('192.168.150.21', 11300), watch='dev-target-binapemdes-test')
+        self.__beanstalk_use: Client = Client(('192.168.150.21', 11300), use='dev-target-binapemdes')
+        self.__beanstalk_watch: Client = Client(('192.168.150.21', 11300), watch='dev-target-binapemdes')
         self.__session: Session = Session() 
         self.__session.headers.update({
             'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:109.0) Gecko/20100101 Firefox/115.0'
@@ -135,7 +135,7 @@ class BinaPemdes:
             if(isinstance(data["page"], str)): return
             for i in range(data["page"]):
                 print(self.__beanstalk_use.put(json.dumps({**data, 'page': i}), ttr=999999999, priority=1))
-        with ThreadPoolExecutor(max_workers=20) as executor:
+        with ThreadPoolExecutor(max_workers=200) as executor:          
             for data in datas:
                 executor.submit(send, data)
 
