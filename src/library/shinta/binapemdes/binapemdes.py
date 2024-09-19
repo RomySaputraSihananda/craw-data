@@ -7,7 +7,7 @@ from urllib.parse import urljoin
 from redis import Redis
 from time import time
 from greenstalk import Client
-from concurrent.futures import ThreadPoolExecutor
+from concurrent.futures import ThreadPoolExecutor, as_completed
 from loguru import logger
 from .urls import urls, datas
 
@@ -50,7 +50,7 @@ class BinaPemdes:
         except: return data
 
     def __get_cookies(self):
-        self.__session.get('https://prodeskel.binapemdes.kemendagri.go.id/default/?nm_run_menu=1&nm_apl_menu=mpublik&script_case_init=1&script_case_session=')
+        self.__session.get('https://202.92.200.53/default/?nm_run_menu=1&nm_apl_menu=mpublik&script_case_init=1&script_case_session=')
 
     def _get_table_paging(self, url, page, soup, size = 50):
         response = self.__session.post(
@@ -82,7 +82,7 @@ class BinaPemdes:
             soup = BeautifulSoup(response.text, 'html.parser')
 
             form = soup.find('form')    
-            url = urljoin("https://prodeskel.binapemdes.kemendagri.go.id", form.get('action'))
+            url = urljoin("https://202.92.200.53", form.get('action'))
             a = self.__session.post(
                 url, 
                 data={
@@ -117,18 +117,24 @@ class BinaPemdes:
             self.__beanstalk_watch.bury(job)
 
     def _get_tables(self):
-        with ThreadPoolExecutor(max_workers=5) as executor:
+        max_workers = 5
+        with ThreadPoolExecutor(max_workers=max_workers) as executor:
+            futures = []
             while(job := self.__beanstalk_watch.reserve()):
                 data = json.loads(job.body)        
                 executor.submit(self._get_table, data, data["page"], 15, job)
-                    
+                futures.append(future)
+
+                if len(futures) >= max_workers:
+                    for future in as_completed(futures):
+                        futures.remove(future)
 
     def _send_target(self):
         def send(data):     
             if(isinstance(data["page"], str)): return
             for i in range(1, data["page"] + 1):
                 print(self.__beanstalk_use.put(json.dumps({**data, 'page': i}), ttr=999999999, priority=1))
-        with ThreadPoolExecutor(max_workers=25) as executor:          
+        with ThreadPoolExecutor(max_workers=5) as executor:          
             for data in datas:
                 executor.submit(send, data)
 
