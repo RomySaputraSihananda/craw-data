@@ -13,7 +13,7 @@ from .urls import urls, datas
 
 class BinaPemdes:
     def __init__(self) -> None:
-        self.__beanstalk_use: Client = Client(('192.168.150.21', 11300), use='dev-target-binapemdes')
+        self.__beanstalk_use: Client = Client(('192.168.150.21', 11300), use='dev-target-binapemdes')   
         self.__beanstalk_watch: Client = Client(('192.168.150.21', 11300), watch='dev-target-binapemdes')
         self.__session: Session = Session() 
         self.__session.headers.update({
@@ -24,7 +24,7 @@ class BinaPemdes:
 
         self.__redis: Redis = Redis(
             '192.168.20.175',           
-            db=2,
+            db=2,   
             decode_responses=True
         )
     @staticmethod
@@ -115,27 +115,27 @@ class BinaPemdes:
             logger.error(f'{db, page, e}')
 
     def _get_tables(self):
-        while(job := self.__beanstalk_watch.reserve()):
-            try:
+        with ThreadPoolExecutor(max_workers=10) as executor:
+            while(job := self.__beanstalk_watch.reserve()):
+                futures = []
                 data = json.loads(job.body)
-                with ThreadPoolExecutor(max_workers=10  ) as executor:
-                    futures = []
+                try:        
                     for i in range(1, data["page"] + 1):
                         futures.append(executor.submit(self._get_table, data, i))
                     for future in futures:
                         future.result()
-                self.__beanstalk_watch.delete(job)
-            except KeyboardInterrupt:
-                exit(0)
-            except BaseException: 
-                self.__beanstalk_watch.bury(job)
+                    self.__beanstalk_watch.delete(job)
+                except KeyboardInterrupt:
+                    exit(0)
+                except BaseException:
+                    self.__beanstalk_watch.bury(job)
 
     def _send_target(self):
         def send(data):     
             if(isinstance(data["page"], str)): return
             for i in range(data["page"]):
                 print(self.__beanstalk_use.put(json.dumps({**data, 'page': i}), ttr=999999999, priority=1))
-        with ThreadPoolExecutor(max_workers=200) as executor:          
+        with ThreadPoolExecutor(max_workers=100) as executor:          
             for data in datas:
                 executor.submit(send, data)
 
