@@ -126,7 +126,7 @@ class BinaPemdes:
     def _send_target(self):
         def send(data):     
             if(isinstance(data["page"], str)): return
-            for i in range(i, data["page"] + 1):
+            for i in range(1, data["page"] + 1):
                 print(self.__beanstalk_use.put(json.dumps({**data, 'page': i}), ttr=999999999, priority=1))
         with ThreadPoolExecutor(max_workers=25) as executor:          
             for data in datas:
