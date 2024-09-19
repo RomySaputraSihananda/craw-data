@@ -111,10 +111,10 @@ class BinaPemdes:
                 self.__redis.rpush(db, json.dumps(d))
 
             logger.success(f'{db, page}')
-            self.__beanstalk_watch.delete(job)
+            # self.__beanstalk_watch.delete(job)        
         except BaseException as e:
             logger.error(f'{db, page, e}')
-            self.__beanstalk_watch.bury(job)
+            # self.__beanstalk_watch.bury(job)
 
     def _get_tables(self):
         max_workers = 5
@@ -122,7 +122,7 @@ class BinaPemdes:
             futures = []
             while(job := self.__beanstalk_watch.reserve()):
                 data = json.loads(job.body)        
-                executor.submit(self._get_table, data, data["page"], 15, job)
+                future = executor.submit(self._get_table, data, data["page"], 15, job)
                 futures.append(future)
 
                 if len(futures) >= max_workers:
@@ -134,9 +134,9 @@ class BinaPemdes:
             if(isinstance(data["page"], str)): return
             for i in range(1, data["page"] + 1):
                 print(self.__beanstalk_use.put(json.dumps({**data, 'page': i}), ttr=999999999, priority=1))
-        with ThreadPoolExecutor(max_workers=5) as executor:          
+        with ThreadPoolExecutor(max_workers=2) as executor:          
             for data in datas:
                 executor.submit(send, data)
 
 if(__name__ == '__main__'):
-    BinaPemdes()._send_target()
+    BinaPemdes()._send_target() 
