@@ -103,7 +103,6 @@ class Peruri:
             if(not datas): break
             self._process_datas(datas)
             page += 1
-            break
 
 if(__name__ == '__main__'):
     for cat in Category:
