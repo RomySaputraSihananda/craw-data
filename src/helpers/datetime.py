@@ -34,9 +34,9 @@ class Datetime:
         return int(datetime.strptime(text, "%Y-%m-%dT%H:%M:%SZ").timestamp())
 
     def now() -> str:
-        tz = pytz.timezone("Asia/Jakarta")
-        date = datetime.now(tz).strftime("%Y-%m-%d %H:%M:%S")
-        return date
+            tz = pytz.timezone("Asia/Jakarta")
+            date = datetime.now(tz).strftime("%Y-%m-%d %H:%M:%S")
+            return date
     
     def tomorrow() -> str:
         tz = pytz.timezone("Asia/Jakarta")

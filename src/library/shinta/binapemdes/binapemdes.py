@@ -134,7 +134,7 @@ class BinaPemdes:
             if(isinstance(data["page"], str)): return
             for i in range(1, data["page"] + 1):
                 print(self.__beanstalk_use.put(json.dumps({**data, 'page': i}), ttr=999999999, priority=1))
-        with ThreadPoolExecutor(max_workers=2) as executor:          
+        with ThreadPoolExecutor(max_workers=2               ) as executor:          
             for data in datas:
                 executor.submit(send, data)
 

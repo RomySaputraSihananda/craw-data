@@ -22,7 +22,7 @@ class Controllers:
                     title='Dephubgoid Kapal Service', 
                     version='v0.0.1',
                     description='rest api untuk mengambil data kapal dari [dephub.go.id](https://kapal.dephub.go.id)'
-                )
+                )                                                   
                 self.dephubgoid(**kwargs)
             case 'jiexpocomevent': 
                 self.__set_app(
