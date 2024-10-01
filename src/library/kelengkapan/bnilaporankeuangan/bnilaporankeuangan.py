@@ -6,7 +6,7 @@ from concurrent.futures import ThreadPoolExecutor
 from src.helpers import Iostream, ConnectionS3
 from src.model import Metadata
 
-    clean = lambda x: x.lower().replace(' ', '_').replace(' ', '_').replace('-', '_').replace('/', '_').replace('-', '_')
+clean = lambda x: x.lower().replace(' ', '_').replace(' ', '_').replace('-', '_').replace('/', '_').replace('-', '_')
 class BniLaporanKeuangan:
     def __init__(self) -> None:
         soup = BeautifulSoup(
