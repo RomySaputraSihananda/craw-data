@@ -6,7 +6,7 @@ from concurrent.futures import ThreadPoolExecutor
 from src.helpers import Iostream, ConnectionS3
 from src.model import Metadata
 
-clean = lambda x: x.lower().replace(' ', '_').replace(' ', '_').replace('-', '_').replace('/', '_').replace('-', '_')
+    clean = lambda x: x.lower().replace(' ', '_').replace(' ', '_').replace('-', '_').replace('/', '_').replace('-', '_')
 class BniLaporanKeuangan:
     def __init__(self) -> None:
         soup = BeautifulSoup(
@@ -49,7 +49,6 @@ class BniLaporanKeuangan:
                     data=d
                 )
                 self.process_data(metadata)
-                exit(0  )
 
     @staticmethod
     def parser_value(soup: BeautifulSoup):
@@ -111,7 +110,7 @@ class BniLaporanKeuangan:
                     )
             path_pdf = [future.result() for future in futures]
         metadata.path_data_raw.extend(path_pdf)
-        
-        ConnectionS3.upload(data.dict, data.path_data_raw[0].replace('s3://ai-pipeline-raw-data/',''), 'ai-pipeline-raw-data')
+
+        ConnectionS3.upload(metadata.dict, metadata.path_data_raw[0].replace('s3://ai-pipeline-raw-data/',''), 'ai-pipeline-raw-data')
 
 if(__name__ == '__main__'): BniLaporanKeuangan()
