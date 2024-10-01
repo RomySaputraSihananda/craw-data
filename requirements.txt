@@ -20,4 +20,4 @@ setuptools==65.5.0
 stem==1.8.2
 urllib3==1.26.18
 uvicorn==0.29.0
-xmltodict==0.13.0
+xmltodict==0.13.0       
