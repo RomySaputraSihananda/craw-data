@@ -2,9 +2,9 @@ import requests
 import json
 
 from bs4 import BeautifulSoup
-from metadata import Metadata
 from concurrent.futures import ThreadPoolExecutor
 from src.helpers import Iostream, ConnectionS3
+from src.model import Metadata
 
 clean = lambda x: x.lower().replace(' ', '_').replace(' ', '_').replace('-', '_').replace('/', '_').replace('-', '_')
 class BniLaporanKeuangan:
@@ -49,7 +49,7 @@ class BniLaporanKeuangan:
                     data=d
                 )
                 self.process_data(metadata)
-                exit(0)
+                exit(0  )
 
     @staticmethod
     def parser_value(soup: BeautifulSoup):
