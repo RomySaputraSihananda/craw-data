@@ -14,8 +14,8 @@ class BniLaporanKeuangan:
             'html.parser'
         )
 
-        containers = soup.select('.resp-tabs-container > div')[1:]      
-        category = ['Tahunan', 'Triwulan', 'Bulanan', 'Lainnya'][1:]
+        containers = soup.select('.resp-tabs-container > div')[:1]      
+        category = ['Tahunan', 'Triwulan', 'Bulanan', 'Lainnya'][:1]
         datas = [
             {
                 'sub_category': [heading.get_text(strip=True) for heading in container.select('.panel-heading h4')], 
@@ -23,11 +23,11 @@ class BniLaporanKeuangan:
             } for container in containers
         ]
         for i, data in enumerate(datas):
-            for j, sub_category in enumerate(data['sub_category']):
+            for j, sub_category in enumerate(data['sub_category'][1:]):
                 d = {
                     'category': category[i],
                     'sub_category': sub_category,
-                    'data': data['value'][j]
+                    'data': data['value'][1:][j]
                 }
                 metadata = Metadata(
                     link='https://www.bni.co.id/id-id/investor/laporan-keuangan',
@@ -46,8 +46,10 @@ class BniLaporanKeuangan:
                     title='Laporan Keuangan',
                     category=d['category'],
                     sub_category=d['sub_category'],
-                    data=d
+                    data=d,
+                    table_name='Laporan Posisi Keuangan(Rp Miliar)'
                 )
+
                 self.process_data(metadata)
 
     @staticmethod
@@ -55,14 +57,20 @@ class BniLaporanKeuangan:
         if(cards := soup.select('.icon-box03.box03-new')):
             return [
                 {
-                    'title': card.select_one('p').get_text(strip=True),
-                    'tahun': card.select_one('h2').get_text(strip=True),
-                    'link': 'https://www.bni.co.id' +  card.select_one('a')["href"],
-                    'image': 'https://www.bni.co.id' + card.select_one('img')["data-src"]
-                } for card in cards
+                    "files": [
+                        {
+                            'name': card.select_one('p').get_text(strip=True),
+                            'tahun': card.select_one('h2').get_text(strip=True),
+                            'link': 'https://www.bni.co.id' +  card.select_one('a')["href"],
+                            'image': 'https://www.bni.co.id' + card.select_one('img')["data-src"]
+                        } for card in cards
+                    ]
+                }
             ]
         if(table := soup.select_one('.table-responsive table')):
-            return 'table'
+            return {
+                'name': 'Laporan Posisi Keuangan(Rp Miliar)'
+            }
             return [[[td.get_text() for td in tr.select('td')] for tr in tbody.select('tr')] for tbody in table.select('tbody')]
         if(container := soup.select('h4')):  
             names = [h4.get_text(strip=True) for h4 in container]
@@ -97,20 +105,23 @@ class BniLaporanKeuangan:
         return final_path
 
     def process_data(self, metadata: Metadata):
-        with ThreadPoolExecutor(max_workers=5) as ex:
-            futures = []
-            for data in metadata.data["data"]:
-                for file in data["files"]:
-                    futures.append(
-                        ex.submit(
-                            self.__download, 
-                            file,
-                            metadata.path_data_raw[0].split('/json')[0]
-                        )
-                    )
-            path_pdf = [future.result() for future in futures]
-        metadata.path_data_raw.extend(path_pdf)
-
+        # with ThreadPoolExecutor(max_workers=5) as ex:
+        #     futures = []
+        #     for data in metadata.data["data"]:
+        #         for file in data["files"]:
+        #             futures.append(
+        #                 ex.submit(
+        #                     self.__download, 
+        #                     file,
+        #                     metadata.path_data_raw[0].split('/json')[0]
+        #                 )
+        #             )
+        #     path_pdf = [future.result() for future in futures]
+        # metadata.path_data_raw.extend(path_pdf)
+        a = f"{metadata.path_data_raw[0].split('/json')[0]}/xlsx/{clean("Laporan Posisi Keuangan(Rp Miliar)")}.xlsx"
+        ConnectionS3.upload_content('/home/sc-rommy/Documents/kpu/Laporan Posisi Keuangan(Rp Miliar).xlsx', a.replace('s3://ai-pipeline-raw-data/',''), 'ai-pipeline-raw-data')
+        metadata.path_data_raw.append(a)            
+        # Iostream.write_json(metadata.dict, metadata.path_data_raw[0].replace('s3://ai-pipeline-raw-data/',''))
         ConnectionS3.upload(metadata.dict, metadata.path_data_raw[0].replace('s3://ai-pipeline-raw-data/',''), 'ai-pipeline-raw-data')
 
 if(__name__ == '__main__'): BniLaporanKeuangan()

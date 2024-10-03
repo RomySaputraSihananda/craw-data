@@ -24,8 +24,8 @@ class Datetime:
         return (Datetime.excel_serial_date(date := datetime.now(tz).strftime(format)), date)
 
     def utc(text: str) -> str:
-        if(re.search('\.\d+Z$', text)):
-            return datetime.strptime(text[:-2], "%Y-%m-%dT%H:%M:%S.%f").strftime("%Y-%m-%d %H:%M:%S")
+        # if(re.search('\.\d+Z$', text)):
+        return datetime.strptime(text[:-2], "%Y-%m-%dT%H:%M:%S.%f").strftime("%Y-%m-%d %H:%M:%S")
         return datetime.strptime(text, "%Y-%m-%dT%H:%M:%SZ").strftime("%Y-%m-%d %H:%M:%S")
     
     def utc_epoch(text: str) -> int:
