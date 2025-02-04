@@ -47,10 +47,67 @@ spec:
                 - "kafka06.production02.bt"
           containers:
             - name: sc-geostrategic-agoda-jawa-timur-daily
-              image: 192.168.202.50/crawler/smart-crawler/engine-romy:4.1.8
+              image: 192.168.202.50/crawler/smart-crawler/engine-romy:4.1.9
               command:
                 - /bin/sh
                 - -c
-                - engine_romy data_icc agoda watch_beanstalk --provinsi="jawa timur"
-              imagePullPolicy: Always
+                - engine_romy data_icc agoda by_province --province="jawa tengah"
+              imagePullPolicy: IfNotPresent
+          restartPolicy: Never
+---
+apiVersion: batch/v1beta1
+kind: CronJob
+metadata:
+  name: sc-geostrategic-agoda-jawa-tengah-daily
+  labels:
+    app: smart-crawler
+    kind: sc-geostrategic-agoda-jawa-tengah-daily
+spec:
+  schedule: "0 20 * * *"
+  concurrencyPolicy: Allow
+  suspend: false
+  jobTemplate:
+    spec:
+      template:
+        metadata:
+          labels:
+            app: smart-crawler
+            kind: sc-geostrategic-agoda-jawa-tengah-daily
+        spec:
+          hostAliases:
+            - ip: "10.12.1.101"
+              hostnames:
+                - "kafka01.research.ai"
+            - ip: "10.12.1.102"
+              hostnames:
+                - "kafka02.research.ai"
+            - ip: "10.12.1.103"
+              hostnames:
+                - "kafka03.research.ai"
+            - ip: "192.168.24.201"
+              hostnames:
+                - "kafka01.production02.bt"
+            - ip: "192.168.24.202"
+              hostnames:
+                - "kafka02.production02.bt"
+            - ip: "192.168.24.203"
+              hostnames:
+                - "kafka03.production02.bt"
+            - ip: "192.168.24.204"
+              hostnames:
+                - "kafka04.production02.bt"
+            - ip: "192.168.24.205"
+              hostnames:
+                - "kafka05.production02.bt"
+            - ip: "192.168.24.206"
+              hostnames:
+                - "kafka06.production02.bt"
+          containers:
+            - name: sc-geostrategic-agoda-jawa-tengah-daily
+              image: 192.168.202.50/crawler/smart-crawler/engine-romy:4.1.9
+              command:
+                - /bin/sh
+                - -c
+                - engine_romy data_icc agoda by_province --province="jawa tengah"
+              imagePullPolicy: IfNotPresent
           restartPolicy: Never

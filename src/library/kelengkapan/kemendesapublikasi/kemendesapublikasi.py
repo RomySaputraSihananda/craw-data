@@ -24,7 +24,7 @@ class KemendesaPublikasi:
         }
     
     def __download(self, img, path):
-        final_path = f'{path.replace("data_descriptive", "data_gambar")}/{clean(img["format"])}/{clean(img["file_name"])}'
+        final_path = f'{path}/{clean(img["format"])}/{clean(img["file_name"])}'
         ConnectionS3.upload_content(requests.get(img['link'], verify=False).content, final_path.replace('s3://ai-pipeline-raw-data/',''), 'ai-pipeline-raw-data')
         return final_path
 

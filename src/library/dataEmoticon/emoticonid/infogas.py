@@ -11,7 +11,12 @@ from time import time
 from src.helpers import ConnectionS3, Datetime, Iostream
 
 class BaseSatuDataPertanianInfografis(Spider):
-    start_urls = ['https://satudata.pertanian.go.id/datasets/infografis']
+    start_urls = [
+        'https://satudata.pertanian.go.id/datasets/infografis',
+        'https://satudata.pertanian.go.id/datasets/infografis/20',
+        'https://satudata.pertanian.go.id/datasets/infografis/40',
+        'https://satudata.pertanian.go.id/datasets/infografis/60'
+    ]
 
     def __init__(self, **kwargs: Any):
         super().__init__('pertanian-infografis', **kwargs)
@@ -28,6 +33,7 @@ class BaseSatuDataPertanianInfografis(Spider):
 
             if((response := requests.get(url)).status_code == 200):
                 ConnectionS3.upload_content(response.content, (path := f's3://ai-pipeline-raw-data/data/data_statistics/satu_data_kementrian_pertanian/infografis/{format}/{file.lower().replace(" ", "_")}').replace('s3://ai-pipeline-raw-data/', ''), 'ai-pipeline-raw-data')
+                # path = f's3://ai-pipeline-raw-data/data/data_statistics/satu_data_kementrian_pertanian/infografis/{format}/{file.lower().replace(" ", "_")}'
                 yield path
 
     def parse(self, response, **kwargs: Any) -> Any:
@@ -64,7 +70,7 @@ class BaseSatuDataPertanianInfografis(Spider):
             }
 
             ConnectionS3.upload(data, data['path_data_raw'][0].replace('s3://ai-pipeline-raw-data/', ''), 'ai-pipeline-raw-data')
-            print(data)
+            # print(data)
 
 if(__name__ == '__main__'):
     BaseSatuDataPertanianInfografis().start()

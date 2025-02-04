@@ -3,19 +3,19 @@ kind: Deployment
 metadata:
   labels:
     app: smart-crawler
-    kind: sc-geostrategic-agoda-jawa-timur-consume
-  name: sc-geostrategic-agoda-jawa-timur-consume
+    kind: sc-geostrategic-agoda-consume
+  name: sc-geostrategic-agoda-consume
 spec:
-  replicas: 0
+  replicas: 1
   selector:
     matchLabels:
       app: smart-crawler
-      kind: sc-geostrategic-agoda-jawa-timur-consume
+      kind: sc-geostrategic-agoda-consume
   template:
     metadata:
       labels:
         app: smart-crawler
-        kind: sc-geostrategic-agoda-jawa-timur-consume
+        kind: sc-geostrategic-agoda-consume
     spec:
       hostAliases:
         - ip: "10.12.1.101"
@@ -46,12 +46,10 @@ spec:
           hostnames:
             - "kafka06.production02.bt"
       containers:
-        - name: sc-geostrategic-agoda-jawa-timur-consume
-          image: 192.168.202.50/crawler/smart-crawler/engine-romy:4.1.8
+        - name: sc-geostrategic-agoda-consume
+          image: 192.168.202.50/crawler/smart-crawler/engine-romy:4.1.9
           command:
             - /bin/sh
             - -c
-            - "engine_romy --kafka --bootstrap='kafka01.production02.bt,kafka02.production02.bt,kafka03.production02.bt,kafka04.production02.bt,kafka05.production02.bt' --topic=data-knowledge-repo-general_10 data_icc agoda watch_beanstalk"
-          imagePullPolicy: Always
-      nodeSelector:
-        crawler: "true"
+            - engine_romy --kafka --bootstrap='kafka01.research.ai,kafka02.research.ai,kafka03.research.ai' --topic=data-knowledge-repo-general_10 data_icc agoda --proxy watch_beanstalk
+          imagePullPolicy: IfNotPresent

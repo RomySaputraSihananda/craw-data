@@ -32,14 +32,14 @@ class KemenporaDataset:
             case _: return
 
         final_path = f'{path}/{format}/{clean(file['schema:name'])}'
-        ConnectionS3\
-            .upload_content(
-                self.__session.get(
-                    file['schema:url']
-                ).content, 
-                final_path.replace('s3://ai-pipeline-raw-data/',''), 
-                'ai-pipeline-raw-data'
-            )
+        # ConnectionS3\
+        #     .upload_content(
+        #         self.__session.get(
+        #             file['schema:url']
+        #         ).content, 
+        #         final_path.replace('s3://ai-pipeline-raw-data/',''), 
+        #         'ai-pipeline-raw-data'
+        #     )
         
         return final_path
 
@@ -47,12 +47,12 @@ class KemenporaDataset:
         data = self._get_detail_data(url)
         
         metadata = Metadata(
-            link='https://satudata.kemenpora.go.id' + url,
+            link='https://satudata.rejanglebongkab.go.id' + url,
             tags=[
-                'satudata.kemenpora.go.id',
+                'satudata.rejanglebongkab.go.id',
                 *url.split('/')
             ],
-            source='satudata.kemenpora.go.id',
+            source='satudata.rejanglebongkab.go.id',
             title=(title := (dataset := self.get_graph_by_type(data, 'schema:Dataset')[0])['schema:name']),
             create_date=Datetime.utc(dataset['schema:datePublished']),
             update_date=Datetime.utc(dataset['schema:dateModified']),
@@ -71,25 +71,26 @@ class KemenporaDataset:
                 metadata.path_data_raw[0].split('/json')[0]
             ) for file in self.get_graph_by_type(data, 'schema:DataDownload')
         ]) 
+        print(metadata)
 
-        ConnectionS3\
-            .upload(
-                metadata.dict,
-                metadata.path_data_raw[0].replace('s3://ai-pipeline-raw-data/',''), 
-                'ai-pipeline-raw-data'
-            )
+        # ConnectionS3\
+        #     .upload(
+        #         metadata.dict,
+        #         metadata.path_data_raw[0].replace('s3://ai-pipeline-raw-data/',''), 
+        #         'ai-pipeline-raw-data'
+        #     )
 
     def _get_detail_data(self, url):
-        response = self.__session.get(
-            'https://satudata.kemenpora.go.id' + url
+        response = self.__session.get(      
+            'https://satudata.rejanglebongkab.go.id' + url
         )   
         soup = self.get_soup(response.text)
         return json.loads(soup.select_one('script[type="application/ld+json"]').string)
 
     def _get_url(self, page):
         response = self.__session.get(
-            'https://satudata.kemenpora.go.id/dataset/',
-            params={
+            'https://satudata.rejanglebongkab.go.id/dataset/',
+            params={                            
                 'page': page
             }
         )

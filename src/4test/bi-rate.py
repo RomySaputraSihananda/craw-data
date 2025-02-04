@@ -5,7 +5,7 @@ from src.helpers import ConnectionKafka
 def fetch(date):
     month, year = date.split('/')
 
-    res = requests.get(f'http://server.ubuntu.ph:8088/api/v2/data_tingkat_suku_bunga_bulanan',
+    res = requests.get(f'http://192.168.29.154:5771/api/v2/data_tingkat_suku_bunga_bulanan',
                  params={
                     'start_date': date,
                     'end_date': date
@@ -30,7 +30,7 @@ def fetch(date):
 connectionKafka: ConnectionKafka = ConnectionKafka(bootstrap_servers='kafka01.research.ai,kafka02.research.ai,kafka03.research.ai', topic='data-knowledge-repo-general_4')
 
 if(__name__ == '__main__'):
-    for i in range(2016, 2024 + 1):
+    for i in range(2024, 2024 + 1):
         for j in range(1, 12 + 1):
             data = fetch(f'{"0" if j < 10 else ""}{j}/{i}')
             if(data):

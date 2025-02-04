@@ -27,12 +27,13 @@ class BaseAgoda:
         }
 
         self.__proxy: dict = {
-            'http':  'socks5://192.168.29.154:9050',
-            'https': 'socks5://192.168.29.154:9050'
+            "http": "socks5://10.12.3.205:32090",
+            "https": "socks5://10.12.3.205:32090"
         }
 
-        self.__beanstalk_use: Client = Client(('192.168.150.21', 11300), use='dev-target-hotel-agoda')
-        self.__beanstalk_watch: Client = Client(('192.168.150.21', 11300), watch='dev-target-hotel-agoda')
+
+        self.__beanstalk_use: Client = Client(('192.168.29.67', 32200), use='dev-target-hotel-agoda')
+        self.__beanstalk_watch: Client = Client(('192.168.29.67', 32200), watch='dev-target-hotel-agoda')
 
         self.__requests: Session = Session()
         self.__requests.headers.update(self.__headers)
